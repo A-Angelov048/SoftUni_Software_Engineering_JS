@@ -1,0 +1,20 @@
+[
+    {
+        "img": "https://www.ikea.com/us/en/images/products/morabo-sofa-gunnared-light-green-wood__0602122_pe680191_s5.jpg?f=xl",
+        "name": "Sofa",
+        "price": "259",
+        "decFactor": "0.4"
+    },
+    {
+        "img": "https://www.ikea.com/gb/en/images/products/pax-forsand-wardrobe-combination-white-stained-oak-effect-white-stained-oak-effect__0780525_pe760037_s5.jpg?f=xl",
+        "name": "Wardrobe",
+        "price": "120",
+        "decFactor": "1.2"
+    },
+    {
+        "name": "Sofa",
+        "img": "https://res.cloudinary.com/maisonsdumonde/image/upload/q_auto,f_auto/w_200/img/grey-3-seater-sofa-bed-200-13-0-175521_9.jpg",
+        "price": 150,
+        "decFactor": 1.2
+    }
+]
