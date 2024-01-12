@@ -5,7 +5,7 @@ const host = 'http://localhost:3000'; // Application host (NOT service host - th
 
 const interval = 300;
 const DEBUG = false;
-const slowMo = 100;
+const slowMo = 1000;
 
 const mockData = {
   users: [
@@ -299,7 +299,6 @@ describe('E2E tests', function () {
       const data = mockData.catalog[1];
       const { get } = await handle(endpoints.catalog);
       get(data);
-
       await page.click('.load');
       const titles = await page.$$eval(`#catches .catch >> button`, (t) =>
         t.map((s) => s.disabled)

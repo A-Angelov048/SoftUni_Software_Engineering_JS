@@ -22,21 +22,26 @@ if (userData) {
 }
 
 async function loadCatches() {
-    
+
     catches.innerHTML = '';
     const response = await fetch(url);
     const data = await response.json();
-
-    for (let line of Object.values(data)) {
-
-        if (userData === null) {
-            userData = '';
-        }
-        const access = userData._id === line._ownerId ? '' : 'disabled';
-        const curCatch = createDivCatch(line, access);
-        catches.appendChild(curCatch);
+    if (userData === null) {
+        userData = '';
     }
-
+    
+    if (data.length === undefined) {
+        const access = userData._id === data._ownerId ? '' : 'disabled';
+        const curCatch = createDivCatch(data, access);
+        catches.appendChild(curCatch);
+    } else {
+        for (let line of Object.values(data)) {
+            const access = userData._id === line._ownerId ? '' : 'disabled';
+            const curCatch = createDivCatch(line, access);
+            catches.appendChild(curCatch);
+        }
+    }
+    
     const deleteButton = Array.from(document.querySelectorAll('.delete'));
     deleteButton.forEach(e => e.addEventListener('click', deleteCatch))
 
@@ -74,7 +79,7 @@ async function createCatch(event) {
 }
 
 async function deleteCatch(event) {
-    
+
     const id = event.target.dataset.id;
 
     const options = {
