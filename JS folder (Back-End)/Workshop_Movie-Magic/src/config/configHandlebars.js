@@ -1,4 +1,5 @@
 const handlebars = require('express-handlebars');
+const path = require('path');
 
 
 function configHandlebars(app){
@@ -8,6 +9,8 @@ function configHandlebars(app){
     }));
 
     app.set('view engine', 'hbs');
+    app.set('views', path.resolve('src/views'));
+
 
 }
 
