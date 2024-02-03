@@ -1,5 +1,5 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
+const mongoose = require('mongoose');
 
 const configExpress = require('./config/configExpress');
 const configHandlebars = require('./config/configHandlebars');
@@ -13,6 +13,13 @@ configHandlebars(app);
 
 app.use(routers);
 
+mongoose.connect('mongodb://localhost:27017/magic-movie')
+    .then(() => {
+        console.log('DB Connected.');
 
-app.listen(port, () =>{ console.log(`Express server running on port: ${port}. You can make requests to http://localhost:${port}/ `);})
+        app.listen(port, () => { console.log(`Express server running on port: ${port}. You can make requests to http://localhost:${port}/ `) })
+    })
+    .catch(err => console.log('Cannot connect do DB.'))
+
+
 
