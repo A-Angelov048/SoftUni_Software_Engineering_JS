@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createCast, getAllCast } = require('../services/castService');
+const { createCast, getAllCast, attachCast } = require('../services/castService');
 const { findById } = require('../services/movieService');
 
 
@@ -26,7 +26,7 @@ router.post('/create/cast', async (req, res) => {
 router.get('/attach/cast/:id', async (req, res) => {
 
     const idMovie = req.params.id;
-
+    // TODO: validate if cast is already added
     try {
         const data = await findById(idMovie).lean();
         const casts = await getAllCast().lean();
@@ -35,6 +35,20 @@ router.get('/attach/cast/:id', async (req, res) => {
         console.log(error.message);
     }
 
+})
+
+router.post('/attach/cast/:id', async (req, res) => {
+
+    const idMovie = req.params.id;
+    const idCast = req.body.cast
+    // TODO: validate castId if exists
+    try {
+        await attachCast(idMovie, idCast);
+        res.redirect(`/attach/cast/${idMovie}`);
+    } catch (error) {
+        console.log(error.message);
+        res.redirect(`/attach/cast/${idMovie}`);
+    }
 })
 
 
