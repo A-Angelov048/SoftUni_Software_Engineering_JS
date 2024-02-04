@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createCast } = require('../services/castService');
+const { createCast, getAllCast } = require('../services/castService');
 const { findById } = require('../services/movieService');
 
 
@@ -29,7 +29,8 @@ router.get('/attach/cast/:id', async (req, res) => {
 
     try {
         const data = await findById(idMovie).lean();
-        res.render('cast-attach', { data });
+        const casts = await getAllCast().lean();
+        res.render('cast-attach', { data, casts });
     } catch (error) {
         console.log(error.message);
     }
