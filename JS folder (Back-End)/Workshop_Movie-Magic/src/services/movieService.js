@@ -4,7 +4,7 @@ exports.getAllMovies = () => Movie.find();
 
 exports.saveMovie = (data) => Movie.create(data);
 
-exports.findById = (idMovie) => Movie.findById(idMovie);
+exports.findById = (idMovie) => Movie.findById(idMovie).populate('casts');
 
 exports.searchMovie = (title, genre, year) => {
     const query = {}
