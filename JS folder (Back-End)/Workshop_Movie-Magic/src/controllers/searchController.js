@@ -1,16 +1,18 @@
 const router = require('express').Router();
-const { getAllMovies } = require('../services/movieService');
+const { searchMovie } = require('../services/movieService');
 
 
 router.get('/search', async (req, res) => {
 
     try {
-        const data = await getAllMovies().lean();
-        res.render('search', {data});
+        const { title, genre, year } = req.query;
+        const data = await searchMovie(title, genre, year).lean();
+        res.render('search', { data, title, genre, year });
     } catch (error) {
         console.log(error.message);
     }
 })
+
 
 
 module.exports = router;
