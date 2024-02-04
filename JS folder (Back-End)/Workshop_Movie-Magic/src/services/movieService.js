@@ -1,4 +1,4 @@
-const Movie = require('../models/MovieCreate');
+const Movie = require('../models/Movie');
 
 exports.getAllMovies = () => Movie.find();
 

@@ -21,7 +21,8 @@ const movieCreateSchema = new mongoose.Schema({
     },
     imageURL: {
         type: String,
-        require: true
+        require: true,
+        match: /^https?:\/\//
     },
     rating: {
         type: Number,
@@ -31,7 +32,8 @@ const movieCreateSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        require: true
+        require: true,
+        max: 1000
     },
 
 })
