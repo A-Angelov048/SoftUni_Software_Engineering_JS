@@ -12,6 +12,7 @@ router.post('/create', async (req, res) => {
     const data = req.body;
 
     try {
+
         await saveMovie(data);
         res.redirect('/');
 

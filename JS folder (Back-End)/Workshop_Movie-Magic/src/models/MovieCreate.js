@@ -19,7 +19,7 @@ const movieCreateSchema = new mongoose.Schema({
         min: 1980,
         max: 2030
     },
-    imageUrl: {
+    imageURL: {
         type: String,
         require: true
     },
