@@ -1,9 +1,15 @@
 const router = require('express').Router();
+const { getAllMovies } = require('../services/movieService');
 
 
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
 
-    res.render('search');
+    try {
+        const data = await getAllMovies().lean();
+        res.render('search', {data});
+    } catch (error) {
+        console.log(error.message);
+    }
 })
 
 
