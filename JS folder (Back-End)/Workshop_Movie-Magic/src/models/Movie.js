@@ -3,36 +3,36 @@ const mongoose = require('mongoose');
 const movieCreateSchema = new mongoose.Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
     genre: {
         type: String,
-        require: true
+        required: true
     },
     director: {
         type: String,
-        require: true
+        required: true
     },
     year: {
         type: Number,
-        require: true,
+        required: true,
         min: 1980,
         max: 2030
     },
     imageURL: {
         type: String,
-        require: true,
+        required: true,
         match: /^https?:\/\//
     },
     rating: {
         type: Number,
-        require: true,
+        required: true,
         min: 1,
         max: 5
     },
     description: {
         type: String,
-        require: true,
+        required: true,
         max: 1000
     },
     casts: [{

@@ -4,25 +4,25 @@ const castCreateSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        require: true
+        required: true
     },
     age: {
         type: Number,
-        require: true,
+        required: true,
         min: 15,
         max: 70
     },
     born: {
         type: String,
-        require: true
+        required: true
     },
     nameInMovie: {
         type: String,
-        require: true
+        required: true
     },
     imageURL: {
         type: String,
-        require: true,
+        required: true,
         match: /^https?:\/\//
     }
 })
