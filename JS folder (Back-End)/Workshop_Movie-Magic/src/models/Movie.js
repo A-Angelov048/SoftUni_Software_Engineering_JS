@@ -38,7 +38,11 @@ const movieCreateSchema = new mongoose.Schema({
     casts: [{
         type: mongoose.Types.ObjectId,
         ref: 'Cast'
-    }]
+    }],
+    creatorId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }
 
 })
 
