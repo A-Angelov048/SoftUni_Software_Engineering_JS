@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createUser } = require('../services/authService');
+const { createUser, getUser } = require('../services/authService');
 const { getMessageError } = require('../utils/errorUtils');
 
 
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
     } catch (err) {
 
         const message = getMessageError(err);
-        res.render('register', { message, ...body });
+        res.status(400).render('register', { message, ...body });
     }
 
 })
@@ -28,6 +28,23 @@ router.post('/register', async (req, res) => {
 router.get('/login', (req, res) => {
 
     res.render('login');
+})
+
+router.post('/login', async (req, res) => {
+
+    const body = req.body;
+
+    try {
+
+        const token = await getUser(body);
+        res.cookie('Auth', token);
+        res.redirect('/');
+
+    } catch (err) {
+
+        const message = getMessageError(err);
+        res.status(400).render('login', { message, ...body });
+    }
 })
 
 
