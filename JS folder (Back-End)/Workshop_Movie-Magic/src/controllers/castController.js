@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { createCast, getAllCast, attachCast } = require('../services/castService');
 const { findById } = require('../services/movieService');
 const { isAuth } = require('../middlewares/authMiddleware');
+const { getMessageError } = require('../utils/errorUtils');
+
 
 
 router.get('/create/cast', isAuth, (req, res) => {
@@ -19,8 +21,8 @@ router.post('/create/cast', isAuth, async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        console.log(err.message);
-        res.redirect('/create/cast');
+        const message = getMessageError(err);
+        res.status(400).render('cast-create', { message, ...data });
     }
 })
 
@@ -49,7 +51,7 @@ router.post('/attach/cast/:id', isAuth, async (req, res) => {
         res.redirect(`/attach/cast/${idMovie}`);
     } catch (err) {
         console.log(err.message);
-        res.redirect(`/attach/cast/${idMovie}`);
+        res.status(404).redirect('/404');
     }
 })
 

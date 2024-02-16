@@ -20,8 +20,8 @@ router.post('/create', isAuth, async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        console.log(err.message);
-        res.redirect('/create');
+        const message = getMessageError(err);
+        res.status(400).render('create', { message, ...data });;
     }
 })
 

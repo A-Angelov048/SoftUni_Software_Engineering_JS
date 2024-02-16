@@ -30,6 +30,6 @@ exports.searchMovie = (title, genre, year) => {
     return Movie.find(query);
 }
 
-exports.editMovie = (idMovie, data) => Movie.findByIdAndUpdate(idMovie, data);
+exports.editMovie = (idMovie, data) => Movie.findByIdAndUpdate(idMovie, data, { runValidators: true });
 
 exports.deleteMovie = (idMovie) => Movie.findByIdAndDelete(idMovie);
