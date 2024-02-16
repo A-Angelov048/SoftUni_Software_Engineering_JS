@@ -1,14 +1,15 @@
 const router = require('express').Router();
 const { createCast, getAllCast, attachCast } = require('../services/castService');
 const { findById } = require('../services/movieService');
+const { isAuth } = require('../middlewares/authMiddleware');
 
 
-router.get('/create/cast', (req, res) => {
+router.get('/create/cast', isAuth, (req, res) => {
 
     res.render('cast-create');
 })
 
-router.post('/create/cast', async (req, res) => {
+router.post('/create/cast', isAuth, async (req, res) => {
 
     const data = req.body;
 
@@ -23,7 +24,7 @@ router.post('/create/cast', async (req, res) => {
     }
 })
 
-router.get('/attach/cast/:id', async (req, res) => {
+router.get('/attach/cast/:id', isAuth, async (req, res) => {
 
     const idMovie = req.params.id;
     // TODO: validate if cast is already added
@@ -37,7 +38,7 @@ router.get('/attach/cast/:id', async (req, res) => {
 
 })
 
-router.post('/attach/cast/:id', async (req, res) => {
+router.post('/attach/cast/:id', isAuth, async (req, res) => {
 
     const idMovie = req.params.id;
     const idCast = req.body.cast

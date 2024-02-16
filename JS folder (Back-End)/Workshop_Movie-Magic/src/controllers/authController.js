@@ -1,14 +1,16 @@
 const router = require('express').Router();
 const { createUser, getUser } = require('../services/authService');
 const { getMessageError } = require('../utils/errorUtils');
+const { isUser, isAuth } = require('../middlewares/authMiddleware');
 
 
-router.get('/register', (req, res) => {
+
+router.get('/register', isUser, (req, res) => {
 
     res.render('register');
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', isUser, async (req, res) => {
 
     const body = req.body;
 
@@ -25,12 +27,12 @@ router.post('/register', async (req, res) => {
 
 })
 
-router.get('/login', (req, res) => {
+router.get('/login', isUser, (req, res) => {
 
     res.render('login');
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', isUser, async (req, res) => {
 
     const body = req.body;
 
@@ -47,7 +49,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isAuth, (req, res) => {
 
     res.clearCookie('Auth');
     res.redirect('/');
