@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const { getAllMovies, findById } = require('../services/movieService');
-const { getMessageError } = require('../utils/errorUtils');
-
 
 
 router.get('/', async (req, res) => {

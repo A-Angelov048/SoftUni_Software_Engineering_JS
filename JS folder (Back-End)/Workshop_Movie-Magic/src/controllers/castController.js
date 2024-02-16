@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { createCast, getAllCast, attachCast } = require('../services/castService');
 const { findById } = require('../services/movieService');
-const { isAuth } = require('../middllewares/authMiddleware');
+const { isAuth } = require('../middlewares/authMiddleware');
 
 
 router.get('/create/cast', isAuth, (req, res) => {

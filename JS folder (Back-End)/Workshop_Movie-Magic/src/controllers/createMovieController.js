@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { saveMovie } = require('../services/movieService');
-const { isAuth } = require('../middllewares/authMiddleware');
+const { saveMovie, findById, editMovie, deleteMovie } = require('../services/movieService');
+const { isAuth } = require('../middlewares/authMiddleware');
+const { getMessageError } = require('../utils/errorUtils');
 
 
 router.get('/create', isAuth, (req, res) => {
@@ -19,14 +20,58 @@ router.post('/create', isAuth, async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        console.log(error.message);
+        console.log(err.message);
         res.redirect('/create');
     }
 })
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isAuth, async (req, res) => {
 
-    res.render('edit');
+    const idMovie = req.params.id;
+
+    try {
+
+        const data = await findById(idMovie).lean();
+        res.render('edit', { data });
+
+    } catch (err) {
+
+        console.log(err.message);
+        res.status(404).redirect('/404');
+    }
+})
+
+router.post('/edit/:id', isAuth, async (req, res) => {
+
+    const idMovie = req.params.id;
+    const data = req.body;
+
+    try {
+
+        await editMovie(idMovie, data);
+        res.redirect(`/details/${idMovie}`);
+
+    } catch (err) {
+
+        const message = getMessageError(err);
+        res.status(400).render('edit', { message, data });
+    }
+})
+
+router.get('/delete/:id', isAuth, async (req, res) => {
+
+    const idMovie = req.params.id;
+
+    try {
+
+        await deleteMovie(idMovie);
+        res.redirect('/');
+
+    } catch (err) {
+
+        console.log(err.message);
+        res.status(404).redirect('/404');
+    }
 })
 
 

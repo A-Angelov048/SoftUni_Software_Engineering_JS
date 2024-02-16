@@ -7,7 +7,7 @@ exports.saveMovie = (data, userID) => {
         ...data,
         creatorId: userID
     }
-    Movie.create(newData);
+    return Movie.create(newData);
 }
 
 exports.findById = (idMovie) => Movie.findById(idMovie).populate('casts');
@@ -30,3 +30,6 @@ exports.searchMovie = (title, genre, year) => {
     return Movie.find(query);
 }
 
+exports.editMovie = (idMovie, data) => Movie.findByIdAndUpdate(idMovie, data);
+
+exports.deleteMovie = (idMovie) => Movie.findByIdAndDelete(idMovie);
