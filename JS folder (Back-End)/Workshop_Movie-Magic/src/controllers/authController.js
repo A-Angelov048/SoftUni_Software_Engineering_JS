@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { createUser, getUser } = require('../services/authService');
 const { getMessageError } = require('../utils/errorUtils');
-const { isUser, isAuth } = require('../middlewares/authMiddleware');
+const { isUser, isAuth } = require('../middllewares/authMiddleware');
 
 
 

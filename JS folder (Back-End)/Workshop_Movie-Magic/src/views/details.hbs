@@ -16,10 +16,13 @@
                 </div>
                 <p class="disc">{{data.description}}</p>
             </div>
+            {{#if isOwner}}
             <div class="details-btn">
-                <button id="edit-button">Edit</button>
-                <button id="delete-button">Delete</button>
+                <a href="/edit/{{data._id}}" id="edit-button">Edit</a>
+                <a href="/delete{{data._id}}" id="delete-button">Delete</a>
+                <a href="/attach/cast/{{data._id}}" id="delete-button">Attach</a>
             </div>
+            {{/if}}
         </div>
         <div class="card_right">
             <img src={{data.imageURL}} alt="image">
