@@ -3,7 +3,7 @@ const { SECRET } = require('../config/secret');
 
 exports.auth = async (req, res, next) => {
 
-    const token = req.cookies['Auth'];
+    const token = req.cookies['auth'];
     if (!token) {
         return next();
     }
@@ -13,11 +13,14 @@ exports.auth = async (req, res, next) => {
         const verifyToken = await jwt.verify(token, SECRET);
         req.user = verifyToken;
         res.locals.verifyUser = true;
+        res.locals.ifUser = true;
+
 
         next();
 
     } catch (error) {
-        res.clearCookie('Auth');
+        res.locals.ifUser = false;
+        res.clearCookie('auth');
         res.redirect('login');
     }
 }
