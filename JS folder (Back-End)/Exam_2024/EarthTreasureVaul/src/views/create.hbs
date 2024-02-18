@@ -1,0 +1,19 @@
+<main class="create">
+    <!-- Create Page (Only for logged-in users) -->
+    <section id="create">
+        <div class="form">
+            <h2>Add Stone</h2>
+            <form class="create-form" method="post">
+                <input type="text" name="name" id="name" value="{{name}}" placeholder="Name" />
+                <input type="text" name="category" id="category" value="{{category}}" placeholder="Category" />
+                <input type="text" name="color" id="color" value="{{color}}" placeholder="Color" />
+                <input type="text" name="image" id="stone-img" value="{{image}}" placeholder="Image" />
+                <input type="text" name="location" id="location" value="{{location}}" placeholder="Location" />
+                <input type="text" name="formula" id="formula" value="{{formula}}" placeholder="Formula" />
+                <textarea id="description" placeholder="Description..." name="description">{{description}}</textarea>
+
+                <button type="submit">Create</button>
+            </form>
+        </div>
+    </section>
+</main>

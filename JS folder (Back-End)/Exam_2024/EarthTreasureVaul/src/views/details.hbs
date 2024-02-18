@@ -1,0 +1,50 @@
+<main class="details">
+    <!-- Details page -->
+    <section id="details">
+        <div id="details-wrapper">
+            <p id="details-title">Name: {{name}}</p>
+            <div id="img-wrapper">
+                <img src="{{image}}" />
+            </div>
+            <div id="info-wrapper">
+                <table>
+                    <tr>
+                        <td>
+                            <p>
+                                Category: <span id="details-category">{{category}}</span>
+                            </p>
+                        </td>
+                        <td>
+                            <p>Color: <span id="details-color">{{color}}</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Location: <span id="details-location">{{location}}</span></p>
+                        </td>
+                        <td>
+                            <p>Formula: <span id="details-formula">{{formula}}</span></p>
+                        </td>
+                    </tr>
+                </table>
+                <p>Description: <span id="details-description">{{description}}</span></p>
+            </div>
+
+            <!--Edit and Delete are only for creator-->
+            {{#if ifUser}}
+            <div id="action-buttons">
+                {{#if ifOwner}}
+                <a href="/edit/stone/{{_id}}" id="edit-btn">Edit</a>
+                <a href="/delete/stone/{{_id}}" id="delete-btn">Delete</a>
+                {{else}}
+                    {{#if ifLike}}
+                        <p id="already-liked">You already liked this stone!</p>
+                    {{else}}
+                        <a href="/like/stone/{{_id}}" id="like-btn">Like</a>
+                    {{/if}}
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>
+    </section>
+</main>
