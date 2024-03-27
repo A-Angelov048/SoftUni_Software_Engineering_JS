@@ -1,0 +1,82 @@
+.header-section a {
+    position: relative;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.header-section a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: .3s;
+}
+
+.header-section a:hover::before {
+    width: 100%;
+}
+
+.header-section {
+    position: relative;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.header-section .logo {
+    font-size: 32px;
+    color: #22d378;
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+    bottom: 2px;
+}
+
+.divider {
+    height: 32px;
+    border-left: 3px solid #22d378;
+    justify-content: start;
+    position: relative;
+    top: 2px;
+}
+
+.menu-container {
+    list-style: none;
+}
+
+.menu-container li {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.menu-container .menu {
+    color: #22d378;
+    text-transform: uppercase;
+    bottom: 6px;
+}
+
+.menu-container .menu::before {
+    background: #22d378;
+
+}
+
+.navbar-section div {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.navbar-section .user {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar-section .user::before {
+    background: #fff;
+}
