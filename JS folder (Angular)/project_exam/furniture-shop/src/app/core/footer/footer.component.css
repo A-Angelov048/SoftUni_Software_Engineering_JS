@@ -1,0 +1,112 @@
+footer {
+    margin-top: auto;
+}
+
+.footer-content {
+    background-color: #0f1521;
+    color: #ffffff;
+    padding: 30px 30px;
+    width: 100%;
+
+}
+
+.footer-content .info-logo {
+    width: 90%;
+    margin: 0 auto 45px auto;
+    padding-bottom: 10px;
+    text-align: center;
+    border-bottom: 3px solid #ffffff;
+}
+
+.footer-content .info-logo h2 {
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.footer-content .row p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.footer-content .row .box {
+    flex-basis: 20%;
+    padding: 0px 20px;
+}
+
+.footer-content .row h5 {
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+.footer-content .row .info-contact>div {
+    display: flex;
+    margin: 20px 0px;
+}
+
+.footer-content .row .img-box {
+    width: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.footer-content .row .info-contact p {
+    margin: 0;
+}
+
+.footer-content .row .info-info .social-box {
+    margin-top: 35px;
+    width: 100%;
+    display: flex;
+}
+
+.social-box a {
+    margin-right: 25px;
+}
+
+.info-form form {
+    padding-right: 35px;
+}
+
+.container-form input[type=text],
+textarea {
+    width: 125%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.container-form input[type=submit] {
+    background-color: #22d378;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container-form input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.info-insta .insta-container>div {
+    display: flex;
+}
+
+.insta-image {
+    margin: 5px;
+    align-items: stretch;
+}
