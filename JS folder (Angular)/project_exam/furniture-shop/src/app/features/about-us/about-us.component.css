@@ -1,0 +1,23 @@
+.about-section .row {
+    align-items: center;
+}
+
+.about-section .detail-box p {
+    margin-top: 20px;
+}
+
+.about-section .detail-box a {
+    display: inline-block;
+    padding: 7px 25px;
+    background-color: #252525;
+    color: #ffffff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    margin-top: 35px;
+}
+
+.about-section .img-box img {
+    width: 100%;
+}
