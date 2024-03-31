@@ -19,8 +19,7 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent,
-    NotFoundComponent
+    FooterComponent
   ]
 })
 export class CoreModule { }
