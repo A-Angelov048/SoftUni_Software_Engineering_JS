@@ -14,4 +14,8 @@ export class DestroyIntroductionService {
     this.flagSubject.next(false);
   }
 
+  showComponent() {
+    this.flagSubject.next(true);
+  }
+
 }
