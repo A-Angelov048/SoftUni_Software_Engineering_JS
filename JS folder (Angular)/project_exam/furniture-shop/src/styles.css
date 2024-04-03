@@ -11,6 +11,46 @@ body {
     flex-direction: column;
 }
 
+.introduction {
+    height: 100vh;
+    background-image: url(/assets/images/hero-bg.jpg);
+    background-size: cover;
+    position: relative;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.introduction::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background-image: url(/assets/images/hero-side-bg.png);
+    background-size: cover;
+}
+
+.hideIntroduction {
+    height: auto;
+    background-image: url(/assets/images/hero-bg.jpg);
+    background-size: auto;
+    position: relative;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.hideIntroduction::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background-image: url(/assets/images/hero-side-bg.png);
+    background-size: cover;
+}
+
 .row {
     justify-content: center;
     display: flex;
@@ -65,27 +105,6 @@ body {
     background-color: #24d278;
     -webkit-transform: translate(100%, -50%);
     transform: translate(100%, -50%);
-}
-
-.introduction {
-    height: 100vh;
-    background-image: url(/assets/images/hero-bg.jpg);
-    background-size: cover;
-    position: relative;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-
-.introduction::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 45%;
-    height: 100%;
-    background-image: url(/assets/images/hero-side-bg.png);
-    background-size: cover;
 }
 
 h1,
@@ -185,19 +204,23 @@ a {
 
 @media (max-width: 1225px) {
 
-    body .introduction .header-section .navbar-section .user {
+    body .introduction .header-section .navbar-section .user,
+    body .hideIntroduction .header-section .navbar-section .user {
         color: #22d378;
     }
 
-    body .introduction .header-section .navbar-section .user::before {
+    body .introduction .header-section .navbar-section .user::before,
+    body .hideIntroduction .header-section .navbar-section .user::before {
         background: #22d378;
     }
 
-    .introduction {
+    .introduction,
+    .hideIntroduction {
         overflow: visible;
     }
 
-    .introduction::after {
+    .introduction::after,
+    .hideIntroduction::after {
         background-image: none;
     }
 }
@@ -205,7 +228,8 @@ a {
 
 @media (max-width: 992px) {
 
-    body .introduction .header-section {
+    body .introduction .header-section,
+    body .hideIntroduction .header-section {
         padding: 20px 20px;
         display: inline-block;
     }
@@ -218,7 +242,7 @@ a {
         margin: auto;
     }
 
-    .wrapper,
+    .container .layout-padding2 .wrapper,
     .search-form .wrapper {
         width: 550px;
     }
@@ -251,11 +275,14 @@ a {
 }
 
 @media (max-width: 895px) {
-    .introduction {
+
+    .introduction,
+    .hideIntroduction {
         height: auto;
     }
 
-    .introduction::after {
+    .introduction::after,
+    .hideIntroduction::after {
         background-image: none;
         background-color: rgba(34, 211, 120, 0.4);
         width: 100%;
@@ -270,12 +297,14 @@ a {
         margin-bottom: 45px;
     }
 
+    .hideIntroduction .introduction-section .container .row .img-container,
     .introduction .introduction-section .container .row .img-container {
         justify-content: center;
     }
 
 
-    .introduction {
+    .introduction,
+    .hideIntroduction {
         background: none;
     }
 
@@ -283,6 +312,7 @@ a {
         padding-top: 35px;
     }
 
+    body .hideIntroduction .introduction-section .container .row .col-md-6 .detail-box h1 span,
     body .introduction .introduction-section .container .row .col-md-6 .detail-box h1 span {
         font-size: 4rem;
     }
@@ -313,7 +343,7 @@ a {
         margin: auto;
     }
 
-    .wrapper,
+    .container .layout-padding2 .wrapper,
     .search-form .wrapper {
         width: 450px;
     }
@@ -332,6 +362,7 @@ a {
         font-size: 2.5rem;
     }
 
+    body .hideIntroduction .introduction-section .container .row .col-md-6 .detail-box h1 span,
     body .introduction .introduction-section .container .row .col-md-6 .detail-box h1 span {
         font-size: 3.5rem;
     }
@@ -340,7 +371,7 @@ a {
         margin: auto;
     }
 
-    .wrapper,
+    .container .layout-padding2 .wrapper,
     .search-form .wrapper {
         width: 400px;
     }
@@ -356,11 +387,12 @@ a {
         font-size: 2rem;
     }
 
+    body .hideIntroduction .introduction-section .container .row .col-md-6 .detail-box h1 span,
     body .introduction .introduction-section .container .row .col-md-6 .detail-box h1 span {
         font-size: 3rem;
     }
 
-    .wrapper,
+    .container .layout-padding2 .wrapper,
     .search-form .wrapper {
         width: 320px;
     }
@@ -392,11 +424,12 @@ a {
         font-size: 1.5rem;
     }
 
+    body .hideIntroduction .introduction-section .container .row .col-md-6 .detail-box h1 span,
     body .introduction .introduction-section .container .row .col-md-6 .detail-box h1 span {
         font-size: 2.5rem;
     }
 
-    .wrapper,
+    .container .layout-padding2 .wrapper,
     .search-form .wrapper {
         width: 300px;
     }
