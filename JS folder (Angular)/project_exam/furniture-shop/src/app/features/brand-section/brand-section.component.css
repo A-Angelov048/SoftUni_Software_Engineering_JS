@@ -1,0 +1,17 @@
+.brand-section .brand-btn {
+    display: inline-block;
+    padding: 6px 30px;
+    background-color: #252525;
+    color: #ffffff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.brand-section .brand-btn:hover {
+    background-color: transparent;
+    border-color: #252525;
+    color: #252525;
+}
