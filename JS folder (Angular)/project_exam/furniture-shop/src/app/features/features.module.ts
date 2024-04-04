@@ -5,7 +5,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { InfoGalleryComponent } from './info-gallery/info-gallery.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
-
+import { ShopComponent } from './shop/shop.component';
+import { FeaturesRoutingModule } from './features-routing.module';
+import { BrandSectionComponent } from './brand-section/brand-section.component';
 
 
 @NgModule({
@@ -13,11 +15,14 @@ import { SharedModule } from '../shared/shared.module';
     IntroductionComponent,
     AboutUsComponent,
     InfoGalleryComponent,
-    HomeComponent
+    HomeComponent,
+    ShopComponent,
+    BrandSectionComponent
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FeaturesRoutingModule
   ],
   exports: [
     IntroductionComponent
