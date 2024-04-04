@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ShopComponent } from './shop/shop.component';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { BrandSectionComponent } from './brand-section/brand-section.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { BrandSectionComponent } from './brand-section/brand-section.component';
     InfoGalleryComponent,
     HomeComponent,
     ShopComponent,
-    BrandSectionComponent
+    BrandSectionComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

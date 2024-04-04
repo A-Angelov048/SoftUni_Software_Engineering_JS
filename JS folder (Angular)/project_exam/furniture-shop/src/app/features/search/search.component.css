@@ -1,0 +1,116 @@
+.search-section .search-form {
+    text-align: center;
+}
+
+.search-form .wrapper {
+    width: 420px;
+    background-color: rgba(34, 211, 120, 0.5);
+    border: 3px solid rgba(51, 51, 51, 0.4);
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+    color: #333;
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin: 15px auto;
+}
+
+.search-form .wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.search-form .search-input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(51, 51, 51, 0.4);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #333;
+    padding: 20px 45px 20px 20px;
+}
+
+.search-form .search-input::placeholder {
+    color: #333;
+}
+
+.search-form .wrapper .search-button {
+    width: 100%;
+    height: 45px;
+    background: #333;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.search-form .wrapper .search-button:hover {
+    background: #fff;
+    color: #333;
+}
+
+.search-section .no-match {
+    text-align: center;
+    margin: 0px 250px;
+    padding: 15px 0px;
+    color: #333;
+    background-color: rgba(34, 211, 120, 0.5);
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.search-section .no-match h2 {
+    margin-bottom: 0rem;
+}
+
+.search-section .brand-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.search-section .brand-container .box {
+    position: relative;
+    text-align: center;
+    background-color: #e4e5e9;
+    padding: 75px 35px 10px 35px;
+    margin: 30px 10px 0 10px;
+    min-width: 225px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 23.24670%;
+    flex: 0 0 23.24670%;
+}
+
+.search-section .brand-container .box .new {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 35px;
+    background-color: #252525;
+    color: #ffffff;
+}
+
+.search-section .brand-container .box .img-box img {
+    width: 100%;
+}
+
+.search-section .brand-container .box h6.price {
+    color: #24d278;
+}
+
+.search-section .brand-container .box h6 {
+    color: #252525;
+}
