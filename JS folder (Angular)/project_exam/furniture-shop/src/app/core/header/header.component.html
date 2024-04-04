@@ -2,20 +2,20 @@
 
     <div>
         <ul class="menu-container">
-            <li><a class="logo" href="/home.html">Furniture-Shop</a></li>
+            <li><a class="logo" routerLink="/">Furniture-Shop</a></li>
             <li>
                 <hr class="divider">
             </li>
-            <li><a class="menu" href="/home.html">Home</a></li>
-            <li><a class="menu" href="/shop.html">Shop</a></li>
-            <li><a class="menu" href="/search.html">Search</a></li>
+            <li><a class="menu" routerLink="/">Home</a></li>
+            <li><a class="menu" routerLink="/shop">Shop</a></li>
+            <li><a class="menu" routerLink="/search">Search</a></li>
         </ul>
     </div>
 
     <nav class="navbar-section">
         <!--For logging users-->
         <div>
-            <a class="user" href="/createOffer.html">Create Offer </a>
+            <a class="user" routerLink="/create-offer">Create Offer </a>
         </div>
 
         <div>
@@ -24,11 +24,11 @@
         <!--For guest user-->
 
         <div>
-            <a class="user" href="/login.html">Login</a>
+            <a class="user" routerLink="/login">Login</a>
         </div>
 
         <div>
-            <a class="user" href="/register.html">Register</a>
+            <a class="user" routerLink="/register">Register</a>
         </div>
     </nav>
 
