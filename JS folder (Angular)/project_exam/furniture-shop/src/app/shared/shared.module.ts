@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrandComponent } from './brand/brand.component';
+import { BrandContainerComponent } from './brand-container/brand-container.component';
 
 
 
 @NgModule({
   declarations: [
-    BrandComponent
+    BrandContainerComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    BrandComponent
+    BrandContainerComponent
   ]
 })
 export class SharedModule { }
