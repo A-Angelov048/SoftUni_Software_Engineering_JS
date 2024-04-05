@@ -1,7 +1,3 @@
-.search-section .search-form {
-    text-align: center;
-}
-
 .search-form .wrapper {
     width: 420px;
     background-color: rgba(34, 211, 120, 0.5);
@@ -17,7 +13,7 @@
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .search-form .search-input {
@@ -46,6 +42,7 @@
 }
 
 .search-form .wrapper .search-button {
+    margin-top: 20px;
     width: 100%;
     height: 45px;
     background: #333;
@@ -76,4 +73,15 @@
 
 .search-section .no-match h2 {
     margin-bottom: 0rem;
+}
+
+.error {
+    display: inline-block;
+    margin: 10px 0px;
+    padding: 10px 15px;
+    background: #fad6db;
+    color: #893f47;
+    border-radius: 40px;
+    text-align: center;
+    font-weight: 600;
 }

@@ -9,6 +9,7 @@ import { ShopComponent } from './shop/shop.component';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { BrandSectionComponent } from './brand-section/brand-section.component';
 import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SearchComponent } from './search/search.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
     FeaturesRoutingModule
   ],

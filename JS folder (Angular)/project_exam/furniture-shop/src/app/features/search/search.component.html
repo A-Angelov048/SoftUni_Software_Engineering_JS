@@ -10,16 +10,36 @@
 
         <div class="search-form layout-padding2">
             <div class="wrapper">
-                <form>
+                <form #searchForm="ngForm" (ngSubmit)="submitSearchForm(searchForm)">
+
+                    <!-- NAME -->
                     <div class="input-box">
-                        <input type="text" name="name" class="search-input" placeholder="Enter your search name">
+                        <input type="text" name="name" class="search-input" placeholder="Enter your search name"
+                            #inputName="ngModel" required minlength="4" ngModel>
                         <i class='bx bxs-search-alt-2'></i>
                     </div>
+
+                    <ng-container *ngIf="inputName.touched">
+                        <p class="error" *ngIf="inputName.errors?.['required']">Name is required!</p>
+                        <p class="error" *ngIf="inputName.errors?.['minlength']">Name should be at least 4
+                            characters long.</p>
+                    </ng-container>
+
+                    <!-- TYPE -->
                     <div class="input-box">
-                        <input type="text" name="type" class="search-input" placeholder="Enter your search type">
-                        <i class='bx bxs-search-alt-2' ></i>
+                        <input type="text" name="type" class="search-input" placeholder="Enter your search type"
+                            #inputType="ngModel" required minlength="4" ngModel>
+                        <i class='bx bxs-search-alt-2'></i>
                     </div>
+
+                    <ng-container *ngIf="inputType.touched">
+                        <p class="error" *ngIf="inputType.errors?.['required']">Type is required!</p>
+                        <p class="error" *ngIf="inputType.errors?.['minlength']">Type should be at least 4
+                            characters long.</p>
+                    </ng-container>
+
                     <button class="search-button">Search</button>
+
                 </form>
             </div>
         </div>
