@@ -7,18 +7,34 @@
         </div>
         <div class="layout-padding2">
             <div class="wrapper">
-                <form>
+                <form #loginForm="ngForm" (ngSubmit)="submitLoginForm(loginForm)">
                     <div class="input-box">
-                        <input type="text" placeholder="Type your email" name="email">
+                        <input type="text" placeholder="Type your email" name="email" #inputEmail="ngModel" required
+                            minlength="10" pattern="\w+@[A-Za-z]+\.[A-Za-z]+" ngModel>
                         <i class='bx bxs-envelope'></i>
                     </div>
 
+                    <ng-container *ngIf="inputEmail.touched">
+                        <p class="error" *ngIf="inputEmail.errors?.['required']">Email is required!</p>
+                        <p class="error" *ngIf="inputEmail.errors?.['minlength']">Email should be at least 10 characters
+                            long.</p>
+                        <p class="error" *ngIf="inputEmail.errors?.['pattern']">Not a valid email! Should be in the
+                            xxx@xx.xx format only.</p>
+                    </ng-container>
+
                     <div class="input-box">
-                        <input type="password" placeholder="Type your password" name="password">
+                        <input type="password" placeholder="Type your password" name="password" #inputPassword="ngModel"
+                            required minlength="5" ngModel>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
 
-                    <button class="btn">Login</button>
+                    <ng-container *ngIf="inputPassword.touched">
+                        <p class="error" *ngIf="inputPassword.errors?.['required']">Password is required!</p>
+                        <p class="error" *ngIf="inputPassword.errors?.['minlength']">Password should be at least 5
+                            characters long.</p>
+                    </ng-container>
+
+                    <button [disabled]="loginForm.invalid" class="btn">Login</button>
 
                     <div class="link">
                         <p>Don't have and account?
