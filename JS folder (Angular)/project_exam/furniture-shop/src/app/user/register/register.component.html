@@ -58,10 +58,12 @@
                     </div>
 
                     <ng-container *ngIf="inputRePassword.touched">
-                        <p class="error" *ngIf="inputRePassword.value !== inputPassword.value">Passwords should match!</p>
+                        <p class="error" *ngIf="inputRePassword.value !== inputPassword.value">Passwords should match!
+                        </p>
                     </ng-container>
 
-                    <button [disabled]="registerForm.invalid || inputRePassword.value !== inputPassword.value" class="btn">Register</button>
+                    <button [disabled]="registerForm.invalid || inputRePassword.value !== inputPassword.value"
+                        [style]="{filter: registerForm.invalid ? 'blur(2px)':'blur(0px)'}" class="btn">Register</button>
 
                     <div class="link">
                         <p>Already have an account?

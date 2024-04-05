@@ -34,8 +34,8 @@
                             characters long.</p>
                     </ng-container>
 
-                    <button [disabled]="loginForm.invalid" class="btn">Login</button>
-
+                    <button [disabled]="loginForm.invalid"
+                        [style]="{filter: loginForm.invalid ? 'blur(2px)':'blur(0px)'}" class="btn">Login</button>
                     <div class="link">
                         <p>Don't have and account?
                             <a routerLink="/register">Register here</a>

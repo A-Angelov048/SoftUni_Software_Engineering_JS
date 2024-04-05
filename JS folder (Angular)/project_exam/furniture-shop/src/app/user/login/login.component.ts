@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitLoginForm(form: NgForm): void {
 
     const payloadData = form.value //add type!
-
+    
     if (form.invalid) {
       form.setValue(
         { email: payloadData.email, password: '' }
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // this.userService.login(payload);
+    // this.userService.login(payloadData);
     this.router.navigate(['/']);
   }
 }

@@ -28,11 +28,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    form.setValue({
-      name: payloadData.name,
-      type: payloadData.type,
-    })
-
     // this.userService.login(payload);
 
   }

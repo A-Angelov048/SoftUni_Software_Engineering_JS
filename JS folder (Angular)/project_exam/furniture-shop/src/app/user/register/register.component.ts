@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // this.userService.login(payload);
+    // this.userService.login(payloadData);
     this.router.navigate(['/']);
   }
 
