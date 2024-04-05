@@ -7,26 +7,61 @@
         </div>
         <div class="layout-padding2">
             <div class="wrapper">
-                <form>
+                <form #registerForm="ngForm" (ngSubmit)="submitRegisterForm(registerForm)">
+
+                    <!-- USERNAME -->
                     <div class="input-box">
-                        <input type="text" placeholder="Type your username" name="username">
+                        <input type="text" placeholder="Type your username" name="username" #inputUsername="ngModel"
+                            required minlength="5" ngModel>
                         <i class='bx bxs-user'></i>
                     </div>
 
+                    <ng-container *ngIf="inputUsername.touched">
+                        <p class="error" *ngIf="inputUsername.errors?.['required']">Username is required!</p>
+                        <p class="error" *ngIf="inputUsername.errors?.['minlength']">Username should be at least 5
+                            characters long.</p>
+                    </ng-container>
+
+                    <!-- EMAIL -->
                     <div class="input-box">
-                        <input type="text" placeholder="Type your email" name="email">
+                        <input type="text" placeholder="Type your email" name="email" #inputEmail="ngModel" required
+                            minlength="10" pattern="\w+@[A-Za-z]+\.[A-Za-z]+" ngModel>
                         <i class='bx bxs-envelope'></i>
                     </div>
+
+                    <ng-container *ngIf="inputEmail.touched">
+                        <p class="error" *ngIf="inputEmail.errors?.['required']">Email is required!</p>
+                        <p class="error" *ngIf="inputEmail.errors?.['minlength']">Email should be at least 10 characters
+                            long.</p>
+                        <p class="error" *ngIf="inputEmail.errors?.['pattern']">Not a valid email! Should be in the
+                            xxx@xx.xx format only.</p>
+                    </ng-container>
+
+                    <!-- PASSWORD -->
                     <div class="input-box">
-                        <input type="password" placeholder="Type your password" name="password">
-                        <i class='bx bxs-lock-alt'></i>
-                    </div>
-                    <div class="input-box">
-                        <input type="password" placeholder="Confirm your password" name="rePassword">
+                        <input type="password" placeholder="Type your password" name="password" #inputPassword="ngModel"
+                            required minlength="6" ngModel>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
 
-                    <button class="btn">Register</button>
+                    <ng-container *ngIf="inputPassword.touched">
+                        <p class="error" *ngIf="inputPassword.errors?.['required']">Password is required!</p>
+                        <p class="error" *ngIf="inputPassword.errors?.['minlength']">Password should be at least 6
+                            characters long.</p>
+                    </ng-container>
+
+                    <!-- RE PASSWORD -->
+                    <div class="input-box">
+                        <input type="password" placeholder="Confirm your password" name="rePassword"
+                            #inputRePassword="ngModel" ngModel>
+                        <i class='bx bxs-lock-alt'></i>
+                    </div>
+
+                    <ng-container *ngIf="inputRePassword.touched">
+                        <p class="error" *ngIf="inputRePassword.value !== inputPassword.value">Passwords should match!</p>
+                    </ng-container>
+
+                    <button [disabled]="registerForm.invalid || inputRePassword.value !== inputPassword.value" class="btn">Register</button>
 
                     <div class="link">
                         <p>Already have an account?
