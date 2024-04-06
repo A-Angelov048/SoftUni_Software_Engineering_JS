@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DestroyIntroductionService } from 'src/app/shared/services/destroy-introduction.service';
+import { SearchHandlerService } from './search-handler.service';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +11,7 @@ import { DestroyIntroductionService } from 'src/app/shared/services/destroy-intr
 export class SearchComponent implements OnInit, OnDestroy {
 
 
-  constructor(private introductionService: DestroyIntroductionService) { }
+  constructor(private introductionService: DestroyIntroductionService, private searchHandler: SearchHandlerService) { }
 
   ngOnInit(): void {
     this.introductionService.hideComponent();
@@ -22,13 +23,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   submitSearchForm(form: NgForm) {
 
-    const payloadData = form.value //add type!
-
     if (form.invalid) {
       return;
     }
 
-    // this.userService.login(payload);
+    const payloadData = form.value
+    this.searchHandler.updateData(payloadData);
 
   }
 

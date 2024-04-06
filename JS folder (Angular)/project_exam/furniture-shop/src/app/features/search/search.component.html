@@ -25,19 +25,6 @@
                             characters long.</p>
                     </ng-container>
 
-                    <!-- TYPE -->
-                    <div class="input-box">
-                        <input type="text" name="category" class="search-input" placeholder="Enter your search category"
-                            #inputCategory="ngModel" required minlength="4" ngModel>
-                        <i class='bx bxs-search-alt-2'></i>
-                    </div>
-
-                    <ng-container *ngIf="inputCategory.touched">
-                        <p class="error" *ngIf="inputCategory.errors?.['required']">Category is required!</p>
-                        <p class="error" *ngIf="inputCategory.errors?.['minlength']">Category should be at least 4
-                            characters long.</p>
-                    </ng-container>
-
                     <button [disabled]="searchForm.invalid"
                         [style]="{filter: searchForm.invalid ? 'blur(2px)':'blur(0px)'}"
                         class="search-button">Search</button>
@@ -47,10 +34,6 @@
         </div>
 
         <app-brand-container />
-
-        <div class="no-match">
-            <h2 class="h2">Whoops sorry no match was found!</h2>
-        </div>
 
     </div>
 </section>
