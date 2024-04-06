@@ -1,0 +1,46 @@
+<section class="details-section layout-padding">
+    <div class="container">
+        <div class="heading-container">
+            <h2>
+                Details Furniture
+            </h2>
+        </div>
+        <div *ngIf="currentFurniture" class="layout-padding2">
+
+            <div class="wrapper">
+
+                <div class="details">
+
+                    <div class="right-box">
+                        <div class="image-box">
+                            <img src="{{currentFurniture.imageUrl}}" class="main-image">
+                        </div>
+                    </div>
+
+                    <div class="left-box">
+                        <div class="info-box">
+                            <h2>Name: {{currentFurniture.name}}</h2>
+                            <h3>Category: {{currentFurniture.category}}</h3>
+                            <h3>Year Manufactured: {{currentFurniture.year}}</h3>
+                            <h3>Materials: {{currentFurniture.materials}}</h3>
+                            <h3>Condition: {{currentFurniture.condition}}</h3>
+                            <h3>Price: ${{currentFurniture.price}}</h3>
+                            <h3>Description: {{currentFurniture.description}}</h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="btn-box">
+                    <button class="btn">Edit</button>
+                    <button class="btn">Delete</button>
+                    <button class="btn">Buy</button>
+                    <p class="purchase-box">
+                        Thank You For Your Purchase
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
