@@ -1,69 +1,29 @@
 <div class="brand-container layout-padding2">
-    <div class="box">
-        <a href="">
+    <div class="box" *ngFor="let furniture of furnitureArr">
+        <a routerLink="/details/{{furniture._id}}">
 
             <!-- /only visualize at home page/ -->
-            <!-- <div class="new">
-                        <h5>
-                            New
-                        </h5>
-                    </div> -->
+            <div *ngIf="isHome" class="new">
+                <h5>
+                    New
+                </h5>
+            </div>
             <div class="img-box">
-                <img src="/assets/images/slider-img.png" alt="">
+                <img src="{{furniture.imageUrl}}" alt="">
             </div>
             <div class="detail-box">
                 <h6 class="price">
-                    $100
+                    ${{furniture.price}}
                 </h6>
                 <h6>
-                    Chair
+                    {{furniture.name}}
                 </h6>
             </div>
         </a>
     </div>
-    <div class="box">
-        <a href="">
-            <div class="img-box">
-                <img src="/assets/images/slider-img.png" alt="">
-            </div>
-            <div class="detail-box">
-                <h6 class="price">
-                    $100
-                </h6>
-                <h6>
-                    Chair
-                </h6>
-            </div>
-        </a>
-    </div>
-    <div class="box">
-        <a href="">
-            <div class="img-box">
-                <img src="/assets/images/slider-img.png" alt="">
-            </div>
-            <div class="detail-box">
-                <h6 class="price">
-                    $100
-                </h6>
-                <h6>
-                    Chair
-                </h6>
-            </div>
-        </a>
-    </div>
-    <div class="box">
-        <a href="">
-            <div class="img-box">
-                <img src="/assets/images/slider-img.png" alt="">
-            </div>
-            <div class="detail-box">
-                <h6 class="price">
-                    $100
-                </h6>
-                <h6>
-                    Chair
-                </h6>
-            </div>
-        </a>
-    </div>
+
+</div>
+
+<div *ngIf="noProperties" class="no-match">
+    <h2 class="h2">Whoops sorry no match was found!</h2>
 </div>

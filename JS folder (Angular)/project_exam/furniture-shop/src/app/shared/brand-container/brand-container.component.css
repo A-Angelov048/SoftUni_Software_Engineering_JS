@@ -42,3 +42,17 @@
 .brand-container .box h6 {
     color: #252525;
 }
+
+.no-match {
+    text-align: center;
+    margin: 0px 250px;
+    padding: 15px 0px;
+    color: #333;
+    background-color: rgba(34, 211, 120, 0.5);
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.no-match h2 {
+    margin-bottom: 0rem;
+}

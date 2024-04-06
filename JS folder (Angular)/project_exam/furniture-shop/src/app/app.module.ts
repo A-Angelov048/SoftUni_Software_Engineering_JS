@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { UserModule } from './user/user.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CoreModule,
     FeaturesModule,
     SharedModule,
