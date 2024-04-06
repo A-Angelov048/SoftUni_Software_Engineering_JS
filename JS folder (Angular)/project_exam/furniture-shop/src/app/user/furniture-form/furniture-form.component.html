@@ -1,0 +1,105 @@
+<div class="layout-padding2">
+    <div class="wrapper">
+        <form #createForm="ngForm" (ngSubmit)="submitCreateForm(createForm)">
+
+            <!-- NAME -->
+            <div class="input-box">
+                <input type="text" placeholder="Name..." name="name" #inputName="ngModel" required minlength="4"
+                    ngModel>
+            </div>
+
+            <ng-container *ngIf="inputName.touched">
+                <p class="error" *ngIf="inputName.errors?.['required']">Name is required!</p>
+                <p class="error" *ngIf="inputName.errors?.['minlength']">Name should be at least 4
+                    characters long.</p>
+            </ng-container>
+
+            <!-- CATEGORY -->
+            <div class="input-box">
+                <input type="text" placeholder="Category..." name="category" #inputCategory="ngModel" required
+                    minlength="4" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputCategory.touched">
+                <p class="error" *ngIf="inputCategory.errors?.['required']">Category is required!</p>
+                <p class="error" *ngIf="inputCategory.errors?.['minlength']">Category should be at least 4
+                    characters long.</p>
+            </ng-container>
+
+            <!-- YEAR -->
+            <div class="input-box">
+                <input type="number" placeholder="Year Manufactured..." name="year" #inputYear="ngModel" required
+                    min="1900" max="2024" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputYear.touched">
+                <p class="error" *ngIf="inputYear.errors?.['required']">Year is required!</p>
+                <p class="error" *ngIf="inputYear.errors?.['min']">Year of the furniture should be between 1900
+                    and 2024</p>
+                <p class="error" *ngIf="inputYear.errors?.['max']">Year of the furniture should be between 1900
+                    and 2024</p>
+            </ng-container>
+
+            <!-- MATERIALS -->
+            <div class="input-box">
+                <input type="text" placeholder="Materials..." name="materials" #inputMaterials="ngModel" required
+                    minlength="10" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputMaterials.touched">
+                <p class="error" *ngIf="inputMaterials.errors?.['required']">Materials is required!</p>
+                <p class="error" *ngIf="inputMaterials.errors?.['minlength']">Materials should be at least 10
+                    characters long.</p>
+            </ng-container>
+
+            <!-- CONDITION -->
+            <div class="input-box">
+                <input type="text" placeholder="Condition..." name="condition" #inputCondition="ngModel" required
+                    minlength="6" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputCondition.touched">
+                <p class="error" *ngIf="inputCondition.errors?.['required']">Condition is required!</p>
+                <p class="error" *ngIf="inputCondition.errors?.['minlength']">Condition should be at least 6
+                    characters long.</p>
+            </ng-container>
+
+            <!-- IMAGE -->
+            <div class="input-box">
+                <input type="text" placeholder="Image..." name="imageUrl" #inputImage="ngModel" required ngModel>
+            </div>
+
+            <ng-container *ngIf="inputImage.touched">
+                <p class="error" *ngIf="inputImage.errors?.['required']">Image is required!</p>
+            </ng-container>
+
+            <!-- PRICE -->
+            <div class="input-box">
+                <input type="number" placeholder="Price..." name="price" #inputPrice="ngModel" required min="0" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputPrice.touched">
+                <p class="error" *ngIf="inputPrice.errors?.['required']">Price is required!</p>
+                <p class="error" *ngIf="inputPrice.errors?.['min']">Price should be a positive number.</p>
+            </ng-container>
+
+            <!-- DESCRIPTION -->
+            <div class="input-box">
+                <input type="text" placeholder="Description..." name="description" #inputDescription="ngModel" required
+                    minlength="10" ngModel>
+            </div>
+
+            <ng-container *ngIf="inputDescription.touched">
+                <p class="error" *ngIf="inputDescription.errors?.['required']">Description is required!</p>
+                <p class="error" *ngIf="inputDescription.errors?.['minlength']">Description should be at least
+                    10
+                    characters long.</p>
+            </ng-container>
+
+            <button [disabled]="createForm.invalid" [style]="{filter: createForm.invalid ? 'blur(2px)':'blur(0px)'}"
+                class="btn">Submit
+                Form</button>
+
+        </form>
+    </div>
+</div>

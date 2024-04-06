@@ -5,6 +5,8 @@ import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { FormsModule } from '@angular/forms';
+import { FurnitureFormComponent } from './furniture-form/furniture-form.component';
+import { DetailsComponent } from './details/details.component';
 
 
 
@@ -12,7 +14,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    CreateOfferComponent
+    CreateOfferComponent,
+    FurnitureFormComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

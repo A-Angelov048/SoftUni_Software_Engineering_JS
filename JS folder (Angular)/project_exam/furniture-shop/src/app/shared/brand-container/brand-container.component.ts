@@ -19,7 +19,6 @@ export class BrandContainerComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     if (this.router.url === '/') {
 
       this.api.getAllLatest().subscribe({
@@ -33,7 +32,7 @@ export class BrandContainerComponent implements OnInit {
       this.searchHandler.dataFromForm$.subscribe(curData => {
         this.api.searchFurniture(curData).subscribe({
           next: (x) => {
-            
+
             if (x?.length === 0) {
               this.noProperties = true;
             } else {
@@ -44,8 +43,8 @@ export class BrandContainerComponent implements OnInit {
             this.isHome = false;
 
           }
-        })
-      })
+        });
+      });
 
     } else {
 
@@ -54,11 +53,10 @@ export class BrandContainerComponent implements OnInit {
           this.furnitureArr = x;
           this.isHome = false;
         }
-      })
+      });
 
     }
+
   }
-
-
 
 }

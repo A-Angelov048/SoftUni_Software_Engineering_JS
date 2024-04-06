@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const payloadData = form.value
+    const payloadData = form.value;
     this.searchHandler.updateData(payloadData);
 
   }

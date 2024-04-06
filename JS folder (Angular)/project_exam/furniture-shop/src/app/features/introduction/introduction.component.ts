@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { DestroyIntroductionService } from 'src/app/shared/services/destroy-introduction.service';
 
 @Component({
@@ -10,7 +10,7 @@ export class IntroductionComponent implements AfterViewInit {
 
   toRemoveSection: boolean = true;
 
-  constructor(private destroy: DestroyIntroductionService) {}
+  constructor(private destroy: DestroyIntroductionService) { }
 
   ngAfterViewInit(): void {
     this.destroy.flag$.subscribe(curFlag => {
