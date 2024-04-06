@@ -41,8 +41,8 @@
 
                     <ng-container *ngIf="inputYear.touched">
                         <p class="error" *ngIf="inputYear.errors?.['required']">Year is required!</p>
-                        <p class="error" *ngIf="inputYear.errors?.['min']">The minimum year of the furniture is 1900</p>
-                        <p class="error" *ngIf="inputYear.errors?.['max']">The maximum year of the furniture is 2024</p>
+                        <p class="error" *ngIf="inputYear.errors?.['min']">Year of the furniture should be between 1900 and 2024</p>
+                        <p class="error" *ngIf="inputYear.errors?.['max']">Year of the furniture should be between 1900 and 2024</p>
                     </ng-container>
 
                     <!-- MATERIALS -->

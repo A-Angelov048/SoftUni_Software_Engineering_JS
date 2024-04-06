@@ -24,7 +24,7 @@ export class CreateOfferComponent implements OnInit, OnDestroy {
   submitCreateForm(form: NgForm): void {
 
     const payloadData = form.value //add type!
-
+    
     if (form.invalid) {
       return;
     }
