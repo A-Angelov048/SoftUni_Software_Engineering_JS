@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { DestroyIntroductionService } from 'src/app/shared/services/destroy-introduction.service';
@@ -9,7 +9,7 @@ import { Furniture } from 'src/app/types/furniture';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit, OnDestroy {
 
   currentFurniture: Furniture | undefined;
 
@@ -22,7 +22,7 @@ export class DetailsComponent {
 
     this.api.getCurrentFurniture(furnitureId).subscribe({
       next: (x) => {
-        this.currentFurniture = x;        
+        this.currentFurniture = x;
       }
     });
 
