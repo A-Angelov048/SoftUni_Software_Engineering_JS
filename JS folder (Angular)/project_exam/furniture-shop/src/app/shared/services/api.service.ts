@@ -36,6 +36,11 @@ export class ApiService {
     return this.http.get<Furniture>(`${apiUrl}/furniture/${id}`);
   }
 
+  editFurniture(data: Furniture, id: string) {
+    const { apiUrl } = environment;
+    return this.http.post<any[] | undefined>(`${apiUrl}/furniture/edit${id}`, data);
+  }
+
 
 
 
