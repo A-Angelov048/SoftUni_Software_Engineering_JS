@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrandContainerComponent } from './brand-container/brand-container.component';
 import { RouterModule } from '@angular/router';
+import { appInterceptorProvider } from './interceptor/app.interceptor';
 
 
 
@@ -12,6 +13,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule
+  ],
+  providers:[
+    appInterceptorProvider
   ],
   exports: [
     BrandContainerComponent
