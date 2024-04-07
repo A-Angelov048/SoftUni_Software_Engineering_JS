@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DestroyIntroductionService } from 'src/app/shared/services/destroy-introduction.service';
+import { UserService } from 'src/app/shared/services/user-service.service';
+import { User } from 'src/app/types/user';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,11 @@ import { DestroyIntroductionService } from 'src/app/shared/services/destroy-intr
 export class RegisterComponent implements OnInit, OnDestroy {
 
 
-  constructor(private introductionService: DestroyIntroductionService, private router: Router) { }
+  constructor(
+    private introductionService: DestroyIntroductionService,
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.introductionService.hideComponent();
@@ -24,7 +30,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitRegisterForm(form: NgForm) {
 
-    const payloadData = form.value //add type!
+    const payloadData: User = form.value 
 
     if (form.invalid) {
       form.setValue(
@@ -33,13 +39,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
           email: payloadData.email,
           password: '',
           rePassword: ''
-        }
-      )
+        })
       return;
     }
 
-    // this.userService.login(payloadData);
-    this.router.navigate(['/']);
+    
+    this.userService.register(payloadData).subscribe(() => {
+      this.router.navigate(['/']);
+    });
+
   }
 
 }

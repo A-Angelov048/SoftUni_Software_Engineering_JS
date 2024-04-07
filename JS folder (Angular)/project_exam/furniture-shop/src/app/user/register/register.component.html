@@ -63,7 +63,8 @@
                     </ng-container>
 
                     <button [disabled]="registerForm.invalid || inputRePassword.value !== inputPassword.value"
-                        [style]="{filter: registerForm.invalid ? 'blur(2px)':'blur(0px)'}" class="btn">Register</button>
+                        [style]="{filter: registerForm.invalid || inputRePassword.value !== inputPassword.value ? 'blur(2px)':'blur(0px)'}"
+                        class="btn">Register</button>
 
                     <div class="link">
                         <p>Already have an account?
