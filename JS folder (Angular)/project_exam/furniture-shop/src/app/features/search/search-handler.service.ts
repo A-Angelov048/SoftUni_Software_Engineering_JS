@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Furniture } from 'src/app/types/furniture';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class SearchHandlerService {
 
   dataFromForm$ = this.dataSubject$$.asObservable();
 
-  updateData(data: any) {
+  updateData(data: Furniture) {
     this.dataSubject$$.next(data);
   }
 

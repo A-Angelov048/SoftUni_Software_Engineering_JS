@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DestroyIntroductionService } from 'src/app/shared/services/destroy-introduction.service';
 import { SearchHandlerService } from './search-handler.service';
+import { Furniture } from 'src/app/types/furniture';
 
 @Component({
   selector: 'app-search',
@@ -27,7 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const payloadData = form.value;
+    const payloadData: Furniture = form.value;
     this.searchHandler.updateData(payloadData);
 
   }

@@ -1,17 +1,17 @@
 
 export interface Furniture {
 
-    _id: string,
-    name: string,
-    category: string,
-    year: number,
-    materials: number,
-    condition: string,
-    imageUrl: string,
-    price: number,
-    description: string,
-    buyList: string[],
-    owner: string,
-    createdAt: Date | string,
-    __v: number
+    _id: string | null,
+    name: string | null,
+    category: string | null,
+    year: number | null,
+    materials: string | null,
+    condition: string | null,
+    imageUrl: string | null,
+    price: number | null,
+    description: string | null,
+    buyList: string[] | null,
+    owner: string | null,
+    createdAt: Date | string | null,
+    __v: number | null
 }
