@@ -1,0 +1,114 @@
+<section class="create-offer-section layout-padding">
+    <div class="container">
+
+        <div class="heading-container">
+            <h2>
+                Edit Furniture
+            </h2>
+        </div>
+
+        <div class="layout-padding2">
+            <div class="wrapper">
+                <form [formGroup]="form" (ngSubmit)="edit()">
+
+                    <!-- NAME -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Name..." name="name" formControlName="name">
+                    </div>
+
+                    <ng-container *ngIf="form.get('name')?.touched">
+                        <p class="error" *ngIf="form.get('name')?.errors?.['required']">Name is required!</p>
+                        <p class="error" *ngIf="form.get('name')?.errors?.['minlength']">Name should be at least 4
+                            characters long.</p>
+                    </ng-container>
+
+                    <!-- CATEGORY -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Category..." name="category" formControlName="category">
+                    </div>
+
+                    <ng-container *ngIf="form.get('category')?.touched">
+                        <p class="error" *ngIf="form.get('category')?.errors?.['required']">Category is required!</p>
+                        <p class="error" *ngIf="form.get('category')?.errors?.['minlength']">Category should be at least
+                            4 characters long.</p>
+                    </ng-container>
+
+                    <!-- YEAR -->
+                    <div class="input-box">
+                        <input type="number" placeholder="Year Manufactured..." name="year" formControlName="year">
+                    </div>
+
+                    <ng-container *ngIf="form.get('year')?.touched">
+                        <p class="error" *ngIf="form.get('year')?.errors?.['required']">Year is required!</p>
+                        <p class="error" *ngIf="form.get('year')?.errors?.['min']">Year of the furniture should be
+                            between 1900 and 2024</p>
+                        <p class="error" *ngIf="form.get('year')?.errors?.['max']">Year of the furniture should be
+                            between 1900 and 2024</p>
+                    </ng-container>
+
+                    <!-- MATERIALS -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Materials..." name="materials" formControlName="materials">
+                    </div>
+
+                    <ng-container *ngIf="form.get('materials')?.touched">
+                        <p class="error" *ngIf="form.get('materials')?.errors?.['required']">Materials is required!</p>
+                        <p class="error" *ngIf="form.get('materials')?.errors?.['minlength']">Materials should be at
+                            least 10 characters long.</p>
+                    </ng-container>
+
+                    <!-- CONDITION -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Condition..." name="condition" formControlName="condition">
+                    </div>
+
+                    <ng-container *ngIf="form.get('condition')?.touched">
+                        <p class="error" *ngIf="form.get('condition')?.errors?.['required']">Condition is required!</p>
+                        <p class="error" *ngIf="form.get('condition')?.errors?.['minlength']">Condition should be at
+                            least 6 characters long.</p>
+                    </ng-container>
+
+                    <!-- IMAGE -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Image..." name="imageUrl" formControlName="imageUrl">
+                    </div>
+
+                    <ng-container *ngIf="form.get('imageUrl')?.touched">
+                        <p class="error" *ngIf="form.get('imageUrl')?.errors?.['required']">Image is required!</p>
+                    </ng-container>
+
+                    <!-- PRICE -->
+                    <div class="input-box">
+                        <input type="number" placeholder="Price..." name="price" formControlName="price">
+                    </div>
+
+                    <ng-container *ngIf="form.get('price')?.touched">
+                        <p class="error" *ngIf="form.get('price')?.errors?.['required']">Price is required!</p>
+                        <p class="error" *ngIf="form.get('price')?.errors?.['min']">Price should be a positive number.
+                        </p>
+                    </ng-container>
+
+                    <!-- DESCRIPTION -->
+                    <div class="input-box">
+                        <input type="text" placeholder="Description..." name="description"
+                            formControlName="description">
+                    </div>
+
+                    <ng-container *ngIf="form.get('description')?.touched">
+                        <p class="error" *ngIf="form.get('description')?.errors?.['required']">Description is required!
+                        </p>
+                        <p class="error" *ngIf="form.get('description')?.errors?.['minlength']">Description should be at
+                            least 10 characters long.</p>
+                    </ng-container>
+
+                    <button [disabled]="form.invalid" [style]="{filter: form.invalid ? 'blur(2px)':'blur(0px)'}"
+                        class="btn">Edit Furniture</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>

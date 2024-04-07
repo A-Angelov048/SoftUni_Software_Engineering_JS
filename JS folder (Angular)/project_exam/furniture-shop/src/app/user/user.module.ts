@@ -4,9 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
-import { FormsModule } from '@angular/forms';
-import { FurnitureFormComponent } from './furniture-form/furniture-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -15,12 +15,13 @@ import { DetailsComponent } from './details/details.component';
     LoginComponent,
     RegisterComponent,
     CreateOfferComponent,
-    FurnitureFormComponent,
-    DetailsComponent
+    DetailsComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     UserRoutingModule
   ]
 })
