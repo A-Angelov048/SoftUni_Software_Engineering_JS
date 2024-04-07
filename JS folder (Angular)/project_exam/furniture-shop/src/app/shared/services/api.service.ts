@@ -28,7 +28,7 @@ export class ApiService {
 
   searchFurniture(data: any) {
     const { apiUrl } = environment;
-    return this.http.post<any[] | undefined>(`${apiUrl}/furniture/search`, data);
+    return this.http.post<Furniture[]>(`${apiUrl}/furniture/search`, data);
   }
 
   getCurrentFurniture(id: string) {
@@ -36,9 +36,14 @@ export class ApiService {
     return this.http.get<Furniture>(`${apiUrl}/furniture/${id}`);
   }
 
-  editFurniture(data: Furniture, id: string) {
+  editFurniture(data: Partial<Furniture>, id: string) {
     const { apiUrl } = environment;
-    return this.http.post<any[] | undefined>(`${apiUrl}/furniture/edit${id}`, data);
+    return this.http.post<Furniture>(`${apiUrl}/furniture/edit/${id}`, data);
+  }
+
+  deleteCurrentFurniture(userId: any, id: string) {
+    const { apiUrl } = environment;
+    return this.http.post<Furniture>(`${apiUrl}/furniture/delete/${id}`, userId);
   }
 
 

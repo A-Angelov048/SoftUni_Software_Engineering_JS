@@ -33,7 +33,7 @@
 
                 <div class="btn-box">
                     <button routerLink="/details/edit/{{currentFurniture._id}}" class="btn">Edit</button>
-                    <button class="btn">Delete</button>
+                    <button (click)="deleteFurniture()" class="btn">Delete</button>
                     <!-- <button class="btn">Buy</button> -->
                     <!-- <p class="purchase-box">
                         Thank You For Your Purchase
