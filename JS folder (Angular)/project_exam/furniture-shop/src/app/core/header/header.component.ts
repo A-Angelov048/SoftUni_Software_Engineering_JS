@@ -30,11 +30,9 @@ export class HeaderComponent implements OnInit {
     this.userService.logout().subscribe({
       next: () => {
         this.userService.showHideUser();
-        this.route.navigate(['/']);
       },
       error: () => {
         this.userService.showHideUser();
-        this.route.navigate(['/']);
       }
     }
     )
