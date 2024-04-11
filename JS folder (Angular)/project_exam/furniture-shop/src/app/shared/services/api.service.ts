@@ -12,7 +12,7 @@ export class ApiService {
 
 
   createFurniture(data: Furniture) {
-    const { apiUrl } = environment;    
+    const { apiUrl } = environment;
     return this.http.post<Furniture>(`${apiUrl}/furniture`, data);
   }
 
@@ -36,7 +36,7 @@ export class ApiService {
     return this.http.get<Furniture>(`${apiUrl}/furniture/${id}`);
   }
 
-  editFurniture(data: Partial<Furniture>, id: string) {
+  editFurniture(data: Furniture, id: string) {
     const { apiUrl } = environment;
     return this.http.post<Furniture>(`${apiUrl}/furniture/edit/${id}`, data);
   }
@@ -46,7 +46,7 @@ export class ApiService {
     return this.http.get<Furniture>(`${apiUrl}/furniture/delete/${id}`);
   }
 
-  buyCurrentFurniture(id:string){
+  buyCurrentFurniture(id: string) {
     const { apiUrl } = environment;
     return this.http.get<Furniture>(`${apiUrl}/furniture/buy/${id}`)
   }

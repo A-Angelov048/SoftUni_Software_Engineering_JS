@@ -74,11 +74,12 @@ export class EditComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const payload = this.form.value;
+    const dataFromForm = this.form.value;
+    const payload: Furniture = dataFromForm as Furniture
 
-    this.api.editFurniture(payload, this.furnitureId).subscribe(()=>{
+    this.api.editFurniture(payload, this.furnitureId).subscribe(() => {
       this.router.navigate([`/details/${this.furnitureId}`]);
     })
-    
+
   }
 }
