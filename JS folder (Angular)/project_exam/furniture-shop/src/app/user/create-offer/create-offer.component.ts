@@ -31,12 +31,7 @@ export class CreateOfferComponent implements OnInit, OnDestroy {
 
     const payloadData: Furniture = form.value;
 
-    const body: Furniture = {
-      ...payloadData,
-      owner: '65d20bf3ae6903c8ce172165' // add userID here...
-    };
-
-    this.api.createFurniture(body).subscribe(()=>{
+    this.api.createFurniture(payloadData).subscribe(() => {
       this.router.navigate(['/shop']);
     });
   }
