@@ -79,8 +79,6 @@ export class EditComponent implements OnInit, OnDestroy {
     this.api.editFurniture(payload, this.furnitureId).subscribe(()=>{
       this.router.navigate([`/details/${this.furnitureId}`]);
     })
-
-
-
+    
   }
 }
