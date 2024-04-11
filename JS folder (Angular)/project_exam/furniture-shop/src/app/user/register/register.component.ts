@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitRegisterForm(form: NgForm) {
 
-    const payloadData: User = form.value 
+    const payloadData: User = form.value;
 
     if (form.invalid) {
       form.setValue(
@@ -43,8 +43,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return;
     }
 
-    
-    this.userService.register(payloadData).subscribe(() => {
+
+    this.userService.register(payloadData).subscribe((x) => {
+      localStorage.setItem('userId', JSON.stringify(x));
+      this.userService.showHideUser();
       this.router.navigate(['/']);
     });
 
