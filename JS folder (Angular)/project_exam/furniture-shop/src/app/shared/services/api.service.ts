@@ -12,8 +12,8 @@ export class ApiService {
 
 
   createFurniture(data: Furniture) {
-    const { apiUrl } = environment;
-    return this.http.post(`${apiUrl}/furniture`, data);
+    const { apiUrl } = environment;    
+    return this.http.post<Furniture>(`${apiUrl}/furniture`, data);
   }
 
   getAllLatest() {
@@ -38,12 +38,17 @@ export class ApiService {
 
   editFurniture(data: Partial<Furniture>, id: string) {
     const { apiUrl } = environment;
-    return this.http.post(`${apiUrl}/furniture/edit/${id}`, data);
+    return this.http.post<Furniture>(`${apiUrl}/furniture/edit/${id}`, data);
   }
 
-  deleteCurrentFurniture(userId: any, id: string) {
+  deleteCurrentFurniture(id: string) {
     const { apiUrl } = environment;
-    return this.http.post(`${apiUrl}/furniture/delete/${id}`, userId);
+    return this.http.get<Furniture>(`${apiUrl}/furniture/delete/${id}`);
+  }
+
+  buyCurrentFurniture(id:string){
+    const { apiUrl } = environment;
+    return this.http.get<Furniture>(`${apiUrl}/furniture/buy/${id}`)
   }
 
 
