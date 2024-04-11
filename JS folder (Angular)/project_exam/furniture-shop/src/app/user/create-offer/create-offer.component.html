@@ -106,8 +106,8 @@
                             characters long.</p>
                     </ng-container>
 
-                    <button [disabled]="form.invalid" [style]="{filter: form.invalid ? 'blur(2px)':'blur(0px)'}"
-                        class="btn">Create Offer</button>
+                    <button [disabled]="form.invalid" [class.btn-blur]="form.invalid" [class.btn]="!form.invalid">Create
+                        Offer</button>
 
                 </form>
             </div>
