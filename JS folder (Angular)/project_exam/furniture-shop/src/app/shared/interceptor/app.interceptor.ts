@@ -13,9 +13,9 @@ export class AppInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler):
         Observable<HttpEvent<any>> {
-            
-        if (req.url.startsWith(`${apiUrl}/users`)) {
-    
+
+        if (req.url.startsWith(apiUrl)) {
+
             req = req.clone({ withCredentials: true });
         }
 
