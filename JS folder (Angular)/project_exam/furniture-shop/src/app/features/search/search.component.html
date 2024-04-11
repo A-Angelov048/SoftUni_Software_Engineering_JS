@@ -25,9 +25,8 @@
                             characters long.</p>
                     </ng-container>
 
-                    <button [disabled]="searchForm.invalid"
-                        [style]="{filter: searchForm.invalid ? 'blur(2px)':'blur(0px)'}"
-                        class="search-button">Search</button>
+                    <button [disabled]="searchForm.invalid" [class.search-button-blur]="searchForm.invalid"
+                        [class.search-button]="!searchForm.invalid">Search</button>
 
                 </form>
             </div>
