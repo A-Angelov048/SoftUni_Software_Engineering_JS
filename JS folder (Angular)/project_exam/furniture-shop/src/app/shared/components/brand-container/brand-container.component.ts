@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Furniture } from 'src/app/types/furniture';
 import { Router } from '@angular/router';
 import { SearchHandlerService } from 'src/app/features/search/search-handler.service';
