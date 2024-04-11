@@ -89,7 +89,7 @@ textarea {
     resize: vertical;
 }
 
-.container-form input[type=submit] {
+.container-form .sub {
     background-color: #22d378;
     color: white;
     padding: 12px 20px;
@@ -98,7 +98,7 @@ textarea {
     cursor: pointer;
 }
 
-.container-form input[type=submit]:hover {
+.container-form .sub:hover {
     background-color: #45a049;
 }
 
