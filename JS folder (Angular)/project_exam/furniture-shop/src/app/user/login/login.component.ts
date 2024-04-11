@@ -14,10 +14,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private introductionService: DestroyIntroductionService, 
+    private introductionService: DestroyIntroductionService,
     private router: Router,
     private userService: UserService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.introductionService.hideComponent();
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submitLoginForm(form: NgForm): void {
 
-    const payloadData: User = form.value 
-    
+    const payloadData: User = form.value;
+
     if (form.invalid) {
       form.setValue(
         { email: payloadData.email, password: '' }
@@ -39,8 +39,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    
-    this.userService.login(payloadData).subscribe(() => {
+
+    this.userService.login(payloadData).subscribe((x) => {
+      localStorage.setItem('userId', JSON.stringify(x));
+      this.userService.showHideUser();
       this.router.navigate(['/']);
     });
 
