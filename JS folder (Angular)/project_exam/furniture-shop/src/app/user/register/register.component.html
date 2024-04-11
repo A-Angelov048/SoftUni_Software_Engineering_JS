@@ -52,19 +52,20 @@
 
                     <!-- RE PASSWORD -->
                     <div class="input-box">
-                        <input type="password" placeholder="Confirm your password" name="rePassword"
+                        <input type="password" placeholder="Confirm your password" name="rePassword" required
                             #inputRePassword="ngModel" ngModel>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
 
                     <ng-container *ngIf="inputRePassword.touched">
+                        <p class="error" *ngIf="inputRePassword.errors?.['required']">rePassword is required!</p>
                         <p class="error" *ngIf="inputRePassword.value !== inputPassword.value">Passwords should match!
                         </p>
                     </ng-container>
 
                     <button [disabled]="registerForm.invalid || inputRePassword.value !== inputPassword.value"
-                        [style]="{filter: registerForm.invalid || inputRePassword.value !== inputPassword.value ? 'blur(2px)':'blur(0px)'}"
-                        class="btn">Register</button>
+                        [class.btn-blur]="registerForm.invalid || inputRePassword.value !== inputPassword.value"
+                        [class.btn]="!registerForm.invalid && inputRePassword.value === inputPassword.value">Register</button>
 
                     <div class="link">
                         <p>Already have an account?
