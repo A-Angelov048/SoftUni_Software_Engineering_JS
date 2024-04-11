@@ -13,15 +13,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   currentFurniture: Furniture | undefined;
   furnitureId: string = '';
+  userId: string | undefined;
 
   constructor(
     private introductionService: DestroyIntroductionService,
     private api: ApiService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
-  }
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+
     this.introductionService.hideComponent();
     this.furnitureId = this.activatedRoute.snapshot.params['id'];
 
@@ -31,6 +33,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
       }
     });
 
+    try {
+      const userId = localStorage.getItem('userId') || '';
+      this.userId = JSON.parse(userId);
+    } catch (error) {
+      this.userId = undefined;
+    }
+
+
   }
 
   ngOnDestroy(): void {
@@ -38,10 +48,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   deleteFurniture(): void {
-    const userId: any = { userId: '65d20bf3ae6903c8ce172165' }
-    this.api.deleteCurrentFurniture(userId, this.furnitureId).subscribe(() => {
+    this.api.deleteCurrentFurniture(this.furnitureId).subscribe(() => {
       this.router.navigate(['/shop']);
     });
+  }
+
+  buyFurniture(): void {
+    this.api.buyCurrentFurniture(this.furnitureId).subscribe(() => {
+      this.ngOnInit();
+    })
   }
 
 }

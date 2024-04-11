@@ -31,13 +31,21 @@
 
                 </div>
 
-                <div class="btn-box">
-                    <button routerLink="/details/edit/{{currentFurniture._id}}" class="btn">Edit</button>
-                    <button (click)="deleteFurniture()" class="btn">Delete</button>
-                    <!-- <button class="btn">Buy</button> -->
-                    <!-- <p class="purchase-box">
-                        Thank You For Your Purchase
-                    </p> -->
+                <div *ngIf="!!userId" class="btn-box">
+
+                    <ng-container *ngIf="currentFurniture.owner === userId">
+                        <button routerLink="/details/edit/{{currentFurniture._id}}" class="btn">Edit</button>
+                        <button (click)="deleteFurniture()" class="btn">Delete</button>
+                    </ng-container>
+
+                    <ng-container *ngIf="currentFurniture.owner !== userId">
+                        <button *ngIf="!currentFurniture.buyList?.includes(userId)" (click)="buyFurniture()"
+                            class="btn">Buy</button>
+                        <p *ngIf="currentFurniture.buyList?.includes(userId)" class="purchase-box">
+                            Thank You For Your Purchase
+                        </p>
+                    </ng-container>
+
                 </div>
 
             </div>
