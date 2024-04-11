@@ -13,23 +13,32 @@
     </div>
 
     <nav class="navbar-section">
-        <!--For logging users-->
-        <div>
-            <a class="user" routerLink="/create-offer">Create Offer </a>
-        </div>
 
-        <div>
-            <a class="user" href="#">Logout</a>
-        </div>
+        <!--For logging users-->
+
+        <ng-container *ngIf="isLoggedIn">
+            <div>
+                <a class="user" routerLink="/create-offer">Create Offer </a>
+            </div>
+
+            <div (click)="logoutUser()">
+                <a routerLink="#" class="user">Logout</a>
+            </div>
+        </ng-container>
+
+
         <!--For guest user-->
 
-        <div>
-            <a class="user" routerLink="/login">Login</a>
-        </div>
+        <ng-container *ngIf=!isLoggedIn>
+            <div>
+                <a class="user" routerLink="/login">Login</a>
+            </div>
 
-        <div>
-            <a class="user" routerLink="/register">Register</a>
-        </div>
+            <div>
+                <a class="user" routerLink="/register">Register</a>
+            </div>
+        </ng-container>
+
     </nav>
 
 </header>
