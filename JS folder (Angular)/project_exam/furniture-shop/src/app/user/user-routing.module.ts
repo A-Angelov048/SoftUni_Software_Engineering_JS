@@ -5,15 +5,16 @@ import { RegisterComponent } from './register/register.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
+import { authGuard, loginUserGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'create-offer', component: CreateOfferComponent },
+    { path: 'login', component: LoginComponent, canActivate: [loginUserGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [loginUserGuard] },
+    { path: 'create-offer', component: CreateOfferComponent, canActivate: [authGuard] },
     {
         path: 'details', children: [
             { path: ':id', component: DetailsComponent },
-            { path: 'edit/:id', component: EditComponent }
+            { path: 'edit/:id', component: EditComponent, canActivate: [authGuard] }
         ]
     },
 ];
