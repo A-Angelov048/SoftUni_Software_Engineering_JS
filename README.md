@@ -11,3 +11,5 @@
 | [✔️ Fundamentals with JS](https://softuni.bg/certificates/details/180274/856da3be) |
 | [✔️ JS Advanced](https://softuni.bg/certificates/details/188200/5e6d88ef) |
 | [✔️ JS Applications](https://softuni.bg/certificates/details/195374/d6672e5a) |
+| [✔️ JS Back-End](https://softuni.bg/certificates/details/204908/ba814390) |
+| [✔️ Angular](https://softuni.bg/certificates/details/212752/ee71b1bd) |
