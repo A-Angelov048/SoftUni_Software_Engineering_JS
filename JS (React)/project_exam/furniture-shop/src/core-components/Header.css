@@ -1,0 +1,132 @@
+.header-section a {
+    position: relative;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.header-section a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: .3s;
+}
+
+.header-section a:hover::before {
+    width: 100%;
+}
+
+.header-section {
+    position: relative;
+    padding: 20px 100px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    z-index: 100;
+}
+
+.header-section div .menu-container {
+    list-style: none;
+}
+
+.header-section div .menu-container li {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.header-section div .menu-container .logo {
+    font-size: 32px;
+    color: #22d378;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.header-section div .menu-container .logo::after {
+    content: '';
+    position: relative;
+    left: 10px;
+    border: 2px solid #22d378;
+}
+
+.header-section div .menu-container .menu {
+    color: #22d378;
+    text-transform: uppercase;
+}
+
+
+.header-section .navbar-section div {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.header-section .navbar-section .user {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.introduction {
+    height: 100vh;
+    background-image: url(../../public/images/hero-bg.jpg);
+    background-size: cover;
+    position: relative;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.introduction::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background-image: url(../../public/images/hero-side-bg.png);
+    background-size: cover;
+}
+
+.introduction-info {
+    height: calc(90% - 70px);
+    display: flex;
+    align-items: center;
+}
+
+.introduction-info .container {
+    position: relative;
+    z-index: 2;
+}
+
+.introduction-info .row {
+    align-items: center;
+}
+
+.introduction-info .detail-box h1 {
+    color: #24d278;
+    text-transform: uppercase;
+}
+
+.introduction-info .detail-box h1 p {
+    font-size: 5rem;
+    color: #252525;
+}
+
+.introduction-info .detail-box p {
+    margin-top: 15px;
+}
+
+.introduction-info .img-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.introduction-info .img-container .img-box {
+    width: 250px;
+}
+
+.introduction-info .img-container .img-box img {
+    width: 100%;
+}

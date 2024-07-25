@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.column {
+    position: relative;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.layout-padding {
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.layout-padding2 {
+    padding: 45px 0;
+}
+
+.heading-container {
+    display: flex;
+}
+
+.heading-container h2 {
+    color: #252525;
+    position: relative;
+    font-family: 'Poppins', sans-serif
+}
+
+.heading-container h2::before {
+    content: "";
+    width: 60px;
+    height: 3px;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    background-color: #24d278;
+    transform: translate(100%, -50%);
+}
+
+h1,
+.h1 {
+    font-size: 2.5rem;
+}
+
+h2,
+.h2 {
+    font-size: 2rem;
+}
+
+h5,
+.h5 {
+    font-size: 1.25rem;
+}
+
+h6,
+.h6 {
+    font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+abbr {
+    text-decoration-style: solid;
+}
+
+hr {
+    border: solid 2px #F7F7F7;
+    margin-top: 10px;
+}
+
+hr:focus-within {
+    border-color: #D8D8D8;
+}
+
+.bx {
+    font-size: 20px;
+    background-color: transparent;
+}
