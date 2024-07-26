@@ -1,5 +1,7 @@
-import BrandContainer from '../../shared-components/brand-container/BrandContainer';
 import './BrandSection.css'
+import BrandContainer from '../../shared-components/brand-container/BrandContainer';
+
+import { Link } from 'react-router-dom';
 
 export default function BrandSection() {
     return (
@@ -14,9 +16,9 @@ export default function BrandSection() {
 
                 <BrandContainer />
 
-                <a href="" className="brand-btn">
+                <Link to="/shop" className="brand-btn">
                     See More
-                </a>
+                </Link>
 
             </div>
         </section>

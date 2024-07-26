@@ -49,8 +49,9 @@ footer {
     display: flex;
 }
 
-.footer-content .row .info-info .social-box a {
+.footer-content .row .info-info .social-box div {
     margin-right: 25px;
+    cursor: pointer;
 }
 
 .footer-content .row .info-insta .insta-container>div {

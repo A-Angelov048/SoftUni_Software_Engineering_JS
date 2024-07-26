@@ -22,7 +22,7 @@ export default function Footer() {
                         </h5>
                         <div>
                             <div className="img-box">
-                                <img src="images/location-white.png" width="18px" alt="" />
+                                <img src="/images/location-white.png" width="18px" alt="" />
                             </div>
                             <p>
                                 Address
@@ -30,7 +30,7 @@ export default function Footer() {
                         </div>
                         <div>
                             <div className="img-box">
-                                <img src="images/telephone-white.png" width="12px" alt="" />
+                                <img src="/images/telephone-white.png" width="12px" alt="" />
                             </div>
                             <p>
                                 +359 123 456 789
@@ -38,7 +38,7 @@ export default function Footer() {
                         </div>
                         <div>
                             <div className="img-box">
-                                <img src="images/envelope-white.png" width="18px" alt="" />
+                                <img src="/images/envelope-white.png" width="18px" alt="" />
                             </div>
                             <p>
                                 demo@gmail.com
@@ -56,18 +56,18 @@ export default function Footer() {
                             nihil neque consectetur! Corrupti.
                         </p>
                         <div className="social-box">
-                            <a href="#">
-                                <img src="images/fb.png" alt="" />
-                            </a>
-                            <a href="#">
-                                <img src="images/twitter.png" alt="" />
-                            </a>
-                            <a href="#">
-                                <img src="images/linkedin.png" alt="" />
-                            </a>
-                            <a href="#">
-                                <img src="images/youtube.png" alt="" />
-                            </a>
+                            <div href="#">
+                                <img src="/images/fb.png" alt="" />
+                            </div>
+                            <div href="#">
+                                <img src="/images/twitter.png" alt="" />
+                            </div>
+                            <div href="#">
+                                <img src="/images/linkedin.png" alt="" />
+                            </div>
+                            <div href="#">
+                                <img src="/images/youtube.png" alt="" />
+                            </div>
                         </div>
                     </div>
 
@@ -79,32 +79,32 @@ export default function Footer() {
 
                             <div>
                                 <div className="insta-image">
-                                    <img src="images/i-1.jpg" alt="" />
+                                    <img src="/images/i-1.jpg" alt="" />
                                 </div>
 
                                 <div className="insta-image">
-                                    <img src="images/i-2.jpg" alt="" />
+                                    <img src="/images/i-2.jpg" alt="" />
                                 </div>
 
                                 <div className="insta-image">
-                                    <img src="images/i-6.jpg" alt="" />
+                                    <img src="/images/i-6.jpg" alt="" />
                                 </div>
                             </div>
 
                             <div>
 
                                 <div className="insta-image">
-                                    <img src="images/i-3.jpg" alt="" />
+                                    <img src="/images/i-3.jpg" alt="" />
                                 </div>
 
 
                                 <div className="insta-image">
-                                    <img src="images/i-4.jpg" alt="" />
+                                    <img src="/images/i-4.jpg" alt="" />
                                 </div>
 
 
                                 <div className="insta-image">
-                                    <img src="images/i-5.jpg" alt="" />
+                                    <img src="/images/i-5.jpg" alt="" />
                                 </div>
 
                             </div>
@@ -112,17 +112,17 @@ export default function Footer() {
                             <div>
 
                                 <div className="insta-image">
-                                    <img src="images/i-5.jpg" alt="" />
+                                    <img src="/images/i-5.jpg" alt="" />
                                 </div>
 
 
                                 <div className="insta-image">
-                                    <img src="images/i-6.jpg" alt="" />
+                                    <img src="/images/i-6.jpg" alt="" />
                                 </div>
 
 
                                 <div className="insta-image">
-                                    <img src="images/i-1.jpg" alt="" />
+                                    <img src="/images/i-1.jpg" alt="" />
                                 </div>
 
                             </div>

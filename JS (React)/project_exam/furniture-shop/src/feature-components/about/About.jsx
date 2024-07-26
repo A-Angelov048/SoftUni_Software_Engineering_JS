@@ -26,7 +26,7 @@ export default function About() {
                     </div>
                     <div className="column">
                         <div className="img-box">
-                            <img src="images/about-img.png" alt="" />
+                            <img src="/images/about-img.png" alt="" />
                         </div>
                     </div>
                 </div>

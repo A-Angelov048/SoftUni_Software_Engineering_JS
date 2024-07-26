@@ -25,7 +25,7 @@ export default function Profile() {
                         <div className="profile-info">
 
                             <div className="image">
-                                <img src="images/profile-circle-svgrepo-com.svg" />
+                                <img src="/images/profile-circle-svgrepo-com.svg" />
                             </div>
 
                             <div className="info">

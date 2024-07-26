@@ -22,7 +22,7 @@ export default function IntroductionInfo() {
                     </div>
                     <div className="column img-container">
                         <div className="img-box">
-                            <img src="images/slider-img.png" alt="chair" />
+                            <img src="/images/slider-img.png" alt="chair" />
                         </div>
                     </div>
                 </div>
