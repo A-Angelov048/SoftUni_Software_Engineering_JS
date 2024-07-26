@@ -1,0 +1,11 @@
+.about-section .row {
+    align-items: center;
+}
+
+.about-section .detail-box p {
+    margin-top: 20px;
+}
+
+.about-section .img-box img {
+    width: 100%;
+}
