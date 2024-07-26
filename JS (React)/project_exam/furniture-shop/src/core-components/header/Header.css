@@ -57,6 +57,9 @@
     text-transform: uppercase;
 }
 
+.header-section div .menu-container .menu::before {
+    background: #22d378;
+}
 
 .header-section .navbar-section div {
     display: inline-block;
@@ -66,6 +69,10 @@
 .header-section .navbar-section .user {
     color: #fff;
     text-transform: uppercase;
+}
+
+.header-section .navbar-section .user::before {
+    background: #fff;
 }
 
 .introduction {
