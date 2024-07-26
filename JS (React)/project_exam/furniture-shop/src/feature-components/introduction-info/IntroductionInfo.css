@@ -1,0 +1,42 @@
+.introduction-info {
+    height: calc(90% - 70px);
+    display: flex;
+    align-items: center;
+}
+
+.introduction-info .container {
+    position: relative;
+    z-index: 2;
+}
+
+.introduction-info .row {
+    align-items: center;
+}
+
+.introduction-info .detail-box h1 {
+    color: #24d278;
+    text-transform: uppercase;
+}
+
+.introduction-info .detail-box h1 p {
+    font-size: 5rem;
+    color: #252525;
+}
+
+.introduction-info .detail-box p {
+    margin-top: 15px;
+}
+
+.introduction-info .img-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.introduction-info .img-container .img-box {
+    width: 250px;
+}
+
+.introduction-info .img-container .img-box img {
+    width: 100%;
+}
