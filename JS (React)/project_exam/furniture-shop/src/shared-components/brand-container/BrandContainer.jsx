@@ -22,7 +22,7 @@ export default function BrandContainer() {
                     }
 
                     <div className="img-box">
-                        <img src="images/slider-img.png" alt="" />
+                        <img src="/images/slider-img.png" alt="" />
                     </div>
                     <div className="detail-box">
                         <h6 className="price">

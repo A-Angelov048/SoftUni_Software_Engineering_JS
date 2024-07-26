@@ -8,6 +8,9 @@ import Register from "./user-components/register/Register"
 import CreateOffer from "./user-components/create-offer/CreateOffer"
 import Shop from "./feature-components/shop/Shop"
 import Search from "./feature-components/search/Search"
+import Profile from "./user-components/profile/Profile"
+import Settings from "./user-components/profile/settings/Settings"
+import BrandContainer from "./shared-components/brand-container/BrandContainer"
 
 
 
@@ -25,6 +28,12 @@ function App() {
         <Route path="/create-offer" element={<CreateOffer />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<Profile />} >
+          <Route path="my-furniture" element={<BrandContainer />} />
+          <Route path="whish-list" element={<BrandContainer />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="sales" element={<BrandContainer />} />
+        </Route >
       </Routes>
 
       <Footer />
