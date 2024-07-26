@@ -1,11 +1,11 @@
-.brand-section-home .brand-container {
+.brand-container {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: 0 -10px;
 }
 
-.brand-section-home .brand-container .box {
+.brand-container .box {
     position: relative;
     text-align: center;
     background-color: #e4e5e9;
@@ -15,7 +15,7 @@
     flex: 0 0 23%;
 }
 
-.brand-section-home .brand-container .box .new {
+.brand-container .box:nth-child(1) .new {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,14 +24,14 @@
     color: #ffffff;
 }
 
-.brand-section-home .brand-container .box .img-box img {
+.brand-container .box .img-box img {
     width: 100%;
 }
 
-.brand-section-home .brand-container .box h6.price {
+.brand-container .box h6.price {
     color: #24d278;
 }
 
-.brand-section-home .brand-container .box h6 {
+.brand-container .box h6 {
     color: #252525;
 }
