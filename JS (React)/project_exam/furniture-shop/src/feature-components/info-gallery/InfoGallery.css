@@ -1,0 +1,29 @@
+.image-section .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    border: 3px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.image-section .image-container {
+    text-align: center;
+    padding: 10px;
+}
+
+.image-section .image-container img {
+    width: 180px;
+    /* Adjust as needed */
+    height: 180px;
+    /* Adjust as needed */
+}
+
+.image-section .image-container h2 {
+    margin-top: 15px;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    font-weight: 700;
+}
