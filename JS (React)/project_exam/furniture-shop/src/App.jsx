@@ -11,6 +11,7 @@ import Search from "./feature-components/search/Search"
 import Profile from "./user-components/profile/Profile"
 import Settings from "./user-components/profile/settings/Settings"
 import BrandContainer from "./shared-components/brand-container/BrandContainer"
+import NotFound from "./core-components/not-found/NotFound"
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="sales" element={<BrandContainer />} />
         </Route >
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
