@@ -1,5 +1,6 @@
 
-import Header from "./core-components/Header"
+import Footer from "./core-components/footer/Footer"
+import Header from "./core-components/header/Header"
 
 
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <>
       <Header />
+      <Footer />
     </>
   )
 }
