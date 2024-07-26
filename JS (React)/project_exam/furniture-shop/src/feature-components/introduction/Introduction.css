@@ -1,0 +1,19 @@
+.introduction {
+    height: 100vh;
+    background-image: url(../../public/images/hero-bg.jpg);
+    background-size: cover;
+    position: relative;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.introduction::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background-image: url(../../public/images/hero-side-bg.png);
+    background-size: cover;
+}
