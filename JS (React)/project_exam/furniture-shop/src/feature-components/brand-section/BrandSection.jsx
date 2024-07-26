@@ -2,14 +2,14 @@ import './BrandSection.css'
 
 export default function BrandSection() {
     return (
-        <section class="brand-section-home layout-padding">
-            <div class="container">
-                <div class="heading-container">
+        <section className="brand-section-home layout-padding">
+            <div className="container">
+                <div className="heading-container">
                     <h2>
                         Last Added Furniture
                     </h2>
                 </div>
-                <a href="" class="brand-btn">
+                <a href="" className="brand-btn">
                     See More
                 </a>
             </div>
