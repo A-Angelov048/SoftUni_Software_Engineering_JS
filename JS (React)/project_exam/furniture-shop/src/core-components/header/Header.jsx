@@ -1,5 +1,6 @@
-import './Header.css'
+import { Link } from 'react-router-dom'
 
+import './Header.css'
 
 export default function Header() {
     return (
@@ -9,36 +10,36 @@ export default function Header() {
 
                 <div>
                     <ul className="menu-container">
-                        <li><a className="logo" href="/home.html">Furniture-Shop</a></li>
-                        <li><a className="menu" href="/home.html">Home</a></li>
-                        <li><a className="menu" href="/shop.html">Shop</a></li>
-                        <li><a className="menu" href="/search.html">Search</a></li>
+                        <li><Link className="logo" to="/">Furniture-Shop</Link></li>
+                        <li><Link className="menu" to="/">Home</Link></li>
+                        <li><Link className="menu" to="/shop">Shop</Link></li>
+                        <li><Link className="menu" to="/search">Search</Link></li>
                     </ul>
                 </div>
 
                 <nav className="navbar-section">
                     {/* <!--For logging users--> */}
                     <div>
-                        <a className="user" href="/createOffer.html">Create Offer </a>
+                        <Link className="user" to="/createOffer">Create Offer </Link>
                     </div>
 
                     <div>
-                        <a className="user" href="#">Logout</a>
+                        <Link className="user" to="#">Logout</Link>
                     </div>
 
                     <div>
-                        <a className="user" href="#">
+                        <Link className="user" to="/profile">
                             <i className='bx bxs-user'></i>
-                        </a>
+                        </Link>
                     </div>
                     {/* <!--For guest user--> */}
 
                     <div>
-                        <a className="user" href="/login.html">Login</a>
+                        <Link className="user" to="/login">Login</Link>
                     </div>
 
                     <div>
-                        <a className="user" href="/register.html">Register</a>
+                        <Link className="user" to="/register">Register</Link>
                     </div>
                 </nav>
 

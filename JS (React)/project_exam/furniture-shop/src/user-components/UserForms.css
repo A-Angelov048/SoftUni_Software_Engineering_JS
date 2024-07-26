@@ -1,0 +1,78 @@
+.inactive {
+    height: auto;
+    background-size: auto;
+}
+
+.wrapper-user {
+    max-width: 420px;
+    background-color: rgba(34, 211, 120, 0.5);
+    border: 3px solid rgba(51, 51, 51, 0.4);
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+    color: #333;
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin: auto;
+}
+
+.wrapper-user .input-box {
+    position: relative;
+    margin: 30px 0;
+}
+
+.wrapper-user .input-box input {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid rgba(51, 51, 51, 0.4);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #333;
+    padding: 15px 0px 15px 20px;
+}
+
+.wrapper-user .input-box input::placeholder {
+    color: #333;
+}
+
+.wrapper-user .input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper-user .btn {
+    width: 100%;
+    padding: 15px 0px;
+    background: #333;
+    color: #fff;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.wrapper-user .btn:hover {
+    background: #fff;
+    color: #333;
+}
+
+.wrapper-user .link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px 0;
+}
+
+.wrapper-user .link p a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.wrapper-user .link p a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
