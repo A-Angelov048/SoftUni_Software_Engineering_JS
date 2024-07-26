@@ -17,3 +17,8 @@
     background-image: url(../../public/images/hero-side-bg.png);
     background-size: cover;
 }
+
+.inactive {
+    height: auto;
+    background-size: auto;
+}

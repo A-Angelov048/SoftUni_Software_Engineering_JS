@@ -1,15 +1,19 @@
-import './Introduction.css'
+import styles from './Introduction.module.css'
 
 import Header from "../../core-components/header/Header"
 import IntroductionInfo from "../introduction-info/IntroductionInfo"
 
+import { useLocation } from 'react-router-dom';
+
 export default function Introduction() {
+
+    const location = useLocation();
 
     return (
 
-        <section className="introduction">
+        <section className={location.pathname == '/' ? styles.introduction : styles.introduction + ' ' + styles.inactive}>
             <Header />
-            <IntroductionInfo />
+            {location.pathname == '/' && <IntroductionInfo />}
         </section>
 
     );
