@@ -6,22 +6,22 @@ export default function Footer() {
     return (
         <footer>
 
-            <div class="footer-content">
+            <div className="footer-content">
 
-                <div class="info-logo">
+                <div className="info-logo">
                     <h2>
                         Furniture-Shop
                     </h2>
                 </div>
 
-                <div class="row">
+                <div className="row">
 
-                    <div class="info-contact box">
+                    <div className="info-contact box">
                         <h5>
                             About Shop
                         </h5>
                         <div>
-                            <div class="img-box">
+                            <div className="img-box">
                                 <img src="images/location-white.png" width="18px" alt="" />
                             </div>
                             <p>
@@ -29,7 +29,7 @@ export default function Footer() {
                             </p>
                         </div>
                         <div>
-                            <div class="img-box">
+                            <div className="img-box">
                                 <img src="images/telephone-white.png" width="12px" alt="" />
                             </div>
                             <p>
@@ -37,7 +37,7 @@ export default function Footer() {
                             </p>
                         </div>
                         <div>
-                            <div class="img-box">
+                            <div className="img-box">
                                 <img src="images/envelope-white.png" width="18px" alt="" />
                             </div>
                             <p>
@@ -46,7 +46,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div class="info-info box">
+                    <div className="info-info box">
                         <h5>
                             Information
                         </h5>
@@ -55,7 +55,7 @@ export default function Footer() {
                             sit obcaecati asperiores fugit accusamus tempore quos veritatis, adipisci quod distinctio saepe
                             nihil neque consectetur! Corrupti.
                         </p>
-                        <div class="social-box">
+                        <div className="social-box">
                             <a href="#">
                                 <img src="images/fb.png" alt="" />
                             </a>
@@ -71,39 +71,39 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div class="info-insta box">
+                    <div className="info-insta box">
                         <h5>
                             Instagram
                         </h5>
-                        <div class="insta-container">
+                        <div className="insta-container">
 
                             <div>
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-1.jpg" alt="" />
                                 </div>
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-2.jpg" alt="" />
                                 </div>
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-6.jpg" alt="" />
                                 </div>
                             </div>
 
                             <div>
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-3.jpg" alt="" />
                                 </div>
 
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-4.jpg" alt="" />
                                 </div>
 
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-5.jpg" alt="" />
                                 </div>
 
@@ -111,17 +111,17 @@ export default function Footer() {
 
                             <div>
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-5.jpg" alt="" />
                                 </div>
 
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-6.jpg" alt="" />
                                 </div>
 
 
-                                <div class="insta-image">
+                                <div className="insta-image">
                                     <img src="images/i-1.jpg" alt="" />
                                 </div>
 
@@ -130,26 +130,26 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div class="info-form box">
+                    <div className="info-form box">
                         <h5>
                             Contact us
                         </h5>
-                        <div class="container-form">
+                        <div className="container-form">
 
                             <form>
 
                                 <div>
-                                    <label for="name">Name *</label>
+                                    <label htmlFor="name">Name *</label>
                                     <input type="text" name="name" placeholder="Write your name here." />
                                 </div>
 
                                 <div>
-                                    <label for="email">Email *</label>
+                                    <label htmlFor="email">Email *</label>
                                     <input type="email" name="email" placeholder="Write your email here." />
                                 </div>
 
                                 <div>
-                                    <label for="message">Message *</label>
+                                    <label htmlFor="message">Message *</label>
                                     <textarea name="message" placeholder="Write something..."></textarea>
                                 </div>
 
