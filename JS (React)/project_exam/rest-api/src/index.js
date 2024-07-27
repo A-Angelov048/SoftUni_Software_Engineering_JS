@@ -14,7 +14,7 @@ const port = 3000;
 expressConfig(app);
 handlebarsConfig(app);
 
-app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(router);
 
 mongoose.connect('mongodb://localhost:27017/furniture-shop')
