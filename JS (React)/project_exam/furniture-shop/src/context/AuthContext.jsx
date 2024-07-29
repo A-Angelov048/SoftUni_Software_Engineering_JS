@@ -12,8 +12,9 @@ export function ContextProvider(props) {
 
     const data = {
         userId: authState._id,
+        imageProfile: authState.imageProfile,
         username: authState.username,
-        email: authState.email,
+        location: authState.location,
         createdAt: authState.createdAt,
         lastLogin: authState.lastLogin,
         changeAuthState
