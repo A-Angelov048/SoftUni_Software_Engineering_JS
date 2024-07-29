@@ -12,13 +12,15 @@ import Profile from "./user-components/profile/Profile"
 import Settings from "./user-components/profile/settings/Settings"
 import BrandContainer from "./shared-components/brand-container/BrandContainer"
 import NotFound from "./core-components/not-found/NotFound"
+import { ContextProvider } from "./context/AuthContext"
 
 
 
 function App() {
 
   return (
-    <>
+    
+    <ContextProvider>
 
       <Introduction />
 
@@ -39,7 +41,8 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+
+    </ContextProvider>
 
   )
 }
