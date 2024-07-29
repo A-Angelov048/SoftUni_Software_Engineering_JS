@@ -6,28 +6,28 @@ const furnitureSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minLength: [4, 'Name should be at least 4 characters long.']
+        minLength: [4, 'Name should be at least 4 characters long.'],
     },
     category: {
         type: String,
         required: true,
-        minLength: [4, 'Category should be at least 4 characters long.']
+        minLength: [4, 'Category should be at least 4 characters long.'],
     },
     year: {
         type: Number,
         required: true,
         min: [1900, 'Year should be between 1900 and 2024'],
-        max: [2024, 'Year should be between 1900 and 2024']
+        max: [2024, 'Year should be between 1900 and 2024'],
     },
     materials: {
         type: String,
         required: true,
-        minLength: [10, 'Materials should be at least 10 characters long.']
+        minLength: [10, 'Materials should be at least 10 characters long.'],
     },
     condition: {
         type: String,
         required: true,
-        minLength: [6, 'Condition should be at least 6 characters long.']
+        minLength: [6, 'Condition should be at least 6 characters long.'],
     },
     imageUrl: {
         type: String,
@@ -37,21 +37,21 @@ const furnitureSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        min: [0, 'Price should be a positive number.']
+        min: [0, 'Price should be a positive number.'],
 
     },
     description: {
         type: String,
         required: true,
-        minLength: [10, 'Description should be at least 10 characters long.']
+        minLength: [10, 'Description should be at least 10 characters long.'],
     },
     buyList: [{
         type: mongoose.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     }],
     owner: {
         type: mongoose.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     },
     createdAt: Date
 })
