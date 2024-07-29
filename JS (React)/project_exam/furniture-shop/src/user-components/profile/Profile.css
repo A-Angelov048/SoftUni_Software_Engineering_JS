@@ -18,14 +18,16 @@
 }
 
 .profile-section .container .wrapper-profile .profile-info .image img {
-    width: 120px;
+    width: 100px;
     aspect-ratio: 1;
     border-radius: 50%;
 }
 
 .profile-section .container .wrapper-profile .profile-info .info {
+    flex: 1;
     display: flex;
-    gap: 100px;
+    justify-content: space-between;
+    margin-right: 80px;
 }
 
 .profile-section .container .wrapper-profile .profile-info .info .info-user div {

@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import './Profile.css'
 
+import { convertDate } from '../../utils/convertDate'
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Profile() {
 
     const location = useLocation();
+    const user = useContext(AuthContext);
 
 
     return (
@@ -25,22 +29,22 @@ export default function Profile() {
                         <div className="profile-info">
 
                             <div className="image">
-                                <img src="/images/profile-circle-svgrepo-com.svg" />
+                                <img src={user.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
                             </div>
 
                             <div className="info">
 
                                 <div className="info-user">
-                                    <p>Pesho</p>
+                                    <p>{user.username}</p>
                                     <div>
                                         <i className='bx bxs-map'></i>
-                                        <p>Sofia, District Sofia-city</p>
+                                        <p>{user.location ? user.location : 'City or post code'}</p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <p>Date of registration 23.02.2020</p>
-                                    <p>Last online 20.07.2024</p>
+                                    <p>Date of registration {convertDate(user.createdAt)}</p>
+                                    <p>Last online {convertDate(user.lastLogin)}</p>
                                 </div>
 
                             </div>
