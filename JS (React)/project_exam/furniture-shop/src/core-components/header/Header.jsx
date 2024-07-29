@@ -1,8 +1,24 @@
 import { Link } from 'react-router-dom'
 
 import './Header.css'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import { logout } from '../../service/userService';
 
 export default function Header() {
+
+    const { userId, changeAuthState } = useContext(AuthContext);
+
+    const logoutUser = async () => {
+
+        try {
+            await logout();
+            changeAuthState({});
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     return (
 
         <header className="header-section">
@@ -17,29 +33,34 @@ export default function Header() {
             </div>
 
             <nav className="navbar-section">
-                {/* <!--For logging users--> */}
-                <div>
-                    <Link className="user" to="/create-offer">Create Offer </Link>
-                </div>
 
-                <div>
-                    <Link className="user" to="#">Logout</Link>
-                </div>
+                {!!userId ?
+                    <>
+                        <div>
+                            <Link className="user" to="/create-offer">Create Offer </Link>
+                        </div>
 
-                <div>
-                    <Link className="user" to="/profile">
-                        <i className='bx bxs-user'></i>
-                    </Link>
-                </div>
-                {/* <!--For guest user--> */}
+                        <div>
+                            <Link className="user" onClick={logoutUser} to="/">Logout</Link>
+                        </div>
 
-                <div>
-                    <Link className="user" to="/login">Login</Link>
-                </div>
+                        <div>
+                            <Link className="user" to="/profile">
+                                <i className='bx bxs-user'></i>
+                            </Link>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <div>
+                            <Link className="user" to="/login">Login</Link>
+                        </div>
 
-                <div>
-                    <Link className="user" to="/register">Register</Link>
-                </div>
+                        <div>
+                            <Link className="user" to="/register">Register</Link>
+                        </div>
+                    </>}
+
             </nav>
 
         </header>
