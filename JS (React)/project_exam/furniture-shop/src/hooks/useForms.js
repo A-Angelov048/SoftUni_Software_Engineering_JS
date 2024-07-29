@@ -4,7 +4,7 @@ import { useState } from "react";
 export function useForm(initialValues, submitCallBack) {
     const [values, setValues] = useState(initialValues);
 
-    const changeHandle = (e) => {
+    const changeHandler = (e) => {
 
         setValues(oldValue => ({
             ...oldValue,
@@ -22,7 +22,7 @@ export function useForm(initialValues, submitCallBack) {
 
     return {
         values,
-        changeHandle,
+        changeHandler,
         submitCurForm,
     };
 }
