@@ -9,11 +9,10 @@ router.post('/register', async (req, res) => {
     try {
 
         const token = await createUser(body);
-        res.cookie('auth', token, { httpOnly: true });
-
         const user = await sendUser(token);
-        res.json(user._id);
 
+        res.cookie('auth', token, { httpOnly: true });
+        res.json(user);
 
     } catch (err) {
         console.log(err.errors);
@@ -28,10 +27,10 @@ router.post('/login', async (req, res) => {
     try {
 
         const token = await getUser(body);
-        res.cookie('auth', token, { httpOnly: true });
-
         const user = await sendUser(token);
-        res.json(user._id);
+
+        res.cookie('auth', token, { httpOnly: true });
+        res.json(user);
 
     } catch (err) {
         console.log(err.errors);

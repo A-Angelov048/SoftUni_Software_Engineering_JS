@@ -17,18 +17,16 @@ exports.createUser = async (body) => {
         throw new Error('Passwords should match!');
     }
 
-    const createUser = await User.create(body);
+    const createdUser = await User.create(body);
 
-    const token = await generateToken(createUser);
+    const token = await generateToken(createdUser);
 
     return token;
-
 }
 
 exports.getUser = async (body) => {
 
     const user = await User.findOne({ email: body.email });
-
 
     if (!user) {
         throw new Error('Email or Password invalid.');
@@ -40,7 +38,9 @@ exports.getUser = async (body) => {
         throw new Error('Email or Password invalid.');
     }
 
-    const token = await generateToken(user);
+    const updatedUser = await User.findByIdAndUpdate(user._id, { lastLogin: Date.now() }, { returnDocument: 'after' });
+
+    const token = await generateToken(updatedUser);
 
     return token;
 }
@@ -54,7 +54,10 @@ exports.sendUser = async (token) => {
 async function generateToken(user) {
     const payload = {
         _id: user._id,
-        email: user.email
+        email: user.email,
+        username: user.username,
+        createdAt: user.createdAt,
+        lastLogin: user.lastLogin,
     }
 
     return jwt.sign(payload, SECRET, { expiresIn: '1d' });
