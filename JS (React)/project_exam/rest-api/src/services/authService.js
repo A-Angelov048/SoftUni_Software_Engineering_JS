@@ -51,11 +51,22 @@ exports.sendUser = async (token) => {
     return user;
 }
 
+exports.editProfile = async (userId, body) => {
+
+    const result = await User.findByIdAndUpdate(userId, body, { returnDocument: 'after' });
+
+    const token = await generateToken(result);
+
+    return token;
+
+}
+
 async function generateToken(user) {
     const payload = {
         _id: user._id,
-        email: user.email,
+        imageProfile: user.imageProfile,
         username: user.username,
+        location: user.location,
         createdAt: user.createdAt,
         lastLogin: user.lastLogin,
     }
