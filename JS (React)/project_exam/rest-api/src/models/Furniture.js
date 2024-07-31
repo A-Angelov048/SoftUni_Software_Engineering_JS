@@ -24,6 +24,21 @@ const furnitureSchema = new mongoose.Schema({
         required: true,
         minLength: [10, 'Materials should be at least 10 characters long.'],
     },
+    color: {
+        type: String,
+        required: true,
+        minLength: [4, 'Color should be at least 4 characters long.'],
+    },
+    size: {
+        type: String,
+        required: true,
+        minLength: [4, 'Size should be at least 4 characters long.'],
+    },
+    weight: {
+        type: String,
+        required: true,
+        minLength: [4, 'Weight should be at least 4 characters long.'],
+    },
     condition: {
         type: String,
         required: true,
