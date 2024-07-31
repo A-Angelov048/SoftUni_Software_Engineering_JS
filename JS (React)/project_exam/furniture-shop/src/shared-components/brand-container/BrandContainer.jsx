@@ -1,39 +1,44 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './BrandContainer.css'
 
-export default function BrandContainer() {
+export default function BrandContainer({ furniture }) {
 
     const location = useLocation();
 
-
     return (
         <div className="brand-container layout-padding2">
-            <div className="box">
-                <a href="">
 
-                    {
-                        location.pathname == '/' && //add condition for DB
+            {furniture.map((x, index) => (
 
-                        <div className="new">
-                            <h5>
-                                New
-                            </h5>
+                <div className="box" key={x._id}>
+                    <Link to={`/details/${x._id}`}>
+
+                        {
+                            location.pathname == '/' && index == '0' &&
+
+                            <div className="new">
+                                <h5>
+                                    New
+                                </h5>
+                            </div>
+                        }
+
+                        <div className="img-box">
+                            <img src={x.imageUrl} alt="" />
                         </div>
-                    }
+                        <div className="detail-box">
+                            <h6 className="price">
+                                ${x.price}
+                            </h6>
+                            <h6>
+                                {x.name}
+                            </h6>
+                        </div>
+                    </Link>
+                </div>
 
-                    <div className="img-box">
-                        <img src="/images/slider-img.png" alt="" />
-                    </div>
-                    <div className="detail-box">
-                        <h6 className="price">
-                            $100
-                        </h6>
-                        <h6>
-                            Chair
-                        </h6>
-                    </div>
-                </a>
-            </div>
+            ))}
+
         </div>
     );
 }
