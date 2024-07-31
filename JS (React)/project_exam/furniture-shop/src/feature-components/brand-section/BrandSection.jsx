@@ -2,9 +2,6 @@ import './BrandSection.css'
 import BrandContainer from '../../shared-components/brand-container/BrandContainer';
 
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { getLatestFurniture } from '../../service/furnitureService';
-import { useSetFurniture } from '../../hooks/useFurnitureReducer';
 import { latestFurniture } from '../../hooks/useFurnitureResponse';
 
 export default function BrandSection() {
