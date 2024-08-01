@@ -10,5 +10,7 @@ export const getSearchFurniture = (data) => post('/furniture/search', data);
 
 export const getDetailsFurniture = (furnitureId) => get(`/furniture/${furnitureId}`);
 
+export const removeFurniture = (furnitureId) => del(`/furniture/delete/${furnitureId}`);
+
 
 
