@@ -1,12 +1,15 @@
 import './Details.css'
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 import { AuthContext } from '../../context/AuthContext';
 import Reviews from './reviews/Reviews';
+import { removeFurniture } from '../../service/furnitureService';
 
 export default function Details() {
+
+    const navigate = useNavigate();
 
     const user = useContext(AuthContext)
 
@@ -18,7 +21,16 @@ export default function Details() {
     console.log(furniture);
 
 
+    async function deleteFurniture() {
 
+        try {
+            await removeFurniture(furnitureId);
+            navigate('/shop');
+        } catch (error) {
+            console.log(error.message);
+        }
+
+    }
 
     return (
 
@@ -192,7 +204,7 @@ export default function Details() {
 
                                                     <>
                                                         <button className="btn-hover" name="edit" type="button">Edit</button>
-                                                        <button className="btn-hover" name="delete" type="button">Delete</button>
+                                                        <button onClick={deleteFurniture} className="btn-hover" name="delete" type="button">Delete</button>
                                                     </>
 
                                                     :
