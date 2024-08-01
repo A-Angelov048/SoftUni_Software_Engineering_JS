@@ -8,10 +8,10 @@ export default function BrandContainer({ furniture }) {
     return (
         <div className="brand-container layout-padding2">
 
-            {furniture.map((x, index) => (
+            {furniture.map((furniture, index) => (
 
-                <div className="box" key={x._id}>
-                    <Link to={`/details/${x._id}`}>
+                <div className="box" key={furniture._id}>
+                    <Link to={`/details-furniture/${furniture._id}`} key={furniture._id}>
 
                         {
                             location.pathname == '/' && index == '0' &&
@@ -24,14 +24,14 @@ export default function BrandContainer({ furniture }) {
                         }
 
                         <div className="img-box">
-                            <img src={x.imageUrl} alt="" />
+                            <img src={furniture.imageUrl} alt="" />
                         </div>
                         <div className="detail-box">
                             <h6 className="price">
-                                ${x.price}
+                                ${furniture.price}
                             </h6>
                             <h6>
-                                {x.name}
+                                {furniture.name}
                             </h6>
                         </div>
                     </Link>
