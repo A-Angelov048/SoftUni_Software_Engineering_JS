@@ -6,4 +6,7 @@ export const getLatestFurniture = () => get('/furniture/latest');
 
 export const getAllFurniture = () => get('/furniture');
 
+export const getSearchFurniture = (data) => post('/furniture/search', data);
+
+
 
