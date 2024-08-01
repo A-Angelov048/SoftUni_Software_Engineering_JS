@@ -8,5 +8,7 @@ export const getAllFurniture = () => get('/furniture');
 
 export const getSearchFurniture = (data) => post('/furniture/search', data);
 
+export const getDetailsFurniture = (furnitureId) => get(`/furniture/${furnitureId}`);
+
 
 
