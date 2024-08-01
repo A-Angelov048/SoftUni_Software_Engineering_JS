@@ -1,7 +1,43 @@
 import './Search.css'
+
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
+import { useForm } from '../../hooks/useForms';
+import { getSearchFurniture } from '../../service/furnitureService';
+import { useSetFurniture } from '../../hooks/useFurnitureReducer';
+import { useRef } from 'react';
+
+
+const initialValues = {
+    name: '',
+}
 
 export default function Search() {
+
+    const [furniture, dispatch] = useSetFurniture();
+    const flag = useRef(false);
+
+
+    const search = async (values) => {
+
+        try {
+            let response = await getSearchFurniture(values);
+
+
+            if (response.length === 0) {
+                flag.current = true;
+            } else {
+                flag.current = false;
+            }
+
+            dispatch({ type: 'GET_FURNITURE', payload: response });
+        } catch (error) {
+            console.error(error.message);
+        }
+
+    }
+
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, search);
+
     return (
         <section className="search-section layout-padding">
 
@@ -15,23 +51,40 @@ export default function Search() {
 
                 <div className="search-form layout-padding2">
                     <div className="wrapper-search">
-                        <form>
+                        <form onSubmit={submitCurForm}>
                             <div className="input-box">
-                                <input type="text" name="name" className="search-input" placeholder="Enter your search name" />
-                            </div>
-                            <div className="input-box">
-                                <input type="text" name="type" className="search-input" placeholder="Enter your search type" />
+
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="search-input"
+                                    placeholder="Enter your search name"
+                                    value={values.name}
+                                    onChange={changeHandler}
+                                />
+
+                                <i className='bx bxs-search-alt-2'></i>
+
                             </div>
                             <button type="submit" className="search-button">Search</button>
                         </form>
                     </div>
                 </div>
 
-                <BrandContainer />
+                {
+                    flag.current ?
 
-                <div className="no-match">
-                    <h2 className=".h2">Whoops sorry no match was found!</h2>
-                </div>
+
+                        <div className="no-match">
+                            <h2 className=".h2">Whoops sorry no match was found!</h2>
+                        </div>
+
+                        :
+
+                        <BrandContainer furniture={furniture} />
+
+
+                }
 
             </div>
         </section>
