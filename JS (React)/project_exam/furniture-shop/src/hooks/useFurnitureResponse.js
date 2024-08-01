@@ -3,7 +3,7 @@ import { getAllFurniture, getLatestFurniture } from "../service/furnitureService
 import { useSetFurniture } from "./useFurnitureReducer";
 
 
-export function latestFurniture() {
+export function useLatestFurniture() {
 
     const [furniture, dispatch] = useSetFurniture();
 
@@ -28,7 +28,7 @@ export function latestFurniture() {
 
 }
 
-export function allFurniture() {
+export function useAllFurniture() {
 
     const [furniture, dispatch] = useSetFurniture();
 

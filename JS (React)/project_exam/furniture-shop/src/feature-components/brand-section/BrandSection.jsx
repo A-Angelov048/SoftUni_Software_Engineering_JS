@@ -2,11 +2,11 @@ import './BrandSection.css'
 import BrandContainer from '../../shared-components/brand-container/BrandContainer';
 
 import { Link } from 'react-router-dom';
-import { latestFurniture } from '../../hooks/useFurnitureResponse';
+import { useLatestFurniture } from '../../hooks/useFurnitureResponse';
 
 export default function BrandSection() {
 
-    const furniture = latestFurniture();
+    const furniture = useLatestFurniture();
 
     return (
         <section className="brand-section-home layout-padding">
