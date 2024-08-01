@@ -3,7 +3,10 @@ import { useReducer } from "react";
 function furnitureReducer(state, action) {
 
     switch (action.type) {
+
         case 'GET_FURNITURE': return action.payload;
+
+        case 'CURRENT_FURNITURE': return action.payload;
 
         default:
             return state;
