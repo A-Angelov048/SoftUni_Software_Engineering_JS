@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getAllFurniture, getLatestFurniture } from "../service/furnitureService";
+import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
 
 
@@ -40,6 +40,31 @@ export function useAllFurniture() {
 
                 const response = await getAllFurniture();
                 dispatch({ type: 'GET_FURNITURE', payload: response });
+
+            } catch (error) {
+                console.error(error.message);
+            }
+
+        })();
+
+    }, []);
+
+    return furniture;
+
+}
+
+export function useDetailsFurniture(params) {
+
+    const [furniture, dispatch] = useSetFurniture();
+
+    useEffect(() => {
+
+        (async () => {
+
+            try {
+
+                const response = await getDetailsFurniture(params);
+                dispatch({ type: 'CURRENT_FURNITURE', payload: response });
 
             } catch (error) {
                 console.error(error.message);
