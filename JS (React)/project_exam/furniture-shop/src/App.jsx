@@ -12,6 +12,7 @@ import Profile from "./user-components/profile/Profile"
 import Settings from "./user-components/profile/settings/Settings"
 import BrandContainer from "./shared-components/brand-container/BrandContainer"
 import NotFound from "./core-components/not-found/NotFound"
+import Details from "./feature-components/details/Details"
 import { ContextProvider } from "./context/AuthContext"
 
 
@@ -19,7 +20,7 @@ import { ContextProvider } from "./context/AuthContext"
 function App() {
 
   return (
-    
+
     <ContextProvider>
 
       <Introduction />
@@ -31,6 +32,7 @@ function App() {
         <Route path="/create-offer" element={<CreateOffer />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/details-furniture/:furnitureId" element={<Details />} />
         <Route path="/profile" element={<Profile />} >
           <Route path="my-furniture" element={<BrandContainer />} />
           <Route path="whish-list" element={<BrandContainer />} />
