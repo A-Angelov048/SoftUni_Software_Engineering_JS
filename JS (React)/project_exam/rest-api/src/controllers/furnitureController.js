@@ -73,11 +73,10 @@ router.post('/edit/:id', async (req, res) => {
 
 })
 
-router.get('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
 
     const furnitureId = req.params.id;
     const userId = req.user._id;
-
 
     try {
 
