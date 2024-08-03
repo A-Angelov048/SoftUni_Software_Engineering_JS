@@ -1,26 +1,21 @@
 import './Details.css'
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 import { AuthContext } from '../../context/AuthContext';
 import Reviews from './reviews/Reviews';
-import { removeFurniture } from '../../service/furnitureService';
+import { purchaseFurniture, removeFurniture } from '../../service/furnitureService';
 
 export default function Details() {
 
-    const navigate = useNavigate();
-
-    const user = useContext(AuthContext)
-
-    console.log(user);
-
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
+    const [buyFlag, setBuyFlag] = useState(false);
+    const navigate = useNavigate();
+    const user = useContext(AuthContext);
 
-    console.log(furniture);
-
-
+    
     async function deleteFurniture() {
 
         try {
@@ -29,6 +24,19 @@ export default function Details() {
         } catch (error) {
             console.log(error.message);
         }
+
+    }
+
+    async function buyFurniture() {
+
+        try {
+            await purchaseFurniture(furnitureId);
+            setBuyFlag(true);
+        } catch (error) {
+            console.log(error.message);
+        }
+
+
 
     }
 
@@ -101,6 +109,14 @@ export default function Details() {
                                         user.userId !== furniture.owner
 
                                         &&
+
+                                        buyFlag
+
+                                        ||
+
+                                        furniture.buyList?.includes(user.userId)
+
+                                        ||
 
                                         <div className="quantity">
                                             <h3>Quantity</h3>
@@ -192,6 +208,14 @@ export default function Details() {
 
                                             &&
 
+                                            buyFlag
+
+                                            ||
+
+                                            furniture.buyList?.includes(user.userId)
+
+                                            ||
+
                                             <div className="total-price">
                                                 <h3>Total Price</h3>
                                                 <p>$600.00</p>
@@ -210,10 +234,22 @@ export default function Details() {
                                                     :
 
                                                     <>
-                                                        <button className="btn-hover" name="add-to-cart" type="button">Buy</button>
-                                                        <button name="heart" type="button">
-                                                            <i className='bx bxs-heart bx-tada-hover'></i>
-                                                        </button>
+                                                        {
+                                                            furniture.buyList?.includes(user.userId) || buyFlag ?
+
+                                                                <>
+                                                                    <p className='purchase'>Thank you for your purchase!</p>
+                                                                </>
+
+                                                                :
+
+                                                                <>
+                                                                    <button onClick={buyFurniture} className="btn-hover" name="add-to-cart" type="button">Buy</button>
+                                                                    <button name="heart" type="button">
+                                                                        <i className='bx bxs-heart bx-tada-hover'></i>
+                                                                    </button>
+                                                                </>
+                                                        }
                                                     </>
                                             }
                                         </div>
