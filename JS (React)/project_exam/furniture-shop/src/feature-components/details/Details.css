@@ -183,7 +183,9 @@ section .profile img {
     align-items: center;
 }
 
-.details-section .container .wrapper-details .right-box .box-total-price .button-box button {
+.details-section .container .wrapper-details .right-box .box-total-price .button-box button,
+.details-section .container .wrapper-details .right-box .box-total-price .button-box a {
+    font-size: 16px;
     height: 40px;
     padding: 10px 20px;
     background-color: #333;

@@ -1,6 +1,6 @@
 import './Details.css'
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 import { AuthContext } from '../../context/AuthContext';
@@ -15,7 +15,7 @@ export default function Details() {
     const navigate = useNavigate();
     const user = useContext(AuthContext);
 
-    
+
     async function deleteFurniture() {
 
         try {
@@ -227,7 +227,7 @@ export default function Details() {
                                                 user.userId === furniture.owner ?
 
                                                     <>
-                                                        <button className="btn-hover" name="edit" type="button">Edit</button>
+                                                        <Link  className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
                                                         <button onClick={deleteFurniture} className="btn-hover" name="delete" type="button">Delete</button>
                                                     </>
 
