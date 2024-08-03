@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
+import { FurnitureContext } from "../context/FurnitureContext";
 
 
 export function useLatestFurniture() {
@@ -56,6 +57,8 @@ export function useAllFurniture() {
 export function useDetailsFurniture(params) {
 
     const [furniture, dispatch] = useSetFurniture();
+    const { changeFurnitureState } = useContext(FurnitureContext);
+    
 
     useEffect(() => {
 
@@ -64,6 +67,7 @@ export function useDetailsFurniture(params) {
             try {
 
                 const response = await getDetailsFurniture(params);
+                changeFurnitureState(response);
                 dispatch({ type: 'CURRENT_FURNITURE', payload: response });
 
             } catch (error) {
