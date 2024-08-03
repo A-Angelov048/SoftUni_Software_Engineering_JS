@@ -57,10 +57,11 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/edit/:id', async (req, res) => {
+router.put('/edit/:id', async (req, res) => {
 
     const body = req.body;
     const furnitureId = req.params.id;
+    console.log(body);
 
     try {
 
