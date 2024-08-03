@@ -39,13 +39,13 @@ export default function Reviews() {
                                         </button>
                                     </div>
 
-                                    <input type="hidden" name="rating" value="1"/>
+                                    <input type="hidden" name="rating" value="1" />
                                 </div>
 
                                 <div className="center top">
                                     <div className="profile">
                                         <img alt=""
-                                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"/>
+                                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
                                     </div>
 
                                     <h3>Emily Selman</h3>
@@ -64,14 +64,12 @@ export default function Reviews() {
                             <div className="center">
                                 <div className="profile">
                                     <img alt=""
-                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"/>
+                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
                                 </div>
 
                                 <header>
                                     <h3>Emily Selman</h3>
-                                    <p>
-                                        <time datetime="2021-07-16">July 16, 2021</time>
-                                    </p>
+                                    <p>July 16, 2021</p>
                                 </header>
                             </div>
 
@@ -95,14 +93,12 @@ export default function Reviews() {
                             <div className="center">
                                 <div className="profile">
                                     <img alt=""
-                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"/>
+                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
                                 </div>
 
                                 <header>
                                     <h3>Emily Selman</h3>
-                                    <p>
-                                        <time datetime="2021-07-16">July 16, 2021</time>
-                                    </p>
+                                    <p>July 16, 2021</p>
                                 </header>
                             </div>
 
