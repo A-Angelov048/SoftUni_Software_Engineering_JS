@@ -12,5 +12,7 @@ export const getDetailsFurniture = (furnitureId) => get(`/furniture/${furnitureI
 
 export const removeFurniture = (furnitureId) => del(`/furniture/delete/${furnitureId}`);
 
+export const purchaseFurniture = (furnitureId) => get(`/furniture/buy/${furnitureId}`);
+
 
 
