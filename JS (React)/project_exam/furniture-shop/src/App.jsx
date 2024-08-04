@@ -16,6 +16,8 @@ import Details from "./feature-components/details/Details"
 import Edit from "./user-components/edit-furniture/Edit"
 import { ContextProvider } from "./context/AuthContext"
 import { FurnitureContextProvider } from "./context/FurnitureContext"
+import GuestGuard from "./shared-components/Guards/GuestGuard"
+import AuthGuard from "./shared-components/Guards/AuthGuard"
 
 
 
@@ -29,22 +31,34 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/create-offer" element={<CreateOffer />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/search" element={<Search />} />
+
+        <Route element={<AuthGuard />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        <Route element={<GuestGuard />}>
+          <Route path="/create-offer" element={<CreateOffer />} />
+        </Route>
+
         <Route element={<FurnitureContextProvider />}>
           <Route path="/details-furniture/:furnitureId" element={<Details />} />
-          <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
+          <Route element={<GuestGuard />}>
+            <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
+          </Route>
         </Route>
+
         <Route path="/profile" element={<Profile />} >
           <Route path="my-furniture" element={<BrandContainer />} />
           <Route path="whish-list" element={<BrandContainer />} />
           <Route path="settings" element={<Settings />} />
           <Route path="sales" element={<BrandContainer />} />
         </Route >
+
         <Route path="*" element={<NotFound />} />
+
       </Routes>
 
       <Footer />
