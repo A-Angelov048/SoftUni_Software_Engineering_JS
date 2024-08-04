@@ -61,7 +61,6 @@ router.put('/edit/:id', async (req, res) => {
 
     const body = req.body;
     const furnitureId = req.params.id;
-    console.log(body);
 
     try {
 
