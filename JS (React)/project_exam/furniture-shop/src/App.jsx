@@ -16,8 +16,8 @@ import Details from "./feature-components/details/Details"
 import Edit from "./user-components/edit-furniture/Edit"
 import { ContextProvider } from "./context/AuthContext"
 import { FurnitureContextProvider } from "./context/FurnitureContext"
-import GuestGuard from "./shared-components/Guards/GuestGuard"
-import AuthGuard from "./shared-components/Guards/AuthGuard"
+import GuestGuard from "./shared-components/guards/GuestGuard"
+import AuthGuard from "./shared-components/guards/AuthGuard"
 
 
 
