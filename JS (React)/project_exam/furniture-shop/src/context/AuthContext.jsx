@@ -1,10 +1,11 @@
 import { createContext, useState } from 'react'
+import usePersistence from '../hooks/usePersistence';
 
 export const AuthContext = createContext();
 
 export function ContextProvider(props) {
 
-    const [authState, setAuthState] = useState({});
+    const [authState, setAuthState] = usePersistence({});
 
     const changeAuthState = (state) => {
         setAuthState(state);
