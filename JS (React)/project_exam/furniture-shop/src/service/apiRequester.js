@@ -1,12 +1,18 @@
 
 const baseUrl = 'http://localhost:3000';
 
-async function request(method, url, data) {
+async function request(method, url, data, abortController) {
 
     const options = {
         method,
         headers: {},
         credentials: 'include',
+    }
+
+    console.log(data);
+
+    if (abortController) {
+        options.signal = abortController.signal;
     }
 
     if (data) {
@@ -38,8 +44,8 @@ async function request(method, url, data) {
     }
 }
 
-export async function get(url) {
-    return await request('get', url);
+export async function get(url, abortController) {
+    return await request('get', url, undefined, abortController);
 }
 export async function post(url, data) {
     return await request('post', url, data);

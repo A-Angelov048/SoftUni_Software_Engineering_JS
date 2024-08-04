@@ -10,11 +10,13 @@ export function useLatestFurniture() {
 
     useEffect(() => {
 
+        const abortController = new AbortController();
+
         (async () => {
 
             try {
 
-                const response = await getLatestFurniture();
+                const response = await getLatestFurniture(abortController);
                 dispatch({ type: 'GET_FURNITURE', payload: response });
 
             } catch (error) {
@@ -22,6 +24,10 @@ export function useLatestFurniture() {
             }
 
         })();
+
+        return () => {
+            abortController.abort();
+        }
 
     }, []);
 
@@ -34,12 +40,14 @@ export function useAllFurniture() {
     const [furniture, dispatch] = useSetFurniture();
 
     useEffect(() => {
+        
+        const abortController = new AbortController();
 
         (async () => {
 
             try {
 
-                const response = await getAllFurniture();
+                const response = await getAllFurniture(abortController);
                 dispatch({ type: 'GET_FURNITURE', payload: response });
 
             } catch (error) {
@@ -47,6 +55,10 @@ export function useAllFurniture() {
             }
 
         })();
+
+        return () => {
+            abortController.abort();
+        }
 
     }, []);
 
@@ -58,15 +70,17 @@ export function useDetailsFurniture(params) {
 
     const [furniture, dispatch] = useSetFurniture();
     const { changeFurnitureState } = useContext(FurnitureContext);
-    
+
 
     useEffect(() => {
+
+        const abortController = new AbortController();
 
         (async () => {
 
             try {
 
-                const response = await getDetailsFurniture(params);
+                const response = await getDetailsFurniture(params, abortController);
                 changeFurnitureState(response);
                 dispatch({ type: 'CURRENT_FURNITURE', payload: response });
 
