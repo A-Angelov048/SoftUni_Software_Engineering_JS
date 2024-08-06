@@ -1,9 +1,11 @@
 import './Settings.css'
-import { useContext } from 'react';
 
+import { useContext, useState } from 'react';
 import { useForm } from '../../../hooks/useForms';
 import { editProfile } from '../../../service/userService';
 import { AuthContext } from '../../../context/AuthContext';
+import { profileSchema } from '../../../utils/schemaForm';
+
 
 export default function Settings() {
 
@@ -15,9 +17,36 @@ export default function Settings() {
         location: location,
     }
 
+    const [errorBoolean, setBoolean] = useState(false);
+    const [errors, setErrors] = useState({});
+
+
     const changeUserInfo = async (values) => {
-        const result = await editProfile(values);
-        changeAuthState(result);
+
+        try {
+            await profileSchema.validate(values, { abortEarly: false });
+        } catch (error) {
+
+            const newError = {}
+
+            error.inner.forEach((err) => {
+                newError[err.path] = err.message;
+            })
+
+            setBoolean(true);
+            setErrors(newError);
+
+            return;
+        }
+
+        try {
+            const result = await editProfile(values);
+            setBoolean(false);
+            changeAuthState(result);
+        } catch (error) {
+            console.error(error.message);
+        }
+
     }
 
 
@@ -34,12 +63,19 @@ export default function Settings() {
 
                         <input type="text"
                             name="username"
-                            placeholder="Username *"
+                            placeholder="Username*"
                             value={values.username}
                             onChange={changeHandler}
                         />
 
                     </div>
+
+                    {errorBoolean && errors.hasOwnProperty('username') &&
+                        <div className='error-container'>
+                            <i class='bx bxs-error-circle bx-tada' ></i>
+                            <p className='error'>{errors.username}</p>
+                        </div>
+                    }
 
                     <div className="input-box">
 
