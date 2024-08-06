@@ -1,10 +1,12 @@
 import '../UserForms.css'
-import { Link, useNavigate } from 'react-router-dom'
 
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForms';
 import { register } from '../../service/userService';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { registerSchema } from '../../utils/schemaForm';
+
 
 const initialValues = {
     username: '',
@@ -17,8 +19,27 @@ export default function Register() {
 
     const navigate = useNavigate();
     const { changeAuthState } = useContext(AuthContext);
+    const [errorBoolean, setBoolean] = useState(false);
+    const [errors, setErrors] = useState({});
+
 
     const createUser = async (values) => {
+
+        try {
+            await registerSchema.validate(values, { abortEarly: false });
+        } catch (error) {
+
+            const newError = {}
+
+            error.inner.forEach((err) => {
+                newError[err.path] = err.message;
+            })
+
+            setBoolean(true);
+            setErrors(newError);
+
+            return;
+        }
 
         try {
             const result = await register(values);
@@ -55,10 +76,17 @@ export default function Register() {
                                 <i className='bx bxs-user'></i>
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('username') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.username}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
                                 <input
 
-                                    type="email"
+                                    type="text"
                                     placeholder="Type your email*"
                                     name="email"
                                     value={values.email}
@@ -66,6 +94,14 @@ export default function Register() {
 
                                 <i className='bx bxs-envelope'></i>
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('email') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.email}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
                                 <input
 
@@ -77,6 +113,14 @@ export default function Register() {
 
                                 <i className='bx bxs-lock-alt'></i>
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('password') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.password}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
                                 <input
 
@@ -88,6 +132,13 @@ export default function Register() {
 
                                 <i className='bx bxs-lock-alt'></i>
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('rePassword') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.rePassword}</p>
+                                </div>
+                            }
 
                             <button type="submit" className="btn">Register</button>
 
