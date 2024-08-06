@@ -1,7 +1,11 @@
+import '../UserForms.css'
+
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { createFurnitureRequester } from '../../service/furnitureService';
-import '../UserForms.css'
+import { useState } from 'react';
+import { createFurnitureSchema } from '../../utils/schemaForm';
+
 
 const initialValues = {
     name: '',
@@ -17,12 +21,31 @@ const initialValues = {
     description: '',
 }
 
-
 export default function CreateOffer() {
 
     const navigate = useNavigate();
+    const [errorBoolean, setBoolean] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const createFurniture = async (values) => {
+
+        try {
+            await createFurnitureSchema.validate(values, { abortEarly: false });
+        } catch (error) {
+
+            const newError = {}
+
+            error.inner.forEach((err) => {
+                newError[err.path] = err.message;
+            })
+
+            console.log(error.inner);
+
+            setBoolean(true);
+            setErrors(newError);
+
+            return;
+        }
 
         try {
             await createFurnitureRequester(values);
@@ -59,6 +82,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('name') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.name}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -71,6 +101,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('category') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.category}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input type="number"
@@ -80,6 +117,13 @@ export default function CreateOffer() {
                                     onChange={changeHandler}
                                 />
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('year') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.year}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -93,6 +137,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('materials') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.materials}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -104,6 +155,13 @@ export default function CreateOffer() {
                                 />
 
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('color') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.color}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -117,6 +175,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('size') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.size}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -128,6 +193,13 @@ export default function CreateOffer() {
                                 />
 
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('weight') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.weight}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -141,6 +213,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('condition') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.condition}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -152,6 +231,13 @@ export default function CreateOffer() {
                                 />
 
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('imageUrl') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.imageUrl}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -165,6 +251,13 @@ export default function CreateOffer() {
 
                             </div>
 
+                            {errorBoolean && errors.hasOwnProperty('price') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.price}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -176,6 +269,13 @@ export default function CreateOffer() {
                                 />
 
                             </div>
+
+                            {errorBoolean && errors.hasOwnProperty('description') &&
+                                <div className='error-container'>
+                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.description}</p>
+                                </div>
+                            }
 
                             <button type="submit" className="btn">Create Offer</button>
 
