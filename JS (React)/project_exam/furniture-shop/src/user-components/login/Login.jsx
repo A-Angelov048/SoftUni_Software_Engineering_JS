@@ -1,8 +1,8 @@
+import '../UserForms.css'
+
 import { useContext, useState } from 'react';
-import * as yup from "yup";
 import { useForm } from '../../hooks/useForms';
 import { login } from '../../service/userService';
-import '../UserForms.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from '../../utils/schemaForm';
@@ -24,7 +24,7 @@ export default function Login() {
     const getUser = async (values) => {
 
         try {
-            const error = await loginSchema.validate(values, { abortEarly: false });
+            await loginSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
             const newError = {}
