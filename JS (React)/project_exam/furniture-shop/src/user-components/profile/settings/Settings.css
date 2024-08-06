@@ -35,6 +35,26 @@
     padding: 10px 0px 10px 15px;
 }
 
+.profile-section .container .wrapper-profile .settings .error-container {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 0px 10px;
+    background-color: #fee2e2;
+    border-radius: 8px;
+}
+
+.profile-section .container .wrapper-profile .settings .error-container i {
+    color: #ef4444;
+}
+
+.profile-section .container .wrapper-profile .settings .error-container .error {
+    color: #ef4444;
+    font-weight: 600;
+}
+
 .profile-section .container .wrapper-profile .settings .input-box input::placeholder {
     color: #333;
 }
