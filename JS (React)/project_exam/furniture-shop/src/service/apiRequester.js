@@ -9,8 +9,6 @@ async function request(method, url, data, abortController) {
         credentials: 'include',
     }
 
-    console.log(data);
-
     if (abortController) {
         options.signal = abortController.signal;
     }
