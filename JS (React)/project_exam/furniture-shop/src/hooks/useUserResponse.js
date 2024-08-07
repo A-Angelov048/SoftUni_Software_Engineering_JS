@@ -3,7 +3,7 @@ import { getProfile } from "../service/userService";
 
 export function useGetProfile(params) {
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({});
 
     useEffect(() => {
 
@@ -26,7 +26,7 @@ export function useGetProfile(params) {
             abortController.abort();
         }
 
-    }, [user]);
+    }, [params]);
 
     return user;
 
