@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import './BrandContainer.css'
-import { useState } from 'react';
 
 export default function BrandContainer({ furniture }) {
 
