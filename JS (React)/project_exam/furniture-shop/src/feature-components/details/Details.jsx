@@ -9,9 +9,9 @@ import { purchaseFurniture, removeFurniture } from '../../service/furnitureServi
 
 export default function Details() {
 
+    const { furnitureId } = useParams();
     const [changeContent, setChangeContent] = useState(true);
     const [quantity, setQuantity] = useState(0);
-    const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
     const [buyFlag, setBuyFlag] = useState(false);
     const navigate = useNavigate();
@@ -75,16 +75,16 @@ export default function Details() {
 
                                 <header className="header-right">
                                     <h1>{furniture.name}</h1>
-                                    <a href="">
+                                    <Link to={`/profile/${furniture.owner?._id}`}>
                                         <div className="profile">
                                             <img alt=""
-                                                src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
+                                                src={furniture.owner?.imageProfile ? furniture.owner?.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
                                             <div>
                                                 <p>Creator:</p>
-                                                <p>Emily Selman</p>
+                                                <p>{furniture.owner?.username}</p>
                                             </div>
                                         </div>
-                                    </a>
+                                    </Link>
                                 </header>
 
                                 <div className="box-reviews">
@@ -114,7 +114,7 @@ export default function Details() {
 
                                         &&
 
-                                        user.userId !== furniture.owner
+                                        user.userId !== furniture.owner?._id
 
                                         &&
 
@@ -208,7 +208,7 @@ export default function Details() {
                                     <div className="box-total-price">
 
                                         {
-                                            user.userId !== furniture.owner
+                                            user.userId !== furniture.owner?._id
 
                                             &&
 
@@ -220,7 +220,7 @@ export default function Details() {
 
                                         <div className="button-box">
                                             {
-                                                user.userId === furniture.owner ?
+                                                user.userId === furniture.owner?._id ?
 
                                                     <>
                                                         <Link className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
