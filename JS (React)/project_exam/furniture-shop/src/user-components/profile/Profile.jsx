@@ -1,15 +1,17 @@
-import { useContext } from 'react';
 import './Profile.css'
 
 import { convertDate } from '../../utils/convertDate'
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { useGetProfile } from '../../hooks/useUserResponse';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Profile() {
 
+    const { userId } = useContext(AuthContext)
+    const { profileId } = useParams();
     const location = useLocation();
-    const user = useContext(AuthContext);
-
+    const user = useGetProfile(profileId);
 
     return (
         <section className="profile-section layout-padding">
@@ -29,22 +31,22 @@ export default function Profile() {
                         <div className="profile-info">
 
                             <div className="image">
-                                <img src={user.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
+                                <img src={user?.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
                             </div>
 
                             <div className="info">
 
                                 <div className="info-user">
-                                    <p>{user.username}</p>
+                                    <p>{user?.username}</p>
                                     <div>
                                         <i className='bx bxs-map'></i>
-                                        <p>{user.location ? user.location : 'City or post code'}</p>
+                                        <p>{user?.location ? user.location : 'City or post code'}</p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <p>Date of registration {convertDate(user.createdAt)}</p>
-                                    <p>Last online {convertDate(user.lastLogin)}</p>
+                                    <p>Date of registration {convertDate(user?.createdAt)}</p>
+                                    <p>Last online {convertDate(user?.lastLogin)}</p>
                                 </div>
 
                             </div>
@@ -53,19 +55,24 @@ export default function Profile() {
 
                         <div className="nav-profile">
                             <ul>
-                                <li className={location.pathname == '/profile/my-furniture' ? 'link active' : 'link'}>
-                                    <Link to="my-furniture">My furniture for sells</Link>
-                                </li>
-                                <li className={location.pathname == '/profile/whish-list' ? 'link active' : 'link'}>
-                                    <Link to="whish-list">Whish list</Link>
-                                </li>
-                                <li className={location.pathname == '/profile/settings' ? 'link active' : 'link'}>
-                                    <Link to="settings">Settings</Link>
-                                </li>
-                                {/* <!-- guest user and non owner --> */}
-                                <li className={location.pathname == '/profile/sales' ? 'link active' : 'link'}>
-                                    <Link to="sales">Furniture for sell</Link>
-                                </li>
+                                {userId === user?._id ?
+                                    <>
+                                        <li className={location.pathname == `/profile/${user?._id}/my-furniture` ? 'link active' : 'link'}>
+                                            <Link to="my-furniture" state={[1, 2, 3]}>My furniture for sells</Link>
+                                        </li>
+                                        <li className={location.pathname == `/profile/${user?._id}/whish-list` ? 'link active' : 'link'}>
+                                            <Link to="whish-list">Whish list</Link>
+                                        </li>
+                                        <li className={location.pathname == `/profile/${user?._id}/settings` ? 'link active' : 'link'}>
+                                            <Link to="settings">Settings</Link>
+                                        </li>
+                                    </>
+                                    :
+                                    <>
+                                        <li className={location.pathname == `/profile/${user?._id}/sales` ? 'link active' : 'link'}>
+                                            <Link to="sales">Furniture for sell</Link>
+                                        </li>
+                                    </>}
                             </ul>
                         </div>
 
