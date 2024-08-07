@@ -1,8 +1,18 @@
-# React + Vite
+The current project is designed for users to create offers for selling and buying furniture. The application makes requests to a local server (Express.js). The functionalities supported by the application include:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Creating a user account (registration, login, logout)
+- Managing the user profile
+- Creating an offer for furniture
+- Searching for offers
+- Viewing offers
+- Buying furniture
+- Editing offers
+- Deleting offers
 
-Currently, two official plugins are available:
+To start the React app:
+1. `npm install`
+2. `npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To start the local server:
+1. `npm install`
+2. `npm start`
