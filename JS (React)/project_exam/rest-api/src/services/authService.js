@@ -63,7 +63,7 @@ exports.editProfile = async (userId, body) => {
 
 exports.getCurrentUser = async (userId) => {
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate('furniture');
     
     const token = await generateToken(user);
 
@@ -78,6 +78,7 @@ async function generateToken(user) {
         location: user.location,
         createdAt: user.createdAt,
         lastLogin: user.lastLogin,
+        furniture: user.furniture
     }
 
     return jwt.sign(payload, SECRET, { expiresIn: '1d' });
