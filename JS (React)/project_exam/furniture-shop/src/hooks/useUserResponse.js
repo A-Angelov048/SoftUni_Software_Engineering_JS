@@ -26,7 +26,7 @@ export function useGetProfile(params) {
             abortController.abort();
         }
 
-    }, []);
+    }, [user]);
 
     return user;
 
