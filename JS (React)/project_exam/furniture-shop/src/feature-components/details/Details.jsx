@@ -9,12 +9,22 @@ import { purchaseFurniture, removeFurniture } from '../../service/furnitureServi
 
 export default function Details() {
 
+    const [changeContent, setChangeContent] = useState(true);
+    const [quantity, setQuantity] = useState(0);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
     const [buyFlag, setBuyFlag] = useState(false);
     const navigate = useNavigate();
     const user = useContext(AuthContext);
 
+    function flagHandler(e) {
+
+        if (e.target.textContent === 'Description') {
+            setChangeContent(true);
+        } else {
+            setChangeContent(false);
+        }
+    }
 
     async function deleteFurniture() {
 
@@ -35,8 +45,6 @@ export default function Details() {
         } catch (error) {
             console.log(error.message);
         }
-
-
 
     }
 
@@ -110,20 +118,12 @@ export default function Details() {
 
                                         &&
 
-                                        buyFlag
-
-                                        ||
-
-                                        furniture.buyList?.includes(user.userId)
-
-                                        ||
-
                                         <div className="quantity">
                                             <h3>Quantity</h3>
                                             <div className="quantity-btn">
-                                                <button name="minus" type="button"><i className='bx bx-minus'></i></button>
-                                                <p>2</p>
-                                                <button name="plus" type="button"><i className='bx bx-plus'></i></button>
+                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0) { return setQuantity(0) } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
+                                                <p>{quantity}</p>
+                                                <button name="plus" type="button" onClick={() => { setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
                                             </div>
                                         </div>
                                     }
@@ -134,65 +134,69 @@ export default function Details() {
 
                                     <section className="content-header">
                                         <div>
-                                            <a>Description</a>
-                                            <hr id="target-one" />
+                                            <a onClick={flagHandler}>Description</a>
+                                            <hr className={changeContent ? 'active' : null} />
                                         </div>
 
                                         <div>
-                                            <a>Details</a>
-                                            <hr id="target-two" />
+                                            <a onClick={flagHandler}>Details</a>
+                                            <hr className={!changeContent ? 'active' : null} />
                                         </div>
                                     </section>
 
-                                    <div className="content" id='one'>
+                                    {changeContent &&
+                                        <div className="content">
 
-                                        <div>
-                                            <p>Category</p>
-                                            <p>{furniture.category}</p>
-                                        </div>
+                                            <div>
+                                                <p>Category</p>
+                                                <p>{furniture.category}</p>
+                                            </div>
 
-                                        <div>
-                                            <p>Year of <abbr title="Manufacture">MFR</abbr></p>
-                                            <p>{furniture.year}</p>
-                                        </div>
+                                            <div>
+                                                <p>Year of <abbr title="Manufacture">MFR</abbr></p>
+                                                <p>{furniture.year}</p>
+                                            </div>
 
-                                        <div>
-                                            <p>Condition</p>
-                                            <p>{furniture.condition}</p>
-                                        </div>
+                                            <div>
+                                                <p>Condition</p>
+                                                <p>{furniture.condition}</p>
+                                            </div>
 
-                                        <div>
-                                            <p>Description</p>
-                                            <p>{furniture.description}</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="content" id='two'>
-
-                                        <div>
-                                            <p>Size</p>
-                                            <p>{furniture.size}</p>
+                                            <div>
+                                                <p>Description</p>
+                                                <p>{furniture.description}</p>
+                                            </div>
 
                                         </div>
+                                    }
 
-                                        <div>
-                                            <p>Materials</p>
-                                            <p>{furniture.materials}</p>
+                                    {!changeContent &&
+                                        <div className="content">
+
+                                            <div>
+                                                <p>Size</p>
+                                                <p>{furniture.size}</p>
+
+                                            </div>
+
+                                            <div>
+                                                <p>Materials</p>
+                                                <p>{furniture.materials}</p>
+                                            </div>
+
+                                            <div>
+                                                <p>Color</p>
+                                                <p>{furniture.color}</p>
+
+                                            </div>
+
+                                            <div>
+                                                <p>Weight</p>
+                                                <p>{furniture.weight}</p>
+                                            </div>
+
                                         </div>
-
-                                        <div>
-                                            <p>Color</p>
-                                            <p>{furniture.color}</p>
-
-                                        </div>
-
-                                        <div>
-                                            <p>Weight</p>
-                                            <p>{furniture.weight}</p>
-                                        </div>
-
-                                    </div>
+                                    }
 
                                 </div>
 
@@ -208,17 +212,9 @@ export default function Details() {
 
                                             &&
 
-                                            buyFlag
-
-                                            ||
-
-                                            furniture.buyList?.includes(user.userId)
-
-                                            ||
-
                                             <div className="total-price">
                                                 <h3>Total Price</h3>
-                                                <p>$600.00</p>
+                                                <p>${furniture.price * quantity}</p>
                                             </div>
                                         }
 
@@ -227,7 +223,7 @@ export default function Details() {
                                                 user.userId === furniture.owner ?
 
                                                     <>
-                                                        <Link  className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
+                                                        <Link className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
                                                         <button onClick={deleteFurniture} className="btn-hover" name="delete" type="button">Delete</button>
                                                     </>
 
@@ -272,3 +268,5 @@ export default function Details() {
 
     );
 }
+
+

@@ -145,6 +145,11 @@ section .profile img {
     cursor: pointer;
 }
 
+.details-section .container .wrapper-details .right-box .box-description-details .content-header div .active {
+    border-color: #5e5e5e;
+}
+
+
 .details-section .container .wrapper-details .right-box .box-description-details .content {
     flex-direction: column;
     margin-top: 25px;
@@ -168,7 +173,7 @@ section .profile img {
     display: flex;
     align-items: center;
     margin-top: 25px;
-    gap: 30px;
+    gap: 60px;
     text-transform: uppercase;
 }
 
@@ -212,7 +217,7 @@ section .profile img {
 }
 
 .details-section .container .wrapper-details .right-box .box-total-price .button-box .purchase {
-    padding: 10px 20px;
+    padding: 5px 5px;
     text-align: center;
     background: #333;
     border-radius: 20px;
