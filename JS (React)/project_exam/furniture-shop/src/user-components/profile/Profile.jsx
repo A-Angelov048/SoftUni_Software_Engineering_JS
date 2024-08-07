@@ -58,7 +58,7 @@ export default function Profile() {
                                 {userId === user?._id ?
                                     <>
                                         <li className={location.pathname == `/profile/${user?._id}/my-furniture` ? 'link active' : 'link'}>
-                                            <Link to="my-furniture" state={[1, 2, 3]}>My furniture for sells</Link>
+                                            <Link to="my-furniture" state={user?.furniture}>My furniture for sells</Link>
                                         </li>
                                         <li className={location.pathname == `/profile/${user?._id}/whish-list` ? 'link active' : 'link'}>
                                             <Link to="whish-list">Whish list</Link>
@@ -70,7 +70,7 @@ export default function Profile() {
                                     :
                                     <>
                                         <li className={location.pathname == `/profile/${user?._id}/sales` ? 'link active' : 'link'}>
-                                            <Link to="sales">Furniture for sell</Link>
+                                            <Link to="sales" state={user?.furniture}>Furniture for sell</Link>
                                         </li>
                                     </>}
                             </ul>
