@@ -6,4 +6,6 @@ export const login = (data) => post('/users/login', data);
 
 export const logout = () => get('/users/logout');
 
+export const getProfile = (userId, abortController) => get(`/users/profile/${userId}`, abortController)
+
 export const editProfile = (data) => post('/users/edit-profile', data)
