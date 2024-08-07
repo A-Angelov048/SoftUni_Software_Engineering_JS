@@ -50,7 +50,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/profile" element={<Profile />} >
+        <Route path="/profile/:profileId" element={<Profile />} >
           <Route path="my-furniture" element={<BrandContainer />} />
           <Route path="whish-list" element={<BrandContainer />} />
           <Route path="settings" element={<Settings />} />
