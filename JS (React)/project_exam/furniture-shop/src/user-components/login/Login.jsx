@@ -48,8 +48,6 @@ export default function Login() {
         }
     }
 
-    console.log(errors);
-
     const { values, changeHandler, submitCurForm } = useForm(initialValues, getUser)
 
     return (

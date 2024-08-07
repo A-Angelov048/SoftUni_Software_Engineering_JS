@@ -39,8 +39,6 @@ export default function CreateOffer() {
                 newError[err.path] = err.message;
             })
 
-            console.log(error.inner);
-
             setBoolean(true);
             setErrors(newError);
 
