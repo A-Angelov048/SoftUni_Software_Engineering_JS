@@ -1,14 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import './BrandContainer.css'
+import { useState } from 'react';
 
 export default function BrandContainer({ furniture }) {
 
+    let curFurniture;
     const location = useLocation();
+
+    if (furniture === undefined) {
+        curFurniture = location.state;
+    } else {
+        curFurniture = furniture;
+    }
 
     return (
         <div className="brand-container layout-padding2">
 
-            {furniture.map((furniture, index) => (
+            {curFurniture?.map((furniture, index) => (
 
                 <div className="box" key={furniture._id}>
                     <Link to={`/details-furniture/${furniture._id}`} key={furniture._id}>
