@@ -1,13 +1,25 @@
 const Furniture = require('../models/Furniture');
+const User = require('../models/User');
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
 exports.getAllData = () => Furniture.find();
 
-exports.createFurniture = (body) => Furniture.create(body);
+exports.createFurniture = async (body, userId) => {
 
+    try {
 
-exports.getOne = (furnitureId) => Furniture.findById(furnitureId);
+        const result = await Furniture.create(body);
+
+        await User.findByIdAndUpdate(userId, { $push: { furniture: result._id } });
+
+    } catch (error) {
+        throw error;
+    }
+
+};
+
+exports.getOne = (furnitureId) => Furniture.findById(furnitureId).populate('owner');
 
 exports.buyFurniture = async (furnitureId, userId) => {
 
@@ -15,7 +27,7 @@ exports.buyFurniture = async (furnitureId, userId) => {
 
         const furniture = await this.getOne(furnitureId).lean();
 
-        if (furniture.owner.valueOf() === userId) {
+        if (furniture.owner._id.valueOf() === userId) {
             throw new Error('Furniture do not exists.');
         }
 
@@ -33,8 +45,14 @@ exports.deleteFurniture = async (furnitureId, userId) => {
 
         const furniture = await this.getOne(furnitureId).lean();
 
-        if (furniture.owner.valueOf() !== userId) {
+        if (furniture.owner._id.valueOf() !== userId) {
             throw new Error('Furniture not found.');
+        }
+
+        const user = await User.findById(userId);
+
+        if (user.furniture.includes(furnitureId)) {
+            const test = await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
         }
 
         await Furniture.findByIdAndDelete(furnitureId);

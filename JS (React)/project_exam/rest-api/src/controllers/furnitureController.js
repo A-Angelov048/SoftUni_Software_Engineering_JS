@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 
     try {
 
-        await createFurniture({ ...body, owner: userId });
+        await createFurniture({ ...body, owner: userId }, userId);
         res.json({ ok: true });
 
     } catch (err) {

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createUser, getUser, sendUser, editProfile } = require('../services/authService');
+const { createUser, getUser, sendUser, editProfile, getCurrentUser } = require('../services/authService');
 
 
 router.post('/register', async (req, res) => {
@@ -54,6 +54,23 @@ router.post('/edit-profile', async (req, res) => {
         const editedProfile = await sendUser(token);
         
         res.json(editedProfile);
+
+    } catch (err) {
+        console.log(err.errors);
+    }
+
+})
+
+router.get('/profile/:id', async (req, res) => {
+
+    const userId = req.params.id;
+
+    try {
+
+        const token = await getCurrentUser(userId);
+        const sendProfile = await sendUser(token);
+        
+        res.json(sendProfile);
 
     } catch (err) {
         console.log(err.errors);

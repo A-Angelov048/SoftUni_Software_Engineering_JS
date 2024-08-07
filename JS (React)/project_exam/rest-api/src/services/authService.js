@@ -61,6 +61,15 @@ exports.editProfile = async (userId, body) => {
 
 }
 
+exports.getCurrentUser = async (userId) => {
+
+    const user = await User.findById(userId);
+    
+    const token = await generateToken(user);
+
+    return token;
+}
+
 async function generateToken(user) {
     const payload = {
         _id: user._id,
@@ -73,6 +82,3 @@ async function generateToken(user) {
 
     return jwt.sign(payload, SECRET, { expiresIn: '1d' });
 }
-
-
-
