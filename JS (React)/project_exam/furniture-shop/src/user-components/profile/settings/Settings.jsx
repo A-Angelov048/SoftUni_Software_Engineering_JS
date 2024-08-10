@@ -72,7 +72,7 @@ export default function Settings() {
 
                     {errorBoolean && errors.hasOwnProperty('username') &&
                         <div className='error-container'>
-                            <i class='bx bxs-error-circle bx-tada' ></i>
+                            <i className='bx bxs-error-circle bx-tada' ></i>
                             <p className='error'>{errors.username}</p>
                         </div>
                     }

@@ -78,7 +78,7 @@ export default function Register() {
 
                             {errorBoolean && errors.hasOwnProperty('username') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.username}</p>
                                 </div>
                             }
@@ -97,7 +97,7 @@ export default function Register() {
 
                             {errorBoolean && errors.hasOwnProperty('email') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.email}</p>
                                 </div>
                             }
@@ -116,7 +116,7 @@ export default function Register() {
 
                             {errorBoolean && errors.hasOwnProperty('password') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.password}</p>
                                 </div>
                             }
@@ -135,7 +135,7 @@ export default function Register() {
 
                             {errorBoolean && errors.hasOwnProperty('rePassword') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.rePassword}</p>
                                 </div>
                             }

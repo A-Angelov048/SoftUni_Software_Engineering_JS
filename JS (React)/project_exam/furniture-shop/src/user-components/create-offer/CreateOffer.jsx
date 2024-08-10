@@ -82,7 +82,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('name') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.name}</p>
                                 </div>
                             }
@@ -101,7 +101,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('category') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.category}</p>
                                 </div>
                             }
@@ -118,7 +118,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('year') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.year}</p>
                                 </div>
                             }
@@ -137,7 +137,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('materials') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.materials}</p>
                                 </div>
                             }
@@ -156,7 +156,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('color') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.color}</p>
                                 </div>
                             }
@@ -175,7 +175,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('size') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.size}</p>
                                 </div>
                             }
@@ -194,7 +194,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('weight') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.weight}</p>
                                 </div>
                             }
@@ -213,7 +213,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('condition') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.condition}</p>
                                 </div>
                             }
@@ -232,7 +232,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('imageUrl') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.imageUrl}</p>
                                 </div>
                             }
@@ -251,7 +251,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('price') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.price}</p>
                                 </div>
                             }
@@ -270,7 +270,7 @@ export default function CreateOffer() {
 
                             {errorBoolean && errors.hasOwnProperty('description') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.description}</p>
                                 </div>
                             }

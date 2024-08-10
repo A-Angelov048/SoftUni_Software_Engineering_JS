@@ -76,7 +76,7 @@ export default function Login() {
 
                             {errorBoolean && errors.hasOwnProperty('email') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.email}</p>
                                 </div>
                             }
@@ -95,7 +95,7 @@ export default function Login() {
 
                             {errorBoolean && errors.hasOwnProperty('password') &&
                                 <div className='error-container'>
-                                    <i class='bx bxs-error-circle bx-tada' ></i>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.password}</p>
                                 </div>
                             }
