@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getProfile } from "../service/userService";
+import { AuthContext } from "../context/AuthContext";
 
 export function useGetProfile(params) {
 
+    const userContext = useContext(AuthContext);
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export function useGetProfile(params) {
             abortController.abort();
         }
 
-    }, [params]);
+    }, [params, userContext]);
 
     return user;
 
