@@ -31,22 +31,22 @@ export default function Profile() {
                         <div className="profile-info">
 
                             <div className="image">
-                                <img src={user?.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
+                                <img src={user.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
                             </div>
 
                             <div className="info">
 
                                 <div className="info-user">
-                                    <p>{user?.username}</p>
+                                    <p>{user.username}</p>
                                     <div>
                                         <i className='bx bxs-map'></i>
-                                        <p>{user?.location ? user.location : 'City or post code'}</p>
+                                        <p>{user.location ? user.location : 'City or post code'}</p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <p>Date of registration {convertDate(user?.createdAt)}</p>
-                                    <p>Last online {convertDate(user?.lastLogin)}</p>
+                                    <p>Date of registration {convertDate(user.createdAt)}</p>
+                                    <p>Last online {convertDate(user.lastLogin)}</p>
                                 </div>
 
                             </div>
@@ -55,22 +55,22 @@ export default function Profile() {
 
                         <div className="nav-profile">
                             <ul>
-                                {userId === user?._id ?
+                                {userId === user._id ?
                                     <>
-                                        <li className={location.pathname == `/profile/${user?._id}/my-furniture` ? 'link active' : 'link'}>
-                                            <Link to="my-furniture" state={user?.furniture}>My furniture for sells</Link>
+                                        <li className={location.pathname == `/profile/${user._id}/my-furniture` ? 'link active' : 'link'}>
+                                            <Link to="my-furniture" state={user.furniture}>My furniture for sells</Link>
                                         </li>
-                                        <li className={location.pathname == `/profile/${user?._id}/whish-list` ? 'link active' : 'link'}>
+                                        <li className={location.pathname == `/profile/${user._id}/whish-list` ? 'link active' : 'link'}>
                                             <Link to="whish-list">Whish list</Link>
                                         </li>
-                                        <li className={location.pathname == `/profile/${user?._id}/settings` ? 'link active' : 'link'}>
+                                        <li className={location.pathname == `/profile/${user._id}/settings` ? 'link active' : 'link'}>
                                             <Link to="settings">Settings</Link>
                                         </li>
                                     </>
                                     :
                                     <>
-                                        <li className={location.pathname == `/profile/${user?._id}/sales` ? 'link active' : 'link'}>
-                                            <Link to="sales" state={user?.furniture}>Furniture for sell</Link>
+                                        <li className={location.pathname == `/profile/${user._id}/sales` ? 'link active' : 'link'}>
+                                            <Link to="sales" state={user.furniture}>Furniture for sell</Link>
                                         </li>
                                     </>}
                             </ul>
