@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getAllData, getOne, buyFurniture, editFurniture, deleteFurniture, getLatest, createFurniture, searchFurniture } = require('../services/furnitureService');
+const { getAllData, getOne, buyFurniture, editFurniture, deleteFurniture, getLatest, createFurniture, searchFurniture, wishlistFurniture } = require('../services/furnitureService');
 
 
 router.get('/latest', async (req, res) => {
@@ -98,6 +98,21 @@ router.get('/buy/:id', async (req, res) => {
 
         await buyFurniture(furnitureId, userId);
         res.json({ ok: true });
+
+    } catch (err) {
+        console.log(err.errors);
+    }
+})
+
+router.get('/wishlist/:id', async (req, res) => {
+
+    const furnitureId = req.params.id;
+    const userId = req.user._id;
+
+    try {
+
+        const response = await wishlistFurniture(furnitureId, userId);
+        res.json({ check: response });
 
     } catch (err) {
         console.log(err.errors);
