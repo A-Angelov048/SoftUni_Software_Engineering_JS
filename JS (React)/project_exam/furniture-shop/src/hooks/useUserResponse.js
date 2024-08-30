@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { getProfile } from "../service/userService";
 import { AuthContext } from "../context/AuthContext";
 
-export function useGetProfile(params) {
+export function useGetProfile(profileId) {
 
     const userContext = useContext(AuthContext);
     const [user, setUser] = useState({});
@@ -15,7 +15,7 @@ export function useGetProfile(params) {
 
             try {
 
-                const response = await getProfile(params, abortController);
+                const response = await getProfile(profileId, abortController);
                 setUser(response);
 
             } catch (error) {
@@ -28,7 +28,7 @@ export function useGetProfile(params) {
             abortController.abort();
         }
 
-    }, [params, userContext]);
+    }, [profileId, userContext]);
 
     return user;
 
