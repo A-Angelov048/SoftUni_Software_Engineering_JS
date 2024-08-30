@@ -31,7 +31,19 @@ exports.buyFurniture = async (furnitureId, userId) => {
             throw new Error('Furniture do not exists.');
         }
 
-        return Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } });
+        const flag = furniture.listUserLikes.filter(x => x.valueOf() === userId);
+
+        if (flag.pop().valueOf() === userId) {
+            await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
+        }
+
+        const user = await User.findById(userId);
+
+        if (user.wishlist.includes(furnitureId)) {
+            await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
+        }
+
+        await Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } });
 
     } catch (error) {
         throw error;
@@ -71,10 +83,22 @@ exports.deleteFurniture = async (furnitureId, userId) => {
             throw new Error('Furniture not found.');
         }
 
+        if (furniture.listUserLikes.length > 0) {
+
+            furniture.listUserLikes.forEach(async currentUserId => {
+
+                const user = await User.findById(currentUserId);
+
+                if (user.wishlist.includes(furnitureId)) {
+                    await User.findByIdAndUpdate(currentUserId, { $pull: { wishlist: furnitureId } });
+                }
+            });
+        }
+
         const user = await User.findById(userId);
 
         if (user.furniture.includes(furnitureId)) {
-            const test = await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
+            await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
         }
 
         await Furniture.findByIdAndDelete(furnitureId);
@@ -90,10 +114,6 @@ exports.searchFurniture = (data) => {
 
     if (data.name) {
         body.name = new RegExp(data.name, 'i');
-    }
-
-    if (data.category) {
-        body.category = new RegExp(data.category, 'i');
     }
 
     return Furniture.find(body);
