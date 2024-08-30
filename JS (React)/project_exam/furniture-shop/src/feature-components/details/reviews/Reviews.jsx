@@ -1,6 +1,28 @@
+import { useContext, useState } from 'react';
 import './Reviews.css'
+import { AuthContext } from '../../../context/AuthContext';
+import { useForm } from '../../../hooks/useForms';
 
-export default function Reviews() {
+const initialValues = {
+    rating: 0,
+    review: ''
+}
+
+export default function Reviews({ furniture }) {
+
+    const user = useContext(AuthContext);
+
+    const subReview = async (values) => {
+
+        try {
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, subReview)
+
     return (
         <section className="recent-reviews">
 
@@ -13,51 +35,58 @@ export default function Reviews() {
                 <div className="layout-padding2">
                     <div className="wrapper-reviews">
 
-                        <div className="write-review">
-                            <form action="">
+                        {
+                            furniture.owner?._id !== user.userId
 
-                                <div className="header">
-                                    <h3>How would you rate this furniture?</h3>
-                                </div>
+                            &&
 
-                                <div className="stars-review top">
-                                    <div>
-                                        <button type="button" className="btn-star">
-                                            <i className='bx bxs-star'></i>
-                                        </button>
-                                        <button type="button" className="btn-star">
-                                            <i className='bx bxs-star'></i>
-                                        </button>
-                                        <button type="button" className="btn-star active">
-                                            <i className='bx bxs-star'></i>
-                                        </button>
-                                        <button type="button" className="btn-star">
-                                            <i className='bx bxs-star'></i>
-                                        </button>
-                                        <button type="button" className="btn-star">
-                                            <i className='bx bxs-star'></i>
-                                        </button>
+                            <div className="write-review">
+                                <form onSubmit={submitCurForm}>
+
+                                    <div className="header">
+                                        <h3>How would you rate this furniture?</h3>
                                     </div>
 
-                                    <input type="hidden" name="rating" value="1" />
-                                </div>
+                                    <div className="stars-review top">
+                                        <div>
+                                            <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '5' ? 'btn-star active' : 'btn-star'}>
+                                                <i className='bx bxs-star' data-rating='5'></i>
+                                            </button>
+                                            <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '4' ? 'btn-star active' : 'btn-star'}>
+                                                <i className='bx bxs-star' data-rating='4'></i>
+                                            </button>
+                                            <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '3' ? 'btn-star active' : 'btn-star'}>
+                                                <i className='bx bxs-star' data-rating='3'></i>
+                                            </button>
+                                            <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '2' ? 'btn-star active' : 'btn-star'}>
+                                                <i className='bx bxs-star' data-rating='2'></i>
+                                            </button>
+                                            <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '1' ? 'btn-star active' : 'btn-star'}>
+                                                <i className='bx bxs-star' data-rating='1'></i>
+                                            </button>
+                                        </div>
 
-                                <div className="center top">
-                                    <div className="profile">
-                                        <img alt=""
-                                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
+                                        <input type="hidden" name="rating" value={values.rating} />
                                     </div>
 
-                                    <h3>Emily Selman</h3>
-                                </div>
+                                    <div className="center top">
+                                        <div className="profile">
+                                            <img alt=""
+                                                src={user.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
+                                        </div>
 
-                                <textarea name="review" rows="4" placeholder="Write a review about the furniture.">
-                                </textarea>
+                                        <h3>{user.username}</h3>
+                                    </div>
 
-                                <button className="btn" type="submit">Submit review</button>
+                                    <textarea name="review" rows="4" placeholder="Write a review about the furniture." value={values.review} onChange={changeHandler}>
+                                    </textarea>
 
-                            </form>
-                        </div>
+                                    <button className="btn" type="submit">Submit review</button>
+
+                                </form>
+                            </div>
+                        }
+
 
                         <div className="content-review">
 
