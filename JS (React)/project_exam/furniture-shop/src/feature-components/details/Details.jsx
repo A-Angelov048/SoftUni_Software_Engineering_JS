@@ -284,7 +284,7 @@ export default function Details() {
 
             </section >
 
-            <Reviews />
+            <Reviews furniture={furniture} />
         </>
 
     );
