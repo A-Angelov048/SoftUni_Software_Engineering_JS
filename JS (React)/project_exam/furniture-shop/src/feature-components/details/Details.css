@@ -202,6 +202,11 @@ section .profile img {
     transition: all 0.3s;
 }
 
+.details-section .container .wrapper-details .right-box .box-total-price .button-box button[name='add-to-cart'].blur {
+    filter: blur(2px);
+}
+
+
 .details-section .container .wrapper-details .right-box .box-total-price .button-box button[name='heart'] {
     cursor: auto;
 }
@@ -212,6 +217,10 @@ section .profile img {
 }
 
 .details-section .container .wrapper-details .right-box .box-total-price .button-box button i:hover {
+    cursor: pointer;
+}
+
+.details-section .container .wrapper-details .right-box .box-total-price .button-box button i.active {
     cursor: pointer;
     color: red;
 }
