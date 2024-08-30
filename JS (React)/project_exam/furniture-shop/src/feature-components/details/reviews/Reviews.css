@@ -82,6 +82,7 @@
 
 .recent-reviews .container .wrapper-reviews .write-review textarea {
     width: 100%;
+    padding: 6px 8px;
     margin-top: 10px;
     margin-bottom: 40px;
 }
