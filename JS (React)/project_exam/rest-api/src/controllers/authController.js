@@ -52,7 +52,7 @@ router.post('/edit-profile', async (req, res) => {
 
         const token = await editProfile(userId, body);
         const editedProfile = await sendUser(token);
-        
+
         res.json(editedProfile);
 
     } catch (err) {
@@ -64,13 +64,27 @@ router.post('/edit-profile', async (req, res) => {
 router.get('/profile/:id', async (req, res) => {
 
     const userId = req.params.id;
+    const flag = req.params.id === req.user._id;
 
     try {
 
-        const token = await getCurrentUser(userId);
-        const sendProfile = await sendUser(token);
+        const user = await getCurrentUser(userId);
+
+        const sendUser = {
+            _id: user._id,
+            username: user.username,
+            location: user.location,
+            createdAt: user.createdAt,
+            lastLogin: user.lastLogin,
+            imageProfile: user.imageProfile,
+            furniture: user.furniture,
+        }
+
+        if (flag) {
+            sendUser.wishlist = user.wishlist
+        }
         
-        res.json(sendProfile);
+        res.json(sendUser);
 
     } catch (err) {
         console.log(err.errors);
