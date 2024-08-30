@@ -64,6 +64,10 @@ const furnitureSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     }],
+    listUserLikes: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+    }],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
