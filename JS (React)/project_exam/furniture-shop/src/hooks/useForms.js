@@ -8,7 +8,7 @@ export function useForm(initialValues, submitCallBack) {
 
         setValues(oldValue => ({
             ...oldValue,
-            [e.target.name]: e.target.value,
+            [e.target.name || 'rating']: e.target.value || e.target.dataset.rating,
         }));
 
     };
