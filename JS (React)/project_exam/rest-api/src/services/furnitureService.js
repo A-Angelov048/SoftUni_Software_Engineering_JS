@@ -38,6 +38,28 @@ exports.buyFurniture = async (furnitureId, userId) => {
     }
 };
 
+exports.wishlistFurniture = async (furnitureId, userId) => {
+
+    try {
+
+        const user = await User.findById(userId).lean();
+        const flag = user.wishlist.filter(x => x.valueOf() === furnitureId);
+
+        if (!!flag[0]) {
+            await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
+            await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
+            return false;
+        } else {
+            await User.findByIdAndUpdate(userId, { $push: { wishlist: furnitureId } });
+            await Furniture.findByIdAndUpdate(furnitureId, { $push: { listUserLikes: userId } });
+            return true;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+};
+
 exports.editFurniture = (furnitureId, body) => Furniture.findByIdAndUpdate(furnitureId, body, { runValidators: true });
 
 exports.deleteFurniture = async (furnitureId, userId) => {
