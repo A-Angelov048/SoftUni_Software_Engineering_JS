@@ -14,4 +14,6 @@ export const removeFurniture = (furnitureId) => del(`/furniture/delete/${furnitu
 
 export const purchaseFurniture = (furnitureId) => get(`/furniture/buy/${furnitureId}`);
 
+export const wishlist = (furnitureId) => get(`/furniture/wishlist/${furnitureId}`);
+
 export const editFurnitureRequester = (furnitureId, data) => put(`/furniture/edit/${furnitureId}`, data);
