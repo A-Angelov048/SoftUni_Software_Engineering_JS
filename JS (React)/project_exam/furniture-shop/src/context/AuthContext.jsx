@@ -16,11 +16,8 @@ export function ContextProvider(props) {
         imageProfile: authState.imageProfile,
         username: authState.username,
         location: authState.location,
-        createdAt: authState.createdAt,
-        lastLogin: authState.lastLogin,
         changeAuthState
     }
-
 
     return (
         <AuthContext.Provider value={data}>
