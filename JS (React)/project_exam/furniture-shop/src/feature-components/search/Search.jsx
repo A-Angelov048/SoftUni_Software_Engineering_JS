@@ -20,9 +20,8 @@ export default function Search() {
     const search = async (values) => {
 
         try {
-            let response = await getSearchFurniture(values);
-
-
+            const response = await getSearchFurniture(values);
+            
             if (response.length === 0) {
                 flag.current = true;
             } else {
