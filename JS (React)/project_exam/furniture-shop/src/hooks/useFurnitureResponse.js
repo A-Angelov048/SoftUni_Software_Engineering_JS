@@ -40,7 +40,7 @@ export function useAllFurniture() {
     const [furniture, dispatch] = useSetFurniture();
 
     useEffect(() => {
-        
+
         const abortController = new AbortController();
 
         (async () => {
@@ -66,7 +66,7 @@ export function useAllFurniture() {
 
 }
 
-export function useDetailsFurniture(params) {
+export function useDetailsFurniture(furnitureId) {
 
     const [furniture, dispatch] = useSetFurniture();
     const { changeFurnitureState } = useContext(FurnitureContext);
@@ -80,7 +80,7 @@ export function useDetailsFurniture(params) {
 
             try {
 
-                const response = await getDetailsFurniture(params, abortController);
+                const response = await getDetailsFurniture(furnitureId, abortController);
                 changeFurnitureState(response);
                 dispatch({ type: 'CURRENT_FURNITURE', payload: response });
 
