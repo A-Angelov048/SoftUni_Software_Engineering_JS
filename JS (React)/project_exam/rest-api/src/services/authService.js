@@ -61,24 +61,15 @@ exports.editProfile = async (userId, body) => {
 
 }
 
-exports.getCurrentUser = async (userId) => {
-
-    const user = await User.findById(userId).populate('furniture');
-    
-    const token = await generateToken(user);
-
-    return token;
-}
+exports.getCurrentUser = (userId) => User.findById(userId).populate({ path: 'furniture', select: 'name price imageUrl' }).populate({ path: 'wishlist', select: 'name price imageUrl' });
 
 async function generateToken(user) {
+
     const payload = {
         _id: user._id,
         imageProfile: user.imageProfile,
         username: user.username,
         location: user.location,
-        createdAt: user.createdAt,
-        lastLogin: user.lastLogin,
-        furniture: user.furniture
     }
 
     return jwt.sign(payload, SECRET, { expiresIn: '1d' });
