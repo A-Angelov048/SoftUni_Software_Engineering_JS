@@ -1,23 +1,26 @@
 import './Details.css'
 
+import Reviews from './reviews/Reviews';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 import { AuthContext } from '../../context/AuthContext';
-import Reviews from './reviews/Reviews';
-import { purchaseFurniture, removeFurniture } from '../../service/furnitureService';
+import { purchaseFurniture, removeFurniture, wishlist } from '../../service/furnitureService';
+import { FurnitureContext } from '../../context/FurnitureContext';
 
 export default function Details() {
 
-    const { furnitureId } = useParams();
-    const [changeContent, setChangeContent] = useState(true);
-    const [quantity, setQuantity] = useState(0);
-    const furniture = useDetailsFurniture(furnitureId);
-    const [buyFlag, setBuyFlag] = useState(false);
     const navigate = useNavigate();
-    const user = useContext(AuthContext);
+    const { userId } = useContext(AuthContext);
+    const { listUserLikes, handleUserLikes } = useContext(FurnitureContext);
+    const { furnitureId } = useParams();
+    const furniture = useDetailsFurniture(furnitureId);
 
-    function flagHandler(e) {
+    const [quantity, setQuantity] = useState(0);
+    const [changeContent, setChangeContent] = useState(true);
+    const [buyFlag, setBuyFlag] = useState(false);
+
+    function contentHandler(e) {
 
         if (e.target.textContent === 'Description') {
             setChangeContent(true);
@@ -39,6 +42,8 @@ export default function Details() {
 
     async function buyFurniture() {
 
+        if (quantity === 0) return;
+
         try {
             await purchaseFurniture(furnitureId);
             setBuyFlag(true);
@@ -46,6 +51,22 @@ export default function Details() {
             console.log(error.message);
         }
 
+    }
+
+    async function updateWishlist() {
+
+        try {
+            const response = await wishlist(furnitureId);
+
+            if (response.check) {
+                handleUserLikes(userId);
+            } else {
+                handleUserLikes(userId);
+            }
+
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     return (
@@ -110,11 +131,11 @@ export default function Details() {
                                     </div>
 
                                     {
-                                        !!user.userId
+                                        !!userId
 
                                         &&
 
-                                        user.userId !== furniture.owner?._id
+                                        userId !== furniture.owner?._id
 
                                         &&
 
@@ -134,12 +155,12 @@ export default function Details() {
 
                                     <section className="content-header">
                                         <div>
-                                            <a onClick={flagHandler}>Description</a>
+                                            <a onClick={contentHandler}>Description</a>
                                             <hr className={changeContent ? 'active' : null} />
                                         </div>
 
                                         <div>
-                                            <a onClick={flagHandler}>Details</a>
+                                            <a onClick={contentHandler}>Details</a>
                                             <hr className={!changeContent ? 'active' : null} />
                                         </div>
                                     </section>
@@ -201,14 +222,14 @@ export default function Details() {
                                 </div>
 
                                 {
-                                    !!user.userId
+                                    !!userId
 
                                     &&
 
                                     <div className="box-total-price">
 
                                         {
-                                            user.userId !== furniture.owner?._id
+                                            userId !== furniture.owner?._id
 
                                             &&
 
@@ -220,7 +241,7 @@ export default function Details() {
 
                                         <div className="button-box">
                                             {
-                                                user.userId === furniture.owner?._id ?
+                                                userId === furniture.owner?._id ?
 
                                                     <>
                                                         <Link className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
@@ -231,7 +252,7 @@ export default function Details() {
 
                                                     <>
                                                         {
-                                                            furniture.buyList?.includes(user.userId) || buyFlag ?
+                                                            furniture.buyList?.includes(userId) || buyFlag ?
 
                                                                 <>
                                                                     <p className='purchase'>Thank you for your purchase!</p>
@@ -240,9 +261,9 @@ export default function Details() {
                                                                 :
 
                                                                 <>
-                                                                    <button onClick={buyFurniture} className="btn-hover" name="add-to-cart" type="button">Buy</button>
+                                                                    <button onClick={buyFurniture} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Buy</button>
                                                                     <button name="heart" type="button">
-                                                                        <i className='bx bxs-heart bx-tada-hover'></i>
+                                                                        <i onClick={updateWishlist} className={listUserLikes?.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
                                                                     </button>
                                                                 </>
                                                         }
@@ -261,7 +282,7 @@ export default function Details() {
 
                 </div>
 
-            </section>
+            </section >
 
             <Reviews />
         </>
