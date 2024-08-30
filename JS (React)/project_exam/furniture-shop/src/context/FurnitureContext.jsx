@@ -3,12 +3,31 @@ import { Outlet } from 'react-router-dom';
 
 export const FurnitureContext = createContext();
 
-export function FurnitureContextProvider(props) {
+export function FurnitureContextProvider() {
 
     const [furnitureState, setFurnitureState] = useState({});
 
     const changeFurnitureState = (state) => {
         setFurnitureState(state);
+    }
+
+    const handleUserLikes = (userId) => {
+
+        let currentListLike = [];
+
+        if (furnitureState.listUserLikes.includes(userId)) {
+            const oldArr = furnitureState.listUserLikes;
+            const result = oldArr.filter(x => x !== userId);
+            currentListLike = result;
+        } else {
+            const newArr = furnitureState.listUserLikes;
+            newArr.push(userId);
+            currentListLike = newArr;
+        }
+
+        const newState = ({ ...furnitureState, listUserLikes: currentListLike });
+
+        setFurnitureState(newState);
     }
 
     const data = {
@@ -23,7 +42,9 @@ export function FurnitureContextProvider(props) {
         imageUrl: furnitureState.imageUrl,
         price: furnitureState.price,
         description: furnitureState.description,
-        changeFurnitureState
+        listUserLikes: furnitureState.listUserLikes,
+        changeFurnitureState,
+        handleUserLikes
     }
 
     return (
