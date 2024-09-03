@@ -1,5 +1,6 @@
 const Furniture = require('../models/Furniture');
 const User = require('../models/User');
+const Reviews = require('../models/Reviews');
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
@@ -19,7 +20,7 @@ exports.createFurniture = async (body, userId) => {
 
 };
 
-exports.getOne = (furnitureId) => Furniture.findById(furnitureId).populate({ path: 'owner', select: 'username imageProfile' });
+exports.getOne = (furnitureId) => Furniture.findById(furnitureId).populate({ path: 'owner', select: 'username imageProfile' }).populate('reviews');
 
 exports.buyFurniture = async (furnitureId, userId) => {
 
@@ -81,6 +82,10 @@ exports.deleteFurniture = async (furnitureId, userId) => {
 
         if (furniture.owner._id.valueOf() !== userId) {
             throw new Error('Furniture not found.');
+        }
+
+        if (furniture.reviews.length > 0) {
+            await Reviews.deleteMany({ _id: { $in: furniture.reviews } });
         }
 
         if (furniture.listUserLikes.length > 0) {
