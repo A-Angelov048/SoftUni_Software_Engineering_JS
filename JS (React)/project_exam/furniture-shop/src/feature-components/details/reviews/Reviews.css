@@ -25,6 +25,7 @@
 
 .recent-reviews .container .wrapper-reviews .write-review::before,
 .recent-reviews .container .wrapper-reviews .write-review::after,
+.recent-reviews .container .wrapper-reviews .content-review:nth-child(1):before,
 .recent-reviews .container .wrapper-reviews .content-review::after {
     display: block;
     content: '';
@@ -77,6 +78,11 @@
 
 .recent-reviews .container .wrapper-reviews .write-review .stars-review div>.btn-star:hover,
 .recent-reviews .container .wrapper-reviews .write-review .stars-review div>.btn-star:hover~.btn-star {
+    color: darkorange;
+}
+
+.recent-reviews .container .wrapper-reviews .content-review .stars-review .active,
+.recent-reviews .container .wrapper-reviews .content-review .stars-review .active~.bxs-star {
     color: darkorange;
 }
 
