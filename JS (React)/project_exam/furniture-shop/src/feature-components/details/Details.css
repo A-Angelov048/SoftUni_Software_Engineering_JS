@@ -61,10 +61,6 @@ section .profile img {
     font-style: italic;
 }
 
-.details-section .container .wrapper-details .right-box .box-reviews .stars i:nth-child(-n + 3) {
-    color: darkorange;
-}
-
 .details-section .container .wrapper-details .right-box .box-reviews {
     display: flex;
     margin-top: 20px;
@@ -74,6 +70,16 @@ section .profile img {
 .details-section .container .wrapper-details .right-box .box-reviews p {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.details-section .container .wrapper-details .right-box .box-reviews .stars {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.details-section .container .wrapper-details .right-box .box-reviews .stars .active,
+.details-section .container .wrapper-details .right-box .box-reviews .stars .active~.bxs-star {
+    color: darkorange;
 }
 
 .details-section .container .wrapper-details .right-box .box-price-quantity {
