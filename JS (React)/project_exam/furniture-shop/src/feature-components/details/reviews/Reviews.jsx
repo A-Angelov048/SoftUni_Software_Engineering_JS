@@ -1,20 +1,33 @@
-import { useContext, useState } from 'react';
 import './Reviews.css'
-import { AuthContext } from '../../../context/AuthContext';
+
+import { forwardRef, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForms';
+import useReviews from '../../../hooks/useReviews';
+
+import { AuthContext } from '../../../context/AuthContext';
+import { FurnitureContext } from '../../../context/FurnitureContext';
+import { saveReview } from '../../../service/reviewsService';
+import { convertDateToString } from '../../../utils/convertDate';
+import { checkReview } from '../../../utils/checkReview';
 
 const initialValues = {
     rating: 0,
     review: ''
 }
 
-export default function Reviews({ furniture }) {
+export default forwardRef(function Reviews(props, ref) {
 
     const user = useContext(AuthContext);
+    const furnitureContext = useContext(FurnitureContext);
+    const { furnitureId } = useParams();
+    const [reviewsArr, reviewsState, updateReviewsState] = useReviews();
 
     const subReview = async (values) => {
 
         try {
+            const response = await saveReview(values, furnitureId);
+            furnitureContext.addReviewToState(response);
 
         } catch (error) {
             console.log(error.message);
@@ -24,7 +37,7 @@ export default function Reviews({ furniture }) {
     const { values, changeHandler, submitCurForm } = useForm(initialValues, subReview)
 
     return (
-        <section className="recent-reviews">
+        <section ref={ref} className="recent-reviews">
 
             <div className="container">
 
@@ -36,11 +49,11 @@ export default function Reviews({ furniture }) {
                     <div className="wrapper-reviews">
 
                         {
-                            furniture.owner?._id !== user.userId
+                            checkReview()
 
                             &&
 
-                            <div className="write-review">
+                            < div className="write-review">
                                 <form onSubmit={submitCurForm}>
 
                                     <div className="header">
@@ -66,7 +79,7 @@ export default function Reviews({ furniture }) {
                                             </button>
                                         </div>
 
-                                        <input type="hidden" name="rating" value={values.rating} />
+                                        <input type="hidden" name="rating" defaultValue={values.rating} />
                                     </div>
 
                                     <div className="center top">
@@ -85,72 +98,46 @@ export default function Reviews({ furniture }) {
 
                                 </form>
                             </div>
+
                         }
 
+                        {reviewsArr?.map(review => (
 
-                        <div className="content-review">
 
-                            <div className="center">
-                                <div className="profile">
-                                    <img alt=""
-                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
+                            <div key={review._id} className="content-review">
+
+                                <div className="center">
+                                    <div className="profile">
+                                        <img alt=""
+                                            src={review.owner.imageProfile ? review.owner.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
+                                    </div>
+
+                                    <header>
+                                        <h3>{review.owner.username}</h3>
+                                        <p>{convertDateToString(review.createdAt)}</p>
+                                    </header>
                                 </div>
 
-                                <header>
-                                    <h3>Emily Selman</h3>
-                                    <p>July 16, 2021</p>
-                                </header>
-                            </div>
-
-                            <div className="stars-review top">
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                            </div>
-                            <div className="top">
-                                <p>This icon pack is just what I need for my latest project. There's an icon for just
-                                    about anything I could
-                                    ever need. Love the playful look!
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="content-review">
-
-                            <div className="center">
-                                <div className="profile">
-                                    <img alt=""
-                                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" />
+                                <div className="stars-review top">
+                                    <i className={review.rating === '5' ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                    <i className={review.rating === '4' ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                    <i className={review.rating === '3' ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                    <i className={review.rating === '2' ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                    <i className={review.rating === '1' ? 'bx bxs-star active' : 'bx bxs-star'}></i>
                                 </div>
-
-                                <header>
-                                    <h3>Emily Selman</h3>
-                                    <p>July 16, 2021</p>
-                                </header>
+                                <div className="top">
+                                    <p>{review.review}
+                                    </p>
+                                </div>
                             </div>
 
-                            <div className="stars-review top">
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                                <i className='bx bxs-star'></i>
-                            </div>
-                            <div className="top">
-                                <p>This icon pack is just what I need for my latest project. There's an icon for just
-                                    about anything I could
-                                    ever need. Love the playful look!
-                                </p>
-                            </div>
-                        </div>
+                        ))}
 
-                        <button className="btn" name="show-reviews" type="button">Show all reviews</button>
+                        {furnitureContext.reviews?.length > 2 && !reviewsState && <button onClick={() => { updateReviewsState(true); }} className="btn" name="show-reviews" type="button">Show all reviews</button>}
 
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
-}
+})
