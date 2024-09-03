@@ -30,6 +30,15 @@ export function FurnitureContextProvider() {
         setFurnitureState(newState);
     }
 
+    const addReviewToState = (value) => {
+
+        const newReviewsArr = furnitureState.reviews;
+        newReviewsArr.push(value);
+
+        setFurnitureState(oldState => ({ ...oldState, newReviewsArr }));
+
+    }
+
     const data = {
         name: furnitureState.name,
         category: furnitureState.category,
@@ -43,7 +52,10 @@ export function FurnitureContextProvider() {
         price: furnitureState.price,
         description: furnitureState.description,
         listUserLikes: furnitureState.listUserLikes,
+        reviews: furnitureState.reviews,
+        owner: furnitureState.owner,
         changeFurnitureState,
+        addReviewToState,
         handleUserLikes
     }
 
