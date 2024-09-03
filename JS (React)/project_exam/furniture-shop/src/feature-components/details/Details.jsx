@@ -1,24 +1,27 @@
 import './Details.css'
-
 import Reviews from './reviews/Reviews';
+
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
+
 import { AuthContext } from '../../context/AuthContext';
-import { purchaseFurniture, removeFurniture, wishlist } from '../../service/furnitureService';
 import { FurnitureContext } from '../../context/FurnitureContext';
+import { purchaseFurniture, removeFurniture, wishlist } from '../../service/furnitureService';
+import { averageNumReviews } from '../../utils/averageNumReviews';
 
 export default function Details() {
 
     const navigate = useNavigate();
     const { userId } = useContext(AuthContext);
-    const { listUserLikes, handleUserLikes } = useContext(FurnitureContext);
+    const { reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
 
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
     const [buyFlag, setBuyFlag] = useState(false);
+    const ref = useRef(null);
 
     function contentHandler(e) {
 
@@ -69,6 +72,10 @@ export default function Details() {
         }
     }
 
+    function scrollToReviews() {
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
 
         <>
@@ -111,14 +118,14 @@ export default function Details() {
                                 <div className="box-reviews">
 
                                     <div className="stars">
-                                        <i className='bx bxs-star'></i>
-                                        <i className='bx bxs-star'></i>
-                                        <i className='bx bxs-star'></i>
-                                        <i className='bx bxs-star'></i>
-                                        <i className='bx bxs-star'></i>
+                                        <i className={averageNumReviews() === 5 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                        <i className={averageNumReviews() === 4 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                        <i className={averageNumReviews() === 3 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                        <i className={averageNumReviews() === 2 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
+                                        <i className={averageNumReviews() === 1 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
                                     </div>
 
-                                    <p>5 Reviews</p>
+                                    <p onClick={scrollToReviews}>{reviews?.length} Reviews</p>
                                 </div>
 
                                 <div className="box-price-quantity">
@@ -284,7 +291,8 @@ export default function Details() {
 
             </section >
 
-            <Reviews furniture={furniture} />
+            <Reviews ref={ref} />
+
         </>
 
     );
