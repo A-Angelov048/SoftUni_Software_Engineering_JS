@@ -17,7 +17,6 @@ export default function Settings() {
         location: location,
     }
 
-    const [errorBoolean, setBoolean] = useState(false);
     const [errors, setErrors] = useState({});
 
 
@@ -33,7 +32,6 @@ export default function Settings() {
                 newError[err.path] = err.message;
             })
 
-            setBoolean(true);
             setErrors(newError);
 
             return;
@@ -41,7 +39,7 @@ export default function Settings() {
 
         try {
             const result = await editProfile(values);
-            setBoolean(false);
+            setErrors({});
             changeAuthState(result);
         } catch (error) {
             console.error(error.message);
@@ -70,7 +68,7 @@ export default function Settings() {
 
                     </div>
 
-                    {errorBoolean && errors.hasOwnProperty('username') &&
+                    {errors.hasOwnProperty('username') &&
                         <div className='error-container'>
                             <i className='bx bxs-error-circle bx-tada' ></i>
                             <p className='error'>{errors.username}</p>

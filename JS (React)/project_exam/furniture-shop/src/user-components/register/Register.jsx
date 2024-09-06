@@ -19,7 +19,6 @@ export default function Register() {
 
     const navigate = useNavigate();
     const { changeAuthState } = useContext(AuthContext);
-    const [errorBoolean, setBoolean] = useState(false);
     const [errors, setErrors] = useState({});
 
 
@@ -35,7 +34,6 @@ export default function Register() {
                 newError[err.path] = err.message;
             })
 
-            setBoolean(true);
             setErrors(newError);
 
             return;
@@ -76,7 +74,7 @@ export default function Register() {
                                 <i className='bx bxs-user'></i>
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('username') &&
+                            {errors.hasOwnProperty('username') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.username}</p>
@@ -95,7 +93,7 @@ export default function Register() {
                                 <i className='bx bxs-envelope'></i>
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('email') &&
+                            {errors.hasOwnProperty('email') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.email}</p>
@@ -114,7 +112,7 @@ export default function Register() {
                                 <i className='bx bxs-lock-alt'></i>
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('password') &&
+                            {errors.hasOwnProperty('password') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.password}</p>
@@ -133,7 +131,7 @@ export default function Register() {
                                 <i className='bx bxs-lock-alt'></i>
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('rePassword') &&
+                            {errors.hasOwnProperty('rePassword') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.rePassword}</p>

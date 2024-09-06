@@ -24,7 +24,6 @@ const initialValues = {
 export default function CreateOffer() {
 
     const navigate = useNavigate();
-    const [errorBoolean, setBoolean] = useState(false);
     const [errors, setErrors] = useState({});
 
     const createFurniture = async (values) => {
@@ -39,7 +38,6 @@ export default function CreateOffer() {
                 newError[err.path] = err.message;
             })
 
-            setBoolean(true);
             setErrors(newError);
 
             return;
@@ -80,7 +78,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('name') &&
+                            {errors.hasOwnProperty('name') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.name}</p>
@@ -99,7 +97,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('category') &&
+                            {errors.hasOwnProperty('category') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.category}</p>
@@ -116,7 +114,7 @@ export default function CreateOffer() {
                                 />
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('year') &&
+                            {errors.hasOwnProperty('year') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.year}</p>
@@ -135,7 +133,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('materials') &&
+                            {errors.hasOwnProperty('materials') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.materials}</p>
@@ -154,7 +152,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('color') &&
+                            {errors.hasOwnProperty('color') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.color}</p>
@@ -173,7 +171,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('size') &&
+                            {errors.hasOwnProperty('size') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.size}</p>
@@ -192,7 +190,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('weight') &&
+                            {errors.hasOwnProperty('weight') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.weight}</p>
@@ -211,7 +209,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('condition') &&
+                            {errors.hasOwnProperty('condition') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.condition}</p>
@@ -230,7 +228,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('imageUrl') &&
+                            {errors.hasOwnProperty('imageUrl') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.imageUrl}</p>
@@ -249,7 +247,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('price') &&
+                            {errors.hasOwnProperty('price') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.price}</p>
@@ -268,7 +266,7 @@ export default function CreateOffer() {
 
                             </div>
 
-                            {errorBoolean && errors.hasOwnProperty('description') &&
+                            {errors.hasOwnProperty('description') &&
                                 <div className='error-container'>
                                     <i className='bx bxs-error-circle bx-tada' ></i>
                                     <p className='error'>{errors.description}</p>
