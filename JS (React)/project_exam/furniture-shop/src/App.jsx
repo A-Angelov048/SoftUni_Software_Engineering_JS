@@ -18,6 +18,7 @@ import { ContextProvider } from "./context/AuthContext"
 import { FurnitureContextProvider } from "./context/FurnitureContext"
 import GuestGuard from "./shared-components/guards/GuestGuard"
 import AuthGuard from "./shared-components/guards/AuthGuard"
+import ScrollToTop from "./shared-components/scroll-to-top/ScrollToTop"
 
 
 
@@ -29,37 +30,41 @@ function App() {
 
       <Introduction />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/search" element={<Search />} />
+      <ScrollToTop>
 
-        <Route element={<AuthGuard />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/search" element={<Search />} />
 
-        <Route element={<GuestGuard />}>
-          <Route path="/create-offer" element={<CreateOffer />} />
-        </Route>
-
-        <Route element={<FurnitureContextProvider />}>
-          <Route path="/details-furniture/:furnitureId" element={<Details />} />
-          <Route element={<GuestGuard />}>
-            <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
+          <Route element={<AuthGuard />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
-        </Route>
 
-        <Route path="/profile/:profileId" element={<Profile />} >
-          <Route path="my-furniture" element={<BrandContainer />} />
-          <Route path="wishlist" element={<BrandContainer />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="sales" element={<BrandContainer />} />
-        </Route >
+          <Route element={<GuestGuard />}>
+            <Route path="/create-offer" element={<CreateOffer />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
+          <Route element={<FurnitureContextProvider />}>
+            <Route path="/details-furniture/:furnitureId" element={<Details />} />
+            <Route element={<GuestGuard />}>
+              <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
+            </Route>
+          </Route>
 
-      </Routes>
+          <Route path="/profile/:profileId" element={<Profile />} >
+            <Route path="my-furniture" element={<BrandContainer />} />
+            <Route path="wishlist" element={<BrandContainer />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="sales" element={<BrandContainer />} />
+          </Route >
+
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
+
+      </ScrollToTop>
 
       <Footer />
 
