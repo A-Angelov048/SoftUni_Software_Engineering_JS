@@ -14,13 +14,12 @@ export default function Details() {
 
     const navigate = useNavigate();
     const { userId } = useContext(AuthContext);
-    const { reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
+    const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
 
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
-    const [buyFlag, setBuyFlag] = useState(false);
     const ref = useRef(null);
 
     function contentHandler(e) {
@@ -49,7 +48,7 @@ export default function Details() {
 
         try {
             await purchaseFurniture(furnitureId);
-            setBuyFlag(true);
+            updateArrayState(userId, 'buyList');
         } catch (error) {
             console.log(error.message);
         }
@@ -149,9 +148,9 @@ export default function Details() {
                                         <div className="quantity">
                                             <h3>Quantity</h3>
                                             <div className="quantity-btn">
-                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0) { return setQuantity(0) } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
+                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0 || buyList.includes(userId)) { return } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
                                                 <p>{quantity}</p>
-                                                <button name="plus" type="button" onClick={() => { setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
+                                                <button name="plus" type="button" onClick={() => { if (buyList.includes(userId)) { return } setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
                                             </div>
                                         </div>
                                     }
@@ -259,7 +258,7 @@ export default function Details() {
 
                                                     <>
                                                         {
-                                                            furniture.buyList?.includes(userId) || buyFlag ?
+                                                            buyList?.includes(userId) ?
 
                                                                 <>
                                                                     <p className='purchase'>Thank you for your purchase!</p>
