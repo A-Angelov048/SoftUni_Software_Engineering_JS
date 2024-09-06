@@ -4,7 +4,7 @@ import BrandContainer from "../../shared-components/brand-container/BrandContain
 import { useForm } from '../../hooks/useForms';
 import { getSearchFurniture } from '../../service/furnitureService';
 import { useSetFurniture } from '../../hooks/useFurnitureReducer';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 
 const initialValues = {
@@ -14,18 +14,20 @@ const initialValues = {
 export default function Search() {
 
     const [furniture, dispatch] = useSetFurniture();
-    const flag = useRef(false);
+    const [flagState, setFlagState] = useState(false);
 
 
     const search = async (values) => {
 
+        if (!values.name) return setFlagState(true);
+
         try {
             const response = await getSearchFurniture(values);
-            
+
             if (response.length === 0) {
-                flag.current = true;
+                setFlagState(true);
             } else {
-                flag.current = false;
+                setFlagState(false);
             }
 
             dispatch({ type: 'GET_FURNITURE', payload: response });
@@ -71,8 +73,7 @@ export default function Search() {
                 </div>
 
                 {
-                    flag.current ?
-
+                    flagState ?
 
                         <div className="no-match">
                             <h2 className=".h2">Whoops sorry no match was found!</h2>
@@ -81,7 +82,6 @@ export default function Search() {
                         :
 
                         <BrandContainer furniture={furniture} />
-
 
                 }
 
