@@ -21,10 +21,11 @@
 
 .overlay .content .header-content i {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 3px;
+    top: 3px;
     font-size: 30px;
     color: #C70039;
+    cursor: pointer;
 }
 
 .overlay .content p {
