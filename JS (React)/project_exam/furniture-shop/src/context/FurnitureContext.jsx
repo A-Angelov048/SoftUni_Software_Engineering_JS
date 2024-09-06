@@ -30,12 +30,13 @@ export function FurnitureContextProvider() {
         setFurnitureState(newState);
     }
 
-    const addReviewToState = (value) => {
+    const updateArrayState = (value, property) => {
 
-        const newReviewsArr = furnitureState.reviews;
-        newReviewsArr.push(value);
+        const newArr = furnitureState[property];
 
-        setFurnitureState(oldState => ({ ...oldState, newReviewsArr }));
+        newArr.push(value);
+
+        setFurnitureState(oldState => ({ ...oldState, newArr }));
 
     }
 
@@ -51,11 +52,12 @@ export function FurnitureContextProvider() {
         imageUrl: furnitureState.imageUrl,
         price: furnitureState.price,
         description: furnitureState.description,
+        buyList: furnitureState.buyList,
         listUserLikes: furnitureState.listUserLikes,
         reviews: furnitureState.reviews,
         owner: furnitureState.owner,
         changeFurnitureState,
-        addReviewToState,
+        updateArrayState,
         handleUserLikes
     }
 
