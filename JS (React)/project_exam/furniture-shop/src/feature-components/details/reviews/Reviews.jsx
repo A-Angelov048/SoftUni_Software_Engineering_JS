@@ -27,7 +27,7 @@ export default forwardRef(function Reviews(props, ref) {
 
         try {
             const response = await saveReview(values, furnitureId);
-            furnitureContext.addReviewToState(response);
+            furnitureContext.updateArrayState(response, 'reviews');
 
         } catch (error) {
             console.log(error.message);
