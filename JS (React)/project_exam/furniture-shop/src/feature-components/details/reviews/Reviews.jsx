@@ -1,6 +1,6 @@
 import './Reviews.css'
 
-import { forwardRef, useContext } from 'react';
+import { forwardRef, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForms';
 import useReviews from '../../../hooks/useReviews';
@@ -10,9 +10,10 @@ import { FurnitureContext } from '../../../context/FurnitureContext';
 import { saveReview } from '../../../service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
 import { checkReview } from '../../../utils/checkReview';
+import { reviewSchema } from '../../../utils/schemaForm';
 
 const initialValues = {
-    rating: 0,
+    rating: '',
     review: ''
 }
 
@@ -21,9 +22,27 @@ export default forwardRef(function Reviews(props, ref) {
     const user = useContext(AuthContext);
     const furnitureContext = useContext(FurnitureContext);
     const { furnitureId } = useParams();
+
     const [reviewsArr, reviewsState, updateReviewsState] = useReviews();
+    const [errors, setErrors] = useState({});
 
     const subReview = async (values) => {
+
+        try {
+            await reviewSchema.validate(values, { abortEarly: false });
+        } catch (error) {
+
+            const newError = {}
+
+            error.inner.forEach((err) => {
+                newError[err.path] = err.message;
+            })
+            console.log(newError);
+
+            setErrors(newError);
+
+            return;
+        }
 
         try {
             const response = await saveReview(values, furnitureId);
@@ -56,11 +75,18 @@ export default forwardRef(function Reviews(props, ref) {
                             < div className="write-review">
                                 <form onSubmit={submitCurForm}>
 
-                                    <div className="header">
+                                    <div className="header bottom">
                                         <h3>How would you rate this furniture?</h3>
                                     </div>
 
-                                    <div className="stars-review top">
+                                    {errors.hasOwnProperty('rating') &&
+                                        <div className='error-container'>
+                                            <i className='bx bxs-error-circle bx-tada' ></i>
+                                            <p className='error'>{errors.rating}</p>
+                                        </div>
+                                    }
+
+                                    <div className="stars-review">
                                         <div>
                                             <button onClick={(e) => changeHandler(e)} type="button" className={values.rating === '5' ? 'btn-star active' : 'btn-star'}>
                                                 <i className='bx bxs-star' data-rating='5'></i>
@@ -82,7 +108,9 @@ export default forwardRef(function Reviews(props, ref) {
                                         <input type="hidden" name="rating" defaultValue={values.rating} />
                                     </div>
 
-                                    <div className="center top">
+
+
+                                    <div className="center top bottom">
                                         <div className="profile">
                                             <img alt=""
                                                 src={user.imageProfile ? user.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
@@ -90,6 +118,13 @@ export default forwardRef(function Reviews(props, ref) {
 
                                         <h3>{user.username}</h3>
                                     </div>
+
+                                    {errors.hasOwnProperty('review') &&
+                                        <div className='error-container'>
+                                            <i className='bx bxs-error-circle bx-tada' ></i>
+                                            <p className='error'>{errors.review}</p>
+                                        </div>
+                                    }
 
                                     <textarea name="review" rows="4" placeholder="Write a review about the furniture." value={values.review} onChange={changeHandler}>
                                     </textarea>
