@@ -9,15 +9,16 @@ import { AuthContext } from '../../context/AuthContext';
 import { FurnitureContext } from '../../context/FurnitureContext';
 import { purchaseFurniture, removeFurniture, wishlist } from '../../service/furnitureService';
 import { averageNumReviews } from '../../utils/averageNumReviews';
+import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
 
 export default function Details() {
 
-    const navigate = useNavigate();
     const { userId } = useContext(AuthContext);
     const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
 
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
     const ref = useRef(null);
@@ -29,17 +30,6 @@ export default function Details() {
         } else {
             setChangeContent(false);
         }
-    }
-
-    async function deleteFurniture() {
-
-        try {
-            await removeFurniture(furnitureId);
-            navigate('/shop');
-        } catch (error) {
-            console.log(error.message);
-        }
-
     }
 
     async function buyFurniture() {
@@ -251,7 +241,7 @@ export default function Details() {
 
                                                     <>
                                                         <Link className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
-                                                        <button onClick={deleteFurniture} className="btn-hover" name="delete" type="button">Delete</button>
+                                                        <button onClick={() => setIsDialogOpen(true)} className="btn-hover" name="delete" type="button">Delete</button>
                                                     </>
 
                                                     :
@@ -291,6 +281,8 @@ export default function Details() {
             </section >
 
             <Reviews ref={ref} />
+
+            {isDialogOpen && <MessageDialog onClose={() => setIsDialogOpen(false)} />}
 
         </>
 
