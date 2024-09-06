@@ -32,17 +32,9 @@ exports.buyFurniture = async (furnitureId, userId) => {
             throw new Error('Furniture do not exists.');
         }
 
-        const flag = furniture.listUserLikes.filter(x => x.valueOf() === userId);
+        await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
 
-        if (flag.pop().valueOf() === userId) {
-            await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
-        }
-
-        const user = await User.findById(userId);
-
-        if (user.wishlist.includes(furnitureId)) {
-            await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
-        }
+        await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
 
         await Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } });
 
@@ -100,11 +92,7 @@ exports.deleteFurniture = async (furnitureId, userId) => {
             });
         }
 
-        const user = await User.findById(userId);
-
-        if (user.furniture.includes(furnitureId)) {
-            await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
-        }
+        await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
 
         await Furniture.findByIdAndDelete(furnitureId);
 
