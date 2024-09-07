@@ -7,14 +7,15 @@ const jwt = require('../lib/jwt');
 
 exports.createUser = async (body) => {
 
-    const user = await User.findOne({ email: body.email });
-
-    if (user) {
-        throw new Error('Email already exists!');
+    const username = await User.findOne({ username: body.username });
+    const email = await User.findOne({ email: body.email });
+    
+    if (!!username) {
+        throw new Error('Username already exists!');
     }
 
-    if (body.password !== body.rePassword) {
-        throw new Error('Passwords should match!');
+    if (!!email) {
+        throw new Error('Email already exists!');
     }
 
     const createdUser = await User.create(body);
