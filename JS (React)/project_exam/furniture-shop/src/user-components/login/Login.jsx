@@ -18,6 +18,7 @@ export default function Login() {
     const navigate = useNavigate();
     const { changeAuthState } = useContext(AuthContext)
     const [errors, setErrors] = useState({});
+    const [showTextState, setShowText] = useState(false);
 
 
     const getUser = async (values) => {
@@ -42,7 +43,17 @@ export default function Login() {
             changeAuthState(result);
             navigate('/');
         } catch (error) {
-            console.log(error.message);
+
+            setShowText(true);
+            setErrors({ message: error.message });
+
+            setTimeout(() => {
+
+                setShowText(false);
+                setErrors({});
+
+            }, 4000)
+
         }
     }
 
@@ -56,6 +67,12 @@ export default function Login() {
                         Login
                     </h2>
                 </div>
+                {errors.hasOwnProperty('message') && showTextState &&
+                    <div className='error-container position disappear-text'>
+                        <i className='bx bxs-error-circle bx-tada' ></i>
+                        <p className='error bigger-font'>{errors.message}</p>
+                    </div>
+                }
                 <div className="layout-padding2">
                     <div className="wrapper-user">
                         <form onSubmit={submitCurForm}>
