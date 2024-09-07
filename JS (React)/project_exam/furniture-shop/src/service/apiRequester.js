@@ -38,7 +38,7 @@ async function request(method, url, data, abortController) {
         return result;
 
     } catch (error) {
-        return console.error(error.message);
+        throw new Error(error.message);
     }
 }
 
