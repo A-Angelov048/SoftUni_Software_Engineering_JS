@@ -37,26 +37,6 @@
     font-size: 20px;
 }
 
-.wrapper-user .error-container {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    width: fit-content;
-    padding: 5px 10px;
-    margin: 0px 10px;
-    background-color: #fee2e2;
-    border-radius: 8px;
-}
-
-.wrapper-user .error-container i {
-    color: #ef4444;
-}
-
-.wrapper-user .error-container .error {
-    color: #ef4444;
-    font-weight: 600;
-}
-
 .wrapper-user .btn {
     width: 100%;
     margin-top: 15px;
@@ -91,4 +71,50 @@
 .wrapper-user .link p a:hover {
     color: #fff;
     text-decoration: underline;
+}
+
+.container .error-container {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 0px 10px;
+    background-color: #fee2e2;
+    border-radius: 8px;
+}
+
+.container .error-container.position {
+    position: relative;
+    top: 15px;
+    margin: auto;
+    align-items: center;
+}
+
+.container .error-container.disappear-text {
+    animation: fadeOut 4s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.container .error-container i {
+    color: #ef4444;
+}
+
+.container .error-container .error {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+.container .error-container .error.bigger-font {
+    font-size: 20px;
 }
