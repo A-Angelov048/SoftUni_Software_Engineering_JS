@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
         res.json(user);
 
     } catch (err) {
-        console.log(err.errors);
+        res.status(401).json({ message: err.message });
     }
 
 })
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
         res.json(user);
 
     } catch (err) {
-        console.log(err.errors);
+        res.status(401).json({ message: err.message });
     }
 })
 
@@ -83,7 +83,7 @@ router.get('/profile/:id', async (req, res) => {
         if (flag) {
             sendUser.wishlist = user.wishlist
         }
-        
+
         res.json(sendUser);
 
     } catch (err) {
