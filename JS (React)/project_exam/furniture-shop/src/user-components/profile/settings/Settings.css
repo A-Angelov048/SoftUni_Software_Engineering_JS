@@ -46,6 +46,27 @@
     border-radius: 8px;
 }
 
+.profile-section .container .wrapper-profile .settings .error-container.position {
+    position: relative;
+    margin: auto;
+    align-items: center;
+}
+
+.profile-section .container .wrapper-profile .settings .error-container.disappear-text {
+    animation: fadeOut 4s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 .profile-section .container .wrapper-profile .settings .error-container i {
     color: #ef4444;
 }
@@ -53,6 +74,10 @@
 .profile-section .container .wrapper-profile .settings .error-container .error {
     color: #ef4444;
     font-weight: 600;
+}
+
+.profile-section .container .wrapper-profile .settings .error-container .error.bigger-font {
+    font-size: 20px;
 }
 
 .profile-section .container .wrapper-profile .settings .input-box input::placeholder {
