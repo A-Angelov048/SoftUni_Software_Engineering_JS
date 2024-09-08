@@ -10,6 +10,7 @@ import { profileSchema } from '../../../utils/schemaForm';
 export default function Settings() {
 
     const { imageProfile, username, location, changeAuthState } = useContext(AuthContext);
+    const [showTextState, setShowText] = useState(false);
 
     const initialValues = {
         imageProfile: imageProfile,
@@ -42,7 +43,17 @@ export default function Settings() {
             setErrors({});
             changeAuthState(result);
         } catch (error) {
-            console.error(error.message);
+
+            setShowText(true);
+            setErrors({ message: error.message });
+
+            setTimeout(() => {
+
+                setShowText(false);
+                setErrors({});
+
+            }, 4000)
+
         }
 
     }
@@ -51,8 +62,14 @@ export default function Settings() {
     const { values, changeHandler, submitCurForm } = useForm(initialValues, changeUserInfo)
 
     return (
-        <div className="settings layout-padding2">
 
+        <div className="settings layout-padding2">
+            {errors.hasOwnProperty('message') && showTextState &&
+                <div className='error-container position disappear-text'>
+                    <i className='bx bxs-error-circle bx-tada' ></i>
+                    <p className='error bigger-font'>{errors.message}</p>
+                </div>
+            }
             <details>
                 <summary>Profile editing</summary>
                 <form onSubmit={submitCurForm}>
