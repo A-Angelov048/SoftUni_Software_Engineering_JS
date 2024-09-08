@@ -9,7 +9,7 @@ exports.createUser = async (body) => {
 
     const username = await User.findOne({ username: body.username });
     const email = await User.findOne({ email: body.email });
-    
+
     if (!!username) {
         throw new Error('Username already exists!');
     }
@@ -53,6 +53,12 @@ exports.sendUser = async (token) => {
 }
 
 exports.editProfile = async (userId, body) => {
+
+    const username = await User.findOne({ username: body.username });
+
+    if (!!username) {
+        throw new Error('Username already exists!');
+    }
 
     const result = await User.findByIdAndUpdate(userId, body, { returnDocument: 'after' });
 
