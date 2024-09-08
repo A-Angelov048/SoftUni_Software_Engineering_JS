@@ -73,7 +73,7 @@
     text-decoration: underline;
 }
 
-.container .error-container {
+.container .wrapper-user .error-container {
     display: flex;
     gap: 10px;
     align-items: flex-start;
@@ -84,14 +84,14 @@
     border-radius: 8px;
 }
 
-.container .error-container.position {
+.container .wrapper-user .error-container.position {
     position: relative;
     top: 15px;
     margin: auto;
     align-items: center;
 }
 
-.container .error-container.disappear-text {
+.container .wrapper-user .error-container.disappear-text {
     animation: fadeOut 4s forwards;
 }
 
@@ -106,15 +106,15 @@
     }
 }
 
-.container .error-container i {
+.container .wrapper-user .error-container i {
     color: #ef4444;
 }
 
-.container .error-container .error {
+.container .wrapper-user .error-container .error {
     color: #ef4444;
     font-weight: 600;
 }
 
-.container .error-container .error.bigger-font {
+.container .wrapper-user .error-container .error.bigger-font {
     font-size: 20px;
 }
