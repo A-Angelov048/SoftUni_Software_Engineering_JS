@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
         res.json(user);
 
     } catch (err) {
-        res.status(401).json({ message: err.message });
+        res.status(409).json({ message: err.message });
     }
 
 })
@@ -56,7 +56,7 @@ router.post('/edit-profile', async (req, res) => {
         res.json(editedProfile);
 
     } catch (err) {
-        console.log(err.errors);
+        res.status(409).json({ message: err.message });
     }
 
 })
