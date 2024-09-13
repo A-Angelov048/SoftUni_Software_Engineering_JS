@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    z-index: 100;
+    z-index: 1;
 }
 
 .header-section div .menu-container {
