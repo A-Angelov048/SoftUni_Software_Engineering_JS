@@ -79,5 +79,5 @@ async function generateToken(user) {
         location: user.location,
     }
 
-    return jwt.sign(payload, SECRET, { expiresIn: '1d' });
+    return jwt.sign(payload, SECRET, { expiresIn: '1h' });
 }
