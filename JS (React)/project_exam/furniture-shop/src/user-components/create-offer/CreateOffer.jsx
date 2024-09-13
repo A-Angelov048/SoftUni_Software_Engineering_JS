@@ -2,7 +2,7 @@ import '../UserForms.css'
 
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
-import { createFurnitureRequester } from '../../service/furnitureService';
+import { createFurnitureRequester } from '../../api-service/furnitureService';
 import { useState } from 'react';
 import { createFurnitureSchema } from '../../utils/schemaForm';
 

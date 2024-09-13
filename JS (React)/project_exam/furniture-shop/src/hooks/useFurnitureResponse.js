@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../service/furnitureService";
+import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../api-service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";

@@ -2,7 +2,7 @@ import '../UserForms.css'
 
 import { useContext, useState } from 'react';
 import { useForm } from '../../hooks/useForms';
-import { login } from '../../service/userService';
+import { login } from '../../api-service/userService';
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from '../../utils/schemaForm';

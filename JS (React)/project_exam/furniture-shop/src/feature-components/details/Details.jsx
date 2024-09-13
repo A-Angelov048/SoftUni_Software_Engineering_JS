@@ -7,7 +7,7 @@ import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 
 import { AuthContext } from '../../context/AuthContext';
 import { FurnitureContext } from '../../context/FurnitureContext';
-import { purchaseFurniture, removeFurniture, wishlist } from '../../service/furnitureService';
+import { purchaseFurniture, removeFurniture, wishlist } from '../../api-service/furnitureService';
 import { averageNumReviews } from '../../utils/averageNumReviews';
 import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
 

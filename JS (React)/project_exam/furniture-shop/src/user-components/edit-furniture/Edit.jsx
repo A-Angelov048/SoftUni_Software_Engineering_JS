@@ -3,7 +3,7 @@ import '../UserForms.css'
 
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
-import { editFurnitureRequester } from '../../service/furnitureService';
+import { editFurnitureRequester } from '../../api-service/furnitureService';
 import { useContext } from 'react';
 import { FurnitureContext } from '../../context/FurnitureContext';
 

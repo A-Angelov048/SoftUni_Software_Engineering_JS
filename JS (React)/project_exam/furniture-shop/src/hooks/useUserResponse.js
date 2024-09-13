@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getProfile } from "../service/userService";
+import { getProfile } from "../api-service/userService";
 import { AuthContext } from "../context/AuthContext";
 
 export function useGetProfile(profileId) {

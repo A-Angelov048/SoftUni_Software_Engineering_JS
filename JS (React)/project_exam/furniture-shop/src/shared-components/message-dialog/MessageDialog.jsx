@@ -1,6 +1,6 @@
 import "./MessageDialog.css";
 import { useNavigate, useParams } from 'react-router-dom';
-import { removeFurniture } from "../../service/furnitureService";
+import { removeFurniture } from "../../api-service/furnitureService";
 
 export default function MessageDialog({ onClose }) {
 

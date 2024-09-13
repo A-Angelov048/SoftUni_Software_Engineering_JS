@@ -2,7 +2,7 @@ import './Settings.css'
 
 import { useContext, useState } from 'react';
 import { useForm } from '../../../hooks/useForms';
-import { editProfile } from '../../../service/userService';
+import { editProfile } from '../../../api-service/userService';
 import { AuthContext } from '../../../context/AuthContext';
 import { profileSchema } from '../../../utils/schemaForm';
 

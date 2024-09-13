@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './Header.css'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
-import { logout } from '../../service/userService';
+import { logout } from '../../api-service/userService';
 
 export default function Header() {
 

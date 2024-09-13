@@ -7,7 +7,7 @@ import useReviews from '../../../hooks/useReviews';
 
 import { AuthContext } from '../../../context/AuthContext';
 import { FurnitureContext } from '../../../context/FurnitureContext';
-import { saveReview } from '../../../service/reviewsService';
+import { saveReview } from '../../../api-service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
 import { checkReview } from '../../../utils/checkReview';
 import { reviewSchema } from '../../../utils/schemaForm';

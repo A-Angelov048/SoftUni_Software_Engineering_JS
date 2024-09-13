@@ -2,7 +2,7 @@ import './Search.css'
 
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
 import { useForm } from '../../hooks/useForms';
-import { getSearchFurniture } from '../../service/furnitureService';
+import { getSearchFurniture } from '../../api-service/furnitureService';
 import { useSetFurniture } from '../../hooks/useFurnitureReducer';
 import { useRef, useState } from 'react';
 
