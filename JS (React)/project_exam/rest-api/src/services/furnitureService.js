@@ -97,7 +97,6 @@ exports.deleteFurniture = async (furnitureId, userId) => {
         await Furniture.findByIdAndDelete(furnitureId);
 
     } catch (error) {
-
         throw error;
     }
 }

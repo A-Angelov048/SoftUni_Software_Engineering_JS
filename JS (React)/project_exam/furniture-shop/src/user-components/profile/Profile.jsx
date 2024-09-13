@@ -1,6 +1,6 @@
 import './Profile.css'
 
-import { convertDate } from '../../utils/convertDate'
+import { convertDate } from '../../utils/convertDate';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useGetProfile } from '../../hooks/useUserResponse';
 import { useContext } from 'react';
@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 export default function Profile() {
 
-    const { userId } = useContext(AuthContext)
+    const { userId } = useContext(AuthContext);
     const { profileId } = useParams();
     const location = useLocation();
     const user = useGetProfile(profileId);

@@ -81,7 +81,7 @@ router.get('/profile/:id', async (req, res) => {
         }
 
         if (flag) {
-            sendUser.wishlist = user.wishlist
+            sendUser.wishlist = user.wishlist;
         }
 
         res.json(sendUser);

@@ -9,7 +9,7 @@ router.post('/save-review/:id', async (req, res) => {
         _id: req.user._id,
         username: req.user.username,
         imageProfile: req.user.imageProfile
-    }
+    };
     const furnitureId = req.params.id;
 
     try {

@@ -7,7 +7,7 @@ import { logout } from '../../api-service/userService';
 
 export default function Header() {
 
-    const { userId, changeAuthState } = useContext(AuthContext);
+    const { userId, changeAuthState, updateError } = useContext(AuthContext);
 
     const logoutUser = async () => {
 
@@ -15,6 +15,8 @@ export default function Header() {
             await logout();
             changeAuthState({});
         } catch (error) {
+            if (error.message === '403') return updateError(true);
+
             console.error(error.message);
         }
     }

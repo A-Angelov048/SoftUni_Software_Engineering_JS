@@ -1,4 +1,4 @@
-import './Reviews.css'
+import './Reviews.css';
 
 import { forwardRef, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -9,13 +9,12 @@ import { AuthContext } from '../../../context/AuthContext';
 import { FurnitureContext } from '../../../context/FurnitureContext';
 import { saveReview } from '../../../api-service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
-import { checkReview } from '../../../utils/checkReview';
 import { reviewSchema } from '../../../utils/schemaForm';
 
 const initialValues = {
     rating: '',
     review: ''
-}
+};
 
 export default forwardRef(function Reviews(props, ref) {
 
@@ -32,12 +31,11 @@ export default forwardRef(function Reviews(props, ref) {
             await reviewSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
-            const newError = {}
+            const newError = {};
 
             error.inner.forEach((err) => {
                 newError[err.path] = err.message;
             })
-            console.log(newError);
 
             setErrors(newError);
 
@@ -49,11 +47,13 @@ export default forwardRef(function Reviews(props, ref) {
             furnitureContext.updateArrayState(response, 'reviews');
 
         } catch (error) {
-            console.log(error.message);
+            if (error.message === '403') return user.updateError(true);
+
+            console.error(error.message);
         }
     }
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, subReview)
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, subReview);
 
     return (
         <section ref={ref} className="recent-reviews">
@@ -68,7 +68,8 @@ export default forwardRef(function Reviews(props, ref) {
                     <div className="wrapper-reviews">
 
                         {
-                            checkReview()
+                            // checkReview()
+                            true
 
                             &&
 

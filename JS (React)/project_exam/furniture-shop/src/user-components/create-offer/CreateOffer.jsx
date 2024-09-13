@@ -1,10 +1,11 @@
-import '../UserForms.css'
+import '../UserForms.css';
 
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { createFurnitureRequester } from '../../api-service/furnitureService';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { createFurnitureSchema } from '../../utils/schemaForm';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const initialValues = {
@@ -19,12 +20,13 @@ const initialValues = {
     imageUrl: '',
     price: '',
     description: '',
-}
+};
 
 export default function CreateOffer() {
 
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const { updateError } = useContext(AuthContext);
 
     const createFurniture = async (values) => {
 
@@ -32,7 +34,7 @@ export default function CreateOffer() {
             await createFurnitureSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
-            const newError = {}
+            const newError = {};
 
             error.inner.forEach((err) => {
                 newError[err.path] = err.message;
@@ -47,6 +49,8 @@ export default function CreateOffer() {
             await createFurnitureRequester(values);
             navigate('/shop');
         } catch (error) {
+            if (error.message === '403') return updateError(true);
+
             console.error(error.message);
         }
 

@@ -1,22 +1,23 @@
-import './Search.css'
+import './Search.css';
 
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
 import { useForm } from '../../hooks/useForms';
 import { getSearchFurniture } from '../../api-service/furnitureService';
 import { useSetFurniture } from '../../hooks/useFurnitureReducer';
-import { useRef, useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const initialValues = {
     name: '',
-}
+};
 
 export default function Search() {
 
     const [furniture, dispatch] = useSetFurniture();
     const [flagState, setFlagState] = useState(false);
-
-
+    const { updateError } = useContext(AuthContext);
+    
     const search = async (values) => {
 
         if (!values.name) return setFlagState(true);
@@ -32,6 +33,8 @@ export default function Search() {
 
             dispatch({ type: 'GET_FURNITURE', payload: response });
         } catch (error) {
+            if (error.message === '403') return updateError(true);
+
             console.error(error.message);
         }
 

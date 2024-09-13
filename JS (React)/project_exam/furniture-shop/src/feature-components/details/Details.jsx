@@ -1,19 +1,19 @@
-import './Details.css'
+import './Details.css';
 import Reviews from './reviews/Reviews';
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useContext, useRef, useState } from 'react';
 import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
 
 import { AuthContext } from '../../context/AuthContext';
 import { FurnitureContext } from '../../context/FurnitureContext';
-import { purchaseFurniture, removeFurniture, wishlist } from '../../api-service/furnitureService';
+import { purchaseFurniture, wishlist } from '../../api-service/furnitureService';
 import { averageNumReviews } from '../../utils/averageNumReviews';
 import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
 
 export default function Details() {
 
-    const { userId } = useContext(AuthContext);
+    const { userId, updateError } = useContext(AuthContext);
     const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
@@ -40,7 +40,9 @@ export default function Details() {
             await purchaseFurniture(furnitureId);
             updateArrayState(userId, 'buyList');
         } catch (error) {
-            console.log(error.message);
+            if (error.message === '403') return updateError(true);
+
+            console.error(error.message);
         }
 
     }
@@ -57,7 +59,9 @@ export default function Details() {
             }
 
         } catch (error) {
-            console.log(error.message);
+            if (error.message === '403') return updateError(true);
+
+            console.error(error.message);
         }
     }
 

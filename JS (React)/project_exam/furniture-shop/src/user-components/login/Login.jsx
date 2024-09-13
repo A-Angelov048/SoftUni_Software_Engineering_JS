@@ -16,7 +16,7 @@ const initialValues = {
 export default function Login() {
 
     const navigate = useNavigate();
-    const { changeAuthState } = useContext(AuthContext)
+    const { changeAuthState } = useContext(AuthContext);
     const [errors, setErrors] = useState({});
     const [showTextState, setShowText] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Login() {
             await loginSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
-            const newError = {}
+            const newError = {};
 
             error.inner.forEach((err) => {
                 newError[err.path] = err.message;
@@ -52,12 +52,12 @@ export default function Login() {
                 setShowText(false);
                 setErrors({});
 
-            }, 4000)
+            }, 4000);
 
         }
     }
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, getUser)
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, getUser);
 
     return (
         <section className="login-section layout-padding">

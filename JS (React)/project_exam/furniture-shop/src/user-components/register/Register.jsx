@@ -1,6 +1,6 @@
-import '../UserForms.css'
+import '../UserForms.css';
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { register } from '../../api-service/userService';
 import { useContext, useState } from 'react';
@@ -29,7 +29,7 @@ export default function Register() {
             await registerSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
-            const newError = {}
+            const newError = {};
 
             error.inner.forEach((err) => {
                 newError[err.path] = err.message;
@@ -54,7 +54,7 @@ export default function Register() {
                 setShowText(false);
                 setErrors({});
 
-            }, 4000)
+            }, 4000);
 
         }
 

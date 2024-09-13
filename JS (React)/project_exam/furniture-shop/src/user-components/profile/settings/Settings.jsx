@@ -1,4 +1,4 @@
-import './Settings.css'
+import './Settings.css';
 
 import { useContext, useState } from 'react';
 import { useForm } from '../../../hooks/useForms';
@@ -9,14 +9,14 @@ import { profileSchema } from '../../../utils/schemaForm';
 
 export default function Settings() {
 
-    const { imageProfile, username, location, changeAuthState } = useContext(AuthContext);
+    const { imageProfile, username, location, changeAuthState, updateError } = useContext(AuthContext);
     const [showTextState, setShowText] = useState(false);
 
     const initialValues = {
         imageProfile: imageProfile,
         username: username,
         location: location,
-    }
+    };
 
     const [errors, setErrors] = useState({});
 
@@ -27,7 +27,7 @@ export default function Settings() {
             await profileSchema.validate(values, { abortEarly: false });
         } catch (error) {
 
-            const newError = {}
+            const newError = {};
 
             error.inner.forEach((err) => {
                 newError[err.path] = err.message;
@@ -44,6 +44,8 @@ export default function Settings() {
             changeAuthState(result);
         } catch (error) {
 
+            if (error.message === '403') return updateError(true);
+
             setShowText(true);
             setErrors({ message: error.message });
 
@@ -52,14 +54,14 @@ export default function Settings() {
                 setShowText(false);
                 setErrors({});
 
-            }, 4000)
+            }, 4000);
 
         }
 
     }
 
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, changeUserInfo)
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, changeUserInfo);
 
     return (
 

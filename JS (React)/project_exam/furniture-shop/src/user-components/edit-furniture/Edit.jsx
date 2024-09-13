@@ -6,6 +6,7 @@ import { useForm } from '../../hooks/useForms';
 import { editFurnitureRequester } from '../../api-service/furnitureService';
 import { useContext } from 'react';
 import { FurnitureContext } from '../../context/FurnitureContext';
+import { AuthContext } from '../../context/AuthContext';
 
 
 
@@ -14,6 +15,7 @@ export default function Edit() {
     const navigate = useNavigate();
     const { furnitureId } = useParams();
     const furniture = useContext(FurnitureContext);
+    const { updateError } = useContext(AuthContext);
 
     const initialValues = {
         name: furniture.name,
@@ -27,14 +29,16 @@ export default function Edit() {
         imageUrl: furniture.imageUrl,
         price: furniture.price,
         description: furniture.description,
-    }
+    };
 
     const editFurniture = async (values) => {
 
         try {
-            await editFurnitureRequester(furnitureId ,values);
+            await editFurnitureRequester(furnitureId, values);
             navigate(`/details-furniture/${furnitureId}`);
         } catch (error) {
+            if (error.message === '403') return updateError(true);
+
             console.error(error.message);
         }
 
