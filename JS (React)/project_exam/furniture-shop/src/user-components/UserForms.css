@@ -73,7 +73,7 @@
     text-decoration: underline;
 }
 
-.container .wrapper-user .error-container {
+.layout-padding .container .error-container {
     display: flex;
     gap: 10px;
     align-items: flex-start;
@@ -84,14 +84,14 @@
     border-radius: 8px;
 }
 
-.container .wrapper-user .error-container.position {
+.layout-padding .container .error-container.position {
     position: relative;
     top: 15px;
     margin: auto;
     align-items: center;
 }
 
-.container .wrapper-user .error-container.disappear-text {
+.layout-padding .container .error-container.disappear-text {
     animation: fadeOut 4s forwards;
 }
 
@@ -106,15 +106,15 @@
     }
 }
 
-.container .wrapper-user .error-container i {
+.layout-padding .container .error-container i {
     color: #ef4444;
 }
 
-.container .wrapper-user .error-container .error {
+.layout-padding .container .error-container .error {
     color: #ef4444;
     font-weight: 600;
 }
 
-.container .wrapper-user .error-container .error.bigger-font {
+.layout-padding .container .error-container .error.bigger-font {
     font-size: 20px;
 }
