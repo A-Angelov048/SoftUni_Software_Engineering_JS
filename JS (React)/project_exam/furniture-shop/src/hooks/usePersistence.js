@@ -12,7 +12,7 @@ export default function usePersistence(initialValue) {
     });
 
     const updateState = (value) => {
-        sessionStorage.setItem('auth', JSON.stringify(value));
+        sessionStorage.setItem('auth', JSON.stringify(value._id ? { _id: value._id } : {}));
         setValue(value);
     }
 
