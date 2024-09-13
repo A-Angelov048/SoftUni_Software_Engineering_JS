@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
 import usePersistence from '../hooks/usePersistence';
 
 export const AuthContext = createContext();
@@ -6,9 +6,14 @@ export const AuthContext = createContext();
 export function ContextProvider(props) {
 
     const [authState, setAuthState] = usePersistence({});
+    const [errorState, setErrorState] = useState(false);
 
     const changeAuthState = (state) => {
         setAuthState(state);
+    }
+
+    const updateError = (state) => {
+        setErrorState(state);
     }
 
     const data = {
@@ -16,7 +21,9 @@ export function ContextProvider(props) {
         imageProfile: authState.imageProfile,
         username: authState.username,
         location: authState.location,
-        changeAuthState
+        error: errorState,
+        changeAuthState,
+        updateError,
     }
 
     return (
