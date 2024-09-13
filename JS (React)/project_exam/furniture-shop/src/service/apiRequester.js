@@ -29,10 +29,13 @@ async function request(method, url, data, abortController) {
         }
 
         if (!response.ok) {
+            
             if (response.status === 403) {
-                // delete user from localStorage
+                sessionStorage.removeItem('auth');
+                throw { message: response.status };
             }
-            throw result
+
+            throw result;
         }
 
         return result;
