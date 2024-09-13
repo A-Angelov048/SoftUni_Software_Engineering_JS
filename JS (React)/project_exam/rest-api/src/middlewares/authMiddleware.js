@@ -17,5 +17,6 @@ exports.auth = async (req, res, next) => {
 
     } catch (error) {
         res.clearCookie('auth');
+        res.status(403).json(error.message);
     }
 }
