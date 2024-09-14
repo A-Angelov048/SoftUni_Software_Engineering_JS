@@ -1,5 +1,5 @@
+require('dotenv').config();
 const jwt = require('../lib/jwt');
-const { SECRET } = require('../config/secret');
 
 exports.auth = async (req, res, next) => {
 
@@ -10,7 +10,7 @@ exports.auth = async (req, res, next) => {
 
     try {
 
-        const verifyToken = await jwt.verify(token, SECRET);
+        const verifyToken = await jwt.verify(token, process.env.SECRET);
         req.user = verifyToken;
         
         next();

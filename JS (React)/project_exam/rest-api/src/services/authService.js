@@ -1,6 +1,6 @@
+require('dotenv').config();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const { SECRET } = require('../config/secret');
 const jwt = require('../lib/jwt');
 
 
@@ -48,15 +48,15 @@ exports.getUser = async (body) => {
 
 exports.sendUser = async (token) => {
 
-    const user = await jwt.verify(token, SECRET);
+    const user = await jwt.verify(token, process.env.SECRET);
     return user;
 }
 
 exports.editProfile = async (userId, body) => {
 
     const username = await User.findOne({ username: body.username });
-
-    if (!!username) {
+    
+    if (!!username && username._id.valueOf() !== userId) {
         throw new Error('Username already exists!');
     }
 
@@ -79,5 +79,5 @@ async function generateToken(user) {
         location: user.location,
     };
 
-    return jwt.sign(payload, SECRET, { expiresIn: '1h' });
+    return jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
 }
