@@ -29,7 +29,7 @@ export default function MessageDialog({ onClose }) {
 
                 <header className="header-content" >
                     <h2>Message dialog</h2>
-                    <i class='bx bx-x' onClick={onClose}></i>
+                    <i className='bx bx-x' onClick={onClose}></i>
                 </header>
 
                 <p>Are you sure you want to delete this furniture?</p>

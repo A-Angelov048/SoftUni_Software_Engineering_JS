@@ -10,6 +10,7 @@ import { FurnitureContext } from '../../../context/FurnitureContext';
 import { saveReview } from '../../../api-service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
 import { reviewSchema } from '../../../utils/schemaForm';
+import { checkReview } from '../../../utils/checkReview';
 
 const initialValues = {
     rating: '',
@@ -68,8 +69,7 @@ export default forwardRef(function Reviews(props, ref) {
                     <div className="wrapper-reviews">
 
                         {
-                            // checkReview()
-                            true
+                            checkReview()
 
                             &&
 

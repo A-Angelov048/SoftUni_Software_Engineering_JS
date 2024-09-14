@@ -17,7 +17,7 @@ export default function Search() {
     const [furniture, dispatch] = useSetFurniture();
     const [flagState, setFlagState] = useState(false);
     const { updateError } = useContext(AuthContext);
-    
+
     const search = async (values) => {
 
         if (!values.name) return setFlagState(true);
@@ -63,7 +63,7 @@ export default function Search() {
                                     name="name"
                                     className="search-input"
                                     placeholder="Enter your search name"
-                                    value={values.name}
+                                    value={values.name.trim()}
                                     onChange={changeHandler}
                                 />
 
