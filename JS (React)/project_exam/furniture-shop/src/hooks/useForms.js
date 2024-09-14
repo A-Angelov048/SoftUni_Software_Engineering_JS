@@ -11,7 +11,7 @@ export function useForm(initialValues, submitCallBack) {
 
         setValues(oldValue => ({
             ...oldValue,
-            [name]: value.trim()
+            [name]: value
         }));
 
     };
