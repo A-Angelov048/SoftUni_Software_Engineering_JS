@@ -5,17 +5,21 @@ import { useForm } from '../../../hooks/useForms';
 import { editProfile } from '../../../api-service/userService';
 import { AuthContext } from '../../../context/AuthContext';
 import { profileSchema } from '../../../utils/schemaForm';
+import { useLocation } from 'react-router-dom';
 
 
 export default function Settings() {
 
-    const { imageProfile, username, location, changeAuthState, updateError } = useContext(AuthContext);
+    const location = useLocation();
+    const user = location.state;
+
+    const { changeAuthState, updateError } = useContext(AuthContext);
     const [showTextState, setShowText] = useState(false);
 
     const initialValues = {
-        imageProfile: imageProfile,
-        username: username,
-        location: location,
+        imageProfile: user.imageProfile || '',
+        username: user.username || '',
+        location: user.location || '',
     };
 
     const [errors, setErrors] = useState({});

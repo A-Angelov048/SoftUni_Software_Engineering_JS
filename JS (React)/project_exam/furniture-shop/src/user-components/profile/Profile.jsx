@@ -64,7 +64,7 @@ export default function Profile() {
                                             <Link to="wishlist" state={user.wishlist}>Wishlist</Link>
                                         </li>
                                         <li className={location.pathname == `/profile/${user._id}/settings` ? 'link active' : 'link'}>
-                                            <Link to="settings">Settings</Link>
+                                            <Link state={user} to="settings">Settings</Link>
                                         </li>
                                     </>
                                     :
