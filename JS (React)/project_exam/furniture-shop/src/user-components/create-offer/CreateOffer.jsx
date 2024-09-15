@@ -6,6 +6,7 @@ import { createFurnitureRequester } from '../../api-service/furnitureService';
 import { useContext, useState } from 'react';
 import { createFurnitureSchema } from '../../utils/schemaForm';
 import { AuthContext } from '../../context/AuthContext';
+import { trimValue } from '../../utils/trimValue';
 
 
 const initialValues = {
@@ -30,8 +31,10 @@ export default function CreateOffer() {
 
     const createFurniture = async (values) => {
 
+        const trimValues = trimValue(values);
+
         try {
-            await createFurnitureSchema.validate(values, { abortEarly: false });
+            await createFurnitureSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -46,7 +49,7 @@ export default function CreateOffer() {
         }
 
         try {
-            await createFurnitureRequester(values);
+            await createFurnitureRequester(trimValues);
             navigate('/shop');
         } catch (error) {
             if (error.message === '403') return updateError(true);

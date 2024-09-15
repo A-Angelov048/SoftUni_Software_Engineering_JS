@@ -6,6 +6,7 @@ import { register } from '../../api-service/userService';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { registerSchema } from '../../utils/schemaForm';
+import { trimValue } from '../../utils/trimValue';
 
 
 const initialValues = {
@@ -25,8 +26,10 @@ export default function Register() {
 
     const createUser = async (values) => {
 
+        const trimValues = trimValue(values);
+
         try {
-            await registerSchema.validate(values, { abortEarly: false });
+            await registerSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -41,7 +44,7 @@ export default function Register() {
         }
 
         try {
-            const result = await register(values);
+            const result = await register(trimValues);
             changeAuthState(result);
             navigate('/');
         } catch (error) {

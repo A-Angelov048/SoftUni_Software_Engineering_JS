@@ -4,9 +4,11 @@ import '../UserForms.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { editFurnitureRequester } from '../../api-service/furnitureService';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FurnitureContext } from '../../context/FurnitureContext';
 import { AuthContext } from '../../context/AuthContext';
+import { trimValue } from '../../utils/trimValue';
+import { createFurnitureSchema } from '../../utils/schemaForm';
 
 
 
@@ -16,6 +18,7 @@ export default function Edit() {
     const { furnitureId } = useParams();
     const furniture = useContext(FurnitureContext);
     const { updateError } = useContext(AuthContext);
+    const [errors, setErrors] = useState({});
 
     const initialValues = {
         name: furniture.name,
@@ -33,8 +36,25 @@ export default function Edit() {
 
     const editFurniture = async (values) => {
 
+        const trimValues = trimValue(values);
+
         try {
-            await editFurnitureRequester(furnitureId, values);
+            await createFurnitureSchema.validate(trimValues, { abortEarly: false });
+        } catch (error) {
+
+            const newError = {};
+
+            error.inner.forEach((err) => {
+                newError[err.path] = err.message;
+            })
+
+            setErrors(newError);
+
+            return;
+        }
+
+        try {
+            await editFurnitureRequester(furnitureId, trimValues);
             navigate(`/details-furniture/${furnitureId}`);
         } catch (error) {
             if (error.message === '403') return updateError(true);
@@ -71,6 +91,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('name') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.name}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -83,6 +110,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('category') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.category}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input type="number"
@@ -92,6 +126,13 @@ export default function Edit() {
                                     onChange={changeHandler}
                                 />
                             </div>
+
+                            {errors.hasOwnProperty('year') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.year}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -105,6 +146,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('materials') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.materials}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -116,6 +164,13 @@ export default function Edit() {
                                 />
 
                             </div>
+
+                            {errors.hasOwnProperty('color') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.color}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -129,6 +184,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('size') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.size}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -140,6 +202,13 @@ export default function Edit() {
                                 />
 
                             </div>
+
+                            {errors.hasOwnProperty('weight') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.weight}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -153,6 +222,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('condition') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.condition}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -164,6 +240,13 @@ export default function Edit() {
                                 />
 
                             </div>
+
+                            {errors.hasOwnProperty('imageUrl') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.imageUrl}</p>
+                                </div>
+                            }
 
                             <div className="input-box">
 
@@ -177,6 +260,13 @@ export default function Edit() {
 
                             </div>
 
+                            {errors.hasOwnProperty('price') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.price}</p>
+                                </div>
+                            }
+
                             <div className="input-box">
 
                                 <input
@@ -188,6 +278,13 @@ export default function Edit() {
                                 />
 
                             </div>
+
+                            {errors.hasOwnProperty('description') &&
+                                <div className='error-container'>
+                                    <i className='bx bxs-error-circle bx-tada' ></i>
+                                    <p className='error'>{errors.description}</p>
+                                </div>
+                            }
 
                             <button type="submit" className="btn">Edit</button>
 

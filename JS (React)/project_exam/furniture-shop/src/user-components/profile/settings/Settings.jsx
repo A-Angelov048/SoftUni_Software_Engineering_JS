@@ -6,6 +6,7 @@ import { editProfile } from '../../../api-service/userService';
 import { AuthContext } from '../../../context/AuthContext';
 import { profileSchema } from '../../../utils/schemaForm';
 import { useLocation } from 'react-router-dom';
+import { trimValue } from '../../../utils/trimValue';
 
 
 export default function Settings() {
@@ -27,8 +28,10 @@ export default function Settings() {
 
     const changeUserInfo = async (values) => {
 
+        const trimValues = trimValue(values);
+
         try {
-            await profileSchema.validate(values, { abortEarly: false });
+            await profileSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -43,7 +46,7 @@ export default function Settings() {
         }
 
         try {
-            const result = await editProfile(values);
+            const result = await editProfile(trimValues);
             setErrors({});
             changeAuthState(result);
         } catch (error) {

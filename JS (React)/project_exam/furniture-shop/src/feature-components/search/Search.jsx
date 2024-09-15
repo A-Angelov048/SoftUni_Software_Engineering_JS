@@ -6,6 +6,7 @@ import { getSearchFurniture } from '../../api-service/furnitureService';
 import { useSetFurniture } from '../../hooks/useFurnitureReducer';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { trimValue } from '../../utils/trimValue';
 
 
 const initialValues = {
@@ -22,8 +23,10 @@ export default function Search() {
 
         if (!values.name) return setFlagState(true);
 
+        const trimValues = trimValue(values);
+
         try {
-            const response = await getSearchFurniture(values);
+            const response = await getSearchFurniture(trimValues);
 
             if (response.length === 0) {
                 setFlagState(true);
@@ -63,7 +66,7 @@ export default function Search() {
                                     name="name"
                                     className="search-input"
                                     placeholder="Enter your search name"
-                                    value={values.name.trim()}
+                                    value={values.name}
                                     onChange={changeHandler}
                                 />
 

@@ -11,6 +11,7 @@ import { saveReview } from '../../../api-service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
 import { reviewSchema } from '../../../utils/schemaForm';
 import { checkReview } from '../../../utils/checkReview';
+import { trimValue } from '../../../utils/trimValue';
 
 const initialValues = {
     rating: '',
@@ -28,8 +29,10 @@ export default forwardRef(function Reviews(props, ref) {
 
     const subReview = async (values) => {
 
+        const trimValues = trimValue(values);
+
         try {
-            await reviewSchema.validate(values, { abortEarly: false });
+            await reviewSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -44,7 +47,7 @@ export default forwardRef(function Reviews(props, ref) {
         }
 
         try {
-            const response = await saveReview(values, furnitureId);
+            const response = await saveReview(trimValues, furnitureId);
             furnitureContext.updateArrayState(response, 'reviews');
 
         } catch (error) {
