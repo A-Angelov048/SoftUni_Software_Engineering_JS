@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
         const token = await createUser(body);
         const user = await sendUser(token);
 
-        res.cookie('auth', token, { httpOnly: true });
+        res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true });
         res.json(user);
 
     } catch (err) {
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
         const token = await getUser(body);
         const user = await sendUser(token);
 
-        res.cookie('auth', token, { httpOnly: true });
+        res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true });
         res.json(user);
 
     } catch (err) {
@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     //ToDo make validation of the token
-    res.clearCookie('auth');
+    res.clearCookie('auth', { httpOnly: true, sameSite: 'none', secure: true });
     res.json({ ok: true });
 })
 

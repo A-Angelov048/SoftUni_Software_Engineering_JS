@@ -12,11 +12,11 @@ exports.auth = async (req, res, next) => {
 
         const verifyToken = await jwt.verify(token, process.env.SECRET);
         req.user = verifyToken;
-        
+
         next();
 
     } catch (error) {
-        res.clearCookie('auth');
+        res.clearCookie('auth', { httpOnly: true, sameSite: 'none', secure: true });
         res.status(403).json(error.message);
     }
 }
