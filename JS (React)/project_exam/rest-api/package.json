@@ -2,9 +2,10 @@
   "name": "skeleton",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "deploy": "firebase deploy --only functions:api"
   },
   "author": "",
   "license": "ISC",
@@ -17,8 +18,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.2",
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^6.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2"
+  },
+  "engines": {
+    "node": "20"
   }
 }

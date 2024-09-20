@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "deploy-furniture-shop-123"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
