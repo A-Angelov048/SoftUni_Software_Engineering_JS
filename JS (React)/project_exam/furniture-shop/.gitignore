@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vite environment variables file
+.env
+.env.development
+.env.production
