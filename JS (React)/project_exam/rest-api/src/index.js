@@ -1,22 +1,45 @@
+const functions = require('firebase-functions');
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
+const dotenv = require('dotenv');
 
 const expressConfig = require('./config/expressConfig');
 const router = require('./router');
+const localServerStart = require('./localApi');
+
+
+functions.setGlobalOptions({
+    region: 'europe-west2'
+});
+
+switch (process.env.GCLOUD_PROJECT) {
+    case 'deploy-furniture-shop-123':
+        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.furniture-shop') });
+        break;
+
+    default:
+        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.dev') });
+        break;
+}
+
 
 const app = express();
-const port = process.env.PORT || 3000;
 const connection = process.env.DATABASE_URL;
+const originUrl = process.env.ORIGIN_URL;
 
-expressConfig(app);
+expressConfig(app, originUrl);
 app.use(router);
 
 mongoose.connect(connection)
     .then(() => {
-
         console.log('DB Connected.');
 
-        app.listen(port, () => console.log(`Express server running on port: ${port}. You can make requests to http://localhost:${port}`));
+        if (process.env.NODE_ENV === 'development') {
+            return localServerStart(app);
+        }
+
     })
-    .catch(err => console.log(err.message));
+    .catch(err => console.error(err.message));
+
+exports.api = functions.https.onRequest(app);
