@@ -110,9 +110,9 @@ router.get('/wishlist/:id', async (req, res) => {
     const userId = req.user._id;
 
     try {
-
-        const response = await wishlistFurniture(furnitureId, userId);
-        res.json({ check: response });
+        
+        await wishlistFurniture(furnitureId, userId);
+        res.json({ ok: true });
 
     } catch (err) {
         console.log(err.errors);

@@ -50,13 +50,9 @@ export default function Details() {
     async function updateWishlist() {
 
         try {
-            const response = await wishlist(furnitureId);
+            await wishlist(furnitureId);
 
-            if (response.check) {
-                handleUserLikes(userId);
-            } else {
-                handleUserLikes(userId);
-            }
+            handleUserLikes(userId);
 
         } catch (error) {
             if (error.message === '403') return updateError(true);
