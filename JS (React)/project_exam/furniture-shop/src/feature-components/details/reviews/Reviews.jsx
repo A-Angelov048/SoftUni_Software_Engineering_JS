@@ -47,6 +47,7 @@ export default forwardRef(function Reviews(props, ref) {
         }
 
         try {
+
             const response = await saveReview(trimValues, furnitureId);
             furnitureContext.updateArrayState(response, 'reviews');
 
@@ -148,11 +149,11 @@ export default forwardRef(function Reviews(props, ref) {
                                 <div className="center">
                                     <div className="profile">
                                         <img alt=""
-                                            src={review.owner.imageProfile ? review.owner.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
+                                            src={review.ownerReview.imageProfile ? review.ownerReview.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
                                     </div>
 
                                     <header>
-                                        <h3>{review.owner.username}</h3>
+                                        <h3>{review.ownerReview.username}</h3>
                                         <p>{convertDateToString(review.createdAt)}</p>
                                     </header>
                                 </div>

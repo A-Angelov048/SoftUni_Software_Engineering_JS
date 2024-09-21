@@ -14,7 +14,7 @@ export function checkReview() {
     }
 
     furnitureContext.reviews?.forEach(x => {
-        if (x.owner._id === user.userId) {
+        if (x.ownerReview._id === user.userId) {
             flag = false;
         }
     })
