@@ -20,7 +20,9 @@ exports.createFurniture = async (body, userId) => {
 
 };
 
-exports.getOne = (furnitureId) => Furniture.findById(furnitureId).populate({ path: 'owner', select: 'username imageProfile' }).populate('reviews');
+exports.getOne = (furnitureId) => Furniture.findById(furnitureId)
+    .populate({ path: 'owner', select: 'username imageProfile' })
+    .populate({ path: 'reviews', populate: { path: 'ownerReview', select: 'username imageProfile' } });
 
 exports.buyFurniture = async (furnitureId, userId) => {
 
