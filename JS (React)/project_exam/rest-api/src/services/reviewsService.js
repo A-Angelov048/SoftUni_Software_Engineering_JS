@@ -9,6 +9,8 @@ exports.createReview = async (body, furnitureId) => {
 
         const result = await Reviews.create(body);
         
+        await result.populate({ path: 'ownerReview', select: 'username imageProfile' });
+
         await Furniture.findByIdAndUpdate(furnitureId, { $push: { reviews: result._id } });
 
         return result;
