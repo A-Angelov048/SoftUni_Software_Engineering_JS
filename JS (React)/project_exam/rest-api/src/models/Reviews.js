@@ -11,8 +11,9 @@ const reviewsSchema = new mongoose.Schema({
         required: true,
         minLength: [8, 'Review should be at least 8 characters long.'],
     },
-    owner: {
-        type: Object,
+    ownerReview: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
     },
     createdAt: {
         type: Date,
