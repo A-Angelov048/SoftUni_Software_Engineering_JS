@@ -44,6 +44,12 @@ function App() {
 
           <Route element={<GuestGuard />}>
             <Route path="/create-offer" element={<CreateOffer />} />
+            <Route path="/profile/:profileId" element={<Profile />} >
+              <Route path="my-furniture" element={<BrandContainer />} />
+              <Route path="wishlist" element={<BrandContainer />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="sales" element={<BrandContainer />} />
+            </Route >
           </Route>
 
           <Route element={<FurnitureContextProvider />}>
@@ -52,13 +58,6 @@ function App() {
               <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
             </Route>
           </Route>
-
-          <Route path="/profile/:profileId" element={<Profile />} >
-            <Route path="my-furniture" element={<BrandContainer />} />
-            <Route path="wishlist" element={<BrandContainer />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="sales" element={<BrandContainer />} />
-          </Route >
 
           <Route path="*" element={<NotFound />} />
 
