@@ -16,7 +16,7 @@ The current application is designed for buying and selling furniture. It include
 
 3. **Search page:**
 
-   - **The search page allows users to search for different furniture offers by name (e.g., chairs).**
+   - **The search page allows users to search for different furniture offers by name (e.g. chairs).**
    - **Accessible to both guest users and logged-in users**
   
 4. **Register & Login:**
@@ -31,7 +31,7 @@ The current application is designed for buying and selling furniture. It include
   
 6. **User profile page:**
 
-   - **On the profile page, we can find information about the logged-in user. The logged-in user will be able to view the offers they have created for selling furniture, the furniture they have liked, and update some of          their profile information. Additionally, they will be able to navigate to other users' profiles and will have the ability to view only the offers created by them for selling furniture.**
+   - **On the profile page, we can find information about the logged-in user. The logged-in user will be able to view the offers they have created for selling furniture, the furniture they have liked, and update some of          their profile information. Additionally, they will be able to navigate to other users profile and will have the ability to view only the offers created by them for selling furniture.**
    - **Accessible to logged-in users**
   
 7. **Details Furniture page:**
