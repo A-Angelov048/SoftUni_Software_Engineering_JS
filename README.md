@@ -13,3 +13,5 @@
 | [✔️ JS Applications](https://softuni.bg/certificates/details/195374/d6672e5a) |
 | [✔️ JS Back-End](https://softuni.bg/certificates/details/204908/ba814390) |
 | [✔️ Angular](https://softuni.bg/certificates/details/212752/ee71b1bd) |
+| [✔️ HTML & CSS](https://softuni.bg/certificates/details/218535/94f4b382) |
+| [✔️ React](https://softuni.bg/certificates/details/223125/7e1e6c66) |
