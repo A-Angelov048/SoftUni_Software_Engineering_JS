@@ -1,4 +1,5 @@
-require('dotenv').config({ path: '.env.development' });
+require('dotenv').config({ path: path.resolve(__dirname, '../environments/.env.dev') });
+
 
 function localServerStart(app) {
 
