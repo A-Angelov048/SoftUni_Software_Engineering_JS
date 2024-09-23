@@ -47,13 +47,15 @@ The current application is designed for buying and selling furniture. It include
 ## How to run the React app:
 1. `create environment for developer and production` - VITE_API_URL
 2. `npm install` - installing node_modules
-3. `npm run dev` - localhost
-4. `npm run build` - production build of your app (it's not required.)
-5. `npm run deploy` - firebase host (it's not required.)
+3. `npm run start` - starts localhost
+4. `configured Firebase settings.` - (it's not required.)
+5. `npm run build` - production build of your app (it's not required.)
+6. `npm run deploy` - firebase host (it's not required.)
 
 ## Upcoming features to the app:
 
 - **Pagination for the shop page**
+- **Responsive design**
 - **Multiple images for the details furniture page**
 - **When creating an offer, set the quantity**
 - **View purchased furniture on the profile page and leave a review after purchase.**
