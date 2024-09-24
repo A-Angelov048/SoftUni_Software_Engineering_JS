@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font: 16px/1.5 Gochi Hand, sans-serif;
+}
+
+body {
+    background-color: #E0E0E0;
+    margin-top: 2em;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.wrapper section {
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.wrapper section .image img {
+    padding: 1.5em;
+    border-top-left-radius: 3em;
+    border-top-right-radius: 3em;
+}
+
+.wrapper header {
+    position: absolute;
+    top: 25em;
+    background-color: #F9F9F9;
+    margin: 0em 3.5em;
+    padding: 1em;
+    text-align: center;
+    border-radius: 0.6em;
+}
+
+.wrapper header h2{
+    font-size: 1.6em;
+    margin-bottom: 0.3em;
+}
+
+.wrapper header p {
+    font-size: 1.1em;
+    line-height: 1em;
+    color: #6F6666;
+}
+
+.wrapper .send-to {
+    background-color: #F9F9F9;
+    border-top: 1px solid #CCCCCC;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    padding: 1.5em 2.5em;
+}
+
+.wrapper .send-to h3 {
+    margin-bottom: 1em;
+}
+
+.wrapper .send-to p {
+    line-height: 2em;
+}

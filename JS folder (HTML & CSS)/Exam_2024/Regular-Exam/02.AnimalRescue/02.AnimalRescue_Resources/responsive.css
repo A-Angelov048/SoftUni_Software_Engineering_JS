@@ -1,0 +1,37 @@
+@media (max-width: 600px) {
+
+    header nav {
+        display: block;
+        text-align: center;
+    }
+
+    .header-title {
+        padding: 1em 0;
+    }
+
+    .header-title h1 {
+        padding: 0;
+    }
+
+    .our-dogs-wrapper {
+        width: auto;
+    }
+
+    .our-dogs ul {
+        margin: 0em 4em;
+    }
+
+    .our-dogs ul li img{
+        width: 200px;
+        height: 200px;
+    }
+
+    .our-dogs ul li > p:nth-child(2){
+        padding-bottom: 0.5em;
+    }
+
+    .helpNeed ul{
+        flex-direction: column;
+    }
+
+}

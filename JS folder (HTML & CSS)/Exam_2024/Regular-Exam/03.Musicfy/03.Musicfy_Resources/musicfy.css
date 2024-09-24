@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font: 16px/1.5 Montserrat, sans-serif;
+    color: #fff;
+}
+
+body,
+button,
+a,
+p {
+    font: inherit;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+}
+
+.nav-bar .image img {
+    width: 10%;
+}
+
+.nav-bar ul {
+    display: flex;
+}
+
+.nav-bar ul li {
+    display: block;
+    list-style-type: none;
+    padding-right: 2em;
+}
+
+
+
+
+
+.plans {
+    background-image: url('./images/music.png');
+    background-size: 45% 80%;
+    background-repeat: no-repeat;
+    background-position: left top 35px;
+}
+
+.plans .main-header {
+    position: relative;
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 14em;
+    background-color: #1DB954;
+    z-index: -1;
+}
+
+.plans .plans-content {
+    position: relative;
+    top: -13em;
+    display: flex;
+    justify-content: center;
+    gap: 15em;
+    margin: 1em 2em;
+    margin-bottom: 0;
+}
+
+.plans .plans-content .wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.plans .plans-content .wrapper article {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 485px;
+    background-color: #fff;
+    text-align: center;
+    border: 2px solid transparent;
+    border-top-left-radius: 0.8em;
+    border-top-right-radius: 0.8em;
+    padding: 0 3.5em;
+    padding-top: 1.5em;
+    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.3);
+}
+
+.plans .plans-content .wrapper article header {
+    flex: 1 0 auto;
+    margin-bottom: 1em;
+    text-align: center;
+    color: #54546D;
+}
+
+.plans .plans-content .wrapper article ul li {
+    text-align: left;
+    padding-bottom: 0.5em;
+    list-style-type: circle;
+    color: #54546D;
+}
+
+.plans .plans-content .wrapper article button {
+    max-width: max-content;
+    margin: 1.5em auto;
+    padding: 0.5em 3em;
+    background-color: #1DB954;
+    color: inherit;
+    border-color: transparent;
+    border-radius: 2em;
+    font-weight: bold;
+}
+
+.plans .plans-content .wrapper .price {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #000000;
+    border-bottom-left-radius: 0.8em;
+    border-bottom-right-radius: 0.8em;
+}
+
+.plans .plans-content .wrapper .price p {
+    text-align: center;
+    padding: 0.8em;
+    font-size: 1.2em;
+}
+
+.plans .plans-content .wrapper .price hr {
+    position: relative;
+    margin: 0.6em;
+}
+
+.plans .plans-content .wrapper .one-price {
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+.pay {
+    padding: 0em 5em 0em 5em;
+    margin-top: -5em;
+}
+
+.pay .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+}
+
+.pay .wrapper .content-pay {
+    width: 88.5ch;
+}
+
+.pay .wrapper .content-pay h3 {
+    font-size: 1.4em;
+    white-space: nowrap;
+    margin-bottom: 1em;
+}
+
+.pay .wrapper .content-pay p {
+    margin-top: 1em;
+}
+
+.pay .wrapper .image img {
+    width: 70%;
+}
+
+
+
+
+
+
+
+
+
+.experience {
+    margin: 3em 0 5em 0;
+    color: #000;
+}
+
+.experience header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.experience header h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.experience .experience-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #CCCBCB;
+    border-radius: 0.5em;
+}
+
+.experience .experience-content p {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.experience .experience-content p:nth-child(even) {
+    background-color: #81D8A0;
+    border-radius: 0.5em;
+}
+
+
+.experience .experience-content p::before {
+    position: absolute;
+    right: 40em;
+    content: '';
+    width: 1.1em;
+    height: 1.1em;
+    background: url('./images/check.svg') no-repeat center center/cover;
+}
+
+.experience .experience-content p::after {
+    position: absolute;
+    right: 30em;
+    content: '';
+    width: 1.1em;
+    height: 1.1em;
+    background: url('./images/cross.svg') no-repeat center center/cover;
+}
+
+
+
+
+
+
+
+
+footer {
+    background-color: #000;
+    padding: 1.5em;
+    text-align: center;
+}
