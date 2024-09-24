@@ -1,0 +1,26 @@
+body {
+    font-family: Lato, sans-serif;
+    margin: 2em;
+}
+
+.socials li {
+    display: inline-block;
+    margin: 0.5em;
+    margin-left: 0;
+}
+
+.socials li a {
+    display: block;
+    width: 3em;
+    font-size: 1.5em;
+    line-height: 3em;
+    aspect-ratio: 1/1;
+    text-align: center;
+    background-color: #eee;
+    border-radius: 50%;
+    color: #000;
+}
+
+.socials li a:hover {
+    background-color: darkorange;
+}

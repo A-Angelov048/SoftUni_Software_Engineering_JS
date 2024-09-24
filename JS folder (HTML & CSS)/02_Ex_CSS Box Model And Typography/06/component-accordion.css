@@ -1,0 +1,44 @@
+html {
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    margin: 2em;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0em auto;
+}
+
+details {
+    border: 2px solid #eee;
+    padding: 1em;
+}
+
+details:not(:last-of-type) {
+    border-bottom: none;
+}
+
+details summary {
+    display: block;
+    width: max-content;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+details summary::before {
+    display: inline-block;
+    margin-right: 0.5em;
+    content: '> ';
+}
+
+details[open]>summary::before {
+    content: '^ ';
+    transform: rotate(180deg);
+}
+
+
+details p {
+    margin: 1em;
+}

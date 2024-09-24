@@ -1,0 +1,33 @@
+body {
+    margin: 40px;
+}
+
+div{
+    border: 2px solid green;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+p{
+    margin: 30px 16px;
+}
+
+.font-family {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-size {
+    font-size: 24px;
+}
+
+.font-weight {
+    font-weight: bold;
+}
+
+.font-style {
+    font-style: italic;
+}
+
+.font-variant {
+    font-variant: small-caps;
+}

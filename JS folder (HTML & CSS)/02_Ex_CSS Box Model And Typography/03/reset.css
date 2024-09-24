@@ -1,0 +1,16 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font: 16px/1.5 Lato, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}

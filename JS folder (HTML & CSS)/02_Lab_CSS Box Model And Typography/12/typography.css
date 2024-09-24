@@ -1,0 +1,81 @@
+
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 0em 2em;
+}
+
+p,
+ul,
+ol {
+    padding-bottom: 1.5rem;
+}
+
+ul,
+ol {
+    margin-left: 1em;
+    padding-left: 1.5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+hr {
+    margin: 30px 5px;
+    border-width: 2px;
+}
+
+li ul {
+    padding-bottom: 0rem;
+}
+
+blockquote {
+    margin: 1.5em;
+    margin-top: 0em;
+    border-left: 5px solid green;
+    padding-left: 2em;
+    font-style: italic;
+}
+
+blockquote .author {
+    font-weight: bold;
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    letter-spacing: 1px;
+    margin-bottom: 1.5em;
+}
+
+thead {
+    background-color: rgb(160 160 160);
+    text-align: left;
+}
+
+th,
+td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+}
+
+tbody>tr:nth-of-type(odd) {
+    background-color: rgb(168, 168, 184, 0.4);
+}
+

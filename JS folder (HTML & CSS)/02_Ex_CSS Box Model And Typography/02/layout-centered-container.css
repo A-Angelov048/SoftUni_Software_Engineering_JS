@@ -1,0 +1,20 @@
+body {
+    border: 2px solid green;
+}
+
+.container {
+    max-width: 900px;
+    margin: 2em auto;
+    border: 2px solid blue;
+}
+
+.container header,
+.container main,
+.container footer {
+    border: 2px solid black;
+    padding: 2em;
+    margin: 2em;
+    text-align: center;
+    font-weight: bold;
+    background-color: lightgray;
+}

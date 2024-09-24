@@ -1,0 +1,20 @@
+body {
+    border: 2px solid green;
+}
+
+div {
+    border: 2px solid black;
+    margin: 2em;
+    padding: 2em;
+}
+
+div header,
+div section,
+div article,
+div footer {
+    max-width: 900px;
+    margin: 0em auto;
+    padding: 2em;
+    border: 2px solid blue;
+    background-color: lightgray;
+}

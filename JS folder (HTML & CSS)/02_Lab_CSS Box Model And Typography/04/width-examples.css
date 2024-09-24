@@ -1,0 +1,29 @@
+body {
+    margin: 40px;
+}
+
+div {
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+p{
+    margin: 16px;
+}
+
+.fixed {
+    width: 300px;
+}
+
+.percent {
+    width: 50%;
+}
+
+.viewport {
+    width: 50vw;
+}
+
+.min-max {
+    min-width: 100px;
+    max-width: 300px;
+}

@@ -1,0 +1,25 @@
+body {
+    margin: 40px;
+}
+
+div {
+    width: 350px;
+    height: 140px;
+    border: 2px solid black;
+}
+
+p{
+    margin: 16px;
+}
+
+.visible {
+    overflow: visible;
+}
+
+.hidden {
+    overflow: hidden;
+}
+
+.scroll{
+    overflow: scroll;
+}

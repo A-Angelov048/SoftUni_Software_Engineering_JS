@@ -1,0 +1,63 @@
+html {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+}
+
+body {
+    margin: 2em;
+}
+
+h3 {
+    font-weight: 800;
+    font-size: 1.4rem;
+    width: fit-content;
+}
+
+.link a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+}
+
+.button button {
+    cursor: pointer;
+    font: inherit;
+}
+
+a>i,
+button>i {
+    margin-right: 0.3em;
+}
+
+a,
+button {
+    padding: 1em 1.5em;
+    border: 1px solid #D8D8D8;
+    border-radius: 4px;
+}
+
+a+a,button+button{
+    margin: 1.5em 0em 1.5em 1em;
+}
+
+.first-button,
+.fifth-button,
+.first-link,
+.fifth-link {
+    background-color: #D8D8D8;
+}
+
+.second-button,
+.second-link {
+    background-color: #FF9B00;
+}
+
+.third-button,
+.third-link {
+    background-color: #F9F9CC;
+}
+
+.fourth-button,
+.fourth-link {
+    background-color: #fff;
+}

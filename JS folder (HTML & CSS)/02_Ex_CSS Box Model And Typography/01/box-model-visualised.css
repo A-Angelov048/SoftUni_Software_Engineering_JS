@@ -1,0 +1,49 @@
+.box-model {
+    max-width: 600px;
+    margin: 4em auto;
+}
+
+.box-model div {
+    border: 1px dashed black;
+    padding: 2.2em;
+    padding-top: 1.1em;
+}
+
+.box-model div::before {
+    position: relative;
+    bottom: 1.1em;
+    right: 1.5em;
+}
+
+.box-model .content {
+    padding: 1em;
+    text-align: center;
+    background-color: #A3D2E2;
+}
+
+.padding {
+    background-color: #85EB85;
+}
+
+.padding::before {
+    content: 'padding';
+    position: relative;
+}
+
+.border {
+    background-color: #FFE8C6;
+}
+
+.border::before {
+    content: 'border';
+    position: relative;
+}
+
+.margin {
+    background-color: #FF966F;
+}
+
+.margin::before {
+    content: 'margin';
+    position: relative;
+}
