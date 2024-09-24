@@ -1,0 +1,30 @@
+
+
+h1 {
+    color: red;
+}
+
+p {
+    font-size: 2em;
+}
+
+ul{
+    list-style-type: square;
+}
+
+li {
+    color: gray;
+}
+
+.highlight{
+    background-color: orangered;
+}
+
+#second-title{
+    color: aqua;
+}
+
+#special-paragraph{
+    font-style: italic;
+    font-weight: 700;
+}

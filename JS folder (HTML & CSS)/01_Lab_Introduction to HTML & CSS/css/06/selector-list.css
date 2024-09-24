@@ -1,0 +1,29 @@
+body {
+    margin: 20px;
+}
+
+header a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+header a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+h1,
+h2,
+p {
+    font-family: 'Courier New', Courier, monospace;
+    color: green;
+}
+
+header,
+section,
+footer {
+    padding: 15px;
+    border: 0.2em solid gray;
+    margin-bottom: 20px;
+}

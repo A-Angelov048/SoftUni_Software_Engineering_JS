@@ -1,0 +1,8 @@
+body {
+    margin: 30px;
+    background-color: #f0f2f5;
+}
+
+section.done ol li {
+    text-decoration: line-through;
+}

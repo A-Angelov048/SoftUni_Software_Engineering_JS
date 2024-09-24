@@ -1,0 +1,20 @@
+body {
+    margin: 40px;
+    background-color: gray;
+}
+
+div ul {
+    padding: 0;
+    margin: 0;
+}
+
+div ul li {
+    display: inline;
+    list-style-type: none;
+}
+
+div ul li img {
+    max-width: 300px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}

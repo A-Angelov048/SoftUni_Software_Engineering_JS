@@ -1,0 +1,39 @@
+.container {
+    margin: 20px;
+    padding: 20px;
+    border: 2px dotted red;
+}
+
+p.lighted {
+    color: orange;
+    font-size: larger;
+}
+
+div#special {
+    background-color: green;
+    padding: 2em;
+}
+
+ul>li#itemOne {
+    padding-bottom: 1em;
+    color: blue;
+}
+
+li+li#itemThree {
+    padding-top: 1em;
+    color: red;
+}
+
+[href^="https"].fancyLink {
+
+    border: 0.2em dashed blue;
+}
+
+p.one {
+    color: green;
+}
+
+p.two {
+    font-weight: bold;
+    font-size: xx-large;
+}

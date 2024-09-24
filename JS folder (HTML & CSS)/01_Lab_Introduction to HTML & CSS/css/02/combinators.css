@@ -1,0 +1,20 @@
+div p {
+    color: green;
+}
+
+ul>li {
+    font-style: italic;
+    list-style-type: lower-greek
+}
+
+p>span {
+    color: red;
+}
+
+p+p {
+    background-color: yellow;
+}
+
+p~span {
+    font-weight: 700;
+}

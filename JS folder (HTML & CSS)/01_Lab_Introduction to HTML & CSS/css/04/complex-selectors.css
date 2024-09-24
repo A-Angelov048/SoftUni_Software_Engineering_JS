@@ -1,0 +1,58 @@
+body {
+    border: 0.5em solid gray;
+    padding: 20px;
+}
+
+nav ul li a {
+    color: darkorange;
+    font-style: italic;
+}
+
+nav ul li {
+    list-style-type: circle;
+}
+
+nav ul li a.services {
+    color: darkgoldenrod;
+    font-weight: bold;
+    font-size: larger;
+}
+
+nav>ul>li#special {
+    list-style-type: armenian;
+    color: darkgoldenrod;
+}
+
+header+section>h1.h1 {
+    font-size: xx-large;
+    color: green;
+    font-style: italic;
+}
+
+section>h1~.bestArticle {
+    background-color: aqua;
+}
+
+ul>li>[alt="animal"] {
+    border: 1em solid red;
+}
+
+footer div p:last-child {
+    font-style: italic;
+    background-color: aqua;
+    color: yellow;
+}
+
+footer>p:first-child {
+    color: red;
+}
+
+section>h1::after {
+    content: ' >>';
+    color: yellowgreen;
+}
+
+section>h1::before {
+    content: '<< ';
+    color: yellowgreen;
+}

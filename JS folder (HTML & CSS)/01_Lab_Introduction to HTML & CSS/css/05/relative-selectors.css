@@ -1,0 +1,26 @@
+body {
+    border: 0.5em groove green;
+    margin: 20px;
+    padding: 20px;
+}
+
+section p#different {
+    color: pink;
+}
+
+div>ul>li:nth-of-type(odd) {
+    color: red;
+}
+
+section article.light+article {
+    background-color: blueviolet;
+}
+
+section.sibling>h2~p {
+    font-weight: bold;
+    color: gold;
+}
+
+div ul>li+li>a.special {
+    color: springgreen;
+}

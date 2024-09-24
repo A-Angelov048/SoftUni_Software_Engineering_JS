@@ -1,0 +1,17 @@
+body {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+
+article header p{
+    color: green;
+}
+
+article header p>time {
+    font-style: italic;
+}
+
+article header~p {
+    font-weight: bold;
+}
