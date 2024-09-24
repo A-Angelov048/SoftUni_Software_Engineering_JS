@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font: 16px/1.5 Kode Mono, sans-serif;
+}
+
+body,
+input,
+label {
+    font: inherit;
+}
+
+body {
+    background-color: #C1BDBA;
+    padding: 2em;
+}
+
+.container {
+    max-width: 500px;
+    background-color: #24333C;
+    margin: 0 auto;
+    padding: 2em;
+    color: #fff;
+    border-radius: 0.3em;
+    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.2);
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5em;
+}
+
+.links a {
+    padding: 1em 2em;
+    background-color: #1AB188;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.links .hover {
+    background-color: #435359;
+    color: #95A5A3;
+}
+
+.links .hover:hover {
+    background-color: #179A77;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.names-container {
+    display: flex;
+    gap: 1em;
+}
+
+input {
+    display: block;
+    width: 100%;
+    border: 1px solid #627376;
+    background-color: transparent;
+    padding: 0.3em 0.5em;
+    line-height: 1;
+    outline: none;
+    color: inherit;
+}
+
+.names,
+p {
+    position: relative;
+    padding-bottom: 2em;
+}
+
+label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.3em 0.5em;
+    color: #8F969C;
+}
+
+label::after {
+    display: inline-block;
+    content: '*';
+    padding-left: 0.2em;
+    color: #1AB188;
+}
+
+.names-container .names {
+    flex: 1 1 auto;
+}
+
+input[type="submit"] {
+    padding: 0.8em;
+    font-size: 1.5em;
+    background-color: #1AB188;
+    border: none;
+    text-transform: uppercase;
+}
+
+input:valid+label {
+    top: -2em;
+    left: -0.3em;
+}
