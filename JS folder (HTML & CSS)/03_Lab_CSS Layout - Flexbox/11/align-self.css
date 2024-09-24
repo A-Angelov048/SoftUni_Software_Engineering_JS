@@ -1,0 +1,30 @@
+.flex-container {
+    max-width: 300px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: flex-start;
+    border: 2px solid green;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+}
+
+.flex-start .flex-item {
+    align-self: flex-start;
+}
+
+.center .flex-item:nth-child(2) {
+    align-self: center;
+}
+
+.flex-end .flex-item:nth-child(2) {
+    align-self: flex-end;
+}
+
+.baseline .flex-item {
+    align-items: baseline;
+}

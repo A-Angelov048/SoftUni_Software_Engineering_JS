@@ -1,0 +1,33 @@
+.flex-container {
+    max-width: 400px;
+    aspect-ratio: 1/1;
+    display: flex;
+    border: 2px solid green;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+}
+
+.stretch-default {
+    align-items: stretch;
+}
+
+.flex-start {
+    align-items: flex-start;
+}
+
+.center {
+    align-items: center;
+}
+
+.flex-end {
+    align-items: flex-end;
+}
+
+.baseline {
+    align-items: baseline;
+}

@@ -1,0 +1,33 @@
+.flex-container {
+    max-width: 400px;
+    display: flex;
+    border: 2px solid green;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+    flex-basis: 400px;
+}
+
+.default .flex-item {
+    flex-shrink: 1;
+}
+
+.zero .flex-item {
+    flex-shrink: 0;
+}
+
+/* .child .flex-item:nth-of-type(odd){
+    flex-shrink: 0;
+} */
+
+.child .flex-item {
+    flex-shrink: 0;
+}
+
+.child .flex-item:nth-child(2) {
+    flex-shrink: 1;
+}

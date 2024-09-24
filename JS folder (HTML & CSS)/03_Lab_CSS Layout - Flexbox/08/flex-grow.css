@@ -1,0 +1,38 @@
+.flex-container {
+    max-width: 400px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border: 2px solid green;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+}
+
+.default div {
+    flex-grow: 0;
+}
+
+.one div {
+    flex-grow: 1;
+}
+
+.child div:nth-child(2) {
+    flex-grow: 1;
+}
+
+.proportionally div:nth-child(1) {
+    flex-grow: 1;
+}
+
+.proportionally div:nth-child(2) {
+    flex-grow: 2;
+}
+
+.proportionally div:nth-child(3) {
+    flex-grow: 3;
+}

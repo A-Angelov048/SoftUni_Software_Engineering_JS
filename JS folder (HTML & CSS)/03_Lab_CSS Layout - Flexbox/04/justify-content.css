@@ -1,0 +1,36 @@
+.flex-container {
+    max-width: 400px;
+    border: 2px solid green;
+    display: flex;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+}
+
+.flex-start-default {
+    justify-content: flex-start;
+}
+
+.center {
+    justify-content: center;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}

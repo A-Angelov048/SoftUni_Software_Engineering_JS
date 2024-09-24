@@ -1,0 +1,12 @@
+.flex-container {
+    max-width: 400px;
+    border: 2px solid green;
+    display: flex;
+    padding: 1em;
+}
+
+.flex-item {
+    padding: 1.3em;
+    background-color: #eee;
+    border: 2px solid black;
+}
