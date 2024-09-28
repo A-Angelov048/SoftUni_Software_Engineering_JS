@@ -28,7 +28,6 @@
 }
 
 .introduction-info .img-container {
-    position: relative;
     display: flex;
     justify-content: flex-end;
 }

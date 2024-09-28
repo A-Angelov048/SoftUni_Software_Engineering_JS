@@ -1,6 +1,5 @@
 .header-section a {
     position: relative;
-    text-decoration: none;
     font-size: 18px;
     font-weight: 500;
 }
@@ -20,57 +19,65 @@
 }
 
 .header-section {
-    position: relative;
-    padding: 20px 100px;
     background: transparent;
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
-    z-index: 1;
+    padding: 20px 100px;
 }
 
-.header-section div .menu-container {
-    list-style: none;
-}
-
-.header-section div .menu-container li {
-    display: inline-block;
-    padding: 0px 10px;
-}
-
-.header-section div .menu-container .logo {
+.header-section .logo a {
     font-size: 32px;
     color: #22d378;
-    text-decoration: none;
     font-weight: 700;
 }
 
-.header-section div .menu-container .logo::after {
+.header-section .logo a::after {
     content: '';
     position: relative;
     left: 10px;
     border: 2px solid #22d378;
 }
 
-.header-section div .menu-container .menu {
-    color: #22d378;
-    text-transform: uppercase;
+.header-section .navigation-container {
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
 }
 
-.header-section div .menu-container .menu::before {
-    background: #22d378;
+.header-section .navigation-container .main-nav {
+    list-style: none;
 }
 
-.header-section .navbar-section div {
+.header-section .navigation-container .main-nav li:nth-child(2) {
+    margin-left: 10px;
+}
+
+.header-section .navigation-container .main-nav li {
     display: inline-block;
     padding: 0px 10px;
 }
 
-.header-section .navbar-section .user {
+.header-section .navigation-container .main-nav .main {
+    color: #22d378;
+    text-transform: uppercase;
+}
+
+.header-section .navigation-container .main-nav .main::before {
+    background: #22d378;
+}
+
+.header-section .navigation-container .user-nav div {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.header-section .navigation-container .user-nav .user {
     color: #fff;
     text-transform: uppercase;
 }
 
-.header-section .navbar-section .user::before {
+.header-section .navigation-container .user-nav .user::before {
     background: #fff;
 }
