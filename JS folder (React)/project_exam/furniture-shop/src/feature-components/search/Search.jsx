@@ -65,7 +65,7 @@ export default function Search() {
                                     type="text"
                                     name="name"
                                     className="search-input"
-                                    placeholder="Enter your search name"
+                                    placeholder="Search by name"
                                     value={values.name}
                                     onChange={changeHandler}
                                 />
