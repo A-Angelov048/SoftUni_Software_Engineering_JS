@@ -151,12 +151,12 @@ export default function Details() {
 
                                     <section className="content-header">
                                         <div>
-                                            <a onClick={contentHandler}>Description</a>
+                                            <p onClick={contentHandler}>Description</p>
                                             <hr className={changeContent ? 'active' : null} />
                                         </div>
 
                                         <div>
-                                            <a onClick={contentHandler}>Details</a>
+                                            <p onClick={contentHandler}>Details</p>
                                             <hr className={!changeContent ? 'active' : null} />
                                         </div>
                                     </section>
