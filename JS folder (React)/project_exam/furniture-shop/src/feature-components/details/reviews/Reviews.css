@@ -5,8 +5,7 @@
 }
 
 .recent-reviews .container .wrapper-reviews .btn {
-    width: 25%;
-    height: 35px;
+    padding: 8px 10px;
     background: #333;
     color: #fff;
     border: 1px solid #333;

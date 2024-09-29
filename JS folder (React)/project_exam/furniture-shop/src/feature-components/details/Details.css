@@ -144,7 +144,7 @@ section .profile img {
     text-align: left;
 }
 
-.details-section .container .wrapper-details .right-box .box-description-details .content-header div a {
+.details-section .container .wrapper-details .right-box .box-description-details .content-header div p {
     display: block;
     color: inherit;
     font-size: 1.2rem;
