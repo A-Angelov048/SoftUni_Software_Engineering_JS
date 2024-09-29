@@ -17,9 +17,9 @@ export default function BrandContainer({ furniture }) {
 
             {curFurniture?.map((furniture, index) => (
 
-                <div className="box" key={furniture._id}>
-                    <Link to={`/details-furniture/${furniture._id}`} key={furniture._id}>
+                <Link className="box" to={`/details-furniture/${furniture._id}`} key={furniture._id}>
 
+                    <div>
                         {
                             location.pathname == '/' && index == '0' &&
 
@@ -41,11 +41,13 @@ export default function BrandContainer({ furniture }) {
                                 {furniture.name}
                             </h6>
                         </div>
-                    </Link>
-                </div>
+                    </div>
 
-            ))}
+                </Link>
 
-        </div>
+            ))
+            }
+
+        </div >
     );
 }
