@@ -1,7 +1,7 @@
 
-import '../UserForms.css'
+import '../UserForms.css';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { editFurnitureRequester } from '../../api-service/furnitureService';
 import { useContext, useState } from 'react';
@@ -16,9 +16,12 @@ export default function Edit() {
 
     const navigate = useNavigate();
     const { furnitureId } = useParams();
-    const furniture = useContext(FurnitureContext);
-    const { updateError } = useContext(AuthContext);
     const [errors, setErrors] = useState({});
+
+    const { updateError } = useContext(AuthContext);
+    const furniture = useContext(FurnitureContext);
+
+    if (furniture.name === undefined) return <Navigate to='/404' replace={true} />;
 
     const initialValues = {
         name: furniture.name,
