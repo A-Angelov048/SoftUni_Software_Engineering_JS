@@ -13,15 +13,15 @@ import MessageDialog from '../../shared-components/message-dialog/MessageDialog'
 
 export default function Details() {
 
-    const { userId, updateError } = useContext(AuthContext);
-    const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
     const { furnitureId } = useParams();
     const furniture = useDetailsFurniture(furnitureId);
-
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
     const ref = useRef(null);
+
+    const { userId, updateError } = useContext(AuthContext);
+    const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
 
     function contentHandler(e) {
 
