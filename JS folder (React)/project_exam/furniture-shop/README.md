@@ -55,7 +55,7 @@ The current application is designed for buying and selling furniture. It include
 ## Upcoming features to the app:
 
 - **Pagination for the shop page**
-- **Responsive design**
+- ~~**Responsive design**~~
 - **Multiple images for the details furniture page**
 - **When creating an offer, set the quantity**
 - **View purchased furniture on the profile page and leave a review after purchase.**
