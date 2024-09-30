@@ -238,7 +238,7 @@ hr:focus-within {
         height: 100%;
         background-color: #22d378;
         box-shadow: -5px 0 5px rgba(0, 0, 0, 0.25);
-        transition: 0.65s ease-out;
+        transition: 0.60s ease-out;
     }
 
     body .introduction .header-section .navigation-container .main-nav li:nth-child(2) {
@@ -384,10 +384,6 @@ hr:focus-within {
         font-size: 3.5rem;
     }
 
-    body .introduction .header-section a {
-        font-size: 28px;
-    }
-
     .container {
         padding-left: 40px;
         padding-right: 40px;
@@ -396,6 +392,10 @@ hr:focus-within {
     body .details-section .container .wrapper-details .left-box .image-box .main-image {
         height: 400px;
         width: auto;
+    }
+
+    body .details-section .container .wrapper-details .right-box .header-right h1 {
+        font-size: 1.8rem;
     }
 
     body .profile-section .container .wrapper-profile .profile-info .info {
@@ -441,13 +441,17 @@ hr:focus-within {
         font-size: 14px;
     }
 
-    body .introduction .header-section a {
-        font-size: 24px;
-    }
-
     body .details-section .container .wrapper-details .left-box .image-box .main-image {
         height: 300px;
         width: auto;
+    }
+
+    body .footer-content .row h5 {
+        font-size: 22px;
+    }
+
+    body .footer-content .info-logo h2 {
+        font-size: 1.8rem;
     }
 
 }
