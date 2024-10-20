@@ -29,7 +29,7 @@ async function request(method, url, data, abortController) {
         }
 
         if (!response.ok) {
-            
+
             if (response.status === 403) {
                 sessionStorage.removeItem('auth');
                 throw { message: response.status };
@@ -45,15 +45,15 @@ async function request(method, url, data, abortController) {
     }
 }
 
-export async function get(url, abortController) {
-    return await request('get', url, undefined, abortController);
+export function get(url, abortController) {
+    return request('get', url, undefined, abortController);
 }
-export async function post(url, data) {
-    return await request('post', url, data);
+export function post(url, data) {
+    return request('post', url, data);
 }
-export async function put(url, data) {
-    return await request('put', url, data);
+export function put(url, data) {
+    return request('put', url, data);
 }
-export async function del(url) {
-    return await request('delete', url);
+export function del(url) {
+    return request('delete', url);
 }

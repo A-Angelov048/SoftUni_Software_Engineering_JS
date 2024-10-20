@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 
     try {
 
-        await createFurniture({ ...body, owner: userId }, userId);
+        createFurniture({ ...body, owner: userId }, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -80,7 +80,7 @@ router.delete('/delete/:id', async (req, res) => {
 
     try {
 
-        await deleteFurniture(furnitureId, userId);
+        deleteFurniture(furnitureId, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -96,7 +96,7 @@ router.get('/buy/:id', async (req, res) => {
 
     try {
 
-        await buyFurniture(furnitureId, userId);
+        buyFurniture(furnitureId, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -110,8 +110,8 @@ router.get('/wishlist/:id', async (req, res) => {
     const userId = req.user._id;
 
     try {
-        
-        await wishlistFurniture(furnitureId, userId);
+
+        wishlistFurniture(furnitureId, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -125,7 +125,7 @@ router.post('/search', async (req, res) => {
 
     try {
 
-        const data = await searchFurniture(body).lean();
+        const data = await searchFurniture(body);
         res.json(data);
 
     } catch (err) {
