@@ -34,11 +34,11 @@ exports.buyFurniture = async (furnitureId, userId) => {
             throw new Error('Furniture do not exists.');
         }
 
-        await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
-
-        await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
-
-        await Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } });
+        await Promise.all([
+            Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } }),
+            User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } }),
+            Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } })
+        ]);
 
     } catch (error) {
         throw error;
@@ -53,11 +53,15 @@ exports.wishlistFurniture = async (furnitureId, userId) => {
         const flag = user.wishlist.filter(x => x.valueOf() === furnitureId);
 
         if (!!flag[0]) {
-            await User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } });
-            await Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } });
+            await Promise.all([
+                User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } }),
+                Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } })
+            ])
         } else {
-            await User.findByIdAndUpdate(userId, { $push: { wishlist: furnitureId } });
-            await Furniture.findByIdAndUpdate(furnitureId, { $push: { listUserLikes: userId } });
+            await Promise.all([
+                User.findByIdAndUpdate(userId, { $push: { wishlist: furnitureId } }),
+                Furniture.findByIdAndUpdate(furnitureId, { $push: { listUserLikes: userId } })
+            ])
         }
 
     } catch (error) {
@@ -92,9 +96,10 @@ exports.deleteFurniture = async (furnitureId, userId) => {
             });
         }
 
-        await User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } });
-
-        await Furniture.findByIdAndDelete(furnitureId);
+        await Promise.all([
+            User.findByIdAndUpdate(userId, { $pull: { furniture: furnitureId } }),
+            Furniture.findByIdAndDelete(furnitureId)
+        ])
 
     } catch (error) {
         throw error;

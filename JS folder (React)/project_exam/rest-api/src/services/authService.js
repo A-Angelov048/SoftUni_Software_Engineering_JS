@@ -7,8 +7,10 @@ const jwt = require('../lib/jwt');
 
 exports.createUser = async (body) => {
 
-    const username = await User.findOne({ username: body.username });
-    const email = await User.findOne({ email: body.email });
+    const [username, email] = await Promise.all([
+        User.findOne({ username: body.username }),
+        User.findOne({ email: body.email })
+    ])
 
     if (!!username) {
         throw new Error('Username already exists!');
@@ -20,7 +22,7 @@ exports.createUser = async (body) => {
 
     const createdUser = await User.create(body);
 
-    const token = await generateToken(createdUser);
+    const token = generateToken(createdUser);
 
     return token;
 }
@@ -41,8 +43,8 @@ exports.getUser = async (body) => {
 
     const updatedUser = await User.findByIdAndUpdate(user._id, { lastLogin: Date.now() }, { returnDocument: 'after' });
 
-    const token = await generateToken(updatedUser);
-
+    const token = generateToken(updatedUser);
+    
     return token;
 }
 
@@ -55,14 +57,14 @@ exports.sendUser = async (token) => {
 exports.editProfile = async (userId, body) => {
 
     const username = await User.findOne({ username: body.username });
-    
+
     if (!!username && username._id.valueOf() !== userId) {
         throw new Error('Username already exists!');
     }
 
     const result = await User.findByIdAndUpdate(userId, body, { returnDocument: 'after' });
 
-    const token = await generateToken(result);
+    const token = generateToken(result);
 
     return token;
 
