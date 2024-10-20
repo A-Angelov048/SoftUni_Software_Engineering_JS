@@ -19,7 +19,7 @@ switch (process.env.GCLOUD_PROJECT) {
         break;
 
     default:
-        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.dev') });
+        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.development') });
         break;
 }
 
