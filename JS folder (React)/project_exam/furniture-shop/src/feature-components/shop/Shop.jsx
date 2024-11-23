@@ -1,5 +1,7 @@
-import { useAllFurniture } from "../../hooks/useFurnitureResponse";
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
+import Spinner from "../../shared-components/spinner/Spinner";
+
+import { useAllFurniture } from "../../hooks/useFurnitureResponse";
 
 export default function Shop() {
 
@@ -15,7 +17,7 @@ export default function Shop() {
                     </h2>
                 </div>
 
-                <BrandContainer furniture={furniture} />
+                {furniture?.length > 0 ? <BrandContainer furniture={furniture} /> : <Spinner />}
 
             </div>
         </section>

@@ -1,5 +1,6 @@
-import './BrandSection.css'
+import './BrandSection.css';
 import BrandContainer from '../../shared-components/brand-container/BrandContainer';
+import Spinner from '../../shared-components/spinner/Spinner';
 
 import { Link } from 'react-router-dom';
 import { useLatestFurniture } from '../../hooks/useFurnitureResponse';
@@ -9,6 +10,7 @@ export default function BrandSection() {
     const furniture = useLatestFurniture();
 
     return (
+
         <section className="brand-section-home layout-padding">
             <div className="container">
 
@@ -18,11 +20,19 @@ export default function BrandSection() {
                     </h2>
                 </div>
 
-                <BrandContainer furniture={furniture} />
+                {furniture?.length > 0 ?
+                    <>
+                        <BrandContainer furniture={furniture} />
 
-                <Link to="/shop" className="brand-btn">
-                    See More
-                </Link>
+                        <Link to="/shop" className="brand-btn">
+                            See More
+                        </Link>
+                    </>
+
+                    :
+
+                    <Spinner />
+                }
 
             </div>
         </section>
