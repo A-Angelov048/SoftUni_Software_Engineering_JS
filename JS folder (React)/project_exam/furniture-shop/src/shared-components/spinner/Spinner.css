@@ -1,0 +1,15 @@
+.spinner {
+    margin: 45px auto;
+    width: 120px;
+    aspect-ratio: 1/1;
+    border: 3px solid;
+    border-color: #24d278 transparent;
+    border-radius: 50%;
+    animation: spin 1.3s ease infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
