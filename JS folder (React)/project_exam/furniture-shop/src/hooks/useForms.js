@@ -20,7 +20,7 @@ export function useForm(initialValues, submitCallBack) {
 
         e.preventDefault();
 
-        submitCallBack(values);
+        submitCallBack(values, e.target);
     };
 
     return {
