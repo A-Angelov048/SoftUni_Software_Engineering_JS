@@ -1,5 +1,9 @@
 import * as yup from "yup";
-
+export const passwordSchema = yup.object().shape({
+    password: yup.string().min(6).required(),
+    newPassword: yup.string().min(6).required(),
+    reNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Passwords must match!'),
+})
 export const profileSchema = yup.object().shape({
     username: yup.string().min(5).required(),
 })
@@ -34,5 +38,7 @@ export const reviewSchema = yup.object().shape({
     rating: yup.string().required('From 1 to 5 - how much do you like this furniture?'),
     review: yup.string().min(8, 'Review must be at least 8 characters').required("What's the point of an empty review? Help other customers make the right choice."),
 })
+
+
 
 
