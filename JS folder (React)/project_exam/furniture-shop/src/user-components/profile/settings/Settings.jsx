@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { useForm } from '../../../hooks/useForms';
 import { editProfile } from '../../../api-service/userService';
 import { AuthContext } from '../../../context/AuthContext';
-import { profileSchema } from '../../../utils/schemaForm';
+import { profileSchema, passwordSchema } from '../../../utils/schemaForm';
 import { useLocation } from 'react-router-dom';
 import { trimValue } from '../../../utils/trimValue';
 
@@ -21,17 +21,28 @@ export default function Settings() {
         imageProfile: user.imageProfile || '',
         username: user.username || '',
         location: user.location || '',
+        password: '',
+        newPassword: '',
+        reNewPassword: '',
     };
 
     const [errors, setErrors] = useState({});
 
 
-    const changeUserInfo = async (values) => {
+    const changeUserInfo = async (values, eventTarget) => {
 
-        const trimValues = trimValue(values);
+        let newValues;
+        let validatorSchema;
+
+        switch (eventTarget.parentNode.id) {
+            case 'profile-editing': validatorSchema = profileSchema, newValues = { username: values.username, location: values.location, imageProfile: values.imageProfile }; break;
+            case 'password-change': validatorSchema = passwordSchema, newValues = { password: values.password, newPassword: values.newPassword, reNewPassword: values.reNewPassword }; break;
+        }
+
+        const trimValues = trimValue(newValues);
 
         try {
-            await profileSchema.validate(trimValues, { abortEarly: false });
+            await validatorSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -79,7 +90,7 @@ export default function Settings() {
                     <p className='error bigger-font'>{errors.message}</p>
                 </div>
             }
-            <details>
+            <details id='profile-editing'>
                 <summary>Profile editing</summary>
                 <form onSubmit={submitCurForm}>
 
@@ -124,6 +135,69 @@ export default function Settings() {
                     </div>
 
                     <button type="submit" className="btn">Save</button>
+
+                </form>
+            </details>
+
+            <details id='password-change'>
+                <summary>Password change</summary>
+                <form onSubmit={submitCurForm}>
+
+                    <div className="input-box">
+
+                        <input type="password"
+                            name="password"
+                            placeholder="Current password*"
+                            value={values.password}
+                            onChange={changeHandler}
+                        />
+
+                    </div>
+
+                    {errors.hasOwnProperty('password') &&
+                        <div className='error-container'>
+                            <i className='bx bxs-error-circle bx-tada' ></i>
+                            <p className='error'>{errors.password}</p>
+                        </div>
+                    }
+
+                    <div className="input-box">
+
+                        <input type="password"
+                            name="newPassword"
+                            placeholder="New Password*"
+                            value={values.newPassword}
+                            onChange={changeHandler}
+                        />
+
+                    </div>
+
+                    {errors.hasOwnProperty('newPassword') &&
+                        <div className='error-container'>
+                            <i className='bx bxs-error-circle bx-tada' ></i>
+                            <p className='error'>{errors.newPassword}</p>
+                        </div>
+                    }
+
+                    <div className="input-box">
+
+                        <input type="password"
+                            name="reNewPassword"
+                            placeholder="Confirm new password*"
+                            value={values.reNewPassword}
+                            onChange={changeHandler}
+                        />
+
+                    </div>
+
+                    {errors.hasOwnProperty('reNewPassword') &&
+                        <div className='error-container'>
+                            <i className='bx bxs-error-circle bx-tada' ></i>
+                            <p className='error'>{errors.reNewPassword}</p>
+                        </div>
+                    }
+
+                    <button type="submit" className="btn">Save password</button>
 
                 </form>
             </details>
