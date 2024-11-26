@@ -44,7 +44,7 @@ exports.getUser = async (body) => {
     const updatedUser = await User.findByIdAndUpdate(user._id, { lastLogin: Date.now() }, { returnDocument: 'after' });
 
     const token = generateToken(updatedUser);
-    
+
     return token;
 }
 
@@ -56,13 +56,32 @@ exports.sendUser = async (token) => {
 
 exports.editProfile = async (userId, body) => {
 
-    const username = await User.findOne({ username: body.username });
+    let newBody = {};
+
+    const [username, user] = await Promise.all([
+        User.findOne({ username: body.username }),
+        User.findById(userId)
+    ])
 
     if (!!username && username._id.valueOf() !== userId) {
         throw new Error('Username already exists!');
     }
 
-    const result = await User.findByIdAndUpdate(userId, body, { returnDocument: 'after' });
+    if (body.password !== undefined) {
+
+        const validatePassword = await bcrypt.compare(body.password, user.password);
+
+        if (!validatePassword) {
+            throw new Error('Wrong password! Please try again.');
+        }
+
+        const hashNewPassword = await bcrypt.hash(body.newPassword, 12);
+        newBody.password = hashNewPassword;
+    } else {
+        newBody = body;
+    }
+
+    const result = await User.findByIdAndUpdate(userId, newBody, { returnDocument: 'after' });
 
     const token = generateToken(result);
 
