@@ -53,6 +53,7 @@ router.post('/edit-profile', async (req, res) => {
         const token = await editProfile(userId, body);
         const editedProfile = await sendUser(token);
 
+        res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true });
         res.json(editedProfile);
 
     } catch (err) {
