@@ -19,6 +19,7 @@
 }
 
 .profile-section .container .wrapper-profile .settings .input-box {
+    position: relative;
     display: flex;
     margin: 15px 0;
 }
@@ -34,6 +35,15 @@
     color: #333;
     padding: 10px 15px 10px 15px;
     text-overflow: ellipsis;
+}
+
+.profile-section .container .wrapper-profile .settings .input-box i {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    cursor: pointer;
 }
 
 .profile-section .container .wrapper-profile .settings .error-container {
