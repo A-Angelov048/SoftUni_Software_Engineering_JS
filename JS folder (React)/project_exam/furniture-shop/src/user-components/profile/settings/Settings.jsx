@@ -16,6 +16,8 @@ export default function Settings() {
 
     const { changeAuthState, updateError } = useContext(AuthContext);
     const [showTextState, setShowText] = useState(false);
+    const [showHideCurPassword, setShowHide] = useState(true);
+    const [showHideNewPassword, setShowHideNew] = useState(true);
 
     const initialValues = {
         imageProfile: user.imageProfile || '',
@@ -145,12 +147,18 @@ export default function Settings() {
 
                     <div className="input-box">
 
-                        <input type="password"
+                        <input type={showHideCurPassword ? "password" : "text"}
                             name="password"
                             placeholder="Current password*"
                             value={values.password}
                             onChange={changeHandler}
                         />
+                        {
+                            showHideCurPassword ?
+                                <i onClick={() => { setShowHide(!showHideCurPassword) }} className='bx bxs-show'></i>
+                                :
+                                <i onClick={() => { setShowHide(!showHideCurPassword) }} className='bx bxs-hide'></i>
+                        }
 
                     </div>
 
@@ -163,12 +171,18 @@ export default function Settings() {
 
                     <div className="input-box">
 
-                        <input type="password"
+                        <input type={showHideNewPassword ? "password" : "text"}
                             name="newPassword"
                             placeholder="New Password*"
                             value={values.newPassword}
                             onChange={changeHandler}
                         />
+                        {
+                            showHideNewPassword ?
+                                <i onClick={() => { setShowHideNew(!showHideNewPassword) }} className='bx bxs-show'></i>
+                                :
+                                <i onClick={() => { setShowHideNew(!showHideNewPassword) }} className='bx bxs-hide'></i>
+                        }
 
                     </div>
 
@@ -181,12 +195,18 @@ export default function Settings() {
 
                     <div className="input-box">
 
-                        <input type="password"
+                        <input type={showHideNewPassword ? "password" : "text"}
                             name="reNewPassword"
                             placeholder="Confirm new password*"
                             value={values.reNewPassword}
                             onChange={changeHandler}
                         />
+                        {
+                            showHideNewPassword ?
+                                <i onClick={() => { setShowHideNew(!showHideNewPassword) }} className='bx bxs-show'></i>
+                                :
+                                <i onClick={() => { setShowHideNew(!showHideNewPassword) }} className='bx bxs-hide'></i>
+                        }
 
                     </div>
 
