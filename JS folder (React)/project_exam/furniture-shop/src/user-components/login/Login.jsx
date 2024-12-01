@@ -1,11 +1,12 @@
-import '../UserForms.css'
+import '../UserForms.css';
 
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useForm } from '../../hooks/useForms';
 import { login } from '../../api-service/userService';
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from '../../utils/schemaForm';
+import { ErrorContext } from '../../context/ErrorContext';
 
 const initialValues = {
     email: '',
@@ -17,8 +18,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const { changeAuthState } = useContext(AuthContext);
-    const [errors, setErrors] = useState({});
-    const [showTextState, setShowText] = useState(false);
+    const { errors, handleError, clearError } = useContext(ErrorContext);
 
 
     const getUser = async (values) => {
@@ -33,7 +33,7 @@ export default function Login() {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
@@ -44,13 +44,11 @@ export default function Login() {
             navigate('/');
         } catch (error) {
 
-            setShowText(true);
-            setErrors({ message: error.message });
+            handleError({ message: error.message });
 
             setTimeout(() => {
 
-                setShowText(false);
-                setErrors({});
+                clearError();
 
             }, 4000);
 
@@ -67,7 +65,7 @@ export default function Login() {
                         Login
                     </h2>
                 </div>
-                {errors.hasOwnProperty('message') && showTextState &&
+                {errors.hasOwnProperty('message') &&
                     <div className='error-container position disappear-text'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error bigger-font'>{errors.message}</p>

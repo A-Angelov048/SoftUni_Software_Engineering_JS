@@ -3,10 +3,11 @@ import '../UserForms.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { register } from '../../api-service/userService';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { registerSchema } from '../../utils/schemaForm';
 import { trimValue } from '../../utils/trimValue';
+import { ErrorContext } from '../../context/ErrorContext';
 
 
 const initialValues = {
@@ -20,9 +21,7 @@ export default function Register() {
 
     const navigate = useNavigate();
     const { changeAuthState } = useContext(AuthContext);
-    const [errors, setErrors] = useState({});
-    const [showTextState, setShowText] = useState(false);
-
+    const { errors, handleError, clearError } = useContext(ErrorContext);
 
     const createUser = async (values) => {
 
@@ -38,7 +37,7 @@ export default function Register() {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
@@ -49,13 +48,11 @@ export default function Register() {
             navigate('/');
         } catch (error) {
 
-            setShowText(true);
-            setErrors({ message: error.message });
+            handleError({ message: error.message });
 
             setTimeout(() => {
 
-                setShowText(false);
-                setErrors({});
+                clearError();
 
             }, 4000);
 
@@ -73,7 +70,7 @@ export default function Register() {
                         Register
                     </h2>
                 </div>
-                {errors.hasOwnProperty('message') && showTextState &&
+                {errors.hasOwnProperty('message') &&
                     <div className='error-container position disappear-text'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error bigger-font'>{errors.message}</p>

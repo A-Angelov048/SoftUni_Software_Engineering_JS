@@ -4,11 +4,12 @@ import '../UserForms.css';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { editFurnitureRequester } from '../../api-service/furnitureService';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FurnitureContext } from '../../context/FurnitureContext';
 import { AuthContext } from '../../context/AuthContext';
 import { trimValue } from '../../utils/trimValue';
 import { createFurnitureSchema } from '../../utils/schemaForm';
+import { ErrorContext } from '../../context/ErrorContext';
 
 
 
@@ -16,10 +17,10 @@ export default function Edit() {
 
     const navigate = useNavigate();
     const { furnitureId } = useParams();
-    const [errors, setErrors] = useState({});
 
-    const { updateError } = useContext(AuthContext);
+    const { updateAuthError } = useContext(AuthContext);
     const furniture = useContext(FurnitureContext);
+    const { errors, handleError } = useContext(ErrorContext);
 
     if (furniture.name === undefined) return <Navigate to='/404' replace={true} />;
 
@@ -51,7 +52,7 @@ export default function Edit() {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
@@ -60,7 +61,7 @@ export default function Edit() {
             await editFurnitureRequester(furnitureId, trimValues);
             navigate(`/details-furniture/${furnitureId}`);
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }

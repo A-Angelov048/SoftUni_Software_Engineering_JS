@@ -7,6 +7,7 @@ import useReviews from '../../../hooks/useReviews';
 
 import { AuthContext } from '../../../context/AuthContext';
 import { FurnitureContext } from '../../../context/FurnitureContext';
+import { ErrorContext } from '../../../context/ErrorContext';
 import { saveReview } from '../../../api-service/reviewsService';
 import { convertDateToString } from '../../../utils/convertDate';
 import { reviewSchema } from '../../../utils/schemaForm';
@@ -22,10 +23,11 @@ export default forwardRef(function Reviews(props, ref) {
 
     const user = useContext(AuthContext);
     const furnitureContext = useContext(FurnitureContext);
+    const { errors, handleError } = useContext(ErrorContext);
+
     const { furnitureId } = useParams();
 
     const [reviewsArr, reviewsState, updateReviewsState] = useReviews();
-    const [errors, setErrors] = useState({});
 
     const subReview = async (values) => {
 
@@ -41,7 +43,7 @@ export default forwardRef(function Reviews(props, ref) {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
@@ -52,7 +54,7 @@ export default forwardRef(function Reviews(props, ref) {
             furnitureContext.updateArrayState(response, 'reviews');
 
         } catch (error) {
-            if (error.message === '403') return user.updateError(true);
+            if (error.message === '403') return user.updateAuthError(true);
 
             console.error(error.message);
         }
