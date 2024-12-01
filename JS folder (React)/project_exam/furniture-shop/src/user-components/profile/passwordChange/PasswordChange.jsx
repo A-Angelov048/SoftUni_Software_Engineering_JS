@@ -6,16 +6,19 @@ import { editProfile } from '../../../api-service/userService';
 import { AuthContext } from '../../../context/AuthContext';
 import { passwordSchema } from '../../../utils/schemaForm';
 import { trimValue } from '../../../utils/trimValue';
+import { ErrorContext } from '../../../context/ErrorContext';
 
 
 export default function PasswordChange() {
 
-    const { changeAuthState, updateError } = useContext(AuthContext);
-    const [showTextState, setShowText] = useState(false);
+    const { changeAuthState, updateAuthError } = useContext(AuthContext);
+    const { errors, handleError, clearError } = useContext(ErrorContext);
+
+    const [handleTag, setHandleTag] = useState(false);
     const [showHideCurPassword, setShowHide] = useState(true);
     const [showHideNewPassword, setShowHideNew] = useState(true);
-    const [errors, setErrors] = useState({});
 
+    //close and clear form after success.
 
     const initialValues = {
         password: '',
@@ -37,28 +40,36 @@ export default function PasswordChange() {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
 
         try {
+
             const result = await editProfile(trimValues);
-            setErrors({});
             changeAuthState(result);
-        } catch (error) {
+            setHandleTag(!handleTag);
 
-            if (error.message === '403') return updateError(true);
-
-            setShowText(true);
-            setErrors({ message: error.message });
+            handleError({ successMessage: 'Form submit successfully' });
 
             setTimeout(() => {
 
-                setShowText(false);
-                setErrors({});
+                clearError();
 
-            }, 4000);
+            }, 2000);
+
+        } catch (error) {
+
+            if (error.message === '403') return updateAuthError(true);
+
+            handleError({ errorMessage: error.message });
+
+            setTimeout(() => {
+
+                clearError();
+
+            }, 2000);
 
         }
 
@@ -67,7 +78,7 @@ export default function PasswordChange() {
     const { values, changeHandler, submitCurForm } = useForm(initialValues, changeUserInfo);
 
     return (
-        <details id='password-change'>
+        <details open={handleTag ? false : null}>
             <summary>Password change</summary>
             <form onSubmit={submitCurForm}>
 
@@ -89,7 +100,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('password') &&
-                    <div className='error-container'>
+                    <div className='message-container error'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.password}</p>
                     </div>
@@ -113,7 +124,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('newPassword') &&
-                    <div className='error-container'>
+                    <div className='message-container error'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.newPassword}</p>
                     </div>
@@ -137,7 +148,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('reNewPassword') &&
-                    <div className='error-container'>
+                    <div className='message-container error'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.reNewPassword}</p>
                     </div>
