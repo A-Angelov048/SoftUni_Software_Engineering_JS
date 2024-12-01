@@ -5,11 +5,11 @@ import { AuthContext } from '../../context/AuthContext';
 export default function ErrorDialog() {
 
     const navigate = useNavigate();
-    const { changeAuthState, updateError } = useContext(AuthContext);
+    const { changeAuthState, updateAuthError } = useContext(AuthContext);
 
     function onClose() {
         changeAuthState({});
-        updateError(false);
+        updateAuthError(false);
         navigate('/login');
     }
 

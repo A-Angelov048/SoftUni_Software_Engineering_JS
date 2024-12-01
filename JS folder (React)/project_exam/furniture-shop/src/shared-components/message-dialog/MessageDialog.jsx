@@ -1,4 +1,5 @@
 import "./MessageDialog.css";
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { removeFurniture } from "../../api-service/furnitureService";
 import { useContext } from "react";
@@ -8,7 +9,7 @@ export default function MessageDialog({ onClose }) {
 
     const navigate = useNavigate();
     const { furnitureId } = useParams();
-    const { updateError } = useContext(AuthContext);
+    const { updateAuthError } = useContext(AuthContext);
 
     async function deleteFurniture() {
         
@@ -16,7 +17,7 @@ export default function MessageDialog({ onClose }) {
             await removeFurniture(furnitureId);
             navigate('/shop');
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }

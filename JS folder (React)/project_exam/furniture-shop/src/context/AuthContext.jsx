@@ -6,14 +6,14 @@ export const AuthContext = createContext();
 export function ContextProvider(props) {
 
     const [authState, setAuthState] = usePersistence({});
-    const [errorState, setErrorState] = useState(false);
+    const [authError, setAuthErrorState] = useState(false);
 
     const changeAuthState = (state) => {
         setAuthState(state);
     }
 
-    const updateError = (state) => {
-        setErrorState(state);
+    const updateAuthError = (state) => {
+        setAuthErrorState(state);
     }
 
     const data = {
@@ -21,9 +21,9 @@ export function ContextProvider(props) {
         imageProfile: authState.imageProfile,
         username: authState.username,
         location: authState.location,
-        error: errorState,
+        error: authError,
         changeAuthState,
-        updateError,
+        updateAuthError,
     }
 
     return (

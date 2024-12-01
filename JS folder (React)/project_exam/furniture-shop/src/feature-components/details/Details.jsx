@@ -20,7 +20,7 @@ export default function Details() {
     const [changeContent, setChangeContent] = useState(true);
     const ref = useRef(null);
 
-    const { userId, updateError } = useContext(AuthContext);
+    const { userId, updateAuthError } = useContext(AuthContext);
     const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
 
     function contentHandler(e) {
@@ -40,7 +40,7 @@ export default function Details() {
             await purchaseFurniture(furnitureId);
             updateArrayState(userId, 'buyList');
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }
@@ -55,7 +55,7 @@ export default function Details() {
             handleUserLikes(userId);
 
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }

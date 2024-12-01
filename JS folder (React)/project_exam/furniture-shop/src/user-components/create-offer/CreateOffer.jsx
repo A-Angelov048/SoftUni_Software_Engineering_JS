@@ -27,7 +27,7 @@ export default function CreateOffer() {
 
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
-    const { updateError } = useContext(AuthContext);
+    const { updateAuthError } = useContext(AuthContext);
 
     const createFurniture = async (values) => {
 
@@ -52,7 +52,7 @@ export default function CreateOffer() {
             await createFurnitureRequester(trimValues);
             navigate('/shop');
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }

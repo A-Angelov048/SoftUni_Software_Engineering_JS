@@ -17,7 +17,7 @@ export default function Search() {
 
     const [furniture, dispatch] = useSetFurniture();
     const [flagState, setFlagState] = useState(false);
-    const { updateError } = useContext(AuthContext);
+    const { updateAuthError } = useContext(AuthContext);
 
     const search = async (values) => {
 
@@ -36,7 +36,7 @@ export default function Search() {
 
             dispatch({ type: 'GET_FURNITURE', payload: response });
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }

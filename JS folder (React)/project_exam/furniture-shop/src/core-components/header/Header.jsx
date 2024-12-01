@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom'
+import './Header.css';
 
-import './Header.css'
-import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { logout } from '../../api-service/userService';
 
 export default function Header() {
 
-    const { userId, changeAuthState, updateError } = useContext(AuthContext);
+    const { userId, changeAuthState, updateAuthError } = useContext(AuthContext);
 
     const logoutUser = async () => {
 
@@ -15,7 +15,7 @@ export default function Header() {
             await logout();
             changeAuthState({});
         } catch (error) {
-            if (error.message === '403') return updateError(true);
+            if (error.message === '403') return updateAuthError(true);
 
             console.error(error.message);
         }
