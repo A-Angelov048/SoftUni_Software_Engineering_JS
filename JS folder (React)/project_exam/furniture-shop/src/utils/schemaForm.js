@@ -1,7 +1,7 @@
 import * as yup from "yup";
 export const passwordSchema = yup.object().shape({
     password: yup.string().min(6).required(),
-    newPassword: yup.string().min(6).required(),
+    newPassword: yup.string().min(6).required().notOneOf([yup.ref('password'), null], 'the new password must be different from the current one.'),
     reNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'passwords must match!'),
 })
 export const profileSchema = yup.object().shape({
