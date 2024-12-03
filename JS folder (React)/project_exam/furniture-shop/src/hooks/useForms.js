@@ -20,12 +20,17 @@ export function useForm(initialValues, submitCallBack) {
 
         e.preventDefault();
 
-        submitCallBack(values, e.target);
+        submitCallBack(values);
     };
+
+    const resetCurForm = ()=>{
+        setValues(initialValues);
+    }
 
     return {
         values,
         changeHandler,
         submitCurForm,
+        resetCurForm,
     };
 }
