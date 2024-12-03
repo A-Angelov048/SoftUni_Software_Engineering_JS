@@ -59,5 +59,5 @@ The current application is designed for buying and selling furniture. It include
 - **Multiple images for the details furniture page**
 - **When creating an offer, set the quantity**
 - **View purchased furniture on the profile page and leave a review after purchase.**
-- **Password change for the user**
+- ~~**Password change for the user**~~
 - ~~**Spinner component for home and shop page**~~
