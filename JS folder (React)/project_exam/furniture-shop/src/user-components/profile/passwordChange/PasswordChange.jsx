@@ -18,7 +18,6 @@ export default function PasswordChange() {
     const [showHideCurPassword, setShowHide] = useState(true);
     const [showHideNewPassword, setShowHideNew] = useState(true);
 
-    //close and clear form after success.
 
     const initialValues = {
         password: '',
@@ -53,6 +52,8 @@ export default function PasswordChange() {
 
             handleError({ successMessage: 'Form submit successfully' });
 
+            resetCurForm();
+
             setTimeout(() => {
 
                 clearError();
@@ -75,7 +76,7 @@ export default function PasswordChange() {
 
     }
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, changeUserInfo);
+    const { values, changeHandler, submitCurForm, resetCurForm } = useForm(initialValues, changeUserInfo);
 
     return (
         <details open={handleTag ? false : null}>
