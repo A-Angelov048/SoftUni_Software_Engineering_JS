@@ -18,6 +18,7 @@ export default function Details() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
+    const [imageIndex, setImageIndex] = useState(0);
     const ref = useRef(null);
 
     const { userId, updateAuthError } = useContext(AuthContext);
@@ -83,8 +84,12 @@ export default function Details() {
                         <div className="wrapper-details">
 
                             <div className="left-box">
-                                <div className="image-box">
-                                    <img src={furniture.imageUrl} className="main-image" />
+                                <div className="container-image">
+                                    <i onClick={() => imageIndex - 1 >= 0 ? setImageIndex(oldIndex => oldIndex - 1) : setImageIndex(furniture.imageUrl.length - 1)} className='bx bxs-left-arrow'></i>
+                                    <div className="image-box">
+                                        <img src={furniture.imageUrl?.[imageIndex]} className="main-image" />
+                                    </div>
+                                    <i onClick={() => imageIndex + 1 <= furniture.imageUrl.length - 1 ? setImageIndex(oldIndex => oldIndex + 1) : setImageIndex(0)} className='bx bxs-right-arrow'></i>
                                 </div>
                             </div>
 
