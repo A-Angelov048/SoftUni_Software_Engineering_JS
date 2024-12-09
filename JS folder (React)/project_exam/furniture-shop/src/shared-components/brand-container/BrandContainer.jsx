@@ -31,7 +31,7 @@ export default function BrandContainer({ furniture }) {
                         }
 
                         <div className="img-box">
-                            <img src={furniture.imageUrl} alt="" />
+                            <img src={furniture.imageUrl[0]} alt="" />
                         </div>
                         <div className="detail-box">
                             <h6 className="price">
