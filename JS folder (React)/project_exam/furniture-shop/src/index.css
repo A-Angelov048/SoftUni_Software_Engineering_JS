@@ -183,6 +183,32 @@ hr:focus-within {
     }
 }
 
+@media (max-width: 1140px) {
+
+    body .details-section .container .wrapper-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-width: max-content;
+    }
+
+    body .details-section .container .wrapper-details .left-box {
+        width: auto;
+    }
+
+    body .details-section .container .wrapper-details .right-box {
+        width: 100%;
+        padding: 20px;
+    }
+
+    body .details-section .container .wrapper-details .left-box .image-box .main-image {
+        height: 500px;
+    }
+
+    body .details-section .container .wrapper-details .left-box .image-box .main-image {
+        aspect-ratio: 1;
+    }
+}
 
 @media (max-width: 992px) {
 
@@ -318,30 +344,6 @@ hr:focus-within {
         width: auto;
     }
 
-    body .details-section .container .wrapper-details {
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        max-width: max-content;
-    }
-
-    body .details-section .container .wrapper-details .left-box {
-        width: auto;
-    }
-
-    body .details-section .container .wrapper-details .right-box {
-        width: 100%;
-        padding: 20px;
-    }
-
-    body .details-section .container .wrapper-details .left-box .image-box .main-image {
-        height: 500px;
-    }
-
-    body .details-section .container .wrapper-details .left-box .image-box .main-image {
-        aspect-ratio: 1;
-    }
-
     body .footer-content .row .box {
         padding: 20px;
     }
@@ -361,6 +363,10 @@ hr:focus-within {
 
     body .profile-section .container .wrapper-profile .profile-info .info .info-user {
         margin-bottom: 10px;
+    }
+
+    .details-section .container .wrapper-details .left-box .container-image .image-box .main-image {
+        height: 400px;
     }
 
 }
@@ -427,6 +433,14 @@ hr:focus-within {
         margin-bottom: 10px;
     }
 
+    .details-section .container .wrapper-details .left-box .container-image>i {
+        font-size: 20px;
+    }
+
+    .details-section .container .wrapper-details .left-box .container-image .image-box .main-image {
+        height: 200px;
+    }
+
 }
 
 @media (max-width: 450px) {
@@ -481,7 +495,7 @@ hr:focus-within {
         width: 100%;
     }
 
-    body .overlay .content{
+    body .overlay .content {
         margin: 0px 20px;
     }
 }
