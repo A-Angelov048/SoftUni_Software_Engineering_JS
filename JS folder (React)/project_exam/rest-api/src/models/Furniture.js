@@ -45,7 +45,7 @@ const furnitureSchema = new mongoose.Schema({
         minLength: [6, 'Condition should be at least 6 characters long.'],
     },
     imageUrl: {
-        type: String,
+        type: Array,
         required: true,
         // match: [/^https?:\/\//, 'Image URL should stars with http://... or https://...']
     },
