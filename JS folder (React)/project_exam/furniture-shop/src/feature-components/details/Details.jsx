@@ -85,11 +85,29 @@ export default function Details() {
 
                             <div className="left-box">
                                 <div className="container-image">
-                                    <i onClick={() => imageIndex - 1 >= 0 ? setImageIndex(oldIndex => oldIndex - 1) : setImageIndex(furniture.imageUrl.length - 1)} className='bx bxs-left-arrow'></i>
-                                    <div className="image-box">
-                                        <img src={furniture.imageUrl?.[imageIndex]} className="main-image" />
+
+                                    <div className="container-small">
+
+                                        {furniture.imageUrl?.map((curImage) => (
+                                            <div className="image-box-small">
+                                                <img src={curImage} className='small-image' />
+                                            </div>
+                                        ))}
+
                                     </div>
-                                    <i onClick={() => imageIndex + 1 <= furniture.imageUrl.length - 1 ? setImageIndex(oldIndex => oldIndex + 1) : setImageIndex(0)} className='bx bxs-right-arrow'></i>
+
+                                    <div className="container-large">
+
+                                        <i onClick={() => imageIndex - 1 >= 0 ? setImageIndex(oldIndex => oldIndex - 1) : setImageIndex(furniture.imageUrl.length - 1)} className='bx bxs-left-arrow'></i>
+
+                                        <div className="image-box-large">
+                                            <img src={furniture.imageUrl?.[imageIndex]} className="large-image" />
+                                        </div>
+
+                                        <i onClick={() => imageIndex + 1 <= furniture.imageUrl.length - 1 ? setImageIndex(oldIndex => oldIndex + 1) : setImageIndex(0)} className='bx bxs-right-arrow'></i>
+
+                                    </div>
+
                                 </div>
                             </div>
 
