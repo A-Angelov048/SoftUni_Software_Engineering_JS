@@ -32,12 +32,6 @@ section .profile img {
     margin: 12px 0px 12px 12px;
 }
 
-.details-section .container .wrapper-details .left-box .container-image .container-small .image-box-small .small-image {
-    background: linear-gradient(0deg, rgba(65, 130, 170, .5), rgba(65, 130, 170, .5));
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 .details-section .container .wrapper-details .left-box .container-image .container-small .image-box-small+.image-box-small {
     margin-top: 12px;
 }
@@ -46,6 +40,12 @@ section .profile img {
     display: block;
     width: 80px;
     height: 80px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.details-section .container .wrapper-details .left-box .container-image .container-small .image-box-small .small-image.active {
+    background: linear-gradient(0deg, rgba(65, 130, 170, .5), rgba(65, 130, 170, .5));
 }
 
 .details-section .container .wrapper-details .left-box .container-image .container-large {
