@@ -88,9 +88,9 @@ export default function Details() {
 
                                     <div className="container-small">
 
-                                        {furniture.imageUrl?.map((curImage) => (
-                                            <div className="image-box-small">
-                                                <img src={curImage} className='small-image' />
+                                        {furniture.imageUrl?.map((curImage, index) => (
+                                            <div onClick={() => setImageIndex(index)} className="image-box-small" key={index}>
+                                                <img src={curImage} className={imageIndex === index ? 'small-image active' : 'small-image'} />
                                             </div>
                                         ))}
 
