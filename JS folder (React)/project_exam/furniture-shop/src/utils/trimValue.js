@@ -8,6 +8,8 @@ export function trimValue(values) {
 
         if (typeof values[key] === 'number') {
             value = values[key];
+        } else if (typeof values[key] === 'object') {
+            value = values[key].map(x => x.trim());
         } else {
             value = values[key].trim();
         }
