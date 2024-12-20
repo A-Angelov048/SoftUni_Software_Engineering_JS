@@ -128,3 +128,31 @@
         visibility: hidden;
     }
 }
+
+.wrapper-user .btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wrapper-user .btn-add {
+    width: 25%;
+    margin: 0px;
+    padding: 4px;
+}
+
+.wrapper-user .images {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-user .images i {
+    margin: 0 12px;
+    padding: 5px;
+    color: #C70039;
+    background-color: #fff;
+    border: 1.5px solid #C70039;
+    border-radius: 5px;
+    cursor: pointer;
+    position: unset;
+    transform: translateY(0%);
+}
