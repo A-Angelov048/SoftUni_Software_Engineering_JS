@@ -29,7 +29,7 @@ export const createFurnitureSchema = yup.object().shape({
     size: yup.string().min(4).required(),
     weight: yup.string().min(4).required(),
     condition: yup.string().min(6).required(),
-    imageUrl: yup.string().required(),
+    imageUrl: yup.array().typeError('image-url is a required field').required(),
     price: yup.number().typeError('price is a required field').positive().required(),
     description: yup.string().min(10).required(),
 })
