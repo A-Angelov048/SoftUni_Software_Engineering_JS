@@ -69,7 +69,7 @@ export default function Edit() {
     }
 
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, editFurniture);
+    const { values, changeHandler, changeHandlerArr, handleField, submitCurForm } = useForm(initialValues, editFurniture);
 
     return (
         <section className="create-offer-section layout-padding">
@@ -233,17 +233,34 @@ export default function Edit() {
                                 </div>
                             }
 
-                            <div className="input-box">
+                            {values.imageUrl?.map((input, index) => (
+                                <div key={index}>
+                                    <div className="input-box images">
 
-                                <input
-                                    type="text"
-                                    placeholder="Image*"
-                                    name="imageUrl"
-                                    value={values.imageUrl}
-                                    onChange={changeHandler}
-                                />
+                                        <input
+                                            type="text"
+                                            placeholder="Image*"
+                                            name="imageUrl"
+                                            value={input}
+                                            onChange={(e) => changeHandlerArr(e, index)}
+                                        />
 
-                            </div>
+                                        {values.imageUrl.length - 1 >= 1 &&
+
+                                            <i onClick={() => handleField('delete', index)} className='bx bxs-trash'></i>
+                                        }
+
+                                    </div>
+
+                                    {values.imageUrl.length - 1 === index && values.imageUrl.length < 4 &&
+
+                                        <div className='btn-container'>
+                                            <button className='btn btn-add' type='button' onClick={() => handleField('add', index)}>Add</button>
+                                        </div>
+                                    }
+                                </div>
+                            ))}
+
 
                             {errors.hasOwnProperty('imageUrl') &&
                                 <div className='error-container'>
