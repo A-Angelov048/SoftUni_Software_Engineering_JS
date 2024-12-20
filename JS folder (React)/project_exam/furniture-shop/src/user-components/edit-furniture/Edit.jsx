@@ -234,8 +234,10 @@ export default function Edit() {
                             }
 
                             {values.imageUrl?.map((input, index) => (
-                                <div key={index}>
-                                    <div className="input-box images">
+
+                                <div className='input-box' key={index}>
+
+                                    <div className="images">
 
                                         <input
                                             type="text"
@@ -258,7 +260,9 @@ export default function Edit() {
                                             <button className='btn btn-add' type='button' onClick={() => handleField('add', index)}>Add</button>
                                         </div>
                                     }
+
                                 </div>
+
                             ))}
 
 
