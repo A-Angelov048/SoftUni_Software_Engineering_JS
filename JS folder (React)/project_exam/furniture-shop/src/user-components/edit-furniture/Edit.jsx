@@ -234,44 +234,46 @@ export default function Edit() {
                             }
 
                             {values.imageUrl?.map((input, index) => (
+                                <>
+                                    <div className='input-box' key={index}>
 
-                                <div className='input-box' key={index}>
+                                        <div className="images">
 
-                                    <div className="images">
+                                            <input
+                                                type="text"
+                                                placeholder="Image-Url*"
+                                                name="imageUrl"
+                                                value={input}
+                                                onChange={(e) => changeHandlerArr(e, index)}
+                                            />
 
-                                        <input
-                                            type="text"
-                                            placeholder="Image*"
-                                            name="imageUrl"
-                                            value={input}
-                                            onChange={(e) => changeHandlerArr(e, index)}
-                                        />
+                                            {values.imageUrl.length - 1 >= 1 &&
 
-                                        {values.imageUrl.length - 1 >= 1 &&
+                                                <i onClick={() => handleField('delete', index)} className='bx bxs-trash'></i>
+                                            }
 
-                                            <i onClick={() => handleField('delete', index)} className='bx bxs-trash'></i>
+                                        </div>
+
+                                        {values.imageUrl.length - 1 === index && values.imageUrl.length < 4 &&
+
+                                            <div className='btn-container'>
+                                                <button className='btn btn-add' type='button' onClick={() => handleField('add', index)}>Add</button>
+                                            </div>
                                         }
 
                                     </div>
 
-                                    {values.imageUrl.length - 1 === index && values.imageUrl.length < 4 &&
+                                    {errors.hasOwnProperty(`imageUrl[${index}]`) &&
+                                        <div className='error-container'>
+                                            <i className='bx bxs-error-circle bx-tada' ></i>
+                                            <p className='error'>{errors[`imageUrl[${index}]`]}</p>
+                                        </div>}
 
-                                        <div className='btn-container'>
-                                            <button className='btn btn-add' type='button' onClick={() => handleField('add', index)}>Add</button>
-                                        </div>
-                                    }
-
-                                </div>
+                                </>
 
                             ))}
 
 
-                            {errors.hasOwnProperty('imageUrl') &&
-                                <div className='error-container'>
-                                    <i className='bx bxs-error-circle bx-tada' ></i>
-                                    <p className='error'>{errors.imageUrl}</p>
-                                </div>
-                            }
 
                             <div className="input-box">
 
