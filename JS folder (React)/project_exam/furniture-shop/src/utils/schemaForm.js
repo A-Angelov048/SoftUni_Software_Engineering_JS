@@ -1,4 +1,5 @@
 import * as yup from "yup";
+
 export const passwordSchema = yup.object().shape({
     password: yup.string().min(6).required(),
     newPassword: yup.string().min(6).required().notOneOf([yup.ref('password'), null], 'the new password must be different from the current one.'),
@@ -20,6 +21,8 @@ export const registerSchema = yup.object().shape({
     rePassword: yup.string().oneOf([yup.ref('password'), null], 'passwords must match!'),
 })
 
+const requiredStrings = yup.string().matches(/^https?:\/\//, 'Image URL should stars with http://... or https://...').required('image-url is a required field');
+
 export const createFurnitureSchema = yup.object().shape({
     name: yup.string().min(4).required(),
     category: yup.string().min(4).required(),
@@ -29,7 +32,7 @@ export const createFurnitureSchema = yup.object().shape({
     size: yup.string().min(4).required(),
     weight: yup.string().min(4).required(),
     condition: yup.string().min(6).required(),
-    imageUrl: yup.array().typeError('image-url is a required field').required(),
+    imageUrl: yup.array().of(requiredStrings),
     price: yup.number().typeError('price is a required field').positive().required(),
     description: yup.string().min(10).required(),
 })
