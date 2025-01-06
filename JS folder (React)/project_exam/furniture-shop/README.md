@@ -4,6 +4,14 @@ The current application is designed for buying and selling furniture. It include
 
 <br>
 
+### Users for testing the application.
+| Email  | Password |
+| ------------- | ------------- |
+| `pesho1@abv.bg` | 123123  |
+| `test@abv.bg` | test123  |
+
+<br>
+
 1. **Home page:**
 
    - **The homepage displays static HTML elements and recently added furniture offers.**
@@ -56,8 +64,8 @@ The current application is designed for buying and selling furniture. It include
 
 - **Pagination for the shop page**
 - ~~**Responsive design**~~
-- **Multiple images for the details furniture page**
-- **When creating an offer, set the quantity**
+- ~~**Multiple images for the details furniture page**~~
+- **Add Cart Page**
 - **View purchased furniture on the profile page and leave a review after purchase.**
 - ~~**Password change for the user**~~
 - ~~**Spinner component for home and shop page**~~
