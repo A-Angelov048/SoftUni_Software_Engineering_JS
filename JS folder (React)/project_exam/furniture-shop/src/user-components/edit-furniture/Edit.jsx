@@ -256,7 +256,7 @@ export default function Edit() {
                                         {values.imageUrl.length - 1 === index && values.imageUrl.length < 4 &&
 
                                             <div className='btn-container'>
-                                                <button className='btn btn-add' type='button' onClick={() => { clearError(); handleField('add', index) }}>Add</button>
+                                                <button className='btn btn-add' type='button' onClick={() => { clearError(); handleField('add', index) }}>Add More</button>
                                             </div>
                                         }
 
@@ -271,8 +271,6 @@ export default function Edit() {
                                 </>
 
                             ))}
-
-
 
                             <div className="input-box">
 
