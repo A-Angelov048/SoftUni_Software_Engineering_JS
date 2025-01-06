@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import { createFurnitureSchema } from '../../utils/schemaForm';
 import { AuthContext } from '../../context/AuthContext';
 import { trimValue } from '../../utils/trimValue';
+import { ErrorContext } from '../../context/ErrorContext';
 
 
 const initialValues = {
@@ -18,7 +19,7 @@ const initialValues = {
     size: '',
     weight: '',
     condition: '',
-    imageUrl: '',
+    imageUrl: [''],
     price: '',
     description: '',
 };
@@ -26,8 +27,8 @@ const initialValues = {
 export default function CreateOffer() {
 
     const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
     const { updateAuthError } = useContext(AuthContext);
+    const { errors, handleError, clearError } = useContext(ErrorContext);
 
     const createFurniture = async (values) => {
 
@@ -43,7 +44,7 @@ export default function CreateOffer() {
                 newError[err.path] = err.message;
             })
 
-            setErrors(newError);
+            handleError(newError);
 
             return;
         }
@@ -59,7 +60,7 @@ export default function CreateOffer() {
 
     }
 
-    const { values, changeHandler, submitCurForm } = useForm(initialValues, createFurniture);
+    const { values, changeHandler, changeHandlerArr, handleField, submitCurForm } = useForm(initialValues, createFurniture);
 
     return (
         <section className="create-offer-section layout-padding">
@@ -223,24 +224,44 @@ export default function CreateOffer() {
                                 </div>
                             }
 
-                            <div className="input-box">
+                            {values.imageUrl.map((input, index) => (
+                                <>
+                                    <div className='input-box' key={index}>
 
-                                <input
-                                    type="text"
-                                    placeholder="Image*"
-                                    name="imageUrl"
-                                    value={values.imageUrl}
-                                    onChange={changeHandler}
-                                />
+                                        <div className="images">
 
-                            </div>
+                                            <input
+                                                type="text"
+                                                placeholder="Image-Url*"
+                                                name="imageUrl"
+                                                value={input}
+                                                onChange={(e) => changeHandlerArr(e, index)}
+                                            />
 
-                            {errors.hasOwnProperty('imageUrl') &&
-                                <div className='error-container'>
-                                    <i className='bx bxs-error-circle bx-tada' ></i>
-                                    <p className='error'>{errors.imageUrl}</p>
-                                </div>
-                            }
+                                            {values.imageUrl.length - 1 >= 1 &&
+                                                <i onClick={() => { clearError(); handleField('delete', index) }} className='bx bxs-trash'></i>
+                                            }
+
+                                        </div>
+
+                                        {values.imageUrl.length - 1 === index && values.imageUrl.length < 4 &&
+
+                                            <div className='btn-container'>
+                                                <button className='btn btn-add' type='button' onClick={() => { clearError(); handleField('add', index) }}>Add More</button>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                    {errors.hasOwnProperty(`imageUrl[${index}]`) &&
+                                        <div className='error-container'>
+                                            <i className='bx bxs-error-circle bx-tada' ></i>
+                                            <p className='error'>{errors[`imageUrl[${index}]`]}</p>
+                                        </div>}
+
+                                </>
+
+                            ))}
 
                             <div className="input-box">
 
