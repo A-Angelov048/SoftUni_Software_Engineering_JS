@@ -1,8 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../api-service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 export function useLatestFurniture() {
@@ -39,10 +40,12 @@ export function useLatestFurniture() {
 
 }
 
-export function useAllFurniture() {
+export function useAllFurniture(statePage) {
 
     const [furniture, dispatch] = useSetFurniture();
     const { updateAuthError } = useContext(AuthContext);
+    const lengthDocuments = useRef(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -52,11 +55,17 @@ export function useAllFurniture() {
 
             try {
 
-                const response = await getAllFurniture(abortController);
-                dispatch({ type: 'GET_FURNITURE', payload: response });
+                const response = await getAllFurniture(abortController, statePage, 8);
+                dispatch({ type: 'GET_FURNITURE', payload: response.data });
+                lengthDocuments.current = response.length;
 
             } catch (error) {
-                if (error.message === '403') return updateAuthError(true);
+
+                if (error.message === '403') {
+                    updateAuthError(true)
+                } else {
+                    navigate('/404', { replace: true });
+                }
 
                 console.error(error.message);
             }
@@ -67,9 +76,9 @@ export function useAllFurniture() {
             abortController.abort();
         }
 
-    }, []);
+    }, [statePage]);
 
-    return furniture;
+    return [furniture, lengthDocuments.current];
 
 }
 
