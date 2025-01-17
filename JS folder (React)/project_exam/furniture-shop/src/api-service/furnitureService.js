@@ -4,7 +4,7 @@ export const createFurnitureRequester = (data) => post('/furniture', data);
 
 export const getLatestFurniture = (abortController) => get('/furniture/latest', abortController);
 
-export const getAllFurniture = (abortController) => get('/furniture', abortController);
+export const getAllFurniture = (abortController, statePage, limit) => get(`/furniture/?page=${statePage}&limit=${limit}`, abortController);
 
 export const getSearchFurniture = (data) => post('/furniture/search', data);
 
