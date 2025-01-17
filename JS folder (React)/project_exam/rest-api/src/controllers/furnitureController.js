@@ -17,14 +17,23 @@ router.get('/latest', async (req, res) => {
 
 router.get('/', async (req, res) => {
 
+    const { page, limit } = req.query;
 
     try {
 
-        const data = await getAllData();
-        res.json(data);
+        const [length, furniture] = await getAllData(page, limit);
+
+        res.status(200).json({
+            status: 'success',
+            length: length,
+            data: furniture
+        });
 
     } catch (err) {
-        console.log(err.errors);
+        res.status(404).json({
+            status: 'fail',
+            message: err.message
+        });
     }
 })
 
