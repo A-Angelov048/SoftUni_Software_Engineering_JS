@@ -4,7 +4,26 @@ const Reviews = require('../models/Reviews');
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
-exports.getAllData = () => Furniture.find();
+exports.getAllData = async (page = 1, limit = 8) => {
+
+    const skip = (page - 1) * limit;
+    const regex = /^\d+$/;
+
+    if (!regex.test(page) || !regex.test(limit)) {
+        throw new Error('Page do not exists.');
+    }
+
+    const [furnitureCount, furniture] = await Promise.all([
+        Furniture.countDocuments(),
+        Furniture.find().skip(skip).limit(Number(limit))
+    ])
+
+    if (skip > furnitureCount) {
+        throw new Error('Page do not exists.');
+    }
+
+    return [furnitureCount, furniture];
+}
 
 exports.createFurniture = async (body, userId) => {
 
