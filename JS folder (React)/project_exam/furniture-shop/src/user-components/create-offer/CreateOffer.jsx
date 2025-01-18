@@ -3,7 +3,7 @@ import '../UserForms.css';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { createFurnitureRequester } from '../../api-service/furnitureService';
-import { useContext, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import { createFurnitureSchema } from '../../utils/schemaForm';
 import { AuthContext } from '../../context/AuthContext';
 import { trimValue } from '../../utils/trimValue';
@@ -225,8 +225,8 @@ export default function CreateOffer() {
                             }
 
                             {values.imageUrl.map((input, index) => (
-                                <>
-                                    <div className='input-box' key={index}>
+                                <Fragment key={index}>
+                                    <div className='input-box'>
 
                                         <div className="images">
 
@@ -259,7 +259,7 @@ export default function CreateOffer() {
                                             <p className='error'>{errors[`imageUrl[${index}]`]}</p>
                                         </div>}
 
-                                </>
+                                </Fragment>
 
                             ))}
 

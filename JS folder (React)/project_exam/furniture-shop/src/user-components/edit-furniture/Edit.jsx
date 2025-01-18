@@ -4,7 +4,7 @@ import '../UserForms.css';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { editFurnitureRequester } from '../../api-service/furnitureService';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { FurnitureContext } from '../../context/FurnitureContext';
 import { AuthContext } from '../../context/AuthContext';
 import { trimValue } from '../../utils/trimValue';
@@ -234,8 +234,8 @@ export default function Edit() {
                             }
 
                             {values.imageUrl?.map((input, index) => (
-                                <>
-                                    <div className='input-box' key={index}>
+                                <Fragment key={index}>
+                                    <div className='input-box'>
 
                                         <div className="images">
 
@@ -268,7 +268,7 @@ export default function Edit() {
                                             <p className='error'>{errors[`imageUrl[${index}]`]}</p>
                                         </div>}
 
-                                </>
+                                </Fragment>
 
                             ))}
 
