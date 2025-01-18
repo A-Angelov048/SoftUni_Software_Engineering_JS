@@ -18,7 +18,7 @@ exports.getAllData = async (page = 1, limit = 8) => {
         Furniture.find().skip(skip).limit(Number(limit))
     ])
 
-    if (skip > furnitureCount) {
+    if (skip >= furnitureCount) {
         throw new Error('Page do not exists.');
     }
 
