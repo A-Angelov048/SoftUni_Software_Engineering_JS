@@ -22,6 +22,7 @@ import Edit from "./user-components/edit-furniture/Edit";
 import GuestGuard from "./shared-components/guards/GuestGuard";
 import AuthGuard from "./shared-components/guards/AuthGuard";
 import ScrollToTop from "./shared-components/scroll-to-top/ScrollToTop";
+import Basket from "./user-components/basket/Basket";
 
 
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/basket" element={<Basket />} />
 
             <Route element={<AuthGuard />}>
               <Route path="/login" element={<Login />} />
