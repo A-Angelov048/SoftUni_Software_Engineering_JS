@@ -79,6 +79,7 @@ router.get('/profile/:id', async (req, res) => {
             lastLogin: user.lastLogin,
             imageProfile: user.imageProfile,
             furniture: user.furniture,
+            role: user.role,
         }
 
         if (flag) {
