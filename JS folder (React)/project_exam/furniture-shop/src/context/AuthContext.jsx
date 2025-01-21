@@ -21,6 +21,7 @@ export function ContextProvider(props) {
         imageProfile: authState.imageProfile,
         username: authState.username,
         location: authState.location,
+        role: authState.role,
         error: authError,
         changeAuthState,
         updateAuthError,
