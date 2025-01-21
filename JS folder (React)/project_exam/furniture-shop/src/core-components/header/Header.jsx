@@ -7,7 +7,7 @@ import { logout } from '../../api-service/userService';
 
 export default function Header() {
 
-    const { userId, changeAuthState, updateAuthError } = useContext(AuthContext);
+    const { userId, role, changeAuthState, updateAuthError } = useContext(AuthContext);
 
     const logoutUser = async () => {
 
@@ -50,16 +50,18 @@ export default function Header() {
 
                     {!!userId ?
                         <>
-                            <div>
-                                <Link className="user" to="/create-offer">Create Offer </Link>
-                            </div>
+                            {role === 'admin' &&
+                                <div>
+                                    <Link className="user" to="/create-offer/admin">Create Offer </Link>
+                                </div>
+                            }
 
                             <div>
                                 <Link className="user" onClick={logoutUser} to="/">Logout</Link>
                             </div>
 
                             <div>
-                                <Link className="user" to={`/profile/${userId}`}>
+                                <Link className="user" to={`/profile/${userId}${role === 'admin' ? '/admin' : ''}`}>
                                     <i className='bx bxs-user'></i>
                                 </Link>
                             </div>
