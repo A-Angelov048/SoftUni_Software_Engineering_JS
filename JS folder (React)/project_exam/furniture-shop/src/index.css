@@ -254,7 +254,7 @@ hr:focus-within {
 
     body .details-section .container .wrapper-details .left-box .container-image .container-large .image-box-large .large-image {
         height: 500px;
-        width: auto;
+        width: 500px;
     }
 }
 
@@ -415,6 +415,7 @@ hr:focus-within {
 
     body .details-section .container .wrapper-details .left-box .container-image .container-large .image-box-large .large-image {
         height: 400px;
+        width: 400px;
     }
 
 }
@@ -482,6 +483,7 @@ hr:focus-within {
 
     body .details-section .container .wrapper-details .left-box .container-image .container-large .image-box-large .large-image {
         height: 300px;
+        width: 300px;
     }
 
     body .details-section .container .wrapper-details .left-box .container-image .container-small {
@@ -552,6 +554,7 @@ hr:focus-within {
 
     body .details-section .container .wrapper-details .left-box .container-image .container-large .image-box-large .large-image {
         height: 200px;
+        width: 200px;
     }
 }
 
