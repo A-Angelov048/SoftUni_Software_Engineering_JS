@@ -50,8 +50,8 @@ function App() {
             </Route>
 
             <Route element={<GuestGuard />}>
-              <Route path="/create-offer" element={<CreateOffer />} />
-              <Route path="/profile/:profileId" element={<Profile />} >
+              <Route path="/create-offer/admin" element={<CreateOffer />} />
+              <Route path="/profile/:profileId/admin?" element={<Profile />} >
                 <Route path="my-furniture" element={<BrandContainer />} />
                 <Route path="wishlist" element={<BrandContainer />} />
                 <Route path="settings" element={<Settings />} />
@@ -62,7 +62,7 @@ function App() {
             <Route element={<FurnitureContextProvider />}>
               <Route path="/details-furniture/:furnitureId" element={<Details />} />
               <Route element={<GuestGuard />}>
-                <Route path="/edit-furniture/:furnitureId" element={<Edit />} />
+                <Route path="/edit-furniture/:furnitureId/admin" element={<Edit />} />
               </Route>
             </Route>
 
