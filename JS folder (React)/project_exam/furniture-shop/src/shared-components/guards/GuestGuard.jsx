@@ -7,6 +7,6 @@ export default function GuestGuard() {
 
     const user = useContext(AuthContext);
 
-    return !!user.userId ? <Outlet /> : <Navigate to={'/login'} />
+    return !!user.userId ? <Outlet /> : <Navigate to={'/login'} replace={true} />
 
 }

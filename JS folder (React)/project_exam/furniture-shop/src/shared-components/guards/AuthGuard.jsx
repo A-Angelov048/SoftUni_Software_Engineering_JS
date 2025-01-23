@@ -7,6 +7,6 @@ export default function AuthGuard() {
 
     const user = useContext(AuthContext);
 
-    return !!user.userId ? <Navigate to={'/'} /> : <Outlet />
+    return !!user.userId ? <Navigate to={'/'} replace={true} /> : <Outlet />
 
 }
