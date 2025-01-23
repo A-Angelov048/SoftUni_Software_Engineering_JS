@@ -23,6 +23,7 @@ import GuestGuard from "./shared-components/guards/GuestGuard";
 import AuthGuard from "./shared-components/guards/AuthGuard";
 import ScrollToTop from "./shared-components/scroll-to-top/ScrollToTop";
 import Basket from "./user-components/basket/Basket";
+import AdminGuard from "./shared-components/guards/AdminGuard";
 
 
 
@@ -49,9 +50,12 @@ function App() {
               <Route path="/register" element={<Register />} />
             </Route>
 
-            <Route element={<GuestGuard />}>
+            <Route element={<AdminGuard />}>
               <Route path="/create-offer/admin" element={<CreateOffer />} />
-              <Route path="/profile/:profileId/admin?" element={<Profile />} >
+            </Route>
+
+            <Route element={<GuestGuard />}>
+              <Route path="/profile/:profileId" element={<Profile />} >
                 <Route path="my-furniture" element={<BrandContainer />} />
                 <Route path="wishlist" element={<BrandContainer />} />
                 <Route path="settings" element={<Settings />} />
@@ -61,7 +65,7 @@ function App() {
 
             <Route element={<FurnitureContextProvider />}>
               <Route path="/details-furniture/:furnitureId" element={<Details />} />
-              <Route element={<GuestGuard />}>
+              <Route element={<AdminGuard />}>
                 <Route path="/edit-furniture/:furnitureId/admin" element={<Edit />} />
               </Route>
             </Route>
