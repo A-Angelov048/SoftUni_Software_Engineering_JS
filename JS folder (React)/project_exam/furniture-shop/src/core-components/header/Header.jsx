@@ -50,7 +50,7 @@ export default function Header() {
 
                     {!!userId ?
                         <>
-                            {role === 'admin' &&
+                            {role === 'Admin' &&
                                 <div>
                                     <Link className="user" to="/create-offer/admin">Create Offer </Link>
                                 </div>
@@ -61,7 +61,7 @@ export default function Header() {
                             </div>
 
                             <div>
-                                <Link className="user" to={`/profile/${userId}${role === 'admin' ? '/admin' : ''}`}>
+                                <Link className="user" to={`/profile/${userId}`}>
                                     <i className='bx bxs-user'></i>
                                 </Link>
                             </div>
@@ -75,7 +75,7 @@ export default function Header() {
                             <div>
                                 <Link className="user" to="/register">Register</Link>
                             </div>
-                            
+
                         </>}
 
                     <div>

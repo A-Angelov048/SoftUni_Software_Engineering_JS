@@ -97,12 +97,12 @@ export default function Details() {
                                     <div className="price">
                                         <h3>Price</h3>
                                         <p className="current-price">
-                                            ${role !== 'admin' ? furniture.price * quantity : furniture.price}
+                                            ${role !== 'Admin' ? furniture.price * quantity : furniture.price}
                                         </p>
                                     </div>
 
                                     {
-                                        role !== 'admin'
+                                        role !== 'Admin'
 
                                         &&
 
@@ -192,7 +192,7 @@ export default function Details() {
 
                                     <div className="button-box">
                                         {
-                                            role === 'admin' ?
+                                            role === 'Admin' ?
 
                                                 <>
                                                     <Link className="btn-hover" to={`/edit-furniture/${furnitureId}/admin`}>Edit</Link>
