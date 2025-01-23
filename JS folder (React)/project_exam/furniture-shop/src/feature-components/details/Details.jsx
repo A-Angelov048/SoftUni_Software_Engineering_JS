@@ -3,68 +3,30 @@ import Reviews from './reviews/Reviews';
 
 import { Link, useParams } from 'react-router-dom';
 import { useContext, useRef, useState } from 'react';
-import { useDetailsFurniture } from '../../hooks/useFurnitureResponse';
+import { useDetailsFurniture, useUpdateWishlist } from '../../hooks/useFurnitureResponse';
 
 import { AuthContext } from '../../context/AuthContext';
 import { FurnitureContext } from '../../context/FurnitureContext';
-import { purchaseFurniture, wishlist } from '../../api-service/furnitureService';
 import { averageNumReviews } from '../../utils/averageNumReviews';
 import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
 
 export default function Details() {
 
     const { furnitureId } = useParams();
+
     const furniture = useDetailsFurniture(furnitureId);
+    const updateWishlist = useUpdateWishlist()
+
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
     const [changeContent, setChangeContent] = useState(true);
     const [imageIndex, setImageIndex] = useState(0);
+
+    const { userId, role } = useContext(AuthContext);
+    const { reviews, listUserLikes } = useContext(FurnitureContext);
+
     const ref = useRef(null);
 
-    const { userId, updateAuthError } = useContext(AuthContext);
-    const { updateArrayState, buyList, reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
-
-    function contentHandler(e) {
-
-        if (e.target.textContent === 'Description') {
-            setChangeContent(true);
-        } else {
-            setChangeContent(false);
-        }
-    }
-
-    async function buyFurniture() {
-
-        if (quantity === 0) return;
-
-        try {
-            await purchaseFurniture(furnitureId);
-            updateArrayState(userId, 'buyList');
-        } catch (error) {
-            if (error.message === '403') return updateAuthError(true);
-
-            console.error(error.message);
-        }
-
-    }
-
-    async function updateWishlist() {
-
-        try {
-            await wishlist(furnitureId);
-
-            handleUserLikes(userId);
-
-        } catch (error) {
-            if (error.message === '403') return updateAuthError(true);
-
-            console.error(error.message);
-        }
-    }
-
-    function scrollToReviews() {
-        ref.current?.scrollIntoView({ behavior: 'smooth' });
-    }
 
     return (
 
@@ -115,16 +77,6 @@ export default function Details() {
 
                                 <header className="header-right">
                                     <h1>{furniture.name}</h1>
-                                    <Link to={`/profile/${furniture.owner?._id}`}>
-                                        <div className="profile">
-                                            <img alt=""
-                                                src={furniture.owner?.imageProfile ? furniture.owner?.imageProfile : '/images/profile-circle-svgrepo-com.svg'} />
-                                            <div>
-                                                <p>Creator:</p>
-                                                <p>{furniture.owner?.username}</p>
-                                            </div>
-                                        </div>
-                                    </Link>
                                 </header>
 
                                 <div className="box-reviews">
@@ -137,7 +89,7 @@ export default function Details() {
                                         <i className={averageNumReviews() === 1 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
                                     </div>
 
-                                    <p onClick={scrollToReviews}>{reviews?.length} Reviews</p>
+                                    <p onClick={() => ref.current.scrollIntoView({ behavior: 'smooth' })}>{reviews?.length} Reviews</p>
                                 </div>
 
                                 <div className="box-price-quantity">
@@ -145,25 +97,21 @@ export default function Details() {
                                     <div className="price">
                                         <h3>Price</h3>
                                         <p className="current-price">
-                                            ${furniture.price}
+                                            ${role !== 'admin' ? furniture.price * quantity : furniture.price}
                                         </p>
                                     </div>
 
                                     {
-                                        !!userId
+                                        role !== 'admin'
 
                                         &&
 
-                                        userId !== furniture.owner?._id
-
-                                        &&
-
-                                        <div className="quantity">
+                                        < div className="quantity">
                                             <h3>Quantity</h3>
                                             <div className="quantity-btn">
-                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0 || buyList.includes(userId)) { return } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
+                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0) { return } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
                                                 <p>{quantity}</p>
-                                                <button name="plus" type="button" onClick={() => { if (buyList.includes(userId)) { return } setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
+                                                <button name="plus" type="button" onClick={() => { if (quantity >= 10) { return } setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
                                             </div>
                                         </div>
                                     }
@@ -174,13 +122,13 @@ export default function Details() {
 
                                     <section className="content-header">
                                         <div>
-                                            <p onClick={contentHandler}>Description</p>
+                                            <p onClick={() => setChangeContent(true)}>Description</p>
                                             <hr className={changeContent ? 'active' : null} />
                                         </div>
 
                                         <div>
-                                            <p onClick={contentHandler}>Details</p>
-                                            <hr className={!changeContent ? 'active' : null} />
+                                            <p onClick={() => setChangeContent(false)}>Details</p>
+                                            <hr className={changeContent ? null : 'active'} />
                                         </div>
                                     </section>
 
@@ -240,58 +188,29 @@ export default function Details() {
 
                                 </div>
 
-                                {
-                                    !!userId
+                                <div className="box-total-price">
 
-                                    &&
-
-                                    <div className="box-total-price">
-
+                                    <div className="button-box">
                                         {
-                                            userId !== furniture.owner?._id
+                                            role === 'admin' ?
 
-                                            &&
+                                                <>
+                                                    <Link className="btn-hover" to={`/edit-furniture/${furnitureId}/admin`}>Edit</Link>
+                                                    <button onClick={() => setIsDialogOpen(true)} className="btn-hover" name="delete" type="button">Delete</button>
+                                                </>
 
-                                            <div className="total-price">
-                                                <h3>Total Price</h3>
-                                                <p>${furniture.price * quantity}</p>
-                                            </div>
+                                                :
+
+                                                <>
+                                                    <button disabled={quantity <= 0 ? true : false} onClick={null} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Add to Basket</button>
+                                                    <button name="heart" type="button">
+                                                        <i onClick={() => updateWishlist(furnitureId)} className={listUserLikes?.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
+                                                    </button>
+                                                </>
                                         }
-
-                                        <div className="button-box">
-                                            {
-                                                userId === furniture.owner?._id ?
-
-                                                    <>
-                                                        <Link className="btn-hover" to={`/edit-furniture/${furnitureId}`}>Edit</Link>
-                                                        <button onClick={() => setIsDialogOpen(true)} className="btn-hover" name="delete" type="button">Delete</button>
-                                                    </>
-
-                                                    :
-
-                                                    <>
-                                                        {
-                                                            buyList?.includes(userId) ?
-
-                                                                <>
-                                                                    <p className='purchase'>Thank you for your purchase!</p>
-                                                                </>
-
-                                                                :
-
-                                                                <>
-                                                                    <button onClick={buyFurniture} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Buy</button>
-                                                                    <button name="heart" type="button">
-                                                                        <i onClick={updateWishlist} className={listUserLikes?.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
-                                                                    </button>
-                                                                </>
-                                                        }
-                                                    </>
-                                            }
-                                        </div>
-
                                     </div>
-                                }
+
+                                </div>
 
                             </div>
 
@@ -299,7 +218,7 @@ export default function Details() {
 
                     </div>
 
-                </div>
+                </div >
 
             </section >
 
