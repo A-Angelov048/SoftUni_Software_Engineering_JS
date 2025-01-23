@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { getAllFurniture, getDetailsFurniture, getLatestFurniture } from "../api-service/furnitureService";
+import { getAllFurniture, getDetailsFurniture, getLatestFurniture, wishlist } from "../api-service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";
@@ -111,5 +111,29 @@ export function useDetailsFurniture(furnitureId) {
     }, []);
 
     return furniture;
+
+}
+
+export function useUpdateWishlist() {
+
+    const { userId, updateAuthError } = useContext(AuthContext);
+    const { handleUserLikes } = useContext(FurnitureContext);
+
+    const updateWishlist = async (furnitureId) => {
+
+        try {
+
+            await wishlist(furnitureId);
+            handleUserLikes(userId);
+
+        } catch (error) {
+            if (error.message === '403') return updateAuthError(true);
+
+            console.error(error.message);
+        }
+
+    }
+
+    return updateWishlist
 
 }
