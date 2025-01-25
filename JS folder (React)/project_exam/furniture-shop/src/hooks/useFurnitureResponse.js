@@ -121,6 +121,10 @@ export function useUpdateWishlist() {
 
     const updateWishlist = async (furnitureId) => {
 
+        if (!userId) {
+            return; //send message to UI
+        }
+
         try {
 
             await wishlist(furnitureId);
