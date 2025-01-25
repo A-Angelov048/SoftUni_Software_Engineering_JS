@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { ErrorContextProvider } from "./context/ErrorContext";
 import { ContextProvider } from "./context/AuthContext";
 import { FurnitureContextProvider } from "./context/FurnitureContext";
+import { BasketProvider } from "./context/BasketContext";
 
 import Introduction from "./feature-components/introduction/Introduction";
 import Footer from "./core-components/footer/Footer"
@@ -35,48 +36,52 @@ function App() {
 
       <ContextProvider>
 
-        <Introduction />
+        <BasketProvider>
 
-        <ScrollToTop>
+          <Introduction />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/basket" element={<Basket />} />
+          <ScrollToTop>
 
-            <Route element={<AuthGuard />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Route>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/basket" element={<Basket />} />
 
-            <Route element={<AdminGuard />}>
-              <Route path="/create-offer/admin" element={<CreateOffer />} />
-            </Route>
-
-            <Route element={<GuestGuard />}>
-              <Route path="/profile/:profileId" element={<Profile />} >
-                <Route path="my-furniture" element={<BrandContainer />} />
-                <Route path="wishlist" element={<BrandContainer />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="sales" element={<BrandContainer />} />
-              </Route >
-            </Route>
-
-            <Route element={<FurnitureContextProvider />}>
-              <Route path="/details-furniture/:furnitureId" element={<Details />} />
-              <Route element={<AdminGuard />}>
-                <Route path="/edit-furniture/:furnitureId/admin" element={<Edit />} />
+              <Route element={<AuthGuard />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
               </Route>
-            </Route>
 
-            <Route path="*" element={<NotFound />} />
+              <Route element={<AdminGuard />}>
+                <Route path="/create-offer/admin" element={<CreateOffer />} />
+              </Route>
 
-          </Routes>
+              <Route element={<GuestGuard />}>
+                <Route path="/profile/:profileId" element={<Profile />} >
+                  <Route path="my-furniture" element={<BrandContainer />} />
+                  <Route path="wishlist" element={<BrandContainer />} />
+                  <Route path="settings" element={<Settings />} />
+                  <Route path="sales" element={<BrandContainer />} />
+                </Route >
+              </Route>
 
-        </ScrollToTop>
+              <Route element={<FurnitureContextProvider />}>
+                <Route path="/details-furniture/:furnitureId" element={<Details />} />
+                <Route element={<AdminGuard />}>
+                  <Route path="/edit-furniture/:furnitureId/admin" element={<Edit />} />
+                </Route>
+              </Route>
 
-        <Footer />
+              <Route path="*" element={<NotFound />} />
+
+            </Routes>
+
+          </ScrollToTop>
+
+          <Footer />
+
+        </BasketProvider>
 
       </ContextProvider>
 
