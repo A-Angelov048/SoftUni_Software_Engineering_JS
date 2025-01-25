@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export function ContextProvider(props) {
 
-    const [authState, setAuthState] = usePersistence({});
+    const [authState, setAuthState] = usePersistence({}, 'auth');
     const [authError, setAuthErrorState] = useState(false);
 
     const changeAuthState = (state) => {
