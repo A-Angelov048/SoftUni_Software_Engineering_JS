@@ -10,6 +10,7 @@ import { FurnitureContext } from '../../context/FurnitureContext';
 import { averageNumReviews } from '../../utils/averageNumReviews';
 import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
 import { BasketContext } from '../../context/BasketContext';
+import { ErrorContext } from '../../context/ErrorContext';
 
 export default function Details() {
 
@@ -26,6 +27,7 @@ export default function Details() {
     const { userId, role } = useContext(AuthContext);
     const { reviews, listUserLikes } = useContext(FurnitureContext);
     const { changeBasketState } = useContext(BasketContext);
+    const { errors } = useContext(ErrorContext);
 
     const ref = useRef(null);
 
@@ -42,6 +44,13 @@ export default function Details() {
                             Details Furniture
                         </h2>
                     </div>
+
+                    {(errors.hasOwnProperty('successMessage') || errors.hasOwnProperty('errorMessage')) &&
+                        <div className={errors.successMessage ? 'error-container success position disappear-text' : 'error-container position disappear-text'}>
+                            {errors.successMessage ? <i className='bx bx-check bx-tada' /> : <i className='bx bxs-error-circle bx-tada' />}
+                            <p className={errors.successMessage ? 'success bigger-font' : 'error bigger-font'}>{errors.successMessage || errors.errorMessage}</p>
+                        </div>
+                    }
 
                     <div className="layout-padding2">
 
