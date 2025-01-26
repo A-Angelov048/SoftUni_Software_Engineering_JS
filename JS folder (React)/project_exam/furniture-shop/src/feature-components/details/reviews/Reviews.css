@@ -101,21 +101,5 @@
 }
 
 .recent-reviews .container .wrapper-reviews .write-review form .error-container {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    width: fit-content;
-    padding: 5px 10px;
     margin: 10px 0px 15px 0px;
-    background-color: #fee2e2;
-    border-radius: 8px;
-}
-
-.recent-reviews .container .wrapper-reviews .write-review form .error-container i {
-    color: #ef4444;
-}
-
-.recent-reviews .container .wrapper-reviews .write-review form .error-container .error {
-    color: #ef4444;
-    font-weight: 600;
 }

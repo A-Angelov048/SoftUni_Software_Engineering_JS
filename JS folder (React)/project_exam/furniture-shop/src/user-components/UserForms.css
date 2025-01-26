@@ -74,61 +74,6 @@
     text-decoration: underline;
 }
 
-.create-offer-section .container .error-container,
-.register .container .error-container,
-.login-section .container .error-container {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    width: fit-content;
-    padding: 5px 10px;
-    margin: 0px 10px;
-    background-color: #fee2e2;
-    border-radius: 8px;
-}
-
-.create-offer-section .container .error-container i,
-.register .container .error-container i,
-.login-section .container .error-container i {
-    color: #ef4444;
-}
-
-.create-offer-section .container .error-container .error,
-.register .container .error-container .error,
-.login-section .container .error-container .error {
-    color: #ef4444;
-    font-weight: 600;
-}
-
-.register .container .error-container.position,
-.login-section .container .error-container.position {
-    position: relative;
-    top: 15px;
-    margin: auto;
-    align-items: center;
-}
-
-.register .container .error-container.disappear-text,
-.login-section .container .error-container.disappear-text {
-    animation: fadeOut 4s forwards;
-}
-
-.register .container .error-container .error.bigger-font,
-.login-section .container .error-container .error.bigger-font {
-    font-size: 20px;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
 .wrapper-user .btn-container {
     display: flex;
     justify-content: flex-end;
