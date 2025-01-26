@@ -76,11 +76,13 @@ exports.wishlistFurniture = async (furnitureId, userId) => {
                 User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } }),
                 Furniture.findByIdAndUpdate(furnitureId, { $pull: { listUserLikes: userId } })
             ])
+            return 'remove';
         } else {
             await Promise.all([
                 User.findByIdAndUpdate(userId, { $push: { wishlist: furnitureId } }),
                 Furniture.findByIdAndUpdate(furnitureId, { $push: { listUserLikes: userId } })
             ])
+            return 'add';
         }
 
     } catch (error) {
