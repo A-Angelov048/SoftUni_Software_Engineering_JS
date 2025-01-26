@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
     try {
 
-        createFurniture({ ...body, owner: userId }, userId);
+        await createFurniture({ ...body, owner: userId }, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -89,7 +89,7 @@ router.delete('/delete/:id', async (req, res) => {
 
     try {
 
-        deleteFurniture(furnitureId, userId);
+        await deleteFurniture(furnitureId, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -105,7 +105,7 @@ router.get('/buy/:id', async (req, res) => {
 
     try {
 
-        buyFurniture(furnitureId, userId);
+        await buyFurniture(furnitureId, userId);
         res.json({ ok: true });
 
     } catch (err) {
@@ -120,8 +120,19 @@ router.get('/wishlist/:id', async (req, res) => {
 
     try {
 
-        wishlistFurniture(furnitureId, userId);
-        res.json({ ok: true });
+        const result = await wishlistFurniture(furnitureId, userId);
+
+        if (result === 'add') {
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully add furniture to wishlist'
+            });
+        } else {
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully remove furniture from wishlist'
+            });
+        }
 
     } catch (err) {
         console.log(err.errors);
