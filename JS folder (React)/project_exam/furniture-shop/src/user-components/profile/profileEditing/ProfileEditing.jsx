@@ -90,7 +90,7 @@ export default function ProfileEditing() {
                 </div>
 
                 {errors.hasOwnProperty('username') &&
-                    <div className='message-container error'>
+                    <div className='error-container'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.username}</p>
                     </div>

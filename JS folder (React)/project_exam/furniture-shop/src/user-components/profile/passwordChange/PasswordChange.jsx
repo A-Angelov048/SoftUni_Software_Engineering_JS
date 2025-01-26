@@ -101,7 +101,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('password') &&
-                    <div className='message-container error'>
+                    <div className='error-container'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.password}</p>
                     </div>
@@ -125,7 +125,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('newPassword') &&
-                    <div className='message-container error'>
+                    <div className='error-container'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.newPassword}</p>
                     </div>
@@ -149,7 +149,7 @@ export default function PasswordChange() {
                 </div>
 
                 {errors.hasOwnProperty('reNewPassword') &&
-                    <div className='message-container error'>
+                    <div className='error-container'>
                         <i className='bx bxs-error-circle bx-tada' ></i>
                         <p className='error'>{errors.reNewPassword}</p>
                     </div>
