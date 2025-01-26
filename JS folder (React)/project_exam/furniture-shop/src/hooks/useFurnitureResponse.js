@@ -4,6 +4,7 @@ import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ErrorContext } from "../context/ErrorContext";
 
 
 export function useLatestFurniture() {
@@ -118,17 +119,35 @@ export function useUpdateWishlist() {
 
     const { userId, updateAuthError } = useContext(AuthContext);
     const { handleUserLikes } = useContext(FurnitureContext);
+    const { handleError, clearError } = useContext(ErrorContext);
 
     const updateWishlist = async (furnitureId) => {
 
         if (!userId) {
-            return; //send message to UI
+
+            handleError({ errorMessage: 'Please login first' });
+
+            setTimeout(() => {
+
+                clearError();
+
+            }, 2000);
+
+            return;
         }
 
         try {
 
-            await wishlist(furnitureId);
+            const result = await wishlist(furnitureId);
             handleUserLikes(userId);
+
+            handleError({ successMessage: result.message });
+
+            setTimeout(() => {
+
+                clearError();
+
+            }, 2000);
 
         } catch (error) {
             if (error.message === '403') return updateAuthError(true);
