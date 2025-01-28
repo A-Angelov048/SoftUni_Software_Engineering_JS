@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
-import { getAllFurniture, getDetailsFurniture, getLatestFurniture, wishlist } from "../api-service/furnitureService";
+import { useContext, useEffect, useRef, useState } from "react";
+import { getAllFurniture, getBasketItems, getDetailsFurniture, getLatestFurniture, wishlist } from "../api-service/furnitureService";
 import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";
@@ -138,10 +138,10 @@ export function useUpdateWishlist() {
 
         try {
 
-            const result = await wishlist(furnitureId);
+            const response = await wishlist(furnitureId);
             handleUserLikes(userId);
 
-            handleError({ successMessage: result.message });
+            handleError({ successMessage: response.message });
 
             setTimeout(() => {
 
@@ -158,5 +158,37 @@ export function useUpdateWishlist() {
     }
 
     return updateWishlist
+
+}
+
+export function useGetBasketItems(basket) {
+
+    const basketIds = basket.map(x => x.id);
+    if (basketIds.length === 0) return [];
+
+    const [basketItems, setBasketItems] = useState([]);
+
+    useEffect(() => {
+
+        const abortController = new AbortController();
+
+        (async () => {
+
+            try {
+
+                const response = await getBasketItems(basketIds, abortController);
+                setBasketItems(response);
+
+            } catch (error) {
+                if (error.message === '403') return updateAuthError(true);
+
+                console.error(error.message);
+            }
+
+        })();
+
+    }, []);
+
+    return basketItems;
 
 }
