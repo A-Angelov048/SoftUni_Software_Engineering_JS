@@ -136,3 +136,5 @@ exports.searchFurniture = (data) => {
 
     return Furniture.find(body);
 }
+
+exports.getBasketItems = (data) => Furniture.find({ _id: { $in: data } });
