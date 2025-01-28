@@ -17,3 +17,5 @@ export const purchaseFurniture = (furnitureId) => get(`/furniture/buy/${furnitur
 export const wishlist = (furnitureId) => get(`/furniture/wishlist/${furnitureId}`);
 
 export const editFurnitureRequester = (furnitureId, data) => put(`/furniture/edit/${furnitureId}`, data);
+
+export const getBasketItems = (data) => post('/furniture/basket', data);
