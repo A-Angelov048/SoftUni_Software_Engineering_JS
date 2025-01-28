@@ -1,6 +1,14 @@
 import './Basket.css';
+import { useContext } from 'react';
+import { BasketContext } from '../../context/BasketContext';
+import { useGetBasketItems } from '../../hooks/useFurnitureResponse';
 
 export default function Basket() {
+
+    const { basketItems, changeBasketState, removeBasketState } = useContext(BasketContext);
+    
+    const getBasketItems = useGetBasketItems(basketItems);
+    
 
     return (
         <section className="basket-page layout-padding">

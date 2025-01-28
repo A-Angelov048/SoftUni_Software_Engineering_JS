@@ -17,7 +17,7 @@ export default function Details() {
     const { furnitureId } = useParams();
 
     const furniture = useDetailsFurniture(furnitureId);
-    const updateWishlist = useUpdateWishlist()
+    const updateWishlist = useUpdateWishlist();
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
