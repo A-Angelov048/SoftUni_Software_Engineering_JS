@@ -1,14 +1,14 @@
 import './Basket.css';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { BasketContext } from '../../context/BasketContext';
 import { useGetBasketItems } from '../../hooks/useFurnitureResponse';
 
 export default function Basket() {
 
     const { basketItems, changeBasketState, removeBasketState } = useContext(BasketContext);
-    
+
     const getBasketItems = useGetBasketItems(basketItems);
-    
+
 
     return (
         <section className="basket-page layout-padding">
@@ -29,38 +29,54 @@ export default function Basket() {
 
                             <header className='basket-heading'>
                                 <i className='bx bx-basket'></i>
-                                <h2>- 2 items</h2>
+                                <h2>{`- ${basketItems.length} items`}</h2>
                             </header>
 
                             <div className='basket-body'>
 
-                                <div className="basket-item">
+                                {getBasketItems.map((items, index) => (
 
-                                    <img />
+                                    <Fragment key={items._id}>
 
-                                    <div className="item-details">
-                                        <h3>Blue denim shirt</h3>
-                                        <div className="actions">
-                                            <button className="delete-btn">
-                                                <i className='bx bx-trash bx-tada-hover' ></i>
-                                            </button>
-                                            <button name="heart-btn" type="button">
-                                                <i className='bx bxs-heart bx-tada-hover'></i>
-                                            </button>
+                                        <div className="basket-item">
+
+                                            <img src={items.imageUrl[0]} />
+
+                                            <div className="item-details">
+                                                <h3>{items.name}</h3>
+                                                <div className="actions">
+                                                    <button className="delete-btn">
+                                                        <i onClick={() => removeBasketState(items._id)} className='bx bx-trash bx-tada-hover' ></i>
+                                                    </button>
+                                                    <button name="heart-btn" type="button">
+                                                        <i className='bx bxs-heart bx-tada-hover'></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div className="quantity-btn">
+
+                                                <button onClick={() => { quantityHandler(items._id, 'decrement') }} name="minus" type="button"><i className="bx bx-minus"></i></button>
+
+                                                <p>{basketItems.map((x) => (
+                                                    x.id === items._id && <Fragment key={x.id}>{x.quantity}</Fragment>
+                                                ))}</p>
+
+                                                <button onClick={() => { quantityHandler(items._id, 'increment') }} name="plus" type="button"><i className="bx bx-plus"></i></button>
+
+                                            </div>
+
+                                            <p className="price">{basketItems.map((x) => (
+                                                x.id === items._id && <Fragment key={x.id}>{'$' + (items.price * x.quantity)}</Fragment>
+                                            ))}</p>
+
                                         </div>
-                                    </div>
 
-                                    <div className="quantity-btn">
-                                        <button name="minus" type="button"><i className="bx bx-minus"></i></button>
-                                        <p>0</p>
-                                        <button name="plus" type="button"><i className="bx bx-plus"></i></button>
-                                    </div>
+                                        {getBasketItems.length - 1 !== index && < hr />}
 
-                                    <p className="price">$17.99</p>
+                                    </Fragment>
 
-                                </div>
-
-                                <hr />
+                                ))}
 
                             </div>
 
