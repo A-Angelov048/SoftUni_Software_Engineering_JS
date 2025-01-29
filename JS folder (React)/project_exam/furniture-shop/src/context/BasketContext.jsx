@@ -23,7 +23,10 @@ export function BasketProvider(props) {
     };
 
     const removeBasketState = (id) => {
-        setBasketState(oldState => oldState.filter(item => item !== id));
+        
+        const newBasket = [...basketState];
+
+        setBasketState(newBasket.filter(item => item.id !== id));
     };
 
     const data = {
