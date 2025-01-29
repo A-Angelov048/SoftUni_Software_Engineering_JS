@@ -156,7 +156,6 @@ router.post('/search', async (req, res) => {
 router.post('/basket', async (req, res) => {
 
     const body = req.body;
-    console.log(body);
     
     try {
 
