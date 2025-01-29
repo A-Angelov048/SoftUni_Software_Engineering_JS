@@ -9,6 +9,22 @@ export default function Basket() {
 
     const getBasketItems = useGetBasketItems(basketItems);
 
+    const quantityHandler = (idFurniture, operation) => {
+
+        const findCurrent = basketItems.find(x => x.id === idFurniture)
+
+        switch (operation) {
+
+            case 'increment': if (findCurrent.quantity >= 10) { return } findCurrent.quantity++; break;
+
+            case 'decrement': if (findCurrent.quantity <= 1) { return } findCurrent.quantity--; break;
+
+        }
+
+        changeBasketState({ id: findCurrent.id, quantity: findCurrent.quantity });
+
+    };
+    
 
     return (
         <section className="basket-page layout-padding">
