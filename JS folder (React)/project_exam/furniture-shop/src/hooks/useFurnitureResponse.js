@@ -187,7 +187,7 @@ export function useGetBasketItems(basket) {
 
         })();
 
-    }, []);
+    }, [basket.length]);
 
     return basketItems;
 
