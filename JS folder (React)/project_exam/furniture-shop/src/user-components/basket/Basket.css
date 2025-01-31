@@ -74,8 +74,12 @@
     font-size: 22px;
 }
 
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions button>i.bx-trash:hover {
+.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions .delete-btn:hover {
     color: #C70039;
+}
+
+.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions .heart-btn .active {
+    color: red;
 }
 
 .divide .basket-section .basket-info .basket-body .basket-item .quantity-btn {
@@ -124,9 +128,9 @@
     font-size: 1.5rem;
 }
 
-.divide .basket-section .basket-info .basket-body .empty-basket a {
+.divide .basket-section .basket-info .basket-body .empty-basket .underline {
     font-size: 20px;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 600;
 }
 
