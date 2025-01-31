@@ -17,7 +17,7 @@
 .wrapper-user .input-box input {
     width: 100%;
     background: transparent;
-    outline: none;
+    outline-color: #fff;
     border: 2px solid rgba(51, 51, 51, 0.4);
     border-radius: 40px;
     font-size: 16px;
@@ -59,8 +59,13 @@
 
 .wrapper-user .link {
     font-size: 14.5px;
-    text-align: center;
     margin: 20px 0 15px 0;
+}
+
+.wrapper-user .link p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .wrapper-user .link p a {
