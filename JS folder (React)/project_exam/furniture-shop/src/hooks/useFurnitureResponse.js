@@ -3,7 +3,7 @@ import { getAllFurniture, getBasketItems, getDetailsFurniture, getLatestFurnitur
 import { useSetFurniture } from "./useFurnitureReducer";
 import { FurnitureContext } from "../context/FurnitureContext";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ErrorContext } from "../context/ErrorContext";
 
 
@@ -118,14 +118,13 @@ export function useDetailsFurniture(furnitureId) {
 export function useUpdateWishlist() {
 
     const { userId, updateAuthError } = useContext(AuthContext);
-    const { handleUserLikes } = useContext(FurnitureContext);
     const { handleError, clearError } = useContext(ErrorContext);
 
     const updateWishlist = async (furnitureId) => {
 
         if (!userId) {
 
-            handleError({ errorMessage: 'Please login first' });
+            handleError({ errorMessage: 'Please login first.' });
 
             setTimeout(() => {
 
@@ -139,7 +138,6 @@ export function useUpdateWishlist() {
         try {
 
             const response = await wishlist(furnitureId);
-            handleUserLikes(userId);
 
             handleError({ successMessage: response.message });
 
@@ -164,11 +162,12 @@ export function useUpdateWishlist() {
 export function useGetBasketItems(basket) {
 
     const basketIds = basket.map(x => x.id);
-    if (basketIds.length === 0) return [];
-
+    const location = useLocation();
     const [basketItems, setBasketItems] = useState([]);
 
     useEffect(() => {
+
+        if (basketIds.length === 0) return;
 
         const abortController = new AbortController();
 
@@ -187,7 +186,7 @@ export function useGetBasketItems(basket) {
 
         })();
 
-    }, [basket.length]);
+    }, [basket.length, location]);
 
     return basketItems;
 
