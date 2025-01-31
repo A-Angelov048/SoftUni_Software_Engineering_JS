@@ -124,13 +124,13 @@ router.get('/wishlist/:id', async (req, res) => {
 
         if (result === 'add') {
             res.status(200).json({
-                status: 'success',
-                message: 'Successfully add furniture to wishlist'
+                status: result,
+                message: 'Successfully add furniture to wishlist.'
             });
         } else {
             res.status(200).json({
-                status: 'success',
-                message: 'Successfully remove furniture from wishlist'
+                status: result,
+                message: 'Successfully remove furniture from wishlist.'
             });
         }
 
