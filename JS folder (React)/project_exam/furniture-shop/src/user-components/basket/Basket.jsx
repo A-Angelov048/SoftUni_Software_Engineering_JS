@@ -1,14 +1,21 @@
 import './Basket.css';
 import { Fragment, useContext } from 'react';
 import { BasketContext } from '../../context/BasketContext';
-import { useGetBasketItems } from '../../hooks/useFurnitureResponse';
-import { Link } from 'react-router-dom';
+import { useGetBasketItems, useUpdateWishlist } from '../../hooks/useFurnitureResponse';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { ErrorContext } from '../../context/ErrorContext';
 
 export default function Basket() {
 
+    const navigate = useNavigate();
     const { basketItems, changeBasketState, removeBasketState } = useContext(BasketContext);
+    const { userId } = useContext(AuthContext);
+    const { errors } = useContext(ErrorContext);
+
 
     const getBasketItems = useGetBasketItems(basketItems);
+    const updateWishlist = useUpdateWishlist();
 
     const quantityHandler = (idFurniture, operation) => {
 
@@ -38,6 +45,13 @@ export default function Basket() {
                     </h2>
                 </div>
 
+                {(errors.hasOwnProperty('successMessage') || errors.hasOwnProperty('errorMessage')) &&
+                    <div className={errors.successMessage ? 'error-container success position disappear-text' : 'error-container position disappear-text'}>
+                        {errors.successMessage ? <i className='bx bx-check bx-tada' /> : <i className='bx bxs-error-circle bx-tada' />}
+                        <p className={errors.successMessage ? 'success bigger-font' : 'error bigger-font'}>{errors.successMessage || errors.errorMessage}</p>
+                    </div>
+                }
+
                 <div className="layout-padding2 divide">
 
                     <section className='basket-section'>
@@ -55,7 +69,6 @@ export default function Basket() {
                                 {basketItems.length > 0 ?
 
                                     getBasketItems.map((items, index) => (
-
                                         <Fragment key={items._id}>
 
                                             <div className="basket-item">
@@ -65,11 +78,11 @@ export default function Basket() {
                                                 <div className="item-details">
                                                     <h3>{items.name}</h3>
                                                     <div className="actions">
-                                                        <button className="delete-btn">
-                                                            <i onClick={() => removeBasketState(items._id)} className='bx bx-trash bx-tada-hover' ></i>
+                                                        <button className="delete-btn" type="button">
+                                                            <i onClick={() => { removeBasketState(items._id) }} className='bx bx-trash bx-tada-hover' ></i>
                                                         </button>
-                                                        <button name="heart-btn" type="button">
-                                                            <i className='bx bxs-heart bx-tada-hover'></i>
+                                                        <button className="heart-btn" type="button">
+                                                            <i onClick={async () => { await updateWishlist(items._id); navigate('/basket', { replace: true }) }} className={items.listUserLikes.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -98,9 +111,10 @@ export default function Basket() {
                                     ))
 
                                     :
+
                                     <header className='empty-basket'>
                                         <h2>Whoops, it seems basket is empty.</h2>
-                                        <Link to='/shop'>Start shopping</Link>
+                                        <Link className='underline' to='/shop'>Start shopping</Link>
                                     </header>
                                 }
 
