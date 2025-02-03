@@ -26,23 +26,10 @@ export default function Details() {
 
     const { userId, role } = useContext(AuthContext);
     const { reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
-    const { changeBasketState } = useContext(BasketContext);
-    const { errors, handleError, clearError } = useContext(ErrorContext);
+    const { addToBasket } = useContext(BasketContext);
+    const { errors } = useContext(ErrorContext);
 
     const ref = useRef(null);
-
-    const addToBasket = () => {
-
-        changeBasketState({ id: furnitureId, quantity: quantity })
-
-        handleError({ successMessage: 'Successfully add furniture to basket.' });
-
-        setTimeout(() => {
-
-            clearError();
-
-        }, 2000);
-    }
 
 
     return (
@@ -226,7 +213,7 @@ export default function Details() {
                                                 :
 
                                                 <>
-                                                    <button disabled={quantity <= 0 ? true : false} onClick={addToBasket} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Add to Basket</button>
+                                                    <button disabled={quantity <= 0 ? true : false} onClick={() => addToBasket(furnitureId, quantity, furniture.price)} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Add to Basket</button>
                                                     <button name="heart" type="button">
                                                         <i onClick={async () => { await updateWishlist(furnitureId); if (userId) handleUserLikes(userId) }} className={listUserLikes?.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
                                                     </button>
