@@ -5,33 +5,17 @@ import { useGetBasketItems, useUpdateWishlist } from '../../hooks/useFurnitureRe
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ErrorContext } from '../../context/ErrorContext';
+import { priceHandler } from '../../utils/priceHandler';
 
 export default function Basket() {
 
     const navigate = useNavigate();
-    const { basketItems, changeBasketState, removeBasketState } = useContext(BasketContext);
+    const { basketItems, quantityHandler, removeBasketState } = useContext(BasketContext);
     const { userId } = useContext(AuthContext);
     const { errors } = useContext(ErrorContext);
 
-
     const getBasketItems = useGetBasketItems(basketItems);
     const updateWishlist = useUpdateWishlist();
-
-    const quantityHandler = (idFurniture, operation) => {
-
-        const findCurrent = basketItems.find(x => x.id === idFurniture)
-
-        switch (operation) {
-
-            case 'increment': if (findCurrent.quantity >= 10) { return } findCurrent.quantity++; break;
-
-            case 'decrement': if (findCurrent.quantity <= 1) { return } findCurrent.quantity--; break;
-
-        }
-
-        changeBasketState({ id: findCurrent.id, quantity: findCurrent.quantity });
-
-    };
 
 
     return (
@@ -143,9 +127,9 @@ export default function Basket() {
 
                         <div className="summary">
                             <h3>Summary</h3>
-                            <p>Products: <span>$53.98</span></p>
+                            <p>Products: <span>{'$' + priceHandler()}</span></p>
                             <p>Shipping: <span>Gratis</span></p>
-                            <p>Total amount (including VAT): <span>$53.98</span></p>
+                            <p>Total amount (including VAT): <span>{'$' + priceHandler() * 1.2}</span></p>
                             <button className="checkout-btn">GO TO CHECKOUT</button>
                         </div>
 
