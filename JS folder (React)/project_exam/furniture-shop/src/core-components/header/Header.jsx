@@ -78,9 +78,12 @@ export default function Header() {
 
                         </>}
 
-                    <div>
-                        <Link className="user" to="/basket"><i className='bx bx-basket'></i></Link>
-                    </div>
+                    {
+                        role !== 'Admin' &&
+                        <div>
+                            <Link className="user" to="/basket"><i className='bx bx-basket'></i></Link>
+                        </div>
+                    }
 
                 </nav>
 
