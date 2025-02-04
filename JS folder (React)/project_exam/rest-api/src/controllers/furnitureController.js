@@ -24,14 +24,14 @@ router.get('/', async (req, res) => {
         const [length, furniture] = await getAllData(page, limit);
 
         res.status(200).json({
-            status: 'success',
+            status: 200,
             length: length,
             data: furniture
         });
 
     } catch (err) {
         res.status(404).json({
-            status: 'fail',
+            status: 404,
             message: err.message
         });
     }
@@ -156,11 +156,11 @@ router.post('/search', async (req, res) => {
 router.post('/basket', async (req, res) => {
 
     const body = req.body;
-    
+
     try {
 
         const data = await getBasketItems(body);
-        
+
         res.json(data);
 
     } catch (err) {
