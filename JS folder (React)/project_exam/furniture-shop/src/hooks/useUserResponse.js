@@ -19,6 +19,8 @@ export function useGetProfile(profileId) {
                 setUser(response);
 
             } catch (error) {
+                if (error.message === '403') return userContext.updateAuthError(true);
+
                 console.error(error.message);
             }
 

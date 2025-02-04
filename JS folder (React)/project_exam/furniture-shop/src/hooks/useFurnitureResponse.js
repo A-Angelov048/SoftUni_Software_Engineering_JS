@@ -64,7 +64,7 @@ export function useAllFurniture(statePage) {
 
                 if (error.message === '403') {
                     updateAuthError(true)
-                } else {
+                } else if (error.message === 'Page do not exists.') {
                     navigate('/404', { replace: true });
                 }
 
@@ -164,6 +164,7 @@ export function useGetBasketItems(basket) {
     const basketIds = basket.map(x => x.id);
     const location = useLocation();
     const [basketItems, setBasketItems] = useState([]);
+    const { updateAuthError } = useContext(AuthContext);
 
     useEffect(() => {
 
