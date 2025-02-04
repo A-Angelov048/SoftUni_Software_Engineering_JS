@@ -65,7 +65,7 @@ router.post('/edit-profile', async (req, res) => {
 router.get('/profile/:id', async (req, res) => {
 
     const userId = req.params.id;
-    const flag = req.params.id === req.user._id;
+    const flag = req.params.id === req.user?._id;
 
     try {
 
