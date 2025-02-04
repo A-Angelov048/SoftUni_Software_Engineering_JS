@@ -25,6 +25,7 @@ import AuthGuard from "./shared-components/guards/AuthGuard";
 import ScrollToTop from "./shared-components/scroll-to-top/ScrollToTop";
 import Basket from "./user-components/basket/Basket";
 import AdminGuard from "./shared-components/guards/AdminGuard";
+import RestrictAdminGuard from "./shared-components/guards/RestrictAdminGuard";
 
 
 
@@ -46,7 +47,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/basket" element={<Basket />} />
 
               <Route element={<AuthGuard />}>
                 <Route path="/login" element={<Login />} />
@@ -71,6 +71,10 @@ function App() {
                 <Route element={<AdminGuard />}>
                   <Route path="/edit-furniture/:furnitureId/admin" element={<Edit />} />
                 </Route>
+              </Route>
+
+              <Route element={<RestrictAdminGuard />}>
+                <Route path="/basket" element={<Basket />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />
