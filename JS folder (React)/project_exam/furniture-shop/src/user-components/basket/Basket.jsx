@@ -1,5 +1,5 @@
 import './Basket.css';
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { BasketContext } from '../../context/BasketContext';
 import { useGetBasketItems, useUpdateWishlist } from '../../hooks/useFurnitureResponse';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +16,9 @@ export default function Basket() {
 
     const getBasketItems = useGetBasketItems(basketItems);
     const updateWishlist = useUpdateWishlist();
+
+    const [receiveInfo, setReceiveInfo] = useState(null);
+    const [priceReceive, setPriceReceive] = useState(0);
 
 
     return (
@@ -108,8 +111,108 @@ export default function Basket() {
                         </div>
 
                         <div className="delivery-info">
-                            <h3>Expected shipping delivery</h3>
-                            <p>12.10.2020 - 14.10.2020</p>
+
+                            <h3>How will you receive the order?</h3>
+
+                            <div className='receive-choice'>
+
+                                <div className='container-receive flex-elements'>
+
+                                    <div className='icon'>
+                                        <i className='bx bxs-store' ></i>
+                                    </div>
+
+                                    <div className="receive-method">
+                                        <button type='button' className='store'>Furniture-Shop</button>
+                                        <p>Choice store</p>
+                                    </div>
+
+                                </div>
+
+                                <div className='container-receive flex-elements'>
+
+                                    <div className='icon'>
+                                        <i class='bx bxs-home'></i>
+                                    </div>
+
+                                    <div className="receive-method">
+                                        <button type='button' className='home'>To Home / To Office</button>
+                                        <p>Shipping calculation</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            { }
+                            <div className="receive-store">
+
+                                <h3>Place of Receipt</h3>
+
+                                <div className="container-receive">
+
+                                    <div className="receive-method flex-elements">
+                                        <button type='button' className='home'>Furniture-Shop Sofia</button>
+                                        <p>$0,00</p>
+
+                                    </div>
+
+                                    <p>Delivery within 7 business days</p>
+
+                                </div>
+
+                                <div className="container-receive">
+
+                                    <div className="receive-method flex-elements">
+                                        <button type='button' className='home'>Furniture-Shop Plovdiv</button>
+                                        <p>$0,00</p>
+                                    </div>
+
+                                    <p>Delivery within 7 business days</p>
+
+                                </div>
+
+                                <div className="container-receive">
+
+                                    <div className="receive-method flex-elements">
+                                        <button type='button' className='home'>Furniture-Shop Varna</button>
+                                        <p>$0,00</p>
+                                    </div>
+
+                                    <p>Delivery within 7 business days</p>
+
+                                </div>
+
+                            </div>
+
+                            <div className="receive-home">
+
+                                <h3>Delivery</h3>
+
+                                <div className="container-receive">
+
+                                    <div className="receive-method flex-elements">
+                                        <button type='button' className='home'>Delivery with pickup from a car</button>
+                                        <p>$25,00</p>
+                                    </div>
+
+                                    <p>Delivery within 7 business days</p>
+
+                                </div>
+
+                                <div className="container-receive">
+
+                                    <div className="receive-method flex-elements">
+                                        <button type='button' className='home'>Door-to-door delivery</button>
+                                        <p>$95,00</p>
+                                    </div>
+
+                                    <p>Delivery within 7 business days</p>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <div className="payment-info">
