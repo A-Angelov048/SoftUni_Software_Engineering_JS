@@ -207,6 +207,12 @@
     align-items: baseline;
 }
 
+.divide .basket-section .delivery-info .receive-shop,
+.divide .basket-section .delivery-info .receive-home {
+    display:flex;
+    flex-direction: column;
+}
+
 .divide .basket-section .delivery-info .container-receive {
     font-size: 14px;
     padding: 15px;
@@ -214,6 +220,8 @@
     border-radius: 10px;
     cursor: pointer;
     margin-bottom: 20px;
+    background: none;
+    text-align: left;
 }
 
 .divide .basket-section .delivery-info .container-receive.flex-elements {
@@ -223,18 +231,19 @@
     flex: 1 1 auto;
 }
 
+.divide .basket-section .delivery-info .container-receive.active {
+    background: #fff;
+}
+
 .divide .basket-section .delivery-info .container-receive .receive-method.flex-elements {
     display: flex;
     justify-content: space-between;
 }
 
-.divide .basket-section .delivery-info .container-receive .icon>i {
-    font-size: 30px;
+.divide .basket-section .delivery-info .container-receive .receive-method p:nth-child(1) {
+    font-weight: bold;
 }
 
-
-.divide .basket-section .delivery-info .container-receive .receive-method>button {
-    background: none;
-    font-weight: bold;
-    cursor: none;
+.divide .basket-section .delivery-info .container-receive .icon>i {
+    font-size: 30px;
 }
