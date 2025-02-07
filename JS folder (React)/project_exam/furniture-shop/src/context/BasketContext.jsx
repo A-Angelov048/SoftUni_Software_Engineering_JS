@@ -26,9 +26,9 @@ export function BasketProvider(props) {
 
     const removeBasketState = (id) => {
 
-        const newBasket = [...basketState];
+        const newBasket = basketState.filter(item => item.id !== id);
 
-        setBasketState(newBasket.filter(item => item.id !== id));
+        setBasketState(newBasket);
 
         handleError({ successMessage: 'Successfully remove item from basket.' });
 
@@ -37,6 +37,8 @@ export function BasketProvider(props) {
             clearError();
 
         }, 2000);
+
+        return newBasket;
     };
 
     const quantityHandler = (idFurniture, operation) => {
@@ -56,7 +58,7 @@ export function BasketProvider(props) {
     }
 
     const addToBasket = (furnitureId, quantity, price) => {
-        
+
         changeBasketState({ id: furnitureId, quantity: quantity, price: price });
 
         handleError({ successMessage: 'Successfully add furniture to basket.' });
