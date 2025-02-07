@@ -17,8 +17,8 @@ export default function Basket() {
     const getBasketItems = useGetBasketItems(basketItems);
     const updateWishlist = useUpdateWishlist();
 
-    const [receiveInfo, setReceiveInfo] = useState(null);
-    const [priceReceive, setPriceReceive] = useState(0);
+    const [receiveInfo, setReceiveInfo] = useState('');
+    const [priceReceive, setPriceReceive] = useState({ option: 0, price: 0 });
 
 
     return (
@@ -66,7 +66,15 @@ export default function Basket() {
                                                     <h3>{items.name}</h3>
                                                     <div className="actions">
                                                         <button className="delete-btn" type="button">
-                                                            <i onClick={() => { removeBasketState(items._id) }} className='bx bx-trash bx-tada-hover' ></i>
+                                                            <i onClick={() => {
+
+                                                                const result = removeBasketState(items._id)
+
+                                                                if (result.length <= 0) {
+                                                                    setReceiveInfo('');
+                                                                    setPriceReceive({ option: 0, price: 0 });
+                                                                }
+                                                            }} className='bx bx-trash bx-tada-hover' ></i>
                                                         </button>
                                                         <button className="heart-btn" type="button">
                                                             <i onClick={async () => { await updateWishlist(items._id); navigate('/basket', { replace: true }) }} className={items.listUserLikes.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
@@ -116,102 +124,124 @@ export default function Basket() {
 
                             <div className='receive-choice'>
 
-                                <div className='container-receive flex-elements'>
+                                <button disabled={basketItems.length <= 0} onClick={() => setReceiveInfo('shop')} type='button'
+                                    className={receiveInfo === 'shop' ?
+                                        'container-receive flex-elements active'
+                                        :
+                                        'container-receive flex-elements'}>
 
                                     <div className='icon'>
                                         <i className='bx bxs-store' ></i>
                                     </div>
 
                                     <div className="receive-method">
-                                        <button type='button' className='store'>Furniture-Shop</button>
+                                        <p>Furniture-Shop</p>
                                         <p>Choice store</p>
                                     </div>
 
-                                </div>
+                                </button>
 
-                                <div className='container-receive flex-elements'>
+                                <button disabled={basketItems.length <= 0} onClick={() => setReceiveInfo('home')} type='button' className={receiveInfo === 'home' ?
+                                    'container-receive flex-elements active'
+                                    :
+                                    'container-receive flex-elements'}>
 
                                     <div className='icon'>
-                                        <i class='bx bxs-home'></i>
+                                        <i className='bx bxs-home'></i>
                                     </div>
 
                                     <div className="receive-method">
-                                        <button type='button' className='home'>To Home / To Office</button>
+                                        <p>To Home / To Office</p>
                                         <p>Shipping calculation</p>
                                     </div>
 
-                                </div>
+                                </button>
 
                             </div>
 
-                            { }
-                            <div className="receive-store">
+                            {
+                                receiveInfo === 'shop'
 
-                                <h3>Place of Receipt</h3>
+                                &&
 
-                                <div className="container-receive">
+                                <div className="receive-shop">
 
-                                    <div className="receive-method flex-elements">
-                                        <button type='button' className='home'>Furniture-Shop Sofia</button>
-                                        <p>$0,00</p>
+                                    <h3>Place of Receipt</h3>
 
-                                    </div>
+                                    <button onClick={() => basketItems.length <= 0 ? setReceiveInfo('') : setPriceReceive({ option: 1, price: 0 })} type='button'
+                                        className={priceReceive.option === 1 ? 'container-receive active' : 'container-receive'}>
 
-                                    <p>Delivery within 7 business days</p>
+                                        <div className="receive-method flex-elements">
+                                            <p>Furniture-Shop Sofia</p>
+                                            <p>$0,00</p>
+                                        </div>
 
-                                </div>
+                                        <span>Delivery within 7 business days</span>
 
-                                <div className="container-receive">
+                                    </button>
 
-                                    <div className="receive-method flex-elements">
-                                        <button type='button' className='home'>Furniture-Shop Plovdiv</button>
-                                        <p>$0,00</p>
-                                    </div>
+                                    <button onClick={() => basketItems.length <= 0 ? setReceiveInfo('') : setPriceReceive({ option: 2, price: 0 })} type='button'
+                                        className={priceReceive.option === 2 ? 'container-receive active' : 'container-receive'}>
 
-                                    <p>Delivery within 7 business days</p>
+                                        <div className="receive-method flex-elements">
+                                            <p>Furniture-Shop Plovdiv</p>
+                                            <p>$0,00</p>
+                                        </div>
 
-                                </div>
+                                        <span>Delivery within 7 business days</span>
 
-                                <div className="container-receive">
+                                    </button>
 
-                                    <div className="receive-method flex-elements">
-                                        <button type='button' className='home'>Furniture-Shop Varna</button>
-                                        <p>$0,00</p>
-                                    </div>
+                                    <button onClick={() => basketItems.length <= 0 ? setReceiveInfo('') : setPriceReceive({ option: 3, price: 0 })} type='button'
+                                        className={priceReceive.option === 3 ? 'container-receive active' : 'container-receive'}>
 
-                                    <p>Delivery within 7 business days</p>
+                                        <div className="receive-method flex-elements">
+                                            <p>Furniture-Shop Varna</p>
+                                            <p>$0,00</p>
+                                        </div>
 
-                                </div>
+                                        <span>Delivery within 7 business days</span>
 
-                            </div>
-
-                            <div className="receive-home">
-
-                                <h3>Delivery</h3>
-
-                                <div className="container-receive">
-
-                                    <div className="receive-method flex-elements">
-                                        <button type='button' className='home'>Delivery with pickup from a car</button>
-                                        <p>$25,00</p>
-                                    </div>
-
-                                    <p>Delivery within 7 business days</p>
+                                    </button>
 
                                 </div>
+                            }
 
-                                <div className="container-receive">
+                            {
+                                receiveInfo === 'home'
 
-                                    <div className="receive-method flex-elements">
-                                        <button type='button' className='home'>Door-to-door delivery</button>
-                                        <p>$95,00</p>
-                                    </div>
+                                &&
 
-                                    <p>Delivery within 7 business days</p>
+                                <div className="receive-home">
+
+                                    <h3>Delivery</h3>
+
+                                    <button onClick={() => setPriceReceive({ option: 4, price: 25 })} type='button'
+                                        className={priceReceive.option === 4 ? 'container-receive active' : 'container-receive'}>
+
+                                        <div className="receive-method flex-elements">
+                                            <p>Delivery with pickup from a car</p>
+                                            <p>$25,00</p>
+                                        </div>
+
+                                        <p>Delivery within 7 business days</p>
+
+                                    </button>
+
+                                    <button onClick={() => setPriceReceive({ option: 5, price: 95 })} type='button'
+                                        className={priceReceive.option === 5 ? 'container-receive active' : 'container-receive'}>
+
+                                        <div className="receive-method flex-elements">
+                                            <p>Door-to-door delivery</p>
+                                            <p>$95,00</p>
+                                        </div>
+
+                                        <p>Delivery within 7 business days</p>
+
+                                    </button>
 
                                 </div>
-
-                            </div>
+                            }
 
                         </div>
 
@@ -230,9 +260,9 @@ export default function Basket() {
 
                         <div className="summary">
                             <h3>Summary</h3>
-                            <p>Products: <span>{'$' + priceHandler()}</span></p>
-                            <p>Shipping: <span>Gratis</span></p>
-                            <p>Total amount (including VAT): <span>{'$' + priceHandler() * 1.2}</span></p>
+                            <p>Products: <span>{'$' + priceHandler(priceReceive.price)}</span></p>
+                            <p>Shipping: <span>{priceReceive.price === 0 ? 'Gratis' : `$${priceReceive.price}`}</span></p>
+                            <p>Total amount (including VAT): <span>{'$' + priceHandler(priceReceive.price) * 1.2}</span></p>
                             <button className="checkout-btn">GO TO CHECKOUT</button>
                         </div>
 
