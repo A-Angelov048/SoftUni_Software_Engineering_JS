@@ -8,6 +8,6 @@ export function priceHandler(priceReceive) {
 
     const totalPrice = basketItems.reduce((acc, initValue) => acc + (initValue.price * initValue.quantity), 0);
 
-    return totalPrice + priceReceive;
+    return (totalPrice + priceReceive).toFixed(2);
 
 }
