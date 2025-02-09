@@ -1,3 +1,5 @@
+import DeliveryForm from '../../deliveryForm/DeliveryForm';
+import './Checkout.css';
 import { useLocation } from "react-router-dom";
 
 export default function Checkout() {
@@ -15,11 +17,25 @@ export default function Checkout() {
                     </h2>
                 </div>
 
-                <div className="layout-padding2 divide">
+                <div className="layout-padding2">
 
+                    <div className="wrapper-checkout">
 
+                        <div className="address">
 
-                </div >
+                            <header className='header-address'>
+                                <p className="step">1</p>
+                                <h2>Delivery address</h2>
+                                <button></button>
+                            </header>
+
+                            <DeliveryForm/>
+                            
+                        </div>
+
+                    </div >
+
+                </div>
 
             </div >
 
