@@ -20,6 +20,7 @@ export default function Basket() {
     const [receiveInfo, setReceiveInfo] = useState('');
     const [priceReceive, setPriceReceive] = useState({ option: 0, price: 0 });
 
+    const totalPrice = priceHandler(priceReceive.price);
 
     return (
         <section className="basket-page layout-padding">
@@ -124,7 +125,7 @@ export default function Basket() {
 
                             <div className='receive-choice'>
 
-                                <button disabled={basketItems.length <= 0} onClick={() => setReceiveInfo('shop')} type='button'
+                                <button disabled={!basketItems.length > 0} onClick={() => setReceiveInfo('shop')} type='button'
                                     className={receiveInfo === 'shop' ?
                                         'container-receive flex-elements active'
                                         :
@@ -141,7 +142,7 @@ export default function Basket() {
 
                                 </button>
 
-                                <button disabled={basketItems.length <= 0} onClick={() => setReceiveInfo('home')} type='button' className={receiveInfo === 'home' ?
+                                <button disabled={!basketItems.length > 0} onClick={() => setReceiveInfo('home')} type='button' className={receiveInfo === 'home' ?
                                     'container-receive flex-elements active'
                                     :
                                     'container-receive flex-elements'}>
@@ -260,10 +261,10 @@ export default function Basket() {
 
                         <div className="summary">
                             <h3>Summary</h3>
-                            <p>Products: <span>{'$' + priceHandler(priceReceive.price)}</span></p>
-                            <p>Shipping: <span>{priceReceive.price === 0 ? 'Gratis' : `$${priceReceive.price}`}</span></p>
-                            <p>Total amount (including VAT): <span>{'$' + priceHandler(priceReceive.price) * 1.2}</span></p>
-                            <button className="checkout-btn">GO TO CHECKOUT</button>
+                            <p>Products: <span>{'$' + totalPrice}</span></p>
+                            <p>Shipping: <span>{priceReceive.price === 0 ? 'Gratis' : `$${priceReceive.price.toFixed(2)}`}</span></p>
+                            <p>Total amount (including VAT): <span>{'$' + (totalPrice * 1.2).toFixed(2)}</span></p>
+                            <button disabled={!basketItems.length > 0} onClick={() => navigate('/checkout', { state: { furniture: getBasketItems, furniturePrice: totalPrice, shippingPrice: priceReceive.price } })} type='button' className="checkout-btn">GO TO CHECKOUT</button >
                         </div>
 
                     </section>
