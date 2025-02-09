@@ -42,6 +42,14 @@ export const reviewSchema = yup.object().shape({
     review: yup.string().min(8, 'Review must be at least 8 characters').required("What's the point of an empty review? Help other customers make the right choice."),
 })
 
-
-
-
+export const deliveryFormSchema = yup.object().shape({
+    'last-name': yup.string().required('Required field'),
+    'first-name': yup.string().required('Required field'),
+    address: yup.string().required('Required field'),
+    'zip-code': yup.string().matches(/^\d{4}$/, 'Invalid zip code (example: 1000)').required('Required field'),
+    region: yup.string().required('Required field'),
+    city: yup.string().required('Required field'),
+    neighborhood: yup.string().required('Required field'),
+    email: yup.string().email('Email must be a valid email').required('Required field'),
+    phone: yup.string().matches(/^\+359[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}$/, 'Invalid phone number (example: +359111222333)').required('Required field'),
+})
