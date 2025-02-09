@@ -1,0 +1,28 @@
+.container .wrapper-checkout {
+    max-width: 700px;
+    padding: 30px;
+    margin: 0 auto;
+    color: #333;
+    background-color: #22d37880;
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+.header-address {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.step {
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
