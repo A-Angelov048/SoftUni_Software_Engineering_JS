@@ -34,7 +34,7 @@
 }
 
 .basket .basket-items img {
-    width: 40px;
+    width: 60px;
     height: auto;
 }
 
@@ -72,7 +72,6 @@
     border-radius: 8px;
     overflow: hidden;
 }
-
 
 .checkout .wrapper-checkout .address .header-address {
     display: flex;
