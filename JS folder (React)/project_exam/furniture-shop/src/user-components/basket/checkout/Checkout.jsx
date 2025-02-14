@@ -1,11 +1,13 @@
 import './Checkout.css';
-import { useLocation } from "react-router-dom";
 import { useGetDeliveryInfo } from '../../../hooks/useUserResponse';
 import DeliveryForm from '../../delivery-form/DeliveryForm';
+import { useContext, useState } from 'react';
+import { ErrorContext } from '../../../context/ErrorContext';
 
 export default function Checkout() {
 
-    const location = useLocation();
+    const [changeInfo, setChangeInfo] = useState(true);
+
     const deliveryInfo = useGetDeliveryInfo();
 
     return (
@@ -25,13 +27,25 @@ export default function Checkout() {
 
                         <div className="address">
 
-                            <header className='header-address'>
-                                <p className="step">1</p>
-                                <h2>Delivery address</h2>
-                                <button></button>
-                            </header>
+                            <div className='header-address'>
+                                <header>
+                                    <p className="step">1</p>
+                                    <h2>Delivery address</h2>
+                                </header>
+                                {changeInfo && <button onClick={() => setChangeInfo(false)} className='change-info' type='button'>Change</button>}
+                            </div>
 
-                            {deliveryInfo.hasOwnProperty('_id') && <DeliveryForm deliveryInfo={deliveryInfo} />}
+                            {deliveryInfo.hasOwnProperty('_id') && changeInfo ?
+                                <div className='delivery-info'>
+                                    <p>{deliveryInfo['first-name']} {deliveryInfo['last-name']}</p>
+                                    <p>{deliveryInfo.address}, {deliveryInfo['zip-code']}</p>
+                                    <p>{deliveryInfo.city}, {deliveryInfo.region}</p>
+                                    <p>{deliveryInfo.email}</p>
+                                    <p>{deliveryInfo.phone}</p>
+                                </div>
+                                :
+                                < DeliveryForm deliveryInfo={deliveryInfo} onClose={() => setChangeInfo(true)} />
+                            }
 
                         </div>
 
