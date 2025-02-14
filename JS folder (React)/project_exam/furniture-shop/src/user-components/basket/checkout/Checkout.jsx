@@ -1,10 +1,12 @@
-import DeliveryForm from '../../deliveryForm/DeliveryForm';
 import './Checkout.css';
 import { useLocation } from "react-router-dom";
+import { useGetDeliveryInfo } from '../../../hooks/useUserResponse';
+import DeliveryForm from '../../delivery-form/DeliveryForm';
 
 export default function Checkout() {
 
     const location = useLocation();
+    const deliveryInfo = useGetDeliveryInfo();
 
     return (
         <section className="basket-page layout-padding">
@@ -29,8 +31,8 @@ export default function Checkout() {
                                 <button></button>
                             </header>
 
-                            <DeliveryForm/>
-                            
+                            {deliveryInfo.hasOwnProperty('_id') && <DeliveryForm deliveryInfo={deliveryInfo} />}
+
                         </div>
 
                     </div >
