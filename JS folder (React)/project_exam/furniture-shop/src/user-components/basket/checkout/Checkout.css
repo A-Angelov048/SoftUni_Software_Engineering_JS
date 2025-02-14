@@ -10,14 +10,31 @@
 }
 
 
-.header-address {
+.container .wrapper-checkout .address .header-address {
     display: flex;
-    gap: 15px;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.step {
+.container .wrapper-checkout .address .header-address header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.container .wrapper-checkout .address .header-address header h2 {
+    margin-bottom: 0.35rem;
+}
+
+.container .wrapper-checkout .address .header-address .change-info {
+    background: none;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration:underline;
+}
+
+.container .wrapper-checkout .address .header-address .step {
     width: 28px;
     height: 28px;
     text-align: center;
@@ -25,4 +42,8 @@
     color: white;
     border-radius: 50%;
     border: 2px solid #333;
+}
+
+.container .wrapper-checkout .address .delivery-info {
+    line-height: 26px;
 }
