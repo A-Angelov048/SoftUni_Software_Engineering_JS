@@ -3,15 +3,17 @@ import { useGetDeliveryInfo } from '../../../hooks/useUserResponse';
 import DeliveryForm from '../../delivery-form/DeliveryForm';
 import { useContext, useState } from 'react';
 import { ErrorContext } from '../../../context/ErrorContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Checkout() {
 
+    const { state } = useLocation();
+
     const { errors } = useContext(ErrorContext);
 
-    const [changeInfo, setChangeInfo] = useState(true);
-
     const deliveryInfo = useGetDeliveryInfo();
+
+    const [changeInfo, setChangeInfo] = useState(true);
 
     return (
         <section className="checkout-page layout-padding">
@@ -62,27 +64,28 @@ export default function Checkout() {
 
                     </div >
 
-                    <div class="basket">
-                        <div class="basket-header">
+                    <div className="basket">
+                        <div className="basket-header">
                             <h3>Basket</h3>
                             <Link className='link' to={'/basket'}>Back to basket</Link>
                         </div>
-                        <div class="basket-items">
-                            <img src="image.png" alt="Product 1" />
-                            <img src="image.png" alt="Product 2" />
+                        <div className="basket-items">
+                            {state.furniture.map((current, index) => (
+                                index <= 3 && <img key={current._id} src={current.imageUrl[0]} alt={`Product ${index + 1}`} />
+                            ))}
                         </div>
-                        <div class="basket-summary">
-                            <div class="summary-row">
+                        <div className="basket-summary">
+                            <div className="summary-row">
                                 <span>Products:</span>
-                                <span>$640,00</span>
+                                <span>{'$' + state.furniturePrice.toFixed(2)}</span>
                             </div>
-                            <div class="summary-row">
+                            <div className="summary-row">
                                 <span>Shipping:</span>
-                                <span>$25,00</span>
+                                <span>{state.shippingPrice === 0 ? 'Gratis' : `$${state.shippingPrice.toFixed(2)}`}</span>
                             </div>
-                            <div class="summary-row total">
+                            <div className="summary-row total">
                                 <span>Total amount:</span>
-                                <span>$665,00</span>
+                                <span>{`$${((state.furniturePrice * 1.2) + state.shippingPrice).toFixed(2)}`}</span>
                             </div>
                             <div className='low-font'>
                                 <span>(including VAT)</span>
