@@ -1,7 +1,71 @@
-.container .wrapper-checkout {
-    max-width: 700px;
+.checkout {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.basket {
+    flex: 1 0 auto;
+    align-self: flex-start;
+    background: #22d37880;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 320px;
+    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+}
+
+.basket .basket-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.basket .basket-header .link {
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.basket .basket-items {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.basket .basket-items img {
+    width: 40px;
+    height: auto;
+}
+
+.basket .basket-summary {
+    border-top: 2px solid #5e5e5e;
+    padding-top: 10px;
+}
+
+.basket .basket-summary .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.basket .basket-summary .total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding-top: 10px;
+    border-top: 2px solid #5e5e5e;
+}
+
+.basket .basket-summary .low-font {
+    font-size: 12px;
+}
+
+.checkout .wrapper-checkout {
+    flex: 1 0 auto;
+    max-width: 600px;
     padding: 30px;
-    margin: 0 auto;
     color: #333;
     background-color: #22d37880;
     box-shadow: 0 0 10px rgb(51, 51, 51, .4);
@@ -10,31 +74,31 @@
 }
 
 
-.container .wrapper-checkout .address .header-address {
+.checkout .wrapper-checkout .address .header-address {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.container .wrapper-checkout .address .header-address header {
+.checkout .wrapper-checkout .address .header-address header {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.container .wrapper-checkout .address .header-address header h2 {
+.checkout .wrapper-checkout .address .header-address header h2 {
     margin-bottom: 0.35rem;
 }
 
-.container .wrapper-checkout .address .header-address .change-info {
+.checkout .wrapper-checkout .address .header-address .change-info {
     background: none;
     font-weight: bold;
     font-style: italic;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
-.container .wrapper-checkout .address .header-address .step {
+.checkout .wrapper-checkout .address .header-address .step {
     width: 28px;
     height: 28px;
     text-align: center;
@@ -44,6 +108,7 @@
     border: 2px solid #333;
 }
 
-.container .wrapper-checkout .address .delivery-info {
+.checkout .wrapper-checkout .address .delivery-info p {
+    width: max-content;
     line-height: 26px;
 }
