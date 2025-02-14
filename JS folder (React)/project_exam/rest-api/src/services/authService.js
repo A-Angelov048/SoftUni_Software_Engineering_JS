@@ -1,5 +1,6 @@
 require('dotenv').config();
 const User = require('../models/User');
+const DeliveryInfo = require('../models/deliveryInfo');
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
 
@@ -90,6 +91,31 @@ exports.editProfile = async (userId, body) => {
 }
 
 exports.getCurrentUser = (userId) => User.findById(userId).populate({ path: 'furniture', select: 'name price imageUrl' }).populate({ path: 'wishlist', select: 'name price imageUrl' });
+
+exports.createDeliveryInfo = async (body, userId) => {
+
+    const result = await DeliveryInfo.findOne({ owner: userId });
+    const newDeliveryInfo = [];
+
+    if (!result) {
+
+        const createDeliveryInfo = await DeliveryInfo.create({ ...body, owner: userId });
+        await User.findByIdAndUpdate(userId, { $push: { deliveryInfo: createDeliveryInfo._id } });
+
+        newDeliveryInfo.push(createDeliveryInfo);
+
+    } else {
+
+        const updateDeliveryInfo = await DeliveryInfo.findOneAndUpdate(result._id, body, { returnDocument: 'after' });
+
+        newDeliveryInfo.push(updateDeliveryInfo);
+    }
+    
+    return newDeliveryInfo;
+
+}
+
+exports.getDeliveryInfo = (userId) => DeliveryInfo.findOne({owner: userId});
 
 async function generateToken(user) {
 
