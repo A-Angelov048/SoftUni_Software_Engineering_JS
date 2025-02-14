@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from '../../utils/schemaForm';
 import { ErrorContext } from '../../context/ErrorContext';
+import { trimValue } from '../../utils/trimValue';
 
 const initialValues = {
     email: '',
@@ -22,9 +23,11 @@ export default function Login() {
 
 
     const getUser = async (values) => {
+        
+        const trimValues = trimValue(values);
 
         try {
-            await loginSchema.validate(values, { abortEarly: false });
+            await loginSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -39,7 +42,7 @@ export default function Login() {
         }
 
         try {
-            const result = await login(values);
+            const result = await login(trimValues);
             changeAuthState(result);
             navigate('/');
         } catch (error) {
