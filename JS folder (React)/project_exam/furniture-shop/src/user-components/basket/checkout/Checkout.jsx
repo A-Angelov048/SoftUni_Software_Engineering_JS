@@ -6,6 +6,8 @@ import { ErrorContext } from '../../../context/ErrorContext';
 
 export default function Checkout() {
 
+    const { errors } = useContext(ErrorContext);
+
     const [changeInfo, setChangeInfo] = useState(true);
 
     const deliveryInfo = useGetDeliveryInfo();
@@ -20,6 +22,13 @@ export default function Checkout() {
                         Checkout summary
                     </h2>
                 </div>
+
+                {(errors.hasOwnProperty('successMessage') || errors.hasOwnProperty('errorMessage')) &&
+                    <div className={errors.successMessage ? 'error-container success position disappear-text' : 'error-container position disappear-text'}>
+                        {errors.successMessage ? <i className='bx bx-check bx-tada' /> : <i className='bx bxs-error-circle bx-tada' />}
+                        <p className={errors.successMessage ? 'success bigger-font' : 'error bigger-font'}>{errors.successMessage || errors.errorMessage}</p>
+                    </div>
+                }
 
                 <div className="layout-padding2">
 
