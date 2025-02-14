@@ -10,11 +10,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function DeliveryForm({ deliveryInfo }) {
+export default function DeliveryForm({ deliveryInfo, onClose }) {
 
     const navigate = useNavigate();
 
-    const { errors, handleError } = useContext(ErrorContext);
+    const { errors, handleError, clearError } = useContext(ErrorContext);
     const { updateAuthError } = useContext(AuthContext);
 
     const initialValues = {
@@ -51,6 +51,17 @@ export default function DeliveryForm({ deliveryInfo }) {
         try {
 
             await createDeliveryInfo(trimValues);
+
+            onClose();
+
+            handleError({ successMessage: 'Form submit successfully' });
+
+            setTimeout(() => {
+
+                clearError();
+
+            }, 2000);
+
             navigate('/checkout');
 
         } catch (error) {
