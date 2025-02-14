@@ -4,19 +4,37 @@ import { useForm } from '../../hooks/useForms';
 import { ErrorContext } from '../../context/ErrorContext';
 import { AuthContext } from '../../context/AuthContext';
 import { deliveryFormSchema } from '../../utils/schemaForm';
+import { trimValue } from '../../utils/trimValue';
+import { createDeliveryInfo } from '../../api-service/userService';
+import { useNavigate } from 'react-router-dom';
 
 
 
-export default function DeliveryForm() {
+export default function DeliveryForm({ deliveryInfo }) {
 
-    const { errors, handleError, clearError } = useContext(ErrorContext);
-    const { userId, role, changeAuthState, updateAuthError } = useContext(AuthContext);
+    const navigate = useNavigate();
 
+    const { errors, handleError } = useContext(ErrorContext);
+    const { updateAuthError } = useContext(AuthContext);
 
-    const createDeliveryInfo = async (values) => {
-        
+    const initialValues = {
+        'last-name': deliveryInfo['last-name'] || '',
+        'first-name': deliveryInfo['first-name'] || '',
+        address: deliveryInfo.address || '',
+        'zip-code': deliveryInfo['zip-code'] || '',
+        region: deliveryInfo.region || '',
+        city: deliveryInfo.city || '',
+        neighborhood: deliveryInfo.neighborhood || '',
+        email: deliveryInfo.email || '',
+        phone: deliveryInfo.phone || '',
+    };
+
+    const submitDeliveryInfo = async (values) => {
+
+        const trimValues = trimValue(values);
+
         try {
-            await deliveryFormSchema.validate(values, { abortEarly: false });
+            await deliveryFormSchema.validate(trimValues, { abortEarly: false });
         } catch (error) {
 
             const newError = {};
@@ -32,6 +50,9 @@ export default function DeliveryForm() {
 
         try {
 
+            await createDeliveryInfo(trimValues);
+            navigate('/checkout');
+
         } catch (error) {
 
             if (error.message === '403') return updateAuthError(true);
@@ -41,7 +62,7 @@ export default function DeliveryForm() {
         }
     }
 
-    const { values, changeHandler, submitCurForm } = useForm({}, createDeliveryInfo);
+    const { values, changeHandler, submitCurForm } = useForm(initialValues, submitDeliveryInfo);
 
 
     return (
