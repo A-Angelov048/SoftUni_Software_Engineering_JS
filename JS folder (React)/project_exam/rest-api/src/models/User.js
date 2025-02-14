@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
     location: {
         type: String,
         required: false,
-        minLength: [4, 'Location should be at least 4 characters long.'],
     },
     imageProfile: {
         type: String,
@@ -48,7 +47,11 @@ const userSchema = new mongoose.Schema({
     wishlist: [{
         type: mongoose.Types.ObjectId,
         ref: 'Furniture',
-    }]
+    }],
+    deliveryInfo: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'DeliveryInfo',
+    }],
 })
 
 userSchema.pre('save', async function () {
