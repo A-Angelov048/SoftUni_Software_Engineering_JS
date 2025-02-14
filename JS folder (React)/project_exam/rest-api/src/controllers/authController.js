@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { createUser, getUser, sendUser, editProfile, getCurrentUser } = require('../services/authService');
+const { json } = require('express');
+const { createUser, getUser, sendUser, editProfile, getCurrentUser, createDeliveryInfo, getDeliveryInfo } = require('../services/authService');
 
 
 router.post('/register', async (req, res) => {
@@ -87,6 +88,37 @@ router.get('/profile/:id', async (req, res) => {
         }
 
         res.json(sendUser);
+
+    } catch (err) {
+        console.log(err.errors);
+    }
+
+})
+
+router.post('/delivery-info', async (req, res) => {
+
+    const body = req.body
+    const userId = req.user._id;
+
+    try {
+
+        await createDeliveryInfo(body, userId);
+        res.json({ ok: true });
+
+    } catch (err) {
+        console.log(err.errors);
+    }
+
+})
+
+router.get('/delivery-info', async (req, res) => {
+
+    const userId = req.user._id;
+
+    try {
+
+        const result = await getDeliveryInfo(userId);
+        res.json(result);
 
     } catch (err) {
         console.log(err.errors);
