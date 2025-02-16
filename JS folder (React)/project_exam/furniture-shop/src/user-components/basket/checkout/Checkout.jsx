@@ -96,15 +96,39 @@ export default function Checkout() {
                     </div >
 
                     <div className="basket">
+
                         <div className="basket-header">
                             <h3>Basket</h3>
                             <Link className='link' to={'/basket'}>Back to basket</Link>
                         </div>
+
+                        <input type="checkbox" id='basket-toggle' />
+                        <label htmlFor="basket-toggle" id='overlay'></label>
+
                         <div className="basket-items">
+
                             {state.furniture.map((current, index) => (
                                 index <= 3 && <img key={current._id} src={current.imageUrl[0]} alt={`Product ${index + 1}`} />
                             ))}
+
+                            <label htmlFor="basket-toggle" className='open-basket'>
+                                <i className='bx bxs-right-arrow'></i>
+                            </label>
+
+                            <div className='full-basket'>
+
+                                <header className='header-full-basket'>
+                                    <h3>{`My products (2)`}</h3>
+                                    <label htmlFor="basket-toggle" className='close-basket'>
+                                        <i class='bx bx-x'></i>
+                                    </label>
+                                </header>
+
+                            </div>
+
                         </div>
+
+
                         <div className="basket-summary">
                             <div className="summary-row">
                                 <span>Products:</span>
@@ -122,6 +146,7 @@ export default function Checkout() {
                                 <span>(including VAT)</span>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
