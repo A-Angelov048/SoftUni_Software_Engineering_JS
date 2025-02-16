@@ -46,7 +46,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/edit-profile', async (req, res) => {
 
-    const userId = req.user._id;
+    const userId = req.user?._id;
     const body = req.body;
 
     try {
@@ -113,7 +113,7 @@ router.post('/delivery-info', async (req, res) => {
 
 router.get('/delivery-info', async (req, res) => {
 
-    const userId = req.user._id;
+    const userId = req.user?._id;
 
     try {
 
