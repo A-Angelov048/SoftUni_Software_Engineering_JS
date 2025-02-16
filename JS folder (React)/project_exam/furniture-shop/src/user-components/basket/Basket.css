@@ -171,11 +171,17 @@
     cursor: pointer;
     font-weight: bold;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 .divide .summary-section .summary .checkout-btn:hover {
     background-color: #fff;
     color: #333;
+}
+
+.divide .summary-section .summary .checkout-btn:disabled {
+    cursor: not-allowed;
+    filter: blur(2px);
 }
 
 .divide .basket-section .delivery-info,
@@ -209,7 +215,7 @@
 
 .divide .basket-section .delivery-info .receive-shop,
 .divide .basket-section .delivery-info .receive-home {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
