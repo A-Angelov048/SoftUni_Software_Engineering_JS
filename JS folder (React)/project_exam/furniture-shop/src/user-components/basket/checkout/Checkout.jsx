@@ -8,12 +8,13 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Checkout() {
 
     const { state } = useLocation();
+    console.log(state);
 
     const { errors } = useContext(ErrorContext);
 
     const deliveryInfo = useGetDeliveryInfo();
 
-    const [changeInfo, setChangeInfo] = useState(true);
+    const [changeInfo, setChangeInfo] = useState({ option: 0 });
 
     return (
         <section className="checkout-page layout-padding">
@@ -39,7 +40,7 @@ export default function Checkout() {
 
                         <div className="address">
 
-                            <div className='header-address'>
+                            <div className='header'>
                                 <header>
                                     <p className="step">1</p>
                                     <h2>Delivery address</h2>
@@ -59,6 +60,36 @@ export default function Checkout() {
                                 :
                                 < DeliveryForm deliveryInfo={deliveryInfo} onClose={() => setChangeInfo(true)} />
                             }
+
+                        </div>
+
+                        <hr />
+
+                        <div className="payment">
+
+                            <div className='header'>
+                                <header>
+                                    <p className="step">2</p>
+                                    <h2>Payment method</h2>
+                                </header>
+                            </div>
+
+                            <div className='payment-info'>
+
+                                <h3>Chose payment method</h3>
+
+                                <div className='payment-container'>
+                                    <button onClick={() => setChangeInfo({ option: 1 })} className={changeInfo.option === 1 ? 'card active' : 'card'}>
+                                        <i className='bx bxs-credit-card-alt'></i>
+                                        <p>Credit/Debit card</p>
+                                    </button>
+                                    <button onClick={() => setChangeInfo({ option: 2 })} className={changeInfo.option === 2 ? 'card active' : 'card'}>
+                                        <i className='bx bxs-wallet'></i>
+                                        <p>Cash on delivery</p>
+                                    </button>
+                                </div>
+
+                            </div>
 
                         </div>
 
