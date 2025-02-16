@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function DeliveryForm({ deliveryInfo, onClose }) {
+export default function DeliveryForm({ deliveryInfo, onClose, state }) {
 
     const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
 
             }, 2000);
 
-            navigate('/checkout');
+            navigate('/checkout', { state: state });
 
         } catch (error) {
 
