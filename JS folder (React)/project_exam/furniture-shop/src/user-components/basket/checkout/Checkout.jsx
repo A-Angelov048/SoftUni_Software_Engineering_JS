@@ -8,12 +8,12 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Checkout() {
 
     const { state } = useLocation();
-    console.log(state);
 
     const { errors } = useContext(ErrorContext);
 
     const deliveryInfo = useGetDeliveryInfo();
 
+    const [changeInfoDeliver, setChangeInfoDeliver] = useState(true);
     const [changeInfo, setChangeInfo] = useState({ option: 0 });
 
     return (
@@ -45,10 +45,10 @@ export default function Checkout() {
                                     <p className="step">1</p>
                                     <h2>Delivery address</h2>
                                 </header>
-                                {changeInfo && <button onClick={() => setChangeInfo(false)} className='change-info' type='button'>Change</button>}
+                                {changeInfoDeliver && <button onClick={() => setChangeInfoDeliver(false)} className='change-info' type='button'>Change</button>}
                             </div>
 
-                            {deliveryInfo.hasOwnProperty('_id') && changeInfo ?
+                            {deliveryInfo.hasOwnProperty('_id') && changeInfoDeliver ?
                                 <div className='delivery-info'>
                                     <p>{`${deliveryInfo['first-name']} ${deliveryInfo['last-name']}`}</p>
                                     <p>{`${deliveryInfo.address}, ${deliveryInfo['zip-code']}`}</p>
@@ -58,7 +58,7 @@ export default function Checkout() {
                                     <p>{deliveryInfo.phone}</p>
                                 </div>
                                 :
-                                < DeliveryForm deliveryInfo={deliveryInfo} onClose={() => setChangeInfo(true)} />
+                                < DeliveryForm deliveryInfo={deliveryInfo} onClose={() => setChangeInfoDeliver(true)} state={state} />
                             }
 
                         </div>
