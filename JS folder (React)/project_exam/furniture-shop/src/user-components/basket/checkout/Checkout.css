@@ -73,31 +73,36 @@
     overflow: hidden;
 }
 
-.checkout .wrapper-checkout .address .header-address {
+.checkout .wrapper-checkout .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.checkout .wrapper-checkout .address .header-address header {
+.checkout .wrapper-checkout hr {
+    margin: 20px 0;
+    border: 1px solid #5e5e5e;
+}
+
+.checkout .wrapper-checkout .header header {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.checkout .wrapper-checkout .address .header-address header h2 {
+.checkout .wrapper-checkout .header header h2 {
     margin-bottom: 0.35rem;
 }
 
-.checkout .wrapper-checkout .address .header-address .change-info {
+.checkout .wrapper-checkout .header .change-info {
     background: none;
     font-weight: bold;
     font-style: italic;
     text-decoration: underline;
 }
 
-.checkout .wrapper-checkout .address .header-address .step {
+.checkout .wrapper-checkout .header .step {
     width: 28px;
     height: 28px;
     text-align: center;
@@ -105,6 +110,42 @@
     color: white;
     border-radius: 50%;
     border: 2px solid #333;
+}
+
+.checkout .wrapper-checkout .payment .payment-info .payment-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.checkout .wrapper-checkout .payment .payment-info .payment-container>button {
+    flex: 1;
+    min-height: 70px;
+    padding: 20px 24px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border: 1px solid #5e5e5e;
+    border-radius: 5px;
+}
+
+.checkout .wrapper-checkout .payment .payment-info .payment-container>button.active {
+    background-color: #fff;
+}
+
+.checkout .wrapper-checkout .payment .payment-info .payment-container>button>i {
+    font-size: 30px;
+    padding: 2px 12px;
+    border: 1px solid #5e5e5e;
+    border-radius: 5px;
+}
+
+.checkout .wrapper-checkout .payment .payment-info .payment-container>button>p {
+    font-weight: bold;
+    font-style: italic;
 }
 
 .checkout .wrapper-checkout .address .delivery-info p {
