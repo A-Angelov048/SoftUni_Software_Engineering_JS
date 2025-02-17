@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ErrorContext } from '../../context/ErrorContext';
 import { priceHandler } from '../../utils/priceHandler';
+import SubmitButton from '../../shared-components/submit-button/SubmitButton';
 
 export default function Basket() {
 
@@ -264,7 +265,11 @@ export default function Basket() {
                             <p>Products: <span>{'$' + totalPrice.toFixed(2)}</span></p>
                             <p>Shipping: <span>{priceReceive.price === 0 ? 'Gratis' : `$${priceReceive.price.toFixed(2)}`}</span></p>
                             <p>Total amount (including VAT): <span>{'$' + ((totalPrice * 1.2) + priceReceive.price).toFixed(2)}</span></p>
-                            <button disabled={!basketItems.length > 0 || priceReceive.option === 0} onClick={() => navigate('/checkout', { state: { furniture: getBasketItems, furniturePrice: totalPrice, shippingPrice: priceReceive.price } })} type='button' className="checkout-btn">GO TO CHECKOUT</button >
+                            <SubmitButton
+                                disabledButton={!basketItems.length > 0 || priceReceive.option === 0}
+                                clickFunction={() => navigate('/checkout', { state: { furniture: getBasketItems, furniturePrice: totalPrice, shippingPrice: priceReceive.price } })}
+                                buttonName={'GO TO CHECKOUT'}
+                            />
                         </div>
 
                     </section>

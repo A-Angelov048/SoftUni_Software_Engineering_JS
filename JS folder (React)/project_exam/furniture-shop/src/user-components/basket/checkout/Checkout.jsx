@@ -5,6 +5,7 @@ import { Fragment, useContext, useState } from 'react';
 import { ErrorContext } from '../../../context/ErrorContext';
 import { Link, useLocation } from 'react-router-dom';
 import { BasketContext } from '../../../context/BasketContext';
+import SubmitButton from '../../../shared-components/submit-button/SubmitButton';
 
 export default function Checkout() {
 
@@ -164,6 +165,9 @@ export default function Checkout() {
                             </div>
                         </div>
 
+                        <SubmitButton
+                            disabledButton={!deliveryInfo.hasOwnProperty('_id') || changeInfo.option === 0}
+                            buttonName={'Complete your order'} />
                     </div>
 
                 </div>
