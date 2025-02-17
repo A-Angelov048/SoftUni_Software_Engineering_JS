@@ -114,7 +114,7 @@
 
 .basket .basket-summary {
     border-top: 2px solid #5e5e5e;
-    padding-top: 10px;
+    padding: 10px 0;
 }
 
 .basket .basket-summary .summary-row {
