@@ -118,7 +118,13 @@ router.get('/delivery-info', async (req, res) => {
     try {
 
         const result = await getDeliveryInfo(userId);
+
+        if (!result) {
+            return res.status(404).json({ message: "No delivery info found." });
+        }
+
         res.json(result);
+
 
     } catch (err) {
         console.log(err.errors);
