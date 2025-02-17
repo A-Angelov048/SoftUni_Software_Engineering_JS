@@ -1,14 +1,16 @@
 import './Checkout.css';
 import { useGetDeliveryInfo } from '../../../hooks/useUserResponse';
 import DeliveryForm from '../../delivery-form/DeliveryForm';
-import { useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { ErrorContext } from '../../../context/ErrorContext';
 import { Link, useLocation } from 'react-router-dom';
+import { BasketContext } from '../../../context/BasketContext';
 
 export default function Checkout() {
 
     const { state } = useLocation();
 
+    const { basketItems } = useContext(BasketContext);
     const { errors } = useContext(ErrorContext);
 
     const deliveryInfo = useGetDeliveryInfo();
@@ -118,11 +120,26 @@ export default function Checkout() {
                             <div className='full-basket'>
 
                                 <header className='header-full-basket'>
-                                    <h3>{`My products (2)`}</h3>
+                                    <h3>{`My products (${state.furniture.length})`}</h3>
                                     <label htmlFor="basket-toggle" className='close-basket'>
-                                        <i class='bx bx-x'></i>
+                                        <i className='bx bx-x'></i>
                                     </label>
                                 </header>
+
+                                {state.furniture.map((current, index) => (
+                                    <div key={current._id} className='basket-products'>
+                                        <div className="image-product">
+                                            <img src={current.imageUrl[0]} alt={`Product ${index + 1}`} />
+                                        </div>
+                                        <div className="info-product">
+                                            <p className='name'>{current.name}</p>
+                                            <p>{basketItems.map((x) => (x.id === current._id && <Fragment key={x.id}>{`Quantity: ${x.quantity}`}</Fragment>))}</p>
+                                        </div>
+                                        <div className="price-product">
+                                            <span>{basketItems.map((x) => (x.id === current._id && <Fragment key={x.id}>{`$${(x.quantity * x.price).toFixed(2)}`}</Fragment>))}</span>
+                                        </div>
+                                    </div>
+                                ))}
 
                             </div>
 

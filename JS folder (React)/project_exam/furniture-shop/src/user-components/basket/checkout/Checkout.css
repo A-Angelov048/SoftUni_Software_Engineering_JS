@@ -87,6 +87,29 @@
 
 .basket .basket-items .full-basket .header-full-basket i {
     font-size: 30px;
+    cursor: pointer;
+}
+
+.basket .basket-items .full-basket .basket-products {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.basket .basket-items .full-basket .basket-products .image-product img {
+    display: block;
+    width: 80px;
+    height: 80px;
+}
+
+.basket .basket-items .full-basket .basket-products .info-product {
+    flex: 1;
+}
+
+.basket .basket-items .full-basket .basket-products .info-product .name {
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .basket .basket-summary {
