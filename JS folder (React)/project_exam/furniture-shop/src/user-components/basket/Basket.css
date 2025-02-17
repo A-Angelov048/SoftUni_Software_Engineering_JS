@@ -160,30 +160,6 @@
     float: right;
 }
 
-.divide .summary-section .summary .checkout-btn {
-    display: block;
-    width: 100%;
-    background: #333;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.divide .summary-section .summary .checkout-btn:hover {
-    background-color: #fff;
-    color: #333;
-}
-
-.divide .summary-section .summary .checkout-btn:disabled {
-    cursor: not-allowed;
-    filter: blur(2px);
-}
-
 .divide .basket-section .delivery-info,
 .divide .basket-section .payment-info {
     background: #22d37880;
