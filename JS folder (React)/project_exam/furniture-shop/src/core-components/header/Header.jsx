@@ -1,95 +1,96 @@
-import './Header.css';
+import "./Header.css";
 
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { logout } from '../../api-service/userService';
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useLogoutUser } from "../../hooks/useUserResponse";
 
 export default function Header() {
+  const { userId, role } = useContext(AuthContext);
+  const logoutUser = useLogoutUser();
 
-    const { userId, role, changeAuthState, updateAuthError } = useContext(AuthContext);
+  return (
+    <header className="header-section">
+      <div className="logo">
+        <Link to="/">Furniture-Shop</Link>
+      </div>
 
-    const logoutUser = async () => {
+      <input type="checkbox" id="sidebar-toggle" />
+      <label htmlFor="sidebar-toggle" id="overlay"></label>
+      <label htmlFor="sidebar-toggle" className="open-sidebar">
+        <i className="bx bx-menu bx-flip-vertical"></i>
+      </label>
 
-        try {
-            await logout();
-            changeAuthState({});
-        } catch (error) {
-            if (error.message === '403') return updateAuthError(true);
+      <div className="navigation-container">
+        <ul className="main-nav">
+          <label htmlFor="sidebar-toggle" className="close-sidebar">
+            <i className="bx bx-x"></i>
+          </label>
+          <li>
+            <Link className="main" to="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link className="main" to="/shop">
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link className="main" to="/search">
+              Search
+            </Link>
+          </li>
+        </ul>
 
-            console.error(error.message);
-        }
-    }
+        <nav className="user-nav">
+          {!!userId ? (
+            <>
+              {role === "Admin" && (
+                <div>
+                  <Link className="user" to="/create-offer/admin">
+                    Create Offer{" "}
+                  </Link>
+                </div>
+              )}
 
-    return (
+              <div>
+                <Link className="user" onClick={logoutUser} to="/">
+                  Logout
+                </Link>
+              </div>
 
-        <header className="header-section">
+              <div>
+                <Link className="user" to={`/profile/${userId}`}>
+                  <i className="bx bxs-user"></i>
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <Link className="user" to="/login">
+                  Login
+                </Link>
+              </div>
 
-            <div className='logo'>
-                <Link to="/">Furniture-Shop</Link>
+              <div>
+                <Link className="user" to="/register">
+                  Register
+                </Link>
+              </div>
+            </>
+          )}
+
+          {role !== "Admin" && (
+            <div>
+              <Link className="user" to="/basket">
+                <i className="bx bx-basket"></i>
+              </Link>
             </div>
-
-            <input type="checkbox" id='sidebar-toggle' />
-            <label htmlFor="sidebar-toggle" id='overlay'></label>
-            <label htmlFor="sidebar-toggle" className='open-sidebar'>
-                <i className='bx bx-menu bx-flip-vertical' ></i>
-            </label>
-
-            <div className='navigation-container'>
-
-                <ul className="main-nav">
-                    <label htmlFor="sidebar-toggle" className='close-sidebar'>
-                        <i className='bx bx-x'></i>
-                    </label>
-                    <li><Link className="main" to="/">Home</Link></li>
-                    <li><Link className="main" to="/shop">Shop</Link></li>
-                    <li><Link className="main" to="/search">Search</Link></li>
-                </ul>
-
-                <nav className="user-nav">
-
-                    {!!userId ?
-                        <>
-                            {role === 'Admin' &&
-                                <div>
-                                    <Link className="user" to="/create-offer/admin">Create Offer </Link>
-                                </div>
-                            }
-
-                            <div>
-                                <Link className="user" onClick={logoutUser} to="/">Logout</Link>
-                            </div>
-
-                            <div>
-                                <Link className="user" to={`/profile/${userId}`}>
-                                    <i className='bx bxs-user'></i>
-                                </Link>
-                            </div>
-                        </>
-                        :
-                        <>
-                            <div>
-                                <Link className="user" to="/login">Login</Link>
-                            </div>
-
-                            <div>
-                                <Link className="user" to="/register">Register</Link>
-                            </div>
-
-                        </>}
-
-                    {
-                        role !== 'Admin' &&
-                        <div>
-                            <Link className="user" to="/basket"><i className='bx bx-basket'></i></Link>
-                        </div>
-                    }
-
-                </nav>
-
-            </div>
-
-        </header>
-
-    )
+          )}
+        </nav>
+      </div>
+    </header>
+  );
 }

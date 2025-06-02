@@ -1,70 +1,69 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  backdrop-filter: blur(10px);
 }
 
 .overlay .content {
-    position: relative;
-    background: #58d68d;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: center;
+  position: relative;
+  background: #58d68d;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
 }
 
 .overlay .content .header-content i {
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    font-size: 30px;
-    color: #C70039;
-    cursor: pointer;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  font-size: 30px;
+  color: #c70039;
+  cursor: pointer;
 }
 
 .overlay .content p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .overlay .content .button-box {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .overlay .content .button-box button {
-    font-size: 14px;
-    height: 40px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s;
+  font-size: 14px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.overlay .content .button-box button[name='delete'] {
-    color: #C70039;
+.overlay .content .button-box button[name="delete"] {
+  color: #c70039;
 }
 
 .overlay .content .button-box .btn-hover-delete:hover {
-    background-color: #C70039;
-    color: #fff;
+  background-color: #c70039;
+  color: #fff;
 }
 
-.overlay .content .button-box .btn-hover:hover,
 .overlay .content .button-box .btn-hover-cancel:hover {
-    background-color: #fff;
-    color: #333;
+  background-color: #fff;
+  color: #333;
 }

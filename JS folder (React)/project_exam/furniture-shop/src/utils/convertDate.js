@@ -1,13 +1,11 @@
-export function convertDate (date){
+export function convertDate(date) {
+  const dateToConvert = new Date(date);
 
-    const dateToConvert = new Date(date);
-    
-    return dateToConvert.toLocaleString();
+  return dateToConvert.toLocaleString();
 }
 
-export function convertDateToString (date){
+export function convertDateToString(date) {
+  const dateToConvert = new Date(date);
 
-    const dateToConvert = new Date(date);
-    
-    return dateToConvert.toDateString();
+  return dateToConvert.toDateString();
 }

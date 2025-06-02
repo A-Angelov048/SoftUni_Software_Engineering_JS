@@ -1,13 +1,11 @@
-import { useContext } from "react";
-import { FurnitureContext } from "../context/FurnitureContext";
+export function averageNumReviews(reviews) {
+  const averageNumber = reviews?.reduce(
+    (accumulator, current) => accumulator + Number(current?.rating),
+    0
+  );
 
+  const length = reviews?.length || 0;
+  const result = Math.round(averageNumber / length) || 0;
 
-export function averageNumReviews() {
-
-    const furnitureContext = useContext(FurnitureContext);
-
-    const averageNumber = furnitureContext.reviews?.reduce((accumulator, current) => accumulator + Number(current?.rating), 0);
-
-    return Math.round(averageNumber / furnitureContext.reviews?.length);
-
+  return [length, result];
 }

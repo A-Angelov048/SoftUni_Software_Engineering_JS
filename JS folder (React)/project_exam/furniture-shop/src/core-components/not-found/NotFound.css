@@ -1,59 +1,59 @@
 .error-section .container .wrapper {
-    max-width: 1000px;
-    background-color: rgba(34, 211, 120, 0.5);
-    border: 3px solid rgba(51, 51, 51, 0.4);
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-    color: #333;
-    border-radius: 10px;
-    margin: auto;
+  max-width: 1000px;
+  background-color: rgba(34, 211, 120, 0.5);
+  border: 3px solid rgba(51, 51, 51, 0.4);
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+  color: #333;
+  border-radius: 10px;
+  margin: auto;
 }
 
 .error-section .container .wrapper .details {
-    text-align: center;
-    margin: 50px 50px;
+  text-align: center;
+  margin: 50px 50px;
 }
 
 .error-section .container .wrapper .details h2 {
-    font-size: 18vw;
-    color: #333;
-    line-height: 1em;
+  font-size: 18vw;
+  color: #333;
+  line-height: 1em;
 }
 
 .error-section .container .wrapper .details h4 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    background: #fff;
-    font-weight: 300;
-    padding: 10px 20px;
-    display: inline-block;
-    border-radius: 10px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  background: #fff;
+  font-weight: 300;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 10px;
 }
 
 .error-section .container .wrapper .details p {
-    color: #333;
-    font-size: 19px;
+  color: #333;
+  font-size: 19px;
 }
 
 .error-section .container .wrapper .a-box {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .error-section .container .wrapper .a-box a {
-    display: inline-block;
-    padding: 15px 30px;
-    background: #333;
-    color: #fff;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s;
+  display: inline-block;
+  padding: 15px 30px;
+  background: #333;
+  color: #fff;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
 }
 
 .error-section .container .wrapper .a-box a:hover {
-    background: #fff;
-    color: #333;
+  background: #fff;
+  color: #333;
 }

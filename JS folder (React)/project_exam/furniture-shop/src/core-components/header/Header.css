@@ -1,83 +1,83 @@
 .header-section a {
-    position: relative;
-    font-size: 18px;
-    font-weight: 500;
+  position: relative;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .header-section a::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 2px;
-    transition: .3s;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: 0.3s;
 }
 
 .header-section a:hover::before {
-    width: 100%;
+  width: 100%;
 }
 
 .header-section {
-    background: transparent;
-    display: flex;
-    align-items: baseline;
-    padding: 20px 100px;
+  background: transparent;
+  display: flex;
+  align-items: baseline;
+  padding: 20px 100px;
 }
 
 .header-section .logo a {
-    font-size: 32px;
-    color: #22d378;
-    font-weight: 700;
+  font-size: 32px;
+  color: #22d378;
+  font-weight: 700;
 }
 
 .header-section .logo a::after {
-    content: '';
-    position: relative;
-    left: 10px;
-    border: 2px solid #22d378;
+  content: "";
+  position: relative;
+  left: 10px;
+  border: 2px solid #22d378;
 }
 
 .header-section .navigation-container {
-    position: relative;
-    z-index: 1;
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-section .navigation-container .main-nav {
-    list-style: none;
+  list-style: none;
 }
 
 .header-section .navigation-container .main-nav li:nth-child(2) {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .header-section .navigation-container .main-nav li {
-    display: inline-block;
-    padding: 0px 10px;
+  display: inline-block;
+  padding: 0px 10px;
 }
 
 .header-section .navigation-container .main-nav .main {
-    color: #22d378;
-    text-transform: uppercase;
+  color: #22d378;
+  text-transform: uppercase;
 }
 
 .header-section .navigation-container .main-nav .main::before {
-    background: #22d378;
+  background: #22d378;
 }
 
 .header-section .navigation-container .user-nav div {
-    display: inline-block;
-    padding: 0px 10px;
+  display: inline-block;
+  padding: 0px 10px;
 }
 
 .header-section .navigation-container .user-nav .user {
-    color: #fff;
-    text-transform: uppercase;
+  color: #fff;
+  text-transform: uppercase;
 }
 
 .header-section .navigation-container .user-nav .user::before {
-    background: #fff;
+  background: #fff;
 }

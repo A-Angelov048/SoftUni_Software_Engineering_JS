@@ -1,23 +1,30 @@
-import { useContext, useState } from "react";
-import { FurnitureContext } from "../context/FurnitureContext";
+import { useRef, useState } from "react";
 
-export default function useReviews() {
+export function useReviews(initialValue) {
+  const reviewsArr = useRef([]);
 
-    let reviewsArr = [];
+  const [reviewsState, setReviewsState] = useState(initialValue);
+  const [reviewsFlag, setReviewsFlag] = useState(false);
 
-    const [reviewsState, setReviewsState] = useState(false);
-    const furnitureContext = useContext(FurnitureContext);
+  if (!reviewsFlag) {
+    reviewsArr.current = reviewsState.toReversed().slice(0, 2);
+  } else {
+    reviewsArr.current = reviewsState.toReversed();
+  }
 
-    if (!reviewsState) {
-        reviewsArr = furnitureContext.reviews?.toReversed().slice(0, 2);
-    } else {
-        reviewsArr = furnitureContext.reviews?.toReversed();
-    }
+  const setReviewState = (value) => {
+    setReviewsState((oldState) => [...oldState, value]);
+  };
 
-    const updateReviewsState = (value) => {
-        setReviewsState(value);
-    }
+  const updateReviewsFlag = (value) => {
+    setReviewsFlag(value);
+  };
 
-    return [reviewsArr, reviewsState, updateReviewsState];
-
+  return [
+    reviewsArr.current,
+    reviewsState.length,
+    reviewsFlag,
+    updateReviewsFlag,
+    setReviewState,
+  ];
 }

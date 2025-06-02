@@ -1,12 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Navigate, Outlet } from 'react-router-dom';
-
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function AuthGuard() {
+  const user = useContext(AuthContext);
 
-    const user = useContext(AuthContext);
-
-    return !!user.userId ? <Navigate to={'/'} replace={true} /> : <Outlet />
-
+  return !!user.userId ? <Navigate to={"/"} replace={true} /> : <Outlet />;
 }

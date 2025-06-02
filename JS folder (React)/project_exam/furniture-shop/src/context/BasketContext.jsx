@@ -1,89 +1,58 @@
-import { createContext, useContext } from "react";
-import usePersistence from "../hooks/usePersistence";
+import { createContext, useContext, useEffect } from "react";
 import { ErrorContext } from "./ErrorContext";
+import { useSetBasket } from "../hooks/useBasketReducer";
 
 export const BasketContext = createContext();
 
 export function BasketProvider(props) {
+  const [basket, dispatch] = useSetBasket();
+  const { handleError, clearError } = useContext(ErrorContext);
 
-    const [basketState, setBasketState] = usePersistence([], 'basket');
-    const { handleError, clearError } = useContext(ErrorContext);
+  useEffect(() => {
+    sessionStorage.setItem("basket", JSON.stringify(basket));
+  }, [basket]);
 
-    const changeBasketState = (state) => {
+  const addToBasket = (id, quantity, price) => {
+    dispatch({ type: "ADD", payload: { id, quantity, price } });
 
-        const newBasket = [...basketState];
+    handleError({ successMessage: "Successfully add furniture to basket." });
 
-        const findCurrent = newBasket.find(x => x.id === state.id);
+    setTimeout(() => {
+      clearError();
+    }, 2000);
+  };
 
-        if (findCurrent) {
-            findCurrent.quantity = state.quantity;
-        } else {
-            newBasket.push(state);
-        }
+  const removeBasketState = (id) => {
+    dispatch({ type: "REMOVE", payload: id });
+    handleError({ successMessage: "Successfully remove item from basket." });
 
-        setBasketState(newBasket);
-    };
+    setTimeout(() => {
+      clearError();
+    }, 2000);
+  };
 
-    const removeBasketState = (id) => {
+  const quantityHandler = (id, operation) => {
+    switch (operation) {
+      case "increment":
+        dispatch({ type: "INCREMENT_QUANTITY", payload: id });
+        break;
 
-        const newBasket = basketState.filter(item => item.id !== id);
-
-        setBasketState(newBasket);
-
-        handleError({ successMessage: 'Successfully remove item from basket.' });
-
-        setTimeout(() => {
-
-            clearError();
-
-        }, 2000);
-
-        return newBasket;
-    };
-
-    const quantityHandler = (idFurniture, operation) => {
-
-        const findCurrent = basketState.find(x => x.id === idFurniture);
-
-        switch (operation) {
-
-            case 'increment': if (findCurrent.quantity >= 10) { return } findCurrent.quantity++; break;
-
-            case 'decrement': if (findCurrent.quantity <= 1) { return } findCurrent.quantity--; break;
-
-        }
-
-        changeBasketState({ id: findCurrent.id, quantity: findCurrent.quantity });
-
+      case "decrement":
+        dispatch({ type: "DECREMENT_QUANTITY", payload: id });
+        break;
     }
+  };
 
-    const addToBasket = (furnitureId, quantity, price) => {
+  const data = {
+    basketItems: basket,
+    removeBasketState,
+    quantityHandler,
+    addToBasket,
+  };
 
-        changeBasketState({ id: furnitureId, quantity: quantity, price: price });
-
-        handleError({ successMessage: 'Successfully add furniture to basket.' });
-
-        setTimeout(() => {
-
-            clearError();
-
-        }, 2000);
-    };
-
-
-    const data = {
-        basketItems: basketState,
-        changeBasketState,
-        removeBasketState,
-        quantityHandler,
-        addToBasket,
-    };
-
-
-    return (
-        <BasketContext.Provider value={data}>
-            {props.children}
-        </BasketContext.Provider>
-    );
-
+  return (
+    <BasketContext.Provider value={data}>
+      {props.children}
+    </BasketContext.Provider>
+  );
 }

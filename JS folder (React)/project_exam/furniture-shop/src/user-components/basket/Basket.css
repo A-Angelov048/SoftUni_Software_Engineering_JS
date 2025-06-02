@@ -1,231 +1,81 @@
 .divide {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    color: #333;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  color: #333;
 }
 
 .divide .basket-section {
-    flex: 0 0 55%;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .divide .basket-section .basket-info {
-    background: #22d37880;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+  background: #22d37880;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
 }
 
 .divide .basket-section .basket-info .basket-heading {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 20px 15px;
-    border-bottom: 2px solid #5e5e5e;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px 15px;
+  border-bottom: 2px solid #5e5e5e;
 }
 
-.divide .basket-section .basket-info .basket-heading>i {
-    font-size: 40px;
+.divide .basket-section .basket-info .basket-heading > i {
+  font-size: 40px;
 }
 
-.divide .basket-section .basket-info .basket-heading>h2 {
-    margin: 0;
+.divide .basket-section .basket-info .basket-heading > h2 {
+  margin: 0;
 }
 
 .divide .basket-section .basket-info .basket-body {
-    padding: 20px 15px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item {
-    display: flex;
-    align-items: center;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item img {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions {
-    margin-top: 10px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions button>i {
-    font-size: 22px;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions .delete-btn:hover {
-    color: #C70039;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .item-details .actions .heart-btn .active {
-    color: red;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .quantity-btn {
-    width: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    background-color: #fff;
-    border-radius: 37px;
-    overflow: hidden;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .quantity-btn button {
-    display: flex;
-    aspect-ratio: 1;
-    background-color: #333;
-    color: #fff;
-    border-radius: 50%;
-    transition: all 0.3s;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .quantity-btn button:hover {
-    background-color: #22d37880;
-    color: #333;
-}
-
-.divide .basket-section .basket-info .basket-body .basket-item .price {
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 15px;
-}
-
-.divide .basket-section .basket-info .basket-body>hr {
-    border: solid 1px #5e5e5e;
-    margin: 20px 0;
+  padding: 20px 15px;
 }
 
 .divide .basket-section .basket-info .basket-body .empty-basket {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .divide .basket-section .basket-info .basket-body .empty-basket h2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .divide .basket-section .basket-info .basket-body .empty-basket .underline {
-    font-size: 20px;
-    text-decoration: underline;
-    font-weight: 600;
+  font-size: 20px;
+  text-decoration: underline;
+  font-weight: 600;
 }
 
 .divide .basket-section .basket-info .basket-body .empty-basket a:hover {
-    color: #fff;
-    text-decoration: underline;
+  color: #fff;
+  text-decoration: underline;
 }
 
-.divide .summary-section {
-    flex: 0 0 30%;
-    background: #22d37880;
-    padding: 20px;
-    border-radius: 10px;
-    align-self: flex-start;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-}
-
-.divide .summary-section .summary h3 {
-    margin-bottom: 15px;
-}
-
-.divide .summary-section .summary p {
-    margin: 10px 0;
-}
-
-.divide .summary-section .summary span {
-    float: right;
-}
-
-.divide .basket-section .delivery-info,
 .divide .basket-section .payment-info {
-    background: #22d37880;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+  background: #22d37880;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
 }
 
-.divide .basket-section .delivery-info h3,
 .divide .basket-section .payment-info h3 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .divide .basket-section .payment-info .payment-icons {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .divide .basket-section .payment-info .payment-icons img {
-    width: 50px;
-    height: 30px;
-}
-
-.divide .basket-section .delivery-info .receive-choice {
-    display: flex;
-    gap: 20px;
-    align-items: baseline;
-}
-
-.divide .basket-section .delivery-info .receive-shop,
-.divide .basket-section .delivery-info .receive-home {
-    display: flex;
-    flex-direction: column;
-}
-
-.divide .basket-section .delivery-info .container-receive {
-    font-size: 14px;
-    padding: 15px;
-    border: solid 2px #333;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    background: none;
-    text-align: left;
-}
-
-.divide .basket-section .delivery-info .container-receive.flex-elements {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    flex: 1 1 auto;
-}
-
-.divide .basket-section .delivery-info .container-receive.active {
-    background: #fff;
-}
-
-.divide .basket-section .delivery-info .container-receive .receive-method.flex-elements {
-    display: flex;
-    justify-content: space-between;
-}
-
-.divide .basket-section .delivery-info .container-receive .receive-method p:nth-child(1) {
-    font-weight: bold;
-}
-
-.divide .basket-section .delivery-info .container-receive .icon>i {
-    font-size: 30px;
+  width: 50px;
+  height: 30px;
 }

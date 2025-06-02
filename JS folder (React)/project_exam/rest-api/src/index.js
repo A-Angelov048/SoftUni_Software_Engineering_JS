@@ -1,28 +1,30 @@
-const functions = require('firebase-functions');
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const dotenv = require('dotenv');
+const functions = require("firebase-functions");
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const dotenv = require("dotenv");
 
-const expressConfig = require('./config/expressConfig');
-const router = require('./router');
-const localServerStart = require('./localApi');
-
+const expressConfig = require("./config/expressConfig");
+const router = require("./router");
+const localServerStart = require("./localApi");
 
 functions.setGlobalOptions({
-    region: 'europe-west2'
+  region: "europe-west2",
 });
 
 switch (process.env.GCLOUD_PROJECT) {
-    case 'deploy-furniture-shop-123':
-        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.furniture-shop') });
-        break;
+  case "deploy-furniture-shop-123":
+    dotenv.config({
+      path: path.resolve(__dirname, "../environments/.env.furniture-shop"),
+    });
+    break;
 
-    default:
-        dotenv.config({ path: path.resolve(__dirname, '../environments/.env.development') });
-        break;
+  default:
+    dotenv.config({
+      path: path.resolve(__dirname, "../environments/.env.development"),
+    });
+    break;
 }
-
 
 const app = express();
 const connection = process.env.DATABASE_URL;
@@ -31,15 +33,15 @@ const originUrl = process.env.ORIGIN_URL;
 expressConfig(app, originUrl);
 app.use(router);
 
-mongoose.connect(connection)
-    .then(() => {
-        console.log('DB Connected.');
+mongoose
+  .connect(connection)
+  .then(() => {
+    console.log("DB Connected.");
 
-        if (process.env.NODE_ENV === 'development') {
-            return localServerStart(app);
-        }
-
-    })
-    .catch(err => console.error(err.message));
+    if (process.env.NODE_ENV === "development") {
+      return localServerStart(app);
+    }
+  })
+  .catch((err) => console.error(err.message));
 
 exports.api = functions.https.onRequest(app);

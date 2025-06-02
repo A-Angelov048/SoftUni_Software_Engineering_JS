@@ -1,69 +1,64 @@
 import { useState } from "react";
 
-
 export function useForm(initialValues, submitCallBack) {
-    const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(initialValues);
 
-    const changeHandler = (e) => {
-        
-        const name = !!e.target.name ? e.target.name : 'rating';
-        const value = !!e.target.dataset.rating ? e.target.dataset.rating : e.target.value;
+  const changeHandler = (e) => {
+    const name = !!e.target.name ? e.target.name : "rating";
+    const value = !!e.target.dataset.rating
+      ? e.target.dataset.rating
+      : e.target.value;
 
-        setValues(oldValue => ({
-            ...oldValue,
-            [name]: value
-        }));
+    setValues((oldValue) => ({
+      ...oldValue,
+      [name]: value,
+    }));
+  };
 
-    };
+  const changeHandlerArr = (e, index) => {
+    const imageUrl = [...values[e.target.name]];
+    imageUrl[index] = e.target.value;
 
-    const changeHandlerArr = (e, index) => {
+    setValues((oldValue) => ({
+      ...oldValue,
+      imageUrl,
+    }));
+  };
 
-        const imageUrl = [...values[e.target.name]];
-        imageUrl[index] = e.target.value;
+  const handleField = (operation, index) => {
+    const imageUrl = [...values["imageUrl"]];
 
-        setValues(oldValue => ({
-            ...oldValue,
-            imageUrl
-        }));
+    switch (operation) {
+      case "add":
+        imageUrl.push("");
+        break;
 
+      case "delete":
+        imageUrl.splice(index, 1);
+        break;
     }
 
-    const handleField = (operation, index) => {
+    setValues((oldValue) => ({
+      ...oldValue,
+      imageUrl,
+    }));
+  };
 
-        const imageUrl = [...values['imageUrl']];
+  const submitCurForm = (e) => {
+    e.preventDefault();
 
-        switch (operation) {
+    submitCallBack(values, resetCurForm);
+  };
 
-            case 'add': imageUrl.push(''); break;
+  const resetCurForm = () => {
+    setValues(initialValues);
+  };
 
-            case 'delete': imageUrl.splice(index, 1); break;
-
-        }
-
-        setValues(oldValue => ({
-            ...oldValue,
-            imageUrl
-        }));
-
-    }
-
-    const submitCurForm = (e) => {
-
-        e.preventDefault();
-
-        submitCallBack(values);
-    };
-
-    const resetCurForm = () => {
-        setValues(initialValues);
-    }
-
-    return {
-        values,
-        changeHandler,
-        changeHandlerArr,
-        handleField,
-        submitCurForm,
-        resetCurForm,
-    };
+  return {
+    values,
+    changeHandler,
+    changeHandlerArr,
+    handleField,
+    submitCurForm,
+  };
 }

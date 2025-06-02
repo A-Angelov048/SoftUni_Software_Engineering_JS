@@ -1,105 +1,145 @@
 .recent-reviews .container .wrapper-reviews {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #252525;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #252525;
 }
 
 .recent-reviews .container .wrapper-reviews .btn {
-    padding: 8px 10px;
-    background: #333;
-    color: #fff;
-    border: 1px solid #333;
-    border-radius: 30px;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s;
+  padding: 8px 10px;
+  background: #333;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
 }
 
 .recent-reviews .container .wrapper-reviews .btn:hover {
-    background: #fff;
-    color: #333;
+  background: #fff;
+  color: #333;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review::before,
 .recent-reviews .container .wrapper-reviews .write-review::after,
 .recent-reviews .container .wrapper-reviews .content-review:nth-child(1):before,
 .recent-reviews .container .wrapper-reviews .content-review::after {
-    display: block;
-    content: '';
-    border: 1px solid #24d278;
-    margin: 40px 0;
+  display: block;
+  content: "";
+  border: 1px solid #24d278;
+  margin: 40px 0;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .center,
 .recent-reviews .container .wrapper-reviews .write-review .center {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .center header,
 .recent-reviews .container .wrapper-reviews .write-review .center h3 {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review header h3,
 .recent-reviews .container .wrapper-reviews .write-review h3 {
-    margin: 0;
+  margin: 0;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .top,
 .recent-reviews .container .wrapper-reviews .write-review .top {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .bottom,
 .recent-reviews .container .wrapper-reviews .write-review .bottom {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .stars-review,
 .recent-reviews .container .wrapper-reviews .write-review .stars-review div {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    justify-content: start;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: start;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.recent-reviews .container .wrapper-reviews .write-review .stars-review .btn-star {
-    background-color: transparent;
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  .stars-review
+  .btn-star {
+  background-color: transparent;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review .stars-review .active,
-.recent-reviews .container .wrapper-reviews .write-review .stars-review .active~.btn-star {
-    color: darkorange;
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  .stars-review
+  .active
+  ~ .btn-star {
+  color: darkorange;
 }
 
-.recent-reviews .container .wrapper-reviews .write-review .stars-review div>.btn-star:hover,
-.recent-reviews .container .wrapper-reviews .write-review .stars-review div>.btn-star:hover~.btn-star {
-    color: darkorange;
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  .stars-review
+  div
+  > .btn-star:hover,
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  .stars-review
+  div
+  > .btn-star:hover
+  ~ .btn-star {
+  color: darkorange;
 }
 
-.recent-reviews .container .wrapper-reviews .content-review .stars-review .active,
-.recent-reviews .container .wrapper-reviews .content-review .stars-review .active~.bxs-star {
-    color: darkorange;
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .content-review
+  .stars-review
+  .active,
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .content-review
+  .stars-review
+  .active
+  ~ .bxs-star {
+  color: darkorange;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review textarea {
-    width: 100%;
-    padding: 6px 8px;
-    margin-bottom: 40px;
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 40px;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review .btn {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
-.recent-reviews .container .wrapper-reviews .write-review form .error-container {
-    margin: 10px 0px 15px 0px;
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  form
+  .error-container {
+  margin: 10px 0px 15px 0px;
 }

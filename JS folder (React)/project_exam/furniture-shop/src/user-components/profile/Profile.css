@@ -1,142 +1,156 @@
 .profile-section .container .wrapper-profile {
-    max-width: 1000px;
-    color: #333;
-    margin: 0 auto;
-
+  max-width: 1000px;
+  color: #333;
+  margin: 0 auto;
 }
 
 .profile-section .container .wrapper-profile .profile-info {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    padding: 15px;
-    font-size: 18px;
-    line-height: 1.5;
-    background-color: rgba(34, 211, 120, 0.502);
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-    border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 1.5;
+  background-color: rgba(34, 211, 120, 0.502);
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+  border-radius: 10px;
 }
 
 .profile-section .container .wrapper-profile .profile-info .image img {
-    width: 100px;
-    aspect-ratio: 1;
-    border-radius: 50%;
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 .profile-section .container .wrapper-profile .profile-info .info {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    margin-right: 80px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 80px;
 }
 
-.profile-section .container .wrapper-profile .profile-info .info .info-user div {
-    display: flex;
-    align-items: center;
-    gap: 3px;
+.profile-section
+  .container
+  .wrapper-profile
+  .profile-info
+  .info
+  .info-user
+  div {
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .profile-section .container .wrapper-profile .nav-profile {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-section .container .wrapper-profile .nav-profile::after {
-    content: '';
-    border: 2px solid #5e5e5e;
-    margin-top: 5px;
+  content: "";
+  border: 2px solid #5e5e5e;
+  margin-top: 5px;
 }
 
 .profile-section .container .wrapper-profile .nav-profile ul {
-    display: flex;
-    margin-top: 50px;
-    gap: 50px;
-    list-style-type: none;
-
+  display: flex;
+  margin-top: 50px;
+  gap: 50px;
+  list-style-type: none;
 }
 
 .profile-section .container .wrapper-profile .nav-profile ul .link {
-    display: block;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .profile-section .container .wrapper-profile .nav-profile ul li.active::after {
-    content: '';
-    display: block;
-    position: relative;
-    top: 9px;
-    border: 2px solid rgba(34, 211, 120, 0.7);
+  content: "";
+  display: block;
+  position: relative;
+  top: 9px;
+  border: 2px solid rgba(34, 211, 120, 0.7);
 }
 
 .profile-section .container .wrapper-profile .settings details {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgba(34, 211, 120, 0.502);
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(34, 211, 120, 0.502);
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
 }
 
 .profile-section .container .wrapper-profile .settings details summary {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.profile-section .container .wrapper-profile .settings details[open] summary::after {
-    content: '';
-    display: block;
-    margin: 15px 0 30px 0;
-    border: 1px solid #5e5e5e;
+.profile-section
+  .container
+  .wrapper-profile
+  .settings
+  details[open]
+  summary::after {
+  content: "";
+  display: block;
+  margin: 15px 0 30px 0;
+  border: 1px solid #5e5e5e;
 }
 
 .profile-section .container .wrapper-profile .settings .input-box {
-    position: relative;
-    display: flex;
-    margin: 15px 0;
+  position: relative;
+  display: flex;
+  margin: 15px 0;
 }
 
 .profile-section .container .wrapper-profile .settings .input-box input {
-    flex-grow: 1;
-    max-width: 400px;
-    background: transparent;
-    outline-color: #fff;
-    border: 2px solid rgba(51, 51, 51, 0.4);
-    border-radius: 8px;
-    font-size: 16px;
-    color: #333;
-    padding: 10px 15px 10px 15px;
-    text-overflow: ellipsis;
+  flex-grow: 1;
+  max-width: 400px;
+  background: transparent;
+  outline-color: #fff;
+  border: 2px solid rgba(51, 51, 51, 0.4);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  padding: 10px 15px 10px 15px;
+  text-overflow: ellipsis;
 }
 
 .profile-section .container .wrapper-profile .settings .input-box i {
-    position: absolute;
-    left: 48%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 25px;
-    cursor: pointer;
+  position: absolute;
+  left: 48%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
+  cursor: pointer;
 }
 
-.profile-section .container .wrapper-profile .settings .input-box input::placeholder {
-    color: #333;
+.profile-section
+  .container
+  .wrapper-profile
+  .settings
+  .input-box
+  input::placeholder {
+  color: #333;
 }
 
 .profile-section .container .wrapper-profile .settings .btn {
-    width: 150px;
-    padding: 10px 0;
-    margin-top: 15px;
-    background: #333;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgb(51, 51, 51, .4);
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s;
+  width: 150px;
+  padding: 10px 0;
+  margin-top: 15px;
+  background: #333;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
 }
 
 .profile-section .container .wrapper-profile .settings .btn:hover {
-    background: #fff;
-    color: #333;
+  background: #fff;
+  color: #333;
 }

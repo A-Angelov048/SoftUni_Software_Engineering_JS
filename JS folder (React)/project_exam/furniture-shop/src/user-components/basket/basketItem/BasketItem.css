@@ -1,0 +1,78 @@
+.basket-item {
+  display: flex;
+  align-items: center;
+}
+
+.basket-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+}
+
+.basket-item .item-details {
+  flex: 1;
+  margin-left: 10px;
+}
+.basket-item .item-details h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.basket-item .item-details .actions {
+  margin-top: 10px;
+}
+
+.basket-item .item-details .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.basket-item .item-details .actions button > i {
+  font-size: 22px;
+}
+
+.basket-item .item-details .actions .delete-btn:hover {
+  color: #c70039;
+}
+
+.basket-item .item-details .actions .heart-btn .active {
+  color: red;
+}
+
+.basket-item .quantity-btn {
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 37px;
+  overflow: hidden;
+}
+
+.basket-item .quantity-btn button {
+  display: flex;
+  aspect-ratio: 1;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.basket-item .quantity-btn button:hover {
+  background-color: #22d37880;
+  color: #333;
+}
+
+.basket-item .price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.hr-class {
+  border: solid 1px #5e5e5e;
+  margin: 20px 0;
+}

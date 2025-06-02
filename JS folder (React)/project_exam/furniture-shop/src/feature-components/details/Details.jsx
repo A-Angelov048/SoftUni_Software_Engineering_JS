@@ -1,245 +1,351 @@
-import './Details.css';
-import Reviews from './reviews/Reviews';
+import "./Details.css";
+import Reviews from "./reviews/Reviews";
 
-import { Link, useParams } from 'react-router-dom';
-import { useContext, useRef, useState } from 'react';
-import { useDetailsFurniture, useUpdateWishlist } from '../../hooks/useFurnitureResponse';
+import { Link, useParams } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import {
+  useDetailsFurniture,
+  useUpdateWishlist,
+} from "../../hooks/useFurnitureResponse";
 
-import { AuthContext } from '../../context/AuthContext';
-import { FurnitureContext } from '../../context/FurnitureContext';
-import { averageNumReviews } from '../../utils/averageNumReviews';
-import MessageDialog from '../../shared-components/message-dialog/MessageDialog';
-import { BasketContext } from '../../context/BasketContext';
-import { ErrorContext } from '../../context/ErrorContext';
+import MessageDialog from "../../shared-components/message-dialog/MessageDialog";
+import { averageNumReviews } from "../../utils/averageNumReviews";
+import { AuthContext } from "../../context/AuthContext";
+import { BasketContext } from "../../context/BasketContext";
+import { ErrorContext } from "../../context/ErrorContext";
 
 export default function Details() {
+  const { furnitureId } = useParams();
 
-    const { furnitureId } = useParams();
+  const [furniture, reviews, updateReview] = useDetailsFurniture(furnitureId);
+  const [heartStatus, handleWishlist] = useUpdateWishlist();
 
-    const furniture = useDetailsFurniture(furnitureId);
-    const updateWishlist = useUpdateWishlist();
+  const [lengthReviews, averageReviews] = averageNumReviews(reviews);
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [quantity, setQuantity] = useState(0);
-    const [changeContent, setChangeContent] = useState(true);
-    const [imageIndex, setImageIndex] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const [changeContent, setChangeContent] = useState(true);
+  const [imageIndex, setImageIndex] = useState(0);
 
-    const { userId, role } = useContext(AuthContext);
-    const { reviews, listUserLikes, handleUserLikes } = useContext(FurnitureContext);
-    const { addToBasket } = useContext(BasketContext);
-    const { errors } = useContext(ErrorContext);
+  const { userId, role } = useContext(AuthContext);
+  const { addToBasket } = useContext(BasketContext);
+  const { errors } = useContext(ErrorContext);
 
-    const ref = useRef(null);
+  const ref = useRef(null);
 
+  return (
+    <>
+      <section className="details-section layout-padding">
+        <div className="container">
+          <div className="heading-container">
+            <h2>Details Furniture</h2>
+          </div>
 
-    return (
+          {(errors.hasOwnProperty("successMessage") ||
+            errors.hasOwnProperty("errorMessage")) && (
+            <div
+              className={
+                errors.successMessage
+                  ? "error-container success position disappear-text"
+                  : "error-container position disappear-text"
+              }
+            >
+              {errors.successMessage ? (
+                <i className="bx bx-check bx-tada" />
+              ) : (
+                <i className="bx bxs-error-circle bx-tada" />
+              )}
+              <p
+                className={
+                  errors.successMessage
+                    ? "success bigger-font"
+                    : "error bigger-font"
+                }
+              >
+                {errors.successMessage || errors.errorMessage}
+              </p>
+            </div>
+          )}
 
-        <>
-            <section className="details-section layout-padding">
+          <div className="layout-padding2">
+            <div className="wrapper-details">
+              <div className="left-box">
+                <div className="container-image">
+                  <div className="container-small">
+                    {furniture.imageUrl?.map((curImage, index) => (
+                      <div
+                        onClick={() => setImageIndex(index)}
+                        className="image-box-small"
+                        key={index}
+                      >
+                        <img
+                          src={curImage}
+                          className={
+                            imageIndex === index
+                              ? "small-image active"
+                              : "small-image"
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
 
-                <div className="container">
+                  <div className="container-large">
+                    <i
+                      onClick={() =>
+                        imageIndex - 1 >= 0
+                          ? setImageIndex((oldIndex) => oldIndex - 1)
+                          : setImageIndex(furniture.imageUrl.length - 1)
+                      }
+                      className="bx bxs-left-arrow"
+                    ></i>
 
-                    <div className="heading-container">
-                        <h2>
-                            Details Furniture
-                        </h2>
+                    <div className="image-box-large">
+                      <img
+                        src={furniture.imageUrl?.[imageIndex]}
+                        className="large-image"
+                      />
                     </div>
 
-                    {(errors.hasOwnProperty('successMessage') || errors.hasOwnProperty('errorMessage')) &&
-                        <div className={errors.successMessage ? 'error-container success position disappear-text' : 'error-container position disappear-text'}>
-                            {errors.successMessage ? <i className='bx bx-check bx-tada' /> : <i className='bx bxs-error-circle bx-tada' />}
-                            <p className={errors.successMessage ? 'success bigger-font' : 'error bigger-font'}>{errors.successMessage || errors.errorMessage}</p>
-                        </div>
+                    <i
+                      onClick={() =>
+                        imageIndex + 1 <= furniture.imageUrl.length - 1
+                          ? setImageIndex((oldIndex) => oldIndex + 1)
+                          : setImageIndex(0)
+                      }
+                      className="bx bxs-right-arrow"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+
+              <div className="right-box">
+                <header className="header-right">
+                  <h1>{furniture.name}</h1>
+                </header>
+
+                <div className="box-reviews">
+                  <div className="stars">
+                    <i
+                      className={
+                        averageReviews === 5
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        averageReviews === 4
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        averageReviews === 3
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        averageReviews === 2
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        averageReviews === 1
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                  </div>
+
+                  <p
+                    onClick={() =>
+                      ref.current.scrollIntoView({ behavior: "smooth" })
                     }
+                  >
+                    {lengthReviews} Reviews
+                  </p>
+                </div>
 
-                    <div className="layout-padding2">
+                <div className="box-price-quantity">
+                  <div className="price">
+                    <h3>Price</h3>
+                    <p className="current-price">
+                      $
+                      {role !== "Admin"
+                        ? furniture.price * quantity
+                        : furniture.price}
+                    </p>
+                  </div>
 
-                        <div className="wrapper-details">
+                  {role !== "Admin" && (
+                    <div className="quantity">
+                      <h3>Quantity</h3>
+                      <div className="quantity-btn">
+                        <button
+                          name="minus"
+                          type="button"
+                          onClick={() => {
+                            if (quantity <= 0) {
+                              return;
+                            }
+                            setQuantity((quantity) => quantity - 1);
+                          }}
+                        >
+                          <i className="bx bx-minus"></i>
+                        </button>
+                        <p>{quantity}</p>
+                        <button
+                          name="plus"
+                          type="button"
+                          onClick={() => {
+                            if (quantity >= 10) {
+                              return;
+                            }
+                            setQuantity((quantity) => quantity + 1);
+                          }}
+                        >
+                          <i className="bx bx-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-                            <div className="left-box">
-                                <div className="container-image">
-
-                                    <div className="container-small">
-
-                                        {furniture.imageUrl?.map((curImage, index) => (
-                                            <div onClick={() => setImageIndex(index)} className="image-box-small" key={index}>
-                                                <img src={curImage} className={imageIndex === index ? 'small-image active' : 'small-image'} />
-                                            </div>
-                                        ))}
-
-                                    </div>
-
-                                    <div className="container-large">
-
-                                        <i onClick={() => imageIndex - 1 >= 0 ? setImageIndex(oldIndex => oldIndex - 1) : setImageIndex(furniture.imageUrl.length - 1)} className='bx bxs-left-arrow'></i>
-
-                                        <div className="image-box-large">
-                                            <img src={furniture.imageUrl?.[imageIndex]} className="large-image" />
-                                        </div>
-
-                                        <i onClick={() => imageIndex + 1 <= furniture.imageUrl.length - 1 ? setImageIndex(oldIndex => oldIndex + 1) : setImageIndex(0)} className='bx bxs-right-arrow'></i>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div className="right-box">
-
-                                <header className="header-right">
-                                    <h1>{furniture.name}</h1>
-                                </header>
-
-                                <div className="box-reviews">
-
-                                    <div className="stars">
-                                        <i className={averageNumReviews() === 5 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
-                                        <i className={averageNumReviews() === 4 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
-                                        <i className={averageNumReviews() === 3 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
-                                        <i className={averageNumReviews() === 2 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
-                                        <i className={averageNumReviews() === 1 ? 'bx bxs-star active' : 'bx bxs-star'}></i>
-                                    </div>
-
-                                    <p onClick={() => ref.current.scrollIntoView({ behavior: 'smooth' })}>{reviews?.length} Reviews</p>
-                                </div>
-
-                                <div className="box-price-quantity">
-
-                                    <div className="price">
-                                        <h3>Price</h3>
-                                        <p className="current-price">
-                                            ${role !== 'Admin' ? furniture.price * quantity : furniture.price}
-                                        </p>
-                                    </div>
-
-                                    {
-                                        role !== 'Admin'
-
-                                        &&
-
-                                        < div className="quantity">
-                                            <h3>Quantity</h3>
-                                            <div className="quantity-btn">
-                                                <button name="minus" type="button" onClick={() => { if (quantity <= 0) { return } setQuantity(quantity => quantity - 1) }}><i className='bx bx-minus'></i></button>
-                                                <p>{quantity}</p>
-                                                <button name="plus" type="button" onClick={() => { if (quantity >= 10) { return } setQuantity(quantity => quantity + 1) }}><i className='bx bx-plus'></i></button>
-                                            </div>
-                                        </div>
-                                    }
-
-                                </div>
-
-                                <div className="box-description-details">
-
-                                    <section className="content-header">
-                                        <div>
-                                            <p onClick={() => setChangeContent(true)}>Description</p>
-                                            <hr className={changeContent ? 'active' : null} />
-                                        </div>
-
-                                        <div>
-                                            <p onClick={() => setChangeContent(false)}>Details</p>
-                                            <hr className={changeContent ? null : 'active'} />
-                                        </div>
-                                    </section>
-
-                                    {changeContent &&
-                                        <div className="content">
-
-                                            <div>
-                                                <p>Category</p>
-                                                <p>{furniture.category}</p>
-                                            </div>
-
-                                            <div>
-                                                <p>Year of <abbr title="Manufacture">MFR</abbr></p>
-                                                <p>{furniture.year}</p>
-                                            </div>
-
-                                            <div>
-                                                <p>Condition</p>
-                                                <p>{furniture.condition}</p>
-                                            </div>
-
-                                            <div>
-                                                <p>Description</p>
-                                                <p>{furniture.description}</p>
-                                            </div>
-
-                                        </div>
-                                    }
-
-                                    {!changeContent &&
-                                        <div className="content">
-
-                                            <div>
-                                                <p>Size</p>
-                                                <p>{furniture.size}</p>
-
-                                            </div>
-
-                                            <div>
-                                                <p>Materials</p>
-                                                <p>{furniture.materials}</p>
-                                            </div>
-
-                                            <div>
-                                                <p>Color</p>
-                                                <p>{furniture.color}</p>
-
-                                            </div>
-
-                                            <div>
-                                                <p>Weight</p>
-                                                <p>{furniture.weight}</p>
-                                            </div>
-
-                                        </div>
-                                    }
-
-                                </div>
-
-                                <div className="box-total-price">
-
-                                    <div className="button-box">
-                                        {
-                                            role === 'Admin' ?
-
-                                                <>
-                                                    <Link className="btn-hover" to={`/edit-furniture/${furnitureId}/admin`}>Edit</Link>
-                                                    <button onClick={() => setIsDialogOpen(true)} className="btn-hover" name="delete" type="button">Delete</button>
-                                                </>
-
-                                                :
-
-                                                <>
-                                                    <button disabled={quantity <= 0 ? true : false} onClick={() => addToBasket(furnitureId, quantity, furniture.price)} className={quantity > 0 ? 'btn-hover' : 'btn-hover blur'} name="add-to-cart" type="button">Add to Basket</button>
-                                                    <button name="heart" type="button">
-                                                        <i onClick={async () => { await updateWishlist(furnitureId); if (userId) handleUserLikes(userId) }} className={listUserLikes?.includes(userId) ? 'bx bxs-heart bx-tada-hover active' : 'bx bxs-heart bx-tada-hover'}></i>
-                                                    </button>
-                                                </>
-                                        }
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                <div className="box-description-details">
+                  <section className="content-header">
+                    <div>
+                      <p onClick={() => setChangeContent(true)}>Description</p>
+                      <hr className={changeContent ? "active" : null} />
                     </div>
 
-                </div >
+                    <div>
+                      <p onClick={() => setChangeContent(false)}>Details</p>
+                      <hr className={changeContent ? null : "active"} />
+                    </div>
+                  </section>
 
-            </section >
+                  {changeContent && (
+                    <div className="content">
+                      <div>
+                        <p>Category</p>
+                        <p>{furniture.category}</p>
+                      </div>
 
-            <Reviews ref={ref} />
+                      <div>
+                        <p>
+                          Year of <abbr title="Manufacture">MFR</abbr>
+                        </p>
+                        <p>{furniture.year}</p>
+                      </div>
 
-            {isDialogOpen && <MessageDialog onClose={() => setIsDialogOpen(false)} />}
+                      <div>
+                        <p>Condition</p>
+                        <p>{furniture.condition}</p>
+                      </div>
 
-        </>
+                      <div>
+                        <p>Description</p>
+                        <p>{furniture.description}</p>
+                      </div>
+                    </div>
+                  )}
 
-    );
+                  {!changeContent && (
+                    <div className="content">
+                      <div>
+                        <p>Size</p>
+                        <p>{furniture.size}</p>
+                      </div>
+
+                      <div>
+                        <p>Materials</p>
+                        <p>{furniture.materials}</p>
+                      </div>
+
+                      <div>
+                        <p>Color</p>
+                        <p>{furniture.color}</p>
+                      </div>
+
+                      <div>
+                        <p>Weight</p>
+                        <p>{furniture.weight}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="box-total-price">
+                  <div className="button-box">
+                    {role === "Admin" ? (
+                      <>
+                        <Link
+                          state={furniture}
+                          className="btn-hover"
+                          to={`/edit-furniture/${furnitureId}/admin`}
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => setIsDialogOpen(true)}
+                          className="btn-hover"
+                          name="delete"
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          disabled={quantity <= 0 ? true : false}
+                          onClick={() =>
+                            addToBasket(furnitureId, quantity, furniture.price)
+                          }
+                          className={
+                            quantity > 0 ? "btn-hover" : "btn-hover blur"
+                          }
+                          name="add-to-cart"
+                          type="button"
+                        >
+                          Add to Basket
+                        </button>
+                        <button
+                          onClick={() => handleWishlist(furnitureId)}
+                          name="heart"
+                          type="button"
+                        >
+                          <i
+                            className={
+                              heartStatus === "add" ||
+                              (furniture.listUserLikes?.includes(userId) &&
+                                heartStatus === "")
+                                ? "bx bxs-heart bx-tada-hover active"
+                                : "bx bxs-heart bx-tada-hover"
+                            }
+                          ></i>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {furniture.reviews && (
+        <Reviews reviewsArr={reviews} setNewReview={updateReview} ref={ref} />
+      )}
+
+      {isDialogOpen && <MessageDialog onClose={() => setIsDialogOpen(false)} />}
+    </>
+  );
 }
-
-

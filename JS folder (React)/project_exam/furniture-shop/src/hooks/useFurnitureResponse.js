@@ -1,194 +1,259 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { getAllFurniture, getBasketItems, getDetailsFurniture, getLatestFurniture, wishlist } from "../api-service/furnitureService";
-import { useSetFurniture } from "./useFurnitureReducer";
-import { FurnitureContext } from "../context/FurnitureContext";
+import {
+  createFurnitureRequester,
+  editFurnitureRequester,
+  getAllFurniture,
+  getBasketItems,
+  getDetailsFurniture,
+  getLatestFurniture,
+  getSearchFurniture,
+  wishlist,
+} from "../api-service/furnitureService";
 import { AuthContext } from "../context/AuthContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ErrorContext } from "../context/ErrorContext";
-
+import { trimValue } from "../utils/trimValue";
+import { createFurnitureSchema } from "../utils/schemaForm";
 
 export function useLatestFurniture() {
+  const [furniture, setFurniture] = useState([]);
 
-    const [furniture, dispatch] = useSetFurniture();
-    const { updateAuthError } = useContext(AuthContext);
+  const { updateAuthError } = useContext(AuthContext);
 
-    useEffect(() => {
+  useEffect(() => {
+    const abortController = new AbortController();
 
-        const abortController = new AbortController();
+    (async () => {
+      try {
+        const response = await getLatestFurniture(abortController);
+        setFurniture(response);
+      } catch (error) {
+        if (error.message === "403") return updateAuthError(true);
 
-        (async () => {
+        console.error(error.message);
+      }
+    })();
 
-            try {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
-                const response = await getLatestFurniture(abortController);
-                dispatch({ type: 'GET_FURNITURE', payload: response });
-
-            } catch (error) {
-                if (error.message === '403') return updateAuthError(true);
-
-                console.error(error.message);
-            }
-
-        })();
-
-        return () => {
-            abortController.abort();
-        }
-
-    }, []);
-
-    return furniture;
-
+  return furniture;
 }
 
 export function useAllFurniture(statePage) {
+  const [furniture, setFurniture] = useState([]);
+  const { updateAuthError } = useContext(AuthContext);
+  const lengthDocuments = useRef(1);
+  const navigate = useNavigate();
 
-    const [furniture, dispatch] = useSetFurniture();
-    const { updateAuthError } = useContext(AuthContext);
-    const lengthDocuments = useRef(1);
-    const navigate = useNavigate();
+  useEffect(() => {
+    const abortController = new AbortController();
 
-    useEffect(() => {
+    (async () => {
+      try {
+        const response = await getAllFurniture(abortController, statePage, 8);
 
-        const abortController = new AbortController();
-
-        (async () => {
-
-            try {
-
-                const response = await getAllFurniture(abortController, statePage, 8);
-                dispatch({ type: 'GET_FURNITURE', payload: response.data });
-                lengthDocuments.current = response.length;
-
-            } catch (error) {
-
-                if (error.message === '403') {
-                    updateAuthError(true)
-                } else if (error.message === 'Page do not exists.') {
-                    navigate('/404', { replace: true });
-                }
-
-                console.error(error.message);
-            }
-
-        })();
-
-        return () => {
-            abortController.abort();
+        setFurniture(response.data);
+        lengthDocuments.current = response.length;
+      } catch (error) {
+        if (error.message === "403") {
+          updateAuthError(true);
+        } else if (error.message === "Page do not exists.") {
+          navigate("/404", { replace: true });
         }
 
-    }, [statePage]);
+        console.error(error.message);
+      }
+    })();
 
-    return [furniture, lengthDocuments.current];
+    return () => {
+      abortController.abort();
+    };
+  }, [statePage]);
 
+  return [furniture, lengthDocuments.current];
 }
 
 export function useDetailsFurniture(furnitureId) {
+  const [furniture, setFurniture] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const { updateAuthError } = useContext(AuthContext);
 
-    const [furniture, dispatch] = useSetFurniture();
-    const { changeFurnitureState } = useContext(FurnitureContext);
-    const { updateAuthError } = useContext(AuthContext);
+  useEffect(() => {
+    const abortController = new AbortController();
 
-    useEffect(() => {
+    (async () => {
+      try {
+        const response = await getDetailsFurniture(
+          furnitureId,
+          abortController
+        );
+        setFurniture(response);
+        setReviews(response.reviews);
+      } catch (error) {
+        if (error.message === "403") return updateAuthError(true);
 
-        const abortController = new AbortController();
+        console.error(error.message);
+      }
+    })();
+  }, []);
 
-        (async () => {
+  const updateReview = (value) => {
+    setReviews((oldState) => [...oldState, value]);
+  };
 
-            try {
-
-                const response = await getDetailsFurniture(furnitureId, abortController);
-                changeFurnitureState(response);
-                dispatch({ type: 'CURRENT_FURNITURE', payload: response });
-
-            } catch (error) {
-                if (error.message === '403') return updateAuthError(true);
-
-                console.error(error.message);
-            }
-
-        })();
-
-    }, []);
-
-    return furniture;
-
+  return [furniture, reviews, updateReview];
 }
 
 export function useUpdateWishlist() {
+  const heartStatus = useRef("");
+  const { userId, updateAuthError } = useContext(AuthContext);
+  const { handleError, clearError } = useContext(ErrorContext);
 
-    const { userId, updateAuthError } = useContext(AuthContext);
-    const { handleError, clearError } = useContext(ErrorContext);
+  const handleWishlist = async (furnitureId) => {
+    if (!userId) {
+      handleError({ errorMessage: "Please login first." });
 
-    const updateWishlist = async (furnitureId) => {
+      setTimeout(() => {
+        clearError();
+      }, 2000);
 
-        if (!userId) {
-
-            handleError({ errorMessage: 'Please login first.' });
-
-            setTimeout(() => {
-
-                clearError();
-
-            }, 2000);
-
-            return;
-        }
-
-        try {
-
-            const response = await wishlist(furnitureId);
-
-            handleError({ successMessage: response.message });
-
-            setTimeout(() => {
-
-                clearError();
-
-            }, 2000);
-
-        } catch (error) {
-            if (error.message === '403') return updateAuthError(true);
-
-            console.error(error.message);
-        }
-
+      return;
     }
 
-    return updateWishlist
+    try {
+      const response = await wishlist(furnitureId);
 
+      handleError({ successMessage: response.message });
+      heartStatus.current = response.status;
+
+      setTimeout(() => {
+        clearError();
+      }, 2000);
+    } catch (error) {
+      if (error.message === "403") return updateAuthError(true);
+
+      console.error(error.message);
+    }
+  };
+
+  return [heartStatus.current, handleWishlist];
 }
 
 export function useGetBasketItems(basket) {
+  const basketIds = basket.map((x) => x.id);
 
-    const basketIds = basket.map(x => x.id);
-    const location = useLocation();
-    const [basketItems, setBasketItems] = useState([]);
-    const { updateAuthError } = useContext(AuthContext);
+  const [basketItems, setBasketItems] = useState([]);
+  const { updateAuthError } = useContext(AuthContext);
 
-    useEffect(() => {
+  useEffect(() => {
+    if (basketIds.length === 0) return;
 
-        if (basketIds.length === 0) return;
+    const abortController = new AbortController();
 
-        const abortController = new AbortController();
+    (async () => {
+      try {
+        const response = await getBasketItems(basketIds, abortController);
+        setBasketItems(response);
+      } catch (error) {
+        if (error.message === "403") return updateAuthError(true);
 
-        (async () => {
+        console.error(error.message);
+      }
+    })();
+  }, [basket.length]);
 
-            try {
+  return basketItems;
+}
 
-                const response = await getBasketItems(basketIds, abortController);
-                setBasketItems(response);
+export function useSearchFurniture() {
+  const [furniture, setFurniture] = useState([]);
+  const [flagState, setFlagState] = useState(false);
+  const { updateAuthError } = useContext(AuthContext);
 
-            } catch (error) {
-                if (error.message === '403') return updateAuthError(true);
+  const search = async (values) => {
+    if (!values.name) return setFlagState(true);
 
-                console.error(error.message);
-            }
+    const trimValues = trimValue(values);
 
-        })();
+    try {
+      const response = await getSearchFurniture(trimValues);
 
-    }, [basket.length, location]);
+      if (response.length === 0) {
+        setFlagState(true);
+      } else {
+        setFlagState(false);
+      }
 
-    return basketItems;
+      setFurniture(response);
+    } catch (error) {
+      if (error.message === "403") return updateAuthError(true);
 
+      console.error(error.message);
+    }
+  };
+
+  return [furniture, flagState, search];
+}
+
+export function useEditFurniture(furnitureId) {
+  const navigate = useNavigate();
+  const { updateAuthError } = useContext(AuthContext);
+  const { handleError } = useContext(ErrorContext);
+
+  const editFurniture = async (values) => {
+    const trimValues = trimValue(values);
+
+    try {
+      await createFurnitureSchema.validate(trimValues, { abortEarly: false });
+      await editFurnitureRequester(furnitureId, trimValues);
+      navigate(`/details-furniture/${furnitureId}`);
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        const newError = {};
+
+        error.inner.forEach((err) => {
+          newError[err.path] = err.message;
+        });
+        handleError(newError);
+      } else if (error.message === "403") {
+        updateAuthError(true);
+        console.error(error.message);
+      }
+    }
+  };
+
+  return editFurniture;
+}
+
+export function useCreateFurniture() {
+  const navigate = useNavigate();
+  const { updateAuthError } = useContext(AuthContext);
+  const { handleError } = useContext(ErrorContext);
+
+  const createFurniture = async (values) => {
+    const trimValues = trimValue(values);
+
+    try {
+      await createFurnitureSchema.validate(trimValues, { abortEarly: false });
+      await createFurnitureRequester(trimValues);
+      navigate("/shop");
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        const newError = {};
+
+        error.inner.forEach((err) => {
+          newError[err.path] = err.message;
+        });
+        handleError(newError);
+      } else if (error.message === "403") {
+        updateAuthError(true);
+        console.error(error.message);
+      }
+    }
+  };
+
+  return createFurniture;
 }
