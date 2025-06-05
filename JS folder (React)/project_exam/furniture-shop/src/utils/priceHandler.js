@@ -3,7 +3,6 @@ export function priceHandler(basketItems = 0) {
     (acc, initValue) => acc + initValue.price * initValue.quantity,
     0
   );
-  console.log(totalPrice);
 
   return totalPrice;
 }

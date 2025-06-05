@@ -117,10 +117,13 @@ router.get("/delivery-info", async (req, res) => {
     const result = await getDeliveryInfo(userId);
 
     if (!result) {
-      return res.status(404).json({ message: "No delivery info found." });
+      return res.status(200).json({ data: {} });
     }
 
-    res.json(result);
+    res.status(200).json({
+      status: 200,
+      data: result,
+    });
   } catch (err) {
     console.log(err.errors);
   }

@@ -1,26 +1,26 @@
-.delivery-info {
+.receive-info {
   background: #22d37880;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
 }
 
-.delivery-info h3 {
+.receive-info h3 {
   margin-bottom: 20px;
 }
-.delivery-info .receive-choice {
+.receive-info .receive-choice {
   display: flex;
   gap: 20px;
   align-items: baseline;
 }
 
-.delivery-info .receive-shop,
-.delivery-info .receive-home {
+.receive-info .receive-shop,
+.receive-info .receive-home {
   display: flex;
   flex-direction: column;
 }
 
-.delivery-info .container-receive {
+.receive-info .container-receive {
   font-size: 14px;
   padding: 15px;
   border: solid 2px #333;
@@ -31,26 +31,26 @@
   text-align: left;
 }
 
-.delivery-info .container-receive.flex-elements {
+.receive-info .container-receive.flex-elements {
   display: flex;
   align-items: flex-end;
   gap: 10px;
   flex: 1 1 auto;
 }
 
-.delivery-info .container-receive.active {
+.receive-info .container-receive.active {
   background: #fff;
 }
 
-.delivery-info .container-receive .receive-method.flex-elements {
+.receive-info .container-receive .receive-method.flex-elements {
   display: flex;
   justify-content: space-between;
 }
 
-.delivery-info .container-receive .receive-method p:nth-child(1) {
+.receive-info .container-receive .receive-method p:nth-child(1) {
   font-weight: bold;
 }
 
-.delivery-info .container-receive .icon > i {
+.receive-info .container-receive .icon > i {
   font-size: 30px;
 }

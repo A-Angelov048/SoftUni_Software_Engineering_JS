@@ -8,7 +8,7 @@ export default function ReceiveInfo() {
   const { receiveInfo, setInfo } = useContext(ReceiveInfoContext);
 
   return (
-    <div className="delivery-info">
+    <div className="receive-info">
       <h3>How will you receive the order?</h3>
 
       <div className="receive-choice">

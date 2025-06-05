@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
+  createDeliveryInfo,
   editProfile,
   getDeliveryInfo,
   getProfile,
@@ -11,6 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { trimValue } from "../utils/trimValue";
 import {
+  deliveryFormSchema,
   loginSchema,
   passwordSchema,
   profileSchema,
@@ -133,7 +135,7 @@ export function useGetProfile(profileId) {
     return () => {
       abortController.abort();
     };
-  }, [profileId, userContext]);
+  }, [userContext]);
 
   const handleClick = (furniture, currentClick) => {
     setStateFurniture({ furniture, currentClick });
@@ -144,7 +146,7 @@ export function useGetProfile(profileId) {
 
 export function useGetDeliveryInfo() {
   const location = useLocation();
-  const userContext = useContext(AuthContext);
+  const { updateAuthError } = useContext(AuthContext);
   const [info, setInfo] = useState({});
 
   useEffect(() => {
@@ -153,9 +155,9 @@ export function useGetDeliveryInfo() {
     (async () => {
       try {
         const response = await getDeliveryInfo();
-        setInfo(response);
+        setInfo(response.data);
       } catch (error) {
-        if (error.message === "403") return userContext.updateAuthError(true);
+        if (error.message === "403") return updateAuthError(true);
 
         console.error(error.message);
       }
@@ -169,8 +171,47 @@ export function useGetDeliveryInfo() {
   return info;
 }
 
+export function usePostDeliveryInfo() {
+  const closeForm = useRef(false);
+  const navigate = useNavigate();
+  const { updateAuthError } = useContext(AuthContext);
+  const { handleError, clearError } = useContext(ErrorContext);
+
+  const submitDeliveryInfo = async (values) => {
+    const trimValues = trimValue(values);
+
+    try {
+      await deliveryFormSchema.validate(trimValues, { abortEarly: false });
+      await createDeliveryInfo(trimValues);
+
+      closeForm.current = true;
+      handleError({ successMessage: "Form submit successfully" });
+
+      setTimeout(() => {
+        clearError();
+      }, 2000);
+
+      navigate("/checkout", { state: state });
+    } catch (error) {
+      if (error.message === "403") {
+        console.error(error.message);
+        updateAuthError(true);
+      } else if (error.name === "ValidationError") {
+        const newError = {};
+
+        error.inner.forEach((err) => {
+          newError[err.path] = err.message;
+        });
+        handleError(newError);
+      }
+    }
+  };
+
+  return [closeForm.current, submitDeliveryInfo];
+}
+
 export function useChangeUserInfo(action) {
-  const { changeAuthState } = useContext(AuthContext);
+  const { changeAuthState, updateAuthError } = useContext(AuthContext);
   const { handleError, clearError } = useContext(ErrorContext);
   const [handleTag, setHandleTag] = useState(false);
 

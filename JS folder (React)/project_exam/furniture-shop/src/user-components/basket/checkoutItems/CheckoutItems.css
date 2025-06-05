@@ -1,0 +1,22 @@
+.basket-products {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.basket-products .image-product {
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+
+.basket-products .info-product {
+  flex: 1;
+}
+
+.basket-products .info-product .name {
+  font-weight: 700;
+  text-transform: uppercase;
+}

@@ -1,0 +1,131 @@
+body:has(.full-order) {
+  overflow: hidden;
+}
+
+.order {
+  flex: 1 0 auto;
+  align-self: flex-start;
+  background: #22d37880;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
+}
+
+.order input {
+  display: none;
+}
+
+.order .order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order .order-header .link {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline double #3b82f6;
+}
+
+.order .order-items {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order .order-items .order-images {
+  display: flex;
+  gap: 10px;
+}
+
+.order .order-items .order-images img {
+  display: block;
+  width: 70px;
+  aspect-ratio: 1;
+}
+
+.order .order-items .open-order i {
+  border: 2px solid #5e5e5e;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.order .order-items .overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  backdrop-filter: blur(0.3rem);
+  background-color: hsla(0, 0%, 20%, 0.4);
+}
+
+.order .order-items .full-order {
+  display: block;
+
+  position: fixed;
+  top: 0px;
+  right: 0px;
+
+  z-index: 2;
+
+  width: 350px;
+  height: 100%;
+
+  backdrop-filter: blur(0.3rem);
+  background-color: #fff;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  box-shadow: -5px 0 5px rgba(0, 0, 0, 0.25);
+
+  overflow: auto;
+}
+
+.order .order-items .full-order .header-full-order {
+  margin: 15px 0px;
+  padding: 0 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.order .order-items .full-order .header-full-order h3 {
+  flex: 1 1 auto;
+  font-size: 1.5rem;
+}
+
+.order .order-items .full-order .header-full-order i {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.order .order-summary {
+  border-top: 2px solid #5e5e5e;
+  padding: 10px 0;
+}
+
+.order .order-summary .summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.order .order-summary .total {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  padding-top: 10px;
+  border-top: 2px solid #5e5e5e;
+}
+
+.order .order-summary .low-font {
+  font-size: 12px;
+}
