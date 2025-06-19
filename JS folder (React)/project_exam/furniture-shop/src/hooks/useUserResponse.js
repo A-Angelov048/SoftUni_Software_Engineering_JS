@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createDeliveryInfo,
   editProfile,
@@ -28,7 +28,7 @@ const schemas = {
 export function useLoginUser() {
   const navigate = useNavigate();
   const { changeAuthState } = useContext(AuthContext);
-  const { handleError, clearError } = useContext(ErrorContext);
+  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
 
   const getUser = async (values) => {
     const trimValues = trimValue(values);
@@ -47,11 +47,8 @@ export function useLoginUser() {
         });
         handleError(newError);
       } else {
-        handleError({ message: error.message });
-
-        setTimeout(() => {
-          clearError();
-        }, 4000);
+        handleMessage(error.message, false);
+        clearError();
       }
     }
   };
@@ -62,7 +59,7 @@ export function useLoginUser() {
 export function useRegisterUser() {
   const navigate = useNavigate();
   const { changeAuthState } = useContext(AuthContext);
-  const { handleError, clearError } = useContext(ErrorContext);
+  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
 
   const createUser = async (values) => {
     const trimValues = trimValue(values);
@@ -81,11 +78,8 @@ export function useRegisterUser() {
         });
         handleError(newError);
       } else {
-        handleError({ message: error.message });
-
-        setTimeout(() => {
-          clearError();
-        }, 4000);
+        handleMessage(error.message, false);
+        clearError();
       }
     }
   };
@@ -172,10 +166,10 @@ export function useGetDeliveryInfo() {
 }
 
 export function usePostDeliveryInfo() {
-  const closeForm = useRef(false);
+  const { state, pathname } = useLocation();
   const navigate = useNavigate();
   const { updateAuthError } = useContext(AuthContext);
-  const { handleError, clearError } = useContext(ErrorContext);
+  const { handleError, handleMessage } = useContext(ErrorContext);
 
   const submitDeliveryInfo = async (values) => {
     const trimValues = trimValue(values);
@@ -184,14 +178,11 @@ export function usePostDeliveryInfo() {
       await deliveryFormSchema.validate(trimValues, { abortEarly: false });
       await createDeliveryInfo(trimValues);
 
-      closeForm.current = true;
-      handleError({ successMessage: "Form submit successfully" });
+      handleMessage("Form submit successfully");
 
-      setTimeout(() => {
-        clearError();
-      }, 2000);
-
-      navigate("/checkout", { state: state });
+      if (pathname === "/checkout") {
+        navigate("/checkout", { state: state });
+      }
     } catch (error) {
       if (error.message === "403") {
         console.error(error.message);
@@ -207,13 +198,12 @@ export function usePostDeliveryInfo() {
     }
   };
 
-  return [closeForm.current, submitDeliveryInfo];
+  return submitDeliveryInfo;
 }
 
 export function useChangeUserInfo(action) {
   const { changeAuthState, updateAuthError } = useContext(AuthContext);
-  const { handleError, clearError } = useContext(ErrorContext);
-  const [handleTag, setHandleTag] = useState(false);
+  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
 
   const changeUserInfo = async (values, resetCurForm) => {
     const trimValues = trimValue(values);
@@ -222,16 +212,12 @@ export function useChangeUserInfo(action) {
       await schemas[action].validate(trimValues, { abortEarly: false });
       const result = await editProfile(trimValues);
       changeAuthState(result);
-      setHandleTag((oldState) => !oldState);
 
-      handleError({ successMessage: "Form submit successfully" });
+      handleMessage("Form submit successfully");
 
       if (action === "passwordSchema") {
         resetCurForm();
       }
-      setTimeout(() => {
-        clearError();
-      }, 2000);
     } catch (error) {
       if (error.message === "403") {
         console.error(error.message);
@@ -244,14 +230,12 @@ export function useChangeUserInfo(action) {
         });
         handleError(newError);
       } else {
-        handleError({ errorMessage: error.message });
-
-        setTimeout(() => {
-          clearError();
-        }, 4000);
+        //server
+        handleMessage(error.message, false);
+        clearError();
       }
     }
   };
 
-  return [handleTag, changeUserInfo];
+  return changeUserInfo;
 }

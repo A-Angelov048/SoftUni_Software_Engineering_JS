@@ -1,20 +1,27 @@
 import "./Checkout.css";
 import { useGetDeliveryInfo } from "../../../hooks/useUserResponse";
 import DeliveryForm from "../../delivery-form/DeliveryForm";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorContext } from "../../../context/ErrorContext";
 import { useLocation } from "react-router-dom";
 import CompleteOrder from "../completeOrder/CompleteOrder";
+import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
 export default function Checkout() {
   const { state } = useLocation();
 
-  const { errors } = useContext(ErrorContext);
+  const { message } = useContext(ErrorContext);
 
   const deliveryInfo = useGetDeliveryInfo();
 
   const [changeInfoDeliver, setChangeInfoDeliver] = useState(true);
   const [paymentInfo, setPaymentInfo] = useState({ option: 0 });
+
+  useEffect(() => {
+    if (message.text !== "" && message.status) {
+      setChangeInfoDeliver((oldState) => !oldState);
+    }
+  }, [message]);
 
   return (
     <section className="checkout-page layout-padding">
@@ -23,31 +30,7 @@ export default function Checkout() {
           <h2>Checkout summary</h2>
         </div>
 
-        {(errors.hasOwnProperty("successMessage") ||
-          errors.hasOwnProperty("errorMessage")) && (
-          <div
-            className={
-              errors.successMessage
-                ? "error-container success position disappear-text"
-                : "error-container position disappear-text"
-            }
-          >
-            {errors.successMessage ? (
-              <i className="bx bx-check bx-tada" />
-            ) : (
-              <i className="bx bxs-error-circle bx-tada" />
-            )}
-            <p
-              className={
-                errors.successMessage
-                  ? "success bigger-font"
-                  : "error bigger-font"
-              }
-            >
-              {errors.successMessage || errors.errorMessage}
-            </p>
-          </div>
-        )}
+        {message.text !== "" && <ErrorMessage newMessage={message} />}
 
         <div className="layout-padding2 checkout">
           <div className="wrapper-checkout">
@@ -59,7 +42,9 @@ export default function Checkout() {
                 </header>
                 {deliveryInfo.hasOwnProperty("_id") && changeInfoDeliver && (
                   <button
-                    onClick={() => setChangeInfoDeliver(false)}
+                    onClick={() =>
+                      setChangeInfoDeliver((oldState) => !oldState)
+                    }
                     className="change-info"
                     type="button"
                   >
@@ -78,10 +63,7 @@ export default function Checkout() {
                   <p>{deliveryInfo.phone}</p>
                 </div>
               ) : (
-                <DeliveryForm
-                  deliveryInfo={deliveryInfo}
-                  onClose={() => setChangeInfoDeliver(true)}
-                />
+                <DeliveryForm deliveryInfo={deliveryInfo} />
               )}
             </div>
 

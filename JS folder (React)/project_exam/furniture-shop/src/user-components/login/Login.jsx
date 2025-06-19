@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/useForms";
 import { Link } from "react-router-dom";
 import { ErrorContext } from "../../context/ErrorContext";
 import { useLoginUser } from "../../hooks/useUserResponse";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
 const initialValues = {
   email: "",
@@ -12,7 +13,7 @@ const initialValues = {
 };
 
 export default function Login() {
-  const { errors } = useContext(ErrorContext);
+  const { errors, message } = useContext(ErrorContext);
   const getUser = useLoginUser();
 
   const { values, changeHandler, submitCurForm } = useForm(
@@ -26,12 +27,9 @@ export default function Login() {
         <div className="heading-container">
           <h2>Login</h2>
         </div>
-        {errors.hasOwnProperty("message") && (
-          <div className="error-container position disappear-text">
-            <i className="bx bxs-error-circle bx-tada"></i>
-            <p className="error bigger-font">{errors.message}</p>
-          </div>
-        )}
+
+        {message.text !== "" && <ErrorMessage newMessage={message} />}
+
         <div className="layout-padding2">
           <div className="wrapper-user">
             <form onSubmit={submitCurForm}>
@@ -48,10 +46,7 @@ export default function Login() {
               </div>
 
               {errors.hasOwnProperty("email") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.email}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.email }} />
               )}
 
               <div className="input-box">
@@ -67,10 +62,7 @@ export default function Login() {
               </div>
 
               {errors.hasOwnProperty("password") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.password}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.password }} />
               )}
 
               <button type="submit" className="btn">

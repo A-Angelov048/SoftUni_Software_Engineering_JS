@@ -59,11 +59,12 @@
 }
 
 .recent-reviews .container .wrapper-reviews .content-review .stars-review,
-.recent-reviews .container .wrapper-reviews .write-review .stars-review div {
+.recent-reviews .container .wrapper-reviews .write-review .stars-review {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: start;
+  margin-top: 15px;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review form {
@@ -128,18 +129,9 @@
 .recent-reviews .container .wrapper-reviews .write-review textarea {
   width: 100%;
   padding: 6px 8px;
-  margin-bottom: 40px;
+  margin: 15px 0 40px 0;
 }
 
 .recent-reviews .container .wrapper-reviews .write-review .btn {
   align-self: flex-end;
-}
-
-.recent-reviews
-  .container
-  .wrapper-reviews
-  .write-review
-  form
-  .error-container {
-  margin: 10px 0px 15px 0px;
 }

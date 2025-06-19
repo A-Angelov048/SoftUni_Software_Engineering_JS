@@ -3,17 +3,12 @@ import { useContext, useEffect } from "react";
 import { useForm } from "../../hooks/useForms";
 import { ErrorContext } from "../../context/ErrorContext";
 import { usePostDeliveryInfo } from "../../hooks/useUserResponse";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
-export default function DeliveryForm({ deliveryInfo, onClose }) {
+export default function DeliveryForm({ deliveryInfo }) {
   const { errors } = useContext(ErrorContext);
 
-  const [closeForm, submitDeliveryInfo] = usePostDeliveryInfo();
-
-  useEffect(() => {
-    if (closeForm) {
-      onClose();
-    }
-  }, [closeForm]);
+  const submitDeliveryInfo = usePostDeliveryInfo();
 
   const initialValues = {
     "last-name": deliveryInfo["last-name"] || "",
@@ -44,10 +39,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("last-name") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors["last-name"]}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors["last-name"] }} />
           )}
         </div>
 
@@ -60,10 +52,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("first-name") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors["first-name"]}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors["first-name"] }} />
           )}
         </div>
       </div>
@@ -78,10 +67,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("address") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors.address}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors.address }} />
           )}
         </div>
 
@@ -94,10 +80,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("zip-code") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors["zip-code"]}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors["zip-code"] }} />
           )}
         </div>
       </div>
@@ -112,10 +95,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("region") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors.region}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors.region }} />
           )}
         </div>
 
@@ -128,10 +108,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("city") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors.city}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors.city }} />
           )}
         </div>
       </div>
@@ -146,10 +123,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("neighborhood") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors.neighborhood}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors.neighborhood }} />
           )}
         </div>
 
@@ -162,10 +136,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
             onChange={changeHandler}
           />
           {errors.hasOwnProperty("email") && (
-            <div className="error-container">
-              <i className="bx bxs-error-circle bx-tada"></i>
-              <p className="error">{errors.email}</p>
-            </div>
+            <ErrorMessage newMessage={{ read: errors.email }} />
           )}
         </div>
       </div>
@@ -179,10 +150,7 @@ export default function DeliveryForm({ deliveryInfo, onClose }) {
           onChange={changeHandler}
         />
         {errors.hasOwnProperty("phone") && (
-          <div className="error-container">
-            <i className="bx bxs-error-circle bx-tada"></i>
-            <p className="error">{errors.phone}</p>
-          </div>
+          <ErrorMessage newMessage={{ read: errors.phone }} />
         )}
       </div>
 

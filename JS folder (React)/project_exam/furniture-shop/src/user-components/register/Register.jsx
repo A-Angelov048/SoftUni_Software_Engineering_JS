@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/useForms";
 import { useContext } from "react";
 import { ErrorContext } from "../../context/ErrorContext";
 import { useRegisterUser } from "../../hooks/useUserResponse";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
 const initialValues = {
   username: "",
@@ -14,7 +15,7 @@ const initialValues = {
 };
 
 export default function Register() {
-  const { errors } = useContext(ErrorContext);
+  const { errors, message } = useContext(ErrorContext);
   const createUser = useRegisterUser();
 
   const { values, changeHandler, submitCurForm } = useForm(
@@ -28,12 +29,9 @@ export default function Register() {
         <div className="heading-container">
           <h2>Register</h2>
         </div>
-        {errors.hasOwnProperty("message") && (
-          <div className="error-container position disappear-text">
-            <i className="bx bxs-error-circle bx-tada"></i>
-            <p className="error bigger-font">{errors.message}</p>
-          </div>
-        )}
+
+        {message.text !== "" && <ErrorMessage newMessage={message} />}
+
         <div className="layout-padding2">
           <div className="wrapper-user">
             <form onSubmit={submitCurForm}>
@@ -50,10 +48,7 @@ export default function Register() {
               </div>
 
               {errors.hasOwnProperty("username") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.username}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.username }} />
               )}
 
               <div className="input-box">
@@ -69,10 +64,7 @@ export default function Register() {
               </div>
 
               {errors.hasOwnProperty("email") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.email}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.email }} />
               )}
 
               <div className="input-box">
@@ -88,10 +80,7 @@ export default function Register() {
               </div>
 
               {errors.hasOwnProperty("password") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.password}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.password }} />
               )}
 
               <div className="input-box">
@@ -107,10 +96,7 @@ export default function Register() {
               </div>
 
               {errors.hasOwnProperty("rePassword") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.rePassword}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.rePassword }} />
               )}
 
               <button type="submit" className="btn">

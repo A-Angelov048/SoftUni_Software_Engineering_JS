@@ -12,6 +12,7 @@ import { convertDateToString } from "../../../utils/convertDate";
 import { reviewSchema } from "../../../utils/schemaForm";
 import { checkReview } from "../../../utils/checkReview";
 import { trimValue } from "../../../utils/trimValue";
+import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
 const initialValues = {
   rating: "",
@@ -84,10 +85,7 @@ export default forwardRef(function Reviews(props, ref) {
                   </div>
 
                   {errors.hasOwnProperty("rating") && (
-                    <div className="error-container">
-                      <i className="bx bxs-error-circle bx-tada"></i>
-                      <p className="error">{errors.rating}</p>
-                    </div>
+                    <ErrorMessage newMessage={{ read: errors.rating }} />
                   )}
 
                   <div className="stars-review">
@@ -162,10 +160,7 @@ export default forwardRef(function Reviews(props, ref) {
                   </div>
 
                   {errors.hasOwnProperty("review") && (
-                    <div className="error-container">
-                      <i className="bx bxs-error-circle bx-tada"></i>
-                      <p className="error">{errors.review}</p>
-                    </div>
+                    <ErrorMessage newMessage={{ read: errors.review }} />
                   )}
 
                   <textarea

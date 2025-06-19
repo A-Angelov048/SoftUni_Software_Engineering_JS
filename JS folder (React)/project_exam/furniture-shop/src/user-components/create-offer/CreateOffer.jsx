@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/useForms";
 import { Fragment, useContext } from "react";
 import { ErrorContext } from "../../context/ErrorContext";
 import { useCreateFurniture } from "../../hooks/useFurnitureResponse";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
 const initialValues = {
   name: "",
@@ -51,10 +52,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("name") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.name}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.name }} />
               )}
 
               <div className="input-box">
@@ -68,10 +66,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("category") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.category}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.category }} />
               )}
 
               <div className="input-box">
@@ -85,10 +80,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("year") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.year}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.year }} />
               )}
 
               <div className="input-box">
@@ -102,10 +94,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("materials") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.materials}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.materials }} />
               )}
 
               <div className="input-box">
@@ -119,10 +108,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("color") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.color}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.color }} />
               )}
 
               <div className="input-box">
@@ -136,10 +122,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("size") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.size}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.size }} />
               )}
 
               <div className="input-box">
@@ -153,10 +136,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("weight") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.weight}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.weight }} />
               )}
 
               <div className="input-box">
@@ -170,10 +150,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("condition") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.condition}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.condition }} />
               )}
 
               {values.imageUrl.map((input, index) => (
@@ -217,10 +194,9 @@ export default function CreateOffer() {
                   </div>
 
                   {errors.hasOwnProperty(`imageUrl[${index}]`) && (
-                    <div className="error-container">
-                      <i className="bx bxs-error-circle bx-tada"></i>
-                      <p className="error">{errors[`imageUrl[${index}]`]}</p>
-                    </div>
+                    <ErrorMessage
+                      newMessage={{ read: errors[`imageUrl[${index}]`] }}
+                    />
                   )}
                 </Fragment>
               ))}
@@ -236,10 +212,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("price") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.price}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.price }} />
               )}
 
               <div className="input-box">
@@ -253,10 +226,7 @@ export default function CreateOffer() {
               </div>
 
               {errors.hasOwnProperty("description") && (
-                <div className="error-container">
-                  <i className="bx bxs-error-circle bx-tada"></i>
-                  <p className="error">{errors.description}</p>
-                </div>
+                <ErrorMessage newMessage={{ read: errors.description }} />
               )}
 
               <button type="submit" className="btn">

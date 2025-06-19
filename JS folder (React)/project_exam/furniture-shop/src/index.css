@@ -187,71 +187,11 @@ hr:focus-within {
   border: 2px solid #24d278;
 }
 
-.error-container {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  width: fit-content;
-  padding: 5px 10px;
-  margin: 0px 10px;
-  border-radius: 8px;
-  background-color: #fee2e2;
-}
-
-.error-container.success {
-  background-color: #dbf8e8;
-}
-
-.error-container.position {
-  position: relative;
-  margin: auto;
-  align-items: center;
-}
-
-.error-container.disappear-text {
-  animation: fadeOut 4s forwards;
-}
-
 .brand-container {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 0 -10px;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-.error-container i.bxs-error-circle {
-  color: #ef4444;
-}
-
-.error-container i.bx-check {
-  color: #3aad6b;
-}
-
-.error-container > p {
-  font-weight: 600;
-}
-
-.error-container > p.bigger-font {
-  font-size: 20px;
-}
-
-.error-container > p.error {
-  color: #ef4444;
-}
-
-.error-container > p.success {
-  color: #3aad6b;
 }
 
 @media (min-width: 768px) {

@@ -1,43 +1,47 @@
-import { useContext } from "react";
-import { ErrorContext } from "../../../context/ErrorContext";
-
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import ProfileEditing from "../profileEditing/ProfileEditing";
 import PasswordChange from "../passwordChange/PasswordChange";
+import DeliveryForm from "../../delivery-form/DeliveryForm";
+import { useGetDeliveryInfo } from "../../../hooks/useUserResponse";
+import { ErrorContext } from "../../../context/ErrorContext";
+import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
-export default function Settings() {
-  const { errors } = useContext(ErrorContext);
+export default memo(function Settings() {
+  const test = useRef(true);
+  const { message, clearMessage } = useContext(ErrorContext);
+  const [detailsClose, setDetailsClose] = useState(false);
+  const deliveryInfo = useGetDeliveryInfo();
+
+  useEffect(() => {
+    if (test.current) {
+      test.current = false;
+      clearMessage();
+    }
+    if (message.text !== "" && message.status) {
+      setDetailsClose((oldState) => !oldState);
+    }
+  }, [message]);
 
   return (
     <div className="settings layout-padding2">
-      {(errors.hasOwnProperty("successMessage") ||
-        errors.hasOwnProperty("errorMessage")) && (
-        <div
-          className={
-            errors.successMessage
-              ? "error-container success position disappear-text"
-              : "error-container position disappear-text"
-          }
-        >
-          {errors.successMessage ? (
-            <i className="bx bx-check bx-tada" />
-          ) : (
-            <i className="bx bxs-error-circle bx-tada" />
-          )}
-          <p
-            className={
-              errors.successMessage
-                ? "success bigger-font"
-                : "error bigger-font"
-            }
-          >
-            {errors.successMessage || errors.errorMessage}
-          </p>
-        </div>
-      )}
+      {message.text !== "" && <ErrorMessage newMessage={message} />}
 
-      <ProfileEditing />
+      <details open={detailsClose ? false : null}>
+        <summary>Profile info change</summary>
+        <ProfileEditing />
+      </details>
 
-      <PasswordChange />
+      <details open={detailsClose ? false : null}>
+        <summary>Password change</summary>
+        <PasswordChange />
+      </details>
+
+      <details open={detailsClose ? false : null}>
+        <summary>Delivery address change</summary>
+        {deliveryInfo.hasOwnProperty("_id") && (
+          <DeliveryForm deliveryInfo={deliveryInfo} />
+        )}
+      </details>
     </div>
   );
-}
+});
