@@ -18,10 +18,10 @@ import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 export default function Details() {
   const { furnitureId } = useParams();
 
-  const [furniture, reviews, updateReview] = useDetailsFurniture(furnitureId);
+  const furniture = useDetailsFurniture(furnitureId);
   const [heartStatus, handleWishlist] = useUpdateWishlist();
 
-  const [lengthReviews, averageReviews] = averageNumReviews(reviews);
+  const [lengthReviews, averageReviews] = averageNumReviews(furniture.reviews);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -319,7 +319,7 @@ export default function Details() {
       </section>
 
       {furniture.reviews && (
-        <Reviews reviewsArr={reviews} setNewReview={updateReview} ref={ref} />
+        <Reviews reviewsArr={furniture.reviews} ref={ref} />
       )}
 
       {isDialogOpen && <MessageDialog onClose={() => setIsDialogOpen(false)} />}

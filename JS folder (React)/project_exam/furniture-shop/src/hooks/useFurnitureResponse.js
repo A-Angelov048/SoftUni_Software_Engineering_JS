@@ -10,7 +10,7 @@ import {
   wishlist,
 } from "../api-service/furnitureService";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ErrorContext } from "../context/ErrorContext";
 import { trimValue } from "../utils/trimValue";
 import { createFurnitureSchema } from "../utils/schemaForm";
@@ -68,9 +68,9 @@ export function useAllFurniture(statePage) {
 }
 
 export function useDetailsFurniture(furnitureId) {
+  const location = useLocation();
   const errorHandler = useErrorHandler();
   const [furniture, setFurniture] = useState({});
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -82,18 +82,13 @@ export function useDetailsFurniture(furnitureId) {
           abortController
         );
         setFurniture(response);
-        setReviews(response.reviews);
       } catch (error) {
         errorHandler(error);
       }
     })();
-  }, []);
+  }, [location]);
 
-  const updateReview = (value) => {
-    setReviews((oldState) => [...oldState, value]);
-  };
-
-  return [furniture, reviews, updateReview];
+  return furniture;
 }
 
 export function useUpdateWishlist() {

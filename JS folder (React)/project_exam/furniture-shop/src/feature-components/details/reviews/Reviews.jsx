@@ -1,19 +1,15 @@
 import "./Reviews.css";
 
-import { forwardRef, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { forwardRef, useContext, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { useForm } from "../../../hooks/useForms";
-import { useReviews } from "../../../hooks/useReviews";
+import { useCreateReview, useReviews } from "../../../hooks/useReviews";
 
 import { AuthContext } from "../../../context/AuthContext";
 import { ErrorContext } from "../../../context/ErrorContext";
-import { saveReview } from "../../../api-service/reviewsService";
 import { convertDateToString } from "../../../utils/convertDate";
-import { reviewSchema } from "../../../utils/schemaForm";
 import { checkReview } from "../../../utils/checkReview";
-import { trimValue } from "../../../utils/trimValue";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
-import { useErrorHandler } from "../../../hooks/useErrorHandler";
 
 const initialValues = {
   rating: "",
@@ -22,9 +18,15 @@ const initialValues = {
 
 export default forwardRef(function Reviews(props, ref) {
   const { furnitureId } = useParams();
-  const errorHandler = useErrorHandler();
-  const user = useContext(AuthContext);
+  const location = useLocation();
+  const { userId, username, imageProfile, role } = useContext(AuthContext);
   const { errors } = useContext(ErrorContext);
+
+  useEffect(() => {
+    if (location.state !== null) {
+      setReviewState(location.state);
+    }
+  }, [location.state]);
 
   const [
     reviewsArr,
@@ -33,23 +35,9 @@ export default forwardRef(function Reviews(props, ref) {
     updateReviewsFlag,
     setReviewState,
   ] = useReviews(props.reviewsArr);
+  const subReview = useCreateReview(furnitureId);
 
-  const reviewFlag = checkReview(reviewsArr, user.userId);
-
-  const subReview = async (values) => {
-    const trimValues = trimValue(values);
-
-    try {
-      await reviewSchema.validate(trimValues, { abortEarly: false });
-
-      const response = await saveReview(trimValues, furnitureId);
-
-      setReviewState(response);
-      props.setNewReview(response);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const reviewFlag = checkReview(reviewsArr, userId, role);
 
   const { values, changeHandler, submitCurForm } = useForm(
     initialValues,
@@ -77,74 +65,72 @@ export default forwardRef(function Reviews(props, ref) {
                   )}
 
                   <div className="stars-review">
-                    <div>
-                      <button
-                        onClick={(e) => changeHandler(e)}
-                        type="button"
-                        className={
-                          values.rating === "5" ? "btn-star active" : "btn-star"
-                        }
-                      >
-                        <i className="bx bxs-star" data-rating="5"></i>
-                      </button>
-                      <button
-                        onClick={(e) => changeHandler(e)}
-                        type="button"
-                        className={
-                          values.rating === "4" ? "btn-star active" : "btn-star"
-                        }
-                      >
-                        <i className="bx bxs-star" data-rating="4"></i>
-                      </button>
-                      <button
-                        onClick={(e) => changeHandler(e)}
-                        type="button"
-                        className={
-                          values.rating === "3" ? "btn-star active" : "btn-star"
-                        }
-                      >
-                        <i className="bx bxs-star" data-rating="3"></i>
-                      </button>
-                      <button
-                        onClick={(e) => changeHandler(e)}
-                        type="button"
-                        className={
-                          values.rating === "2" ? "btn-star active" : "btn-star"
-                        }
-                      >
-                        <i className="bx bxs-star" data-rating="2"></i>
-                      </button>
-                      <button
-                        onClick={(e) => changeHandler(e)}
-                        type="button"
-                        className={
-                          values.rating === "1" ? "btn-star active" : "btn-star"
-                        }
-                      >
-                        <i className="bx bxs-star" data-rating="1"></i>
-                      </button>
-                    </div>
-
-                    <input
-                      type="hidden"
-                      name="rating"
-                      defaultValue={values.rating}
-                    />
+                    <i
+                      data-rating="5"
+                      onClick={(e) => changeHandler(e)}
+                      className={
+                        values.rating === "5"
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      data-rating="4"
+                      onClick={(e) => changeHandler(e)}
+                      className={
+                        values.rating === "4"
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      data-rating="3"
+                      onClick={(e) => changeHandler(e)}
+                      className={
+                        values.rating === "3"
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      data-rating="2"
+                      onClick={(e) => changeHandler(e)}
+                      className={
+                        values.rating === "2"
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
+                    <i
+                      data-rating="1"
+                      onClick={(e) => changeHandler(e)}
+                      className={
+                        values.rating === "1"
+                          ? "bx bxs-star active"
+                          : "bx bxs-star"
+                      }
+                    ></i>
                   </div>
+
+                  <input
+                    type="hidden"
+                    name="rating"
+                    defaultValue={values.rating}
+                  />
 
                   <div className="center top bottom">
                     <div className="profile">
                       <img
                         alt=""
                         src={
-                          user.imageProfile
-                            ? user.imageProfile
+                          imageProfile
+                            ? imageProfile
                             : "/images/profile-circle-svgrepo-com.svg"
                         }
                       />
                     </div>
 
-                    <h3>{user.username}</h3>
+                    <h3>{username}</h3>
                   </div>
 
                   {errors.hasOwnProperty("review") && (

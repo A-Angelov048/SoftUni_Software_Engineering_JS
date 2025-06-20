@@ -77,18 +77,23 @@
   .wrapper-reviews
   .write-review
   .stars-review
-  .btn-star {
-  background-color: transparent;
+  .bxs-star {
+  cursor: pointer;
 }
 
-.recent-reviews .container .wrapper-reviews .write-review .stars-review .active,
 .recent-reviews
   .container
   .wrapper-reviews
   .write-review
   .stars-review
-  .active
-  ~ .btn-star {
+  .bxs-star.active,
+.recent-reviews
+  .container
+  .wrapper-reviews
+  .write-review
+  .stars-review
+  > .bxs-star.active
+  ~ .bxs-star {
   color: darkorange;
 }
 
@@ -97,16 +102,14 @@
   .wrapper-reviews
   .write-review
   .stars-review
-  div
-  > .btn-star:hover,
+  > .bxs-star:hover,
 .recent-reviews
   .container
   .wrapper-reviews
   .write-review
   .stars-review
-  div
-  > .btn-star:hover
-  ~ .btn-star {
+  > .bxs-star:hover
+  ~ .bxs-star {
   color: darkorange;
 }
 
@@ -121,7 +124,7 @@
   .wrapper-reviews
   .content-review
   .stars-review
-  .active
+  > .active
   ~ .bxs-star {
   color: darkorange;
 }

@@ -1,4 +1,9 @@
 import { useRef, useState } from "react";
+import { useErrorHandler } from "./useErrorHandler";
+import { saveReview } from "../api-service/reviewsService";
+import { trimValue } from "../utils/trimValue";
+import { reviewSchema } from "../utils/schemaForm";
+import { useNavigate } from "react-router-dom";
 
 export function useReviews(initialValue) {
   const reviewsArr = useRef([]);
@@ -27,4 +32,24 @@ export function useReviews(initialValue) {
     updateReviewsFlag,
     setReviewState,
   ];
+}
+
+export function useCreateReview(furnitureId) {
+  const navigate = useNavigate();
+  const errorHandler = useErrorHandler();
+
+  const subReview = async (values) => {
+    const trimValues = trimValue(values);
+
+    try {
+      await reviewSchema.validate(trimValues, { abortEarly: false });
+
+      const response = await saveReview(trimValues, furnitureId);
+      navigate(`/details-furniture/${furnitureId}`, { state: response });
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
+  return subReview;
 }
