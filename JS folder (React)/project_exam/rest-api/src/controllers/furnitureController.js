@@ -33,10 +33,7 @@ router.get("/", async (req, res) => {
       data: furniture,
     });
   } catch (err) {
-    res.status(404).json({
-      status: 404,
-      message: err.message,
-    });
+    res.status(404).json({ message: err.message });
   }
 });
 

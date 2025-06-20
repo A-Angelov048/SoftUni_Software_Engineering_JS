@@ -19,6 +19,7 @@ import {
   registerSchema,
 } from "../utils/schemaForm";
 import { ErrorContext } from "../context/ErrorContext";
+import { useErrorHandler } from "./useErrorHandler";
 
 const schemas = {
   profileSchema: profileSchema,
@@ -27,8 +28,8 @@ const schemas = {
 
 export function useLoginUser() {
   const navigate = useNavigate();
+  const errorHandler = useErrorHandler();
   const { changeAuthState } = useContext(AuthContext);
-  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
 
   const getUser = async (values) => {
     const trimValues = trimValue(values);
@@ -39,17 +40,7 @@ export function useLoginUser() {
       changeAuthState(result);
       navigate("/");
     } catch (error) {
-      if (error.name === "ValidationError") {
-        const newError = {};
-
-        error.inner.forEach((err) => {
-          newError[err.path] = err.message;
-        });
-        handleError(newError);
-      } else {
-        handleMessage(error.message, false);
-        clearError();
-      }
+      errorHandler(error);
     }
   };
 
@@ -59,7 +50,7 @@ export function useLoginUser() {
 export function useRegisterUser() {
   const navigate = useNavigate();
   const { changeAuthState } = useContext(AuthContext);
-  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
+  const errorHandler = useErrorHandler();
 
   const createUser = async (values) => {
     const trimValues = trimValue(values);
@@ -70,17 +61,7 @@ export function useRegisterUser() {
       changeAuthState(result);
       navigate("/");
     } catch (error) {
-      if (error.name === "ValidationError") {
-        const newError = {};
-
-        error.inner.forEach((err) => {
-          newError[err.path] = err.message;
-        });
-        handleError(newError);
-      } else {
-        handleMessage(error.message, false);
-        clearError();
-      }
+      errorHandler(error);
     }
   };
 
@@ -88,16 +69,15 @@ export function useRegisterUser() {
 }
 
 export function useLogoutUser() {
-  const { changeAuthState, updateAuthError } = useContext(AuthContext);
+  const { changeAuthState } = useContext(AuthContext);
+  const errorHandler = useErrorHandler();
 
   const logoutUser = async () => {
     try {
       await logout();
       changeAuthState({});
     } catch (error) {
-      if (error.message === "403") return updateAuthError(true);
-
-      console.error(error.message);
+      errorHandler(error);
     }
   };
 
@@ -106,6 +86,7 @@ export function useLogoutUser() {
 
 export function useGetProfile(profileId) {
   const userContext = useContext(AuthContext);
+  const errorHandler = useErrorHandler();
   const [user, setUser] = useState({});
   const [stateFurniture, setStateFurniture] = useState({
     furniture: [],
@@ -120,9 +101,7 @@ export function useGetProfile(profileId) {
         const response = await getProfile(profileId, abortController);
         setUser(response);
       } catch (error) {
-        if (error.message === "403") return userContext.updateAuthError(true);
-
-        console.error(error.message);
+        errorHandler(error);
       }
     })();
 
@@ -140,7 +119,7 @@ export function useGetProfile(profileId) {
 
 export function useGetDeliveryInfo() {
   const location = useLocation();
-  const { updateAuthError } = useContext(AuthContext);
+  const errorHandler = useErrorHandler();
   const [info, setInfo] = useState({});
 
   useEffect(() => {
@@ -151,9 +130,7 @@ export function useGetDeliveryInfo() {
         const response = await getDeliveryInfo();
         setInfo(response.data);
       } catch (error) {
-        if (error.message === "403") return updateAuthError(true);
-
-        console.error(error.message);
+        errorHandler(error);
       }
     })();
 
@@ -168,8 +145,8 @@ export function useGetDeliveryInfo() {
 export function usePostDeliveryInfo() {
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
-  const { updateAuthError } = useContext(AuthContext);
-  const { handleError, handleMessage } = useContext(ErrorContext);
+  const errorHandler = useErrorHandler();
+  const { handleMessage } = useContext(ErrorContext);
 
   const submitDeliveryInfo = async (values) => {
     const trimValues = trimValue(values);
@@ -184,17 +161,7 @@ export function usePostDeliveryInfo() {
         navigate("/checkout", { state: state });
       }
     } catch (error) {
-      if (error.message === "403") {
-        console.error(error.message);
-        updateAuthError(true);
-      } else if (error.name === "ValidationError") {
-        const newError = {};
-
-        error.inner.forEach((err) => {
-          newError[err.path] = err.message;
-        });
-        handleError(newError);
-      }
+      errorHandler(error);
     }
   };
 
@@ -202,8 +169,9 @@ export function usePostDeliveryInfo() {
 }
 
 export function useChangeUserInfo(action) {
-  const { changeAuthState, updateAuthError } = useContext(AuthContext);
-  const { handleError, handleMessage, clearError } = useContext(ErrorContext);
+  const errorHandler = useErrorHandler();
+  const { changeAuthState } = useContext(AuthContext);
+  const { handleMessage } = useContext(ErrorContext);
 
   const changeUserInfo = async (values, resetCurForm) => {
     const trimValues = trimValue(values);
@@ -219,21 +187,7 @@ export function useChangeUserInfo(action) {
         resetCurForm();
       }
     } catch (error) {
-      if (error.message === "403") {
-        console.error(error.message);
-        updateAuthError(true);
-      } else if (error.name === "ValidationError") {
-        const newError = {};
-
-        error.inner.forEach((err) => {
-          newError[err.path] = err.message;
-        });
-        handleError(newError);
-      } else {
-        //server
-        handleMessage(error.message, false);
-        clearError();
-      }
+      errorHandler(error);
     }
   };
 

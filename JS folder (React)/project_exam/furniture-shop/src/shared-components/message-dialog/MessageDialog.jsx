@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { removeFurniture } from "../../api-service/furnitureService";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { useErrorHandler } from "../../hooks/useErrorHandler";
 
 export default function MessageDialog({ onClose }) {
   const navigate = useNavigate();
   const { furnitureId } = useParams();
+  const errorHandler = useErrorHandler();
   const { updateAuthError } = useContext(AuthContext);
 
   async function deleteFurniture() {
@@ -15,9 +17,7 @@ export default function MessageDialog({ onClose }) {
       await removeFurniture(furnitureId);
       navigate("/shop");
     } catch (error) {
-      if (error.message === "403") return updateAuthError(true);
-
-      console.error(error.message);
+      errorHandler(error);
     }
   }
 

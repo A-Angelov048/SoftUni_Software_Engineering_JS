@@ -6,7 +6,7 @@ export const BasketContext = createContext();
 
 export function BasketProvider(props) {
   const [basket, dispatch] = useSetBasket();
-  const { handleError, clearError } = useContext(ErrorContext);
+  const { handleMessage } = useContext(ErrorContext);
 
   useEffect(() => {
     sessionStorage.setItem("basket", JSON.stringify(basket));
@@ -14,21 +14,12 @@ export function BasketProvider(props) {
 
   const addToBasket = (id, quantity, price) => {
     dispatch({ type: "ADD", payload: { id, quantity, price } });
-
-    handleError({ successMessage: "Successfully add furniture to basket." });
-
-    setTimeout(() => {
-      clearError();
-    }, 2000);
+    handleMessage("Successfully add furniture to basket.");
   };
 
   const removeBasketState = (id) => {
     dispatch({ type: "REMOVE", payload: id });
-    handleError({ successMessage: "Successfully remove item from basket." });
-
-    setTimeout(() => {
-      clearError();
-    }, 2000);
+    handleMessage("Successfully remove item from basket.");
   };
 
   const quantityHandler = (id, operation) => {

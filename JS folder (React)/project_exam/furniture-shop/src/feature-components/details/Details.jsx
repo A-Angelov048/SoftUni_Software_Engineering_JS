@@ -13,6 +13,7 @@ import { averageNumReviews } from "../../utils/averageNumReviews";
 import { AuthContext } from "../../context/AuthContext";
 import { BasketContext } from "../../context/BasketContext";
 import { ErrorContext } from "../../context/ErrorContext";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
 export default function Details() {
   const { furnitureId } = useParams();
@@ -29,7 +30,7 @@ export default function Details() {
 
   const { userId, role } = useContext(AuthContext);
   const { addToBasket } = useContext(BasketContext);
-  const { errors } = useContext(ErrorContext);
+  const { message } = useContext(ErrorContext);
 
   const ref = useRef(null);
 
@@ -41,31 +42,7 @@ export default function Details() {
             <h2>Details Furniture</h2>
           </div>
 
-          {(errors.hasOwnProperty("successMessage") ||
-            errors.hasOwnProperty("errorMessage")) && (
-            <div
-              className={
-                errors.successMessage
-                  ? "error-container success position disappear-text"
-                  : "error-container position disappear-text"
-              }
-            >
-              {errors.successMessage ? (
-                <i className="bx bx-check bx-tada" />
-              ) : (
-                <i className="bx bxs-error-circle bx-tada" />
-              )}
-              <p
-                className={
-                  errors.successMessage
-                    ? "success bigger-font"
-                    : "error bigger-font"
-                }
-              >
-                {errors.successMessage || errors.errorMessage}
-              </p>
-            </div>
-          )}
+          {message.text !== "" && <ErrorMessage newMessage={message} />}
 
           <div className="layout-padding2">
             <div className="wrapper-details">

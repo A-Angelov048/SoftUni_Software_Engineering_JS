@@ -8,10 +8,11 @@ import BasketItems from "./basketItem/BasketItem";
 import ReceiveInfo from "./receiveInfo/ReceiveInfo";
 import { ReceiveInfoProvider } from "../../context/ReceiveInfoContext";
 import SummaryPrice from "./summaryPrice/SummaryPrice";
+import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
 export default function Basket() {
   const { basketItems } = useContext(BasketContext);
-  const { errors } = useContext(ErrorContext);
+  const { message } = useContext(ErrorContext);
 
   const getBasketItems = useGetBasketItems(basketItems);
 
@@ -23,31 +24,7 @@ export default function Basket() {
             <h2>Basket</h2>
           </div>
 
-          {(errors.hasOwnProperty("successMessage") ||
-            errors.hasOwnProperty("errorMessage")) && (
-            <div
-              className={
-                errors.successMessage
-                  ? "error-container success position disappear-text"
-                  : "error-container position disappear-text"
-              }
-            >
-              {errors.successMessage ? (
-                <i className="bx bx-check bx-tada" />
-              ) : (
-                <i className="bx bxs-error-circle bx-tada" />
-              )}
-              <p
-                className={
-                  errors.successMessage
-                    ? "success bigger-font"
-                    : "error bigger-font"
-                }
-              >
-                {errors.successMessage || errors.errorMessage}
-              </p>
-            </div>
-          )}
+          {message.text !== "" && <ErrorMessage newMessage={message} />}
 
           <div className="layout-padding2 divide">
             <section className="basket-section">

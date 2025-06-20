@@ -1,3 +1,5 @@
+import { AuthError, HttpError } from "../utils/customErrors";
+
 const baseUrl = import.meta.env.VITE_API_URL;
 
 async function request(method, url, data, abortController) {
@@ -28,15 +30,15 @@ async function request(method, url, data, abortController) {
     if (!response.ok) {
       if (response.status === 403) {
         sessionStorage.removeItem("auth");
-        throw { message: response.status };
+        throw new AuthError(result.message);
       }
 
-      throw result;
+      throw new HttpError(response.status, result.message);
     }
 
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    throw error;
   }
 }
 

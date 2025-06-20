@@ -13,6 +13,7 @@ import { reviewSchema } from "../../../utils/schemaForm";
 import { checkReview } from "../../../utils/checkReview";
 import { trimValue } from "../../../utils/trimValue";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
+import { useErrorHandler } from "../../../hooks/useErrorHandler";
 
 const initialValues = {
   rating: "",
@@ -21,9 +22,9 @@ const initialValues = {
 
 export default forwardRef(function Reviews(props, ref) {
   const { furnitureId } = useParams();
-
+  const errorHandler = useErrorHandler();
   const user = useContext(AuthContext);
-  const { errors, handleError } = useContext(ErrorContext);
+  const { errors } = useContext(ErrorContext);
 
   const [
     reviewsArr,
@@ -46,20 +47,7 @@ export default forwardRef(function Reviews(props, ref) {
       setReviewState(response);
       props.setNewReview(response);
     } catch (error) {
-      if (error.message === "403") {
-        console.error(error.message);
-        return user.updateAuthError(true);
-      }
-
-      const newError = {};
-
-      error.inner.forEach((err) => {
-        newError[err.path] = err.message;
-      });
-
-      handleError(newError);
-
-      return;
+      errorHandler(error);
     }
   };
 
