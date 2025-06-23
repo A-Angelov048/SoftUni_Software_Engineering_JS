@@ -8,6 +8,7 @@
 .receive-info h3 {
   margin-bottom: 20px;
 }
+
 .receive-info .receive-choice {
   display: flex;
   gap: 20px;
@@ -53,4 +54,12 @@
 
 .receive-info .container-receive .icon > i {
   font-size: 30px;
+}
+
+@media (max-width: 576px) {
+  .receive-info .receive-choice {
+    flex-direction: column;
+    gap: 0;
+    align-items: normal;
+  }
 }

@@ -85,8 +85,8 @@
 }
 
 .wrapper-user .btn-add {
-  width: 30%;
-  padding: 4px;
+  width: auto;
+  padding: 8px;
 }
 
 .wrapper-user .images {

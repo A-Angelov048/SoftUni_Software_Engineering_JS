@@ -34,24 +34,24 @@ export default function CompleteOrder({
           )}
         </div>
 
-        <label htmlFor="order-toggle" className="open-order">
+        <div className="open-order">
           <i
             onClick={() => setToggleArrow(true)}
             className="bx bxs-right-arrow"
           ></i>
-        </label>
+        </div>
 
         {toggleArrow && (
           <div onClick={() => setToggleArrow(false)} className="overlay">
             <div className="full-order" onClick={(e) => e.stopPropagation()}>
               <header className="header-full-order">
                 <h3>{`My products (${state.furniture.length})`}</h3>
-                <label htmlFor="order-toggle" className="close-order">
+                <div className="close-order">
                   <i
                     onClick={() => setToggleArrow(false)}
                     className="bx bx-x"
                   ></i>
-                </label>
+                </div>
               </header>
 
               {state.furniture.map((current, index) => (

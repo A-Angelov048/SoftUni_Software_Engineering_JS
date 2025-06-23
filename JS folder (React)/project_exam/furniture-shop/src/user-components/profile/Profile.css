@@ -100,6 +100,7 @@
 }
 
 .profile-section .container .wrapper-profile .settings .input-box {
+  width: 50%;
   position: relative;
   display: flex;
   margin: 15px 0;
@@ -107,7 +108,6 @@
 
 .profile-section .container .wrapper-profile .settings .input-box input {
   flex-grow: 1;
-  max-width: 400px;
   background: transparent;
   outline-color: #fff;
   border: 2px solid rgba(51, 51, 51, 0.4);
@@ -120,7 +120,7 @@
 
 .profile-section .container .wrapper-profile .settings .input-box i {
   position: absolute;
-  left: 48%;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 25px;
@@ -153,4 +153,10 @@
 .profile-section .container .wrapper-profile .settings .btn:hover {
   background: #fff;
   color: #333;
+}
+
+@media (max-width: 576px) {
+  .profile-section .container .wrapper-profile .settings .input-box {
+    width: 100%;
+  }
 }

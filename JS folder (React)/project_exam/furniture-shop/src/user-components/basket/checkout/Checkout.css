@@ -112,3 +112,26 @@
   font-weight: bold;
   font-style: italic;
 }
+
+@media (max-width: 992px) {
+  .checkout {
+    flex-direction: column;
+  }
+  .checkout .wrapper-checkout {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout .wrapper-checkout .payment .payment-info .payment-container {
+    flex-direction: column;
+  }
+
+  .checkout .wrapper-checkout .header header h2 {
+    font-size: 1.5rem;
+  }
+
+  .checkout .wrapper-checkout .header header {
+    align-items: baseline;
+  }
+}

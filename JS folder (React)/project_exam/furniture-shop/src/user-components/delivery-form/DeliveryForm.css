@@ -43,3 +43,9 @@
   background: #fff;
   color: #333;
 }
+
+@media (max-width: 576px) {
+  .delivery-form .row-input {
+    display: block;
+  }
+}

@@ -109,6 +109,7 @@ export default function Footer() {
                 <div>
                   <label htmlFor="name">Name *</label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     placeholder="Write your name here."
@@ -118,6 +119,7 @@ export default function Footer() {
                 <div>
                   <label htmlFor="email">Email *</label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     placeholder="Write your email here."
@@ -127,6 +129,7 @@ export default function Footer() {
                 <div>
                   <label htmlFor="message">Message *</label>
                   <textarea
+                    id="message"
                     name="message"
                     placeholder="Write something..."
                   ></textarea>

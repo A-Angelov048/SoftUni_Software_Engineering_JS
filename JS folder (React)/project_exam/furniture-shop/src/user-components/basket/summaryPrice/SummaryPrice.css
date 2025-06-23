@@ -18,3 +18,9 @@
 .summary-section .summary span {
   float: right;
 }
+
+@media (max-width: 992px) {
+  .summary-section {
+    align-self: auto;
+  }
+}

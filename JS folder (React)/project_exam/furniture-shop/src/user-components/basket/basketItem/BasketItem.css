@@ -13,6 +13,7 @@
   flex: 1;
   margin-left: 10px;
 }
+
 .basket-item .item-details h3 {
   font-size: 18px;
   margin-bottom: 5px;
@@ -75,4 +76,10 @@
 .hr-class {
   border: solid 1px #5e5e5e;
   margin: 20px 0;
+}
+
+@media (max-width: 450px) {
+  .basket-item .item-details h3 {
+    display: none;
+  }
 }
