@@ -1,11 +1,11 @@
 import "./DeliveryForm.css";
-import { useContext, useEffect } from "react";
+import { memo, useContext } from "react";
 import { useForm } from "../../hooks/useForms";
 import { ErrorContext } from "../../context/ErrorContext";
 import { usePostDeliveryInfo } from "../../hooks/useUserResponse";
 import ErrorMessage from "../../shared-components/error-message/ErrorMessage";
 
-export default function DeliveryForm({ deliveryInfo }) {
+export default memo(function DeliveryForm({ deliveryInfo }) {
   const { errors } = useContext(ErrorContext);
 
   const submitDeliveryInfo = usePostDeliveryInfo();
@@ -159,4 +159,4 @@ export default function DeliveryForm({ deliveryInfo }) {
       </button>
     </form>
   );
-}
+});

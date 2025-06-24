@@ -12,7 +12,7 @@ export default function Checkout() {
 
   const { message } = useContext(ErrorContext);
 
-  const deliveryInfo = useGetDeliveryInfo();
+  const [deliveryInfo, loading] = useGetDeliveryInfo();
 
   const [changeInfoDeliver, setChangeInfoDeliver] = useState(true);
   const [paymentInfo, setPaymentInfo] = useState({ option: 0 });

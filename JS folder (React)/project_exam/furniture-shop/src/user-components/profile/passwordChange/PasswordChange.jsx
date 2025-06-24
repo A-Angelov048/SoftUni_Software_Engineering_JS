@@ -1,12 +1,12 @@
 import "../Profile.css";
 
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { useForm } from "../../../hooks/useForms";
 import { ErrorContext } from "../../../context/ErrorContext";
 import { useChangeUserInfo } from "../../../hooks/useUserResponse";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
-export default function PasswordChange() {
+export default memo(function PasswordChange() {
   const { errors } = useContext(ErrorContext);
 
   const [showHideCurPassword, setShowHide] = useState(true);
@@ -119,4 +119,4 @@ export default function PasswordChange() {
       </button>
     </form>
   );
-}
+});

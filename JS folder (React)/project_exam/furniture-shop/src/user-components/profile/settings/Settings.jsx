@@ -7,14 +7,14 @@ import { ErrorContext } from "../../../context/ErrorContext";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
 export default memo(function Settings() {
-  const test = useRef(true);
+  const flag = useRef(true);
   const { message, clearMessage } = useContext(ErrorContext);
   const [detailsClose, setDetailsClose] = useState(false);
-  const deliveryInfo = useGetDeliveryInfo();
+  const [deliveryInfo, loading] = useGetDeliveryInfo();
 
   useEffect(() => {
-    if (test.current) {
-      test.current = false;
+    if (flag.current) {
+      flag.current = false;
       clearMessage();
     }
     if (message.text !== "" && message.status) {
@@ -38,9 +38,7 @@ export default memo(function Settings() {
 
       <details open={detailsClose ? false : null}>
         <summary>Delivery address change</summary>
-        {deliveryInfo.hasOwnProperty("_id") && (
-          <DeliveryForm deliveryInfo={deliveryInfo} />
-        )}
+        {loading && <DeliveryForm deliveryInfo={deliveryInfo} />}
       </details>
     </div>
   );

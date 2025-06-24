@@ -1,13 +1,13 @@
 import "../Profile.css";
 
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { useForm } from "../../../hooks/useForms";
 import { AuthContext } from "../../../context/AuthContext";
 import { ErrorContext } from "../../../context/ErrorContext";
 import { useChangeUserInfo } from "../../../hooks/useUserResponse";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
-export default function ProfileEditing() {
+export default memo(function ProfileEditing() {
   const { username, imageProfile, location } = useContext(AuthContext);
   const { errors } = useContext(ErrorContext);
 
@@ -65,4 +65,4 @@ export default function ProfileEditing() {
       </button>
     </form>
   );
-}
+});

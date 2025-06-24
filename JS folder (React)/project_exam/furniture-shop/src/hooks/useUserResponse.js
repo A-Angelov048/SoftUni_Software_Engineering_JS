@@ -121,6 +121,7 @@ export function useGetDeliveryInfo() {
   const location = useLocation();
   const errorHandler = useErrorHandler();
   const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -131,6 +132,8 @@ export function useGetDeliveryInfo() {
         setInfo(response.data);
       } catch (error) {
         errorHandler(error);
+      } finally {
+        setLoading(true);
       }
     })();
 
@@ -139,7 +142,7 @@ export function useGetDeliveryInfo() {
     };
   }, [location]);
 
-  return info;
+  return [info, loading];
 }
 
 export function usePostDeliveryInfo() {
