@@ -1,0 +1,71 @@
+.order-container {
+  padding: 20px 0;
+}
+
+.order {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #334155;
+}
+
+.order strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.order span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.order .status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.pre-order {
+  background-color: #1e3a8a;
+  color: #93c5fd;
+}
+
+.in-transit {
+  background-color: #713f12;
+  color: #fde047;
+}
+
+.confirmed {
+  background-color: #14532d;
+  color: #86efac;
+}
+
+.link {
+  width: fit-content;
+  background-color: #333;
+  color: #fff;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 8px;
+  background-color: #22d37880;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
