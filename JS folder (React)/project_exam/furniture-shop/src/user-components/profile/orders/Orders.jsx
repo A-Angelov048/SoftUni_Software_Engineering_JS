@@ -12,19 +12,26 @@ export default function Orders() {
   return (
     <div className="layout-padding2">
       <div className={styles["filter-bar"]}>
-        <select>
-          <option>All orders</option>
-          <option>Pre-order</option>
-          <option>In transit</option>
-          <option>Confirmed</option>
-        </select>
-        <select>
-          <option>this week</option>
-          <option>this month</option>
-          <option>the last 3 month</option>
-          <option>the last 6 month</option>
-          <option>this year</option>
-        </select>
+        <div>
+          <label htmlFor="order-type"></label>
+          <select id="order-type">
+            <option>All orders</option>
+            <option>Pre-order</option>
+            <option>In transit</option>
+            <option>Confirmed</option>
+          </select>
+        </div>
+        <span>from</span>
+        <div>
+          <label htmlFor="duration"></label>
+          <select id="duration">
+            <option>this week</option>
+            <option>this month</option>
+            <option>the last 3 month</option>
+            <option>the last 6 month</option>
+            <option>this year</option>
+          </select>
+        </div>
       </div>
 
       {[1, 2, 3, 4, 5, 6, 7].map((curOrder) => (

@@ -56,11 +56,22 @@
   font-weight: bold;
 }
 
+.link:hover {
+  background-color: #22d37880;
+  color: #333;
+}
+
 .filter-bar {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.filter-bar span {
+  margin: 0 10px;
+  color: #94a3b8;
 }
 
 select {
