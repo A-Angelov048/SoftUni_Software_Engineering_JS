@@ -1,5 +1,6 @@
 import { useHandlePage } from "../../../hooks/useHandlePage";
 import Pagination from "../../../shared-components/pagination/Pagination";
+import Spinner from "../../../shared-components/spinner/Spinner";
 import { convertDocLengthToArr } from "../../../utils/convertDocLengthToArr";
 import CurrentOrder from "./currentOrder/CurrentOrder";
 import styles from "./Orders.module.css";
@@ -34,9 +35,15 @@ export default function Orders() {
         </div>
       </div>
 
-      {[1, 2, 3, 4, 5, 6, 7].map((curOrder) => (
-        <CurrentOrder order={curOrder} />
-      ))}
+      {7 > 0 ? (
+        <div className={styles["order-container"]}>
+          {[1, 2, 3, 4, 5, 6, 7].map((curOrder) => (
+            <CurrentOrder order={curOrder} />
+          ))}
+        </div>
+      ) : (
+        <Spinner />
+      )}
 
       <Pagination
         statePage={statePage}
