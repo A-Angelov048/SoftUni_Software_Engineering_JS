@@ -1,5 +1,5 @@
-export function convertDocLengthToArr(lengthDocuments) {
-  const pages = Math.ceil(lengthDocuments / 8);
+export function convertDocLengthToArr(lengthDocuments, itemsOnView) {
+  const pages = Math.ceil(lengthDocuments / itemsOnView);
 
   const arrayPages = [];
 
