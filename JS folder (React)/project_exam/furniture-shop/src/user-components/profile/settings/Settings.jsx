@@ -5,10 +5,12 @@ import DeliveryForm from "../../delivery-form/DeliveryForm";
 import { useGetDeliveryInfo } from "../../../hooks/useUserResponse";
 import { ErrorContext } from "../../../context/ErrorContext";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default memo(function Settings() {
   const flag = useRef(true);
   const { message, clearMessage } = useContext(ErrorContext);
+  const { role } = useContext(AuthContext);
   const [detailsClose, setDetailsClose] = useState(false);
   const [deliveryInfo, loading] = useGetDeliveryInfo();
 
@@ -36,10 +38,12 @@ export default memo(function Settings() {
         <PasswordChange />
       </details>
 
-      <details open={detailsClose ? false : null}>
-        <summary>Delivery address change</summary>
-        {loading && <DeliveryForm deliveryInfo={deliveryInfo} />}
-      </details>
+      {role !== "Admin" && (
+        <details open={detailsClose ? false : null}>
+          <summary>Delivery address change</summary>
+          {loading && <DeliveryForm deliveryInfo={deliveryInfo} />}
+        </details>
+      )}
     </div>
   );
 });

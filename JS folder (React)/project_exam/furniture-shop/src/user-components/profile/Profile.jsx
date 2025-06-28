@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
 import Settings from "./settings/Settings";
+import Orders from "./orders/Orders";
 
 export default function Profile() {
   const { role } = useContext(AuthContext);
@@ -59,7 +60,7 @@ export default function Profile() {
                       : "link"
                   }
                 >
-                  My furniture for sells
+                  {role !== "Admin" ? "My orders" : "Orders"}
                 </li>
 
                 <li
@@ -99,6 +100,7 @@ export default function Profile() {
             )}
 
             {stateFurniture.currentClick === "settings" && <Settings />}
+            <Orders />
           </div>
         </div>
       </div>
