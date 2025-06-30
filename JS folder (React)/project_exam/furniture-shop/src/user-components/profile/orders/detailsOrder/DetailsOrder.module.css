@@ -1,0 +1,122 @@
+.subtext {
+  color: #94a3b8;
+}
+
+.summary {
+  background-color: #22d37880;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary div {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary div span:first-child {
+  font-weight: bold;
+  color: #374151;
+}
+
+.summary div span:last-child {
+  color: #111827;
+  font-weight: bold;
+}
+
+.invoice {
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.invoice:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 16px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  color: #94a3b8;
+  font-weight: normal;
+}
+
+td img {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.view-link {
+  color: #22d378;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .subtext {
+    font-size: 14px;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: normal;
+    justify-content: normal;
+    padding: 12px;
+  }
+
+  .summary div {
+    font-size: 14px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px;
+  }
+
+  .summary div:not(:nth-child(3)) {
+    border-bottom: 2px solid #333;
+  }
+
+  .invoice {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .delivery-date {
+    display: none;
+  }
+  tr {
+    font-size: 14px;
+  }
+  td {
+    padding: 12px;
+  }
+}

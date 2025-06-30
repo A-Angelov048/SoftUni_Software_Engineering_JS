@@ -23,6 +23,7 @@ import Basket from "./user-components/basket/Basket";
 import AdminGuard from "./shared-components/guards/AdminGuard";
 import RestrictAdminGuard from "./shared-components/guards/RestrictAdminGuard";
 import Checkout from "./user-components/basket/checkout/Checkout";
+import DetailsOrder from "./user-components/profile/orders/detailsOrder/DetailsOrder";
 
 function App() {
   return (
@@ -48,6 +49,10 @@ function App() {
 
               <Route element={<GuestGuard />}>
                 <Route path="/profile/:profileId" element={<Profile />} />
+                <Route
+                  path="/details-order/:orderId"
+                  element={<DetailsOrder />}
+                />
               </Route>
 
               <Route

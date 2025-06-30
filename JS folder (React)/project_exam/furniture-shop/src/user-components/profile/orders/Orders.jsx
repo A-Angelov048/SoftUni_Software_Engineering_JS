@@ -38,7 +38,7 @@ export default function Orders() {
       {7 > 0 ? (
         <div className={styles["order-container"]}>
           {[1, 2, 3, 4, 5, 6, 7].map((curOrder) => (
-            <CurrentOrder order={curOrder} />
+            <CurrentOrder key={curOrder} order={curOrder} />
           ))}
         </div>
       ) : (
