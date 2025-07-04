@@ -16,9 +16,6 @@ export const getDetailsFurniture = (furnitureId, abortController) =>
 export const removeFurniture = (furnitureId) =>
   del(`/furniture/delete/${furnitureId}`);
 
-export const purchaseFurniture = (furnitureId) =>
-  get(`/furniture/buy/${furnitureId}`);
-
 export const wishlist = (furnitureId) =>
   get(`/furniture/wishlist/${furnitureId}`);
 
@@ -26,3 +23,5 @@ export const editFurnitureRequester = (furnitureId, data) =>
   put(`/furniture/edit/${furnitureId}`, data);
 
 export const getBasketItems = (data) => post("/furniture/basket", data);
+
+export const orderSend = (data) => post("/furniture/order", data);

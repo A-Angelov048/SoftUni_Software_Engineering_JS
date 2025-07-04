@@ -3,19 +3,16 @@ import { useGetDeliveryInfo } from "../../../hooks/useUserResponse";
 import DeliveryForm from "../../delivery-form/DeliveryForm";
 import { useContext, useEffect, useState } from "react";
 import { ErrorContext } from "../../../context/ErrorContext";
-import { useLocation } from "react-router-dom";
 import CompleteOrder from "../completeOrder/CompleteOrder";
 import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
 export default function Checkout() {
-  const { state } = useLocation();
-
   const { message } = useContext(ErrorContext);
 
   const [deliveryInfo, loading] = useGetDeliveryInfo();
 
   const [changeInfoDeliver, setChangeInfoDeliver] = useState(true);
-  const [paymentInfo, setPaymentInfo] = useState({ option: 0 });
+  const [paymentInfo, setPaymentInfo] = useState({ payment: "" });
 
   useEffect(() => {
     if (message.text !== "" && message.status) {
@@ -83,18 +80,18 @@ export default function Checkout() {
 
                   <div className="payment-container">
                     <button
-                      onClick={() => setPaymentInfo({ option: 1 })}
+                      onClick={() => setPaymentInfo({ payment: "card" })}
                       className={
-                        paymentInfo.option === 1 ? "card active" : "card"
+                        paymentInfo.payment === "card" ? "card active" : "card"
                       }
                     >
                       <i className="bx bxs-credit-card-alt"></i>
                       <p>Credit/Debit card</p>
                     </button>
                     <button
-                      onClick={() => setPaymentInfo({ option: 2 })}
+                      onClick={() => setPaymentInfo({ payment: "cash" })}
                       className={
-                        paymentInfo.option === 2 ? "card active" : "card"
+                        paymentInfo.payment === "cash" ? "card active" : "card"
                       }
                     >
                       <i className="bx bxs-wallet"></i>
@@ -111,7 +108,7 @@ export default function Checkout() {
           </div>
 
           <CompleteOrder
-            state={state}
+            deliveryInfo={deliveryInfo}
             paymentInfo={paymentInfo}
             changeInfoDeliver={changeInfoDeliver}
           />

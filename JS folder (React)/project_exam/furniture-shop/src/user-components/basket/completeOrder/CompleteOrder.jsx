@@ -1,15 +1,33 @@
 import "./CompleteOrder.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CheckoutItems from "../checkoutItems/CheckoutItems";
 import SubmitButton from "../../../shared-components/submit-button/SubmitButton";
+import { orderSend } from "../../../api-service/furnitureService";
 
 export default function CompleteOrder({
-  state,
+  deliveryInfo,
   paymentInfo,
   changeInfoDeliver,
 }) {
+  const { state } = useLocation();
   const [toggleArrow, setToggleArrow] = useState(false);
+
+  const placeOrder = async () => {
+    try {
+      const result = await orderSend({
+        deliveryInfo: deliveryInfo,
+        status: "Pre-order",
+        ...paymentInfo,
+        ...state,
+      });
+      console.log(result);
+
+      // navigate to modal or something? await for the result from the server?
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <div className="order">
@@ -91,8 +109,9 @@ export default function CompleteOrder({
       </div>
 
       <SubmitButton
-        disabledButton={paymentInfo.option === 0 || !changeInfoDeliver}
+        disabledButton={paymentInfo.payment === "" || !changeInfoDeliver}
         buttonName={"Complete your order"}
+        clickFunction={() => placeOrder()}
       />
     </div>
   );
