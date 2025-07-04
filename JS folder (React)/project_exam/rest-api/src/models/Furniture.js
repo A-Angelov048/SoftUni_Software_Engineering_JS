@@ -57,12 +57,6 @@ const furnitureSchema = new mongoose.Schema({
     required: true,
     minLength: [10, "Description should be at least 10 characters long."],
   },
-  buyList: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-    },
-  ],
   listUserLikes: [
     {
       type: mongoose.Types.ObjectId,

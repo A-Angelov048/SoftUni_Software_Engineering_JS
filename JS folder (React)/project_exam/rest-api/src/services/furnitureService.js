@@ -1,6 +1,9 @@
+require("dotenv").config();
+const orderid = require("order-id");
 const Furniture = require("../models/Furniture");
 const User = require("../models/User");
 const Reviews = require("../models/Reviews");
+const Order = require("../models/Order");
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
@@ -12,16 +15,20 @@ exports.getAllData = async (page = 1, limit = 8) => {
     throw new Error("Page do not exists.");
   }
 
-  const [furnitureCount, furniture] = await Promise.all([
-    Furniture.countDocuments(),
-    Furniture.find().skip(skip).limit(Number(limit)),
-  ]);
+  try {
+    const [furnitureCount, furniture] = await Promise.all([
+      Furniture.countDocuments(),
+      Furniture.find().skip(skip).limit(Number(limit)),
+    ]);
 
-  if (skip >= furnitureCount) {
-    throw new Error("Page do not exists.");
+    if (skip >= furnitureCount) {
+      throw new Error("Page do not exists.");
+    }
+
+    return [furnitureCount, furniture];
+  } catch (error) {
+    throw error;
   }
-
-  return [furnitureCount, furniture];
 };
 
 exports.createFurniture = async (body, userId) => {
@@ -41,26 +48,6 @@ exports.getOne = (furnitureId) =>
       path: "reviews",
       populate: { path: "ownerReview", select: "username imageProfile" },
     });
-
-exports.buyFurniture = async (furnitureId, userId) => {
-  try {
-    const furniture = await this.getOne(furnitureId).lean();
-
-    if (furniture.owner._id.valueOf() === userId) {
-      throw new Error("Furniture do not exists.");
-    }
-
-    await Promise.all([
-      Furniture.findByIdAndUpdate(furnitureId, {
-        $pull: { listUserLikes: userId },
-      }),
-      User.findByIdAndUpdate(userId, { $pull: { wishlist: furnitureId } }),
-      Furniture.findByIdAndUpdate(furnitureId, { $push: { buyList: userId } }),
-    ]);
-  } catch (error) {
-    throw error;
-  }
-};
 
 exports.wishlistFurniture = async (furnitureId, userId) => {
   try {
@@ -140,3 +127,17 @@ exports.getBasketItems = (data) =>
     { _id: { $in: data } },
     "_id name imageUrl price listUserLikes"
   );
+
+exports.createOrder = async (body, userId) => {
+  const orderIdClient = orderid(process.env.SECRET).generate();
+
+  try {
+    const result = await Order.create({ ...body, orderIdClient });
+
+    await User.findByIdAndUpdate(userId, { $push: { orders: result._id } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};

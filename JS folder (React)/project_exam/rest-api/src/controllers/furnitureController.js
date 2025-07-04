@@ -2,7 +2,6 @@ const router = require("express").Router();
 const {
   getAllData,
   getOne,
-  buyFurniture,
   editFurniture,
   deleteFurniture,
   getLatest,
@@ -10,6 +9,7 @@ const {
   searchFurniture,
   wishlistFurniture,
   getBasketItems,
+  createOrder,
 } = require("../services/furnitureService");
 
 router.get("/latest", async (req, res) => {
@@ -84,18 +84,6 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-router.get("/buy/:id", async (req, res) => {
-  const furnitureId = req.params.id;
-  const userId = req.user?._id;
-
-  try {
-    await buyFurniture(furnitureId, userId);
-    res.json({ ok: true });
-  } catch (err) {
-    console.log(err.errors);
-  }
-});
-
 router.get("/wishlist/:id", async (req, res) => {
   const furnitureId = req.params.id;
   const userId = req.user?._id;
@@ -139,6 +127,18 @@ router.post("/basket", async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err.errors);
+  }
+});
+
+router.post("/order", async (req, res) => {
+  const body = req.body;
+  const userId = req.user?._id;
+
+  try {
+    const result = await createOrder(body, userId);
+    res.status(201).json({ orderId: result.orderIdClient, ok: true });
+  } catch (err) {
+    console.log(err.message);
   }
 });
 

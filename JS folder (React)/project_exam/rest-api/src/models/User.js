@@ -38,10 +38,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  furniture: [
+  orders: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "Furniture",
+      ref: "Order",
     },
   ],
   wishlist: [
