@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CheckoutItems from "../checkoutItems/CheckoutItems";
 import SubmitButton from "../../../shared-components/submit-button/SubmitButton";
-import { orderSend } from "../../../api-service/furnitureService";
+import { orderSend } from "../../../api-service/ordersService";
 
 export default function CompleteOrder({
   deliveryInfo,
@@ -17,7 +17,7 @@ export default function CompleteOrder({
     try {
       const result = await orderSend({
         deliveryInfo: deliveryInfo,
-        status: "Pre-order",
+        status: "pre-order",
         ...paymentInfo,
         ...state,
       });

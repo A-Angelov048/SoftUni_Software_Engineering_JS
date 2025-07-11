@@ -23,5 +23,3 @@ export const editFurnitureRequester = (furnitureId, data) =>
   put(`/furniture/edit/${furnitureId}`, data);
 
 export const getBasketItems = (data) => post("/furniture/basket", data);
-
-export const orderSend = (data) => post("/furniture/order", data);

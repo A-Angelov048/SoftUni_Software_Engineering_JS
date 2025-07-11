@@ -1,9 +1,6 @@
-require("dotenv").config();
-const orderid = require("order-id");
 const Furniture = require("../models/Furniture");
 const User = require("../models/User");
 const Reviews = require("../models/Reviews");
-const Order = require("../models/Order");
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
@@ -127,17 +124,3 @@ exports.getBasketItems = (data) =>
     { _id: { $in: data } },
     "_id name imageUrl price listUserLikes"
   );
-
-exports.createOrder = async (body, userId) => {
-  const orderIdClient = orderid(process.env.SECRET).generate();
-
-  try {
-    const result = await Order.create({ ...body, orderIdClient });
-
-    await User.findByIdAndUpdate(userId, { $push: { orders: result._id } });
-
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};

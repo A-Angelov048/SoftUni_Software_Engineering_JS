@@ -84,7 +84,7 @@ router.get("/profile/:id", async (req, res) => {
       createdAt: user.createdAt,
       lastLogin: user.lastLogin,
       imageProfile: user.imageProfile,
-      furniture: user.furniture,
+      orders: user.orders,
       role: user.role,
     };
 

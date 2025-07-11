@@ -9,7 +9,6 @@ const {
   searchFurniture,
   wishlistFurniture,
   getBasketItems,
-  createOrder,
 } = require("../services/furnitureService");
 
 router.get("/latest", async (req, res) => {
@@ -127,18 +126,6 @@ router.post("/basket", async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err.errors);
-  }
-});
-
-router.post("/order", async (req, res) => {
-  const body = req.body;
-  const userId = req.user?._id;
-
-  try {
-    const result = await createOrder(body, userId);
-    res.status(201).json({ orderId: result.orderIdClient, ok: true });
-  } catch (err) {
-    console.log(err.message);
   }
 });
 

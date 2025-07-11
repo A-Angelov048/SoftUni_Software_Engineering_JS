@@ -12,7 +12,7 @@ import Orders from "./orders/Orders";
 export default function Profile() {
   const { role } = useContext(AuthContext);
   const { profileId } = useParams();
-  const [user, stateFurniture, handleClick] = useGetProfile(profileId);
+  const [user, stateItems, handleClick] = useGetProfile(profileId);
 
   return (
     <section className="profile-section layout-padding">
@@ -53,9 +53,9 @@ export default function Profile() {
             <div className="nav-profile">
               <ul>
                 <li
-                  onClick={() => handleClick(user.furniture, "my-furniture")}
+                  onClick={() => handleClick(user.orders, "orders")}
                   className={
-                    stateFurniture.currentClick === "my-furniture"
+                    stateItems.currentClick === "orders"
                       ? "link active"
                       : "link"
                   }
@@ -66,7 +66,7 @@ export default function Profile() {
                 <li
                   onClick={() => handleClick(user.wishlist, "wishlist")}
                   className={
-                    stateFurniture.currentClick === "wishlist"
+                    stateItems.currentClick === "wishlist"
                       ? "link active"
                       : "link"
                   }
@@ -77,7 +77,7 @@ export default function Profile() {
                 <li
                   onClick={() => handleClick([], "settings")}
                   className={
-                    stateFurniture.currentClick === "settings"
+                    stateItems.currentClick === "settings"
                       ? "link active"
                       : "link"
                   }
@@ -87,20 +87,23 @@ export default function Profile() {
               </ul>
             </div>
 
-            {stateFurniture.furniture.length > 0 && (
-              <div className="brand-container layout-padding2">
-                {stateFurniture.furniture.map((current, index) => (
-                  <BrandContainer
-                    furniture={current}
-                    curIndex={index}
-                    key={current._id}
-                  />
-                ))}
-              </div>
-            )}
+            {stateItems.currentClick === "wishlist" &&
+              stateItems.items.length > 0 && (
+                <div className="brand-container layout-padding2">
+                  {stateItems.items.map((current, index) => (
+                    <BrandContainer
+                      furniture={current}
+                      curIndex={index}
+                      key={current._id}
+                    />
+                  ))}
+                </div>
+              )}
 
-            {stateFurniture.currentClick === "settings" && <Settings />}
-            <Orders />
+            {stateItems.currentClick === "orders" &&
+              stateItems.items.length > 0 && <Orders />}
+
+            {stateItems.currentClick === "settings" && <Settings />}
           </div>
         </div>
       </div>

@@ -1,28 +1,31 @@
 import { Link } from "react-router-dom";
 import styles from "../Orders.module.css";
 import StatusOrder from "../statusOrder/StatusOrder";
+import { convertDate2 } from "../../../../utils/convertDate";
 
 export default function CurrentOrder({ order }) {
   return (
     <div className={styles.order}>
       <div>
         <strong>Order ID:</strong>
-        <span>#FWB127364372</span>
+        <span>{order.orderIdClient}</span>
       </div>
       <div>
         <strong>Date:</strong>
-        <span>20.12.2023</span>
+        <span>{convertDate2(order.createdAt)}</span>
       </div>
       <div>
         <strong>Price:</strong>
-        <span>$4,756</span>
+        <span>{`$${order.furniturePrice}`}</span>
       </div>
       <div>
         <strong>Status:</strong>
-        <StatusOrder status={"confirmed"} />
+        <StatusOrder status={order.status.toLowerCase()} />
       </div>
       <div>
-        <Link className={styles.link}>View details</Link>
+        <Link to={`/details-order/${order._id}`} className={styles.link}>
+          View details
+        </Link>
       </div>
     </div>
   );

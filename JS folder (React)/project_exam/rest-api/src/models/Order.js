@@ -37,6 +37,12 @@ const orderSchema = new mongoose.Schema({
   createdAt: Date,
 });
 
+orderSchema.pre("save", function () {
+  if (!this.createdAt) {
+    this.createdAt = Date.now();
+  }
+});
+
 const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;

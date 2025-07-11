@@ -89,9 +89,10 @@ exports.editProfile = async (userId, body) => {
 };
 
 exports.getCurrentUser = (userId) =>
-  User.findById(userId)
-    .populate({ path: "furniture", select: "name price imageUrl" })
-    .populate({ path: "wishlist", select: "name price imageUrl" });
+  User.findById(userId).populate({
+    path: "wishlist",
+    select: "name price imageUrl",
+  });
 
 exports.createDeliveryInfo = async (body, userId) => {
   const result = await DeliveryInfo.findOne({ owner: userId });

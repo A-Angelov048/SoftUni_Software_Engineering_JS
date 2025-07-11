@@ -88,8 +88,8 @@ export function useGetProfile(profileId) {
   const userContext = useContext(AuthContext);
   const errorHandler = useErrorHandler();
   const [user, setUser] = useState({});
-  const [stateFurniture, setStateFurniture] = useState({
-    furniture: [],
+  const [stateItems, setStateItems] = useState({
+    items: [],
     currentClick: "",
   });
 
@@ -110,11 +110,11 @@ export function useGetProfile(profileId) {
     };
   }, [userContext]);
 
-  const handleClick = (furniture, currentClick) => {
-    setStateFurniture({ furniture, currentClick });
+  const handleClick = (items, currentClick) => {
+    setStateItems({ items, currentClick });
   };
 
-  return [user, stateFurniture, handleClick];
+  return [user, stateItems, handleClick];
 }
 
 export function useGetDeliveryInfo() {
