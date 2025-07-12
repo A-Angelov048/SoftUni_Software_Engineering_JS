@@ -1,6 +1,13 @@
-import { useRef, useState, useEffect } from "react";
-import { getAllOrders } from "../api-service/ordersService";
+import { useRef, useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  getAllOrders,
+  getOrder,
+  sendEditOrder,
+} from "../api-service/ordersService";
 import { useErrorHandler } from "./useErrorHandler";
+import { ErrorContext } from "../context/ErrorContext";
+import { AuthContext } from "../context/AuthContext";
 
 export function useAllOrders(statePage, filters) {
   const errorHandler = useErrorHandler();
@@ -43,4 +50,52 @@ export function useAllOrders(statePage, filters) {
   }, [statePage, filters]);
 
   return [orders, lengthDocuments.current, notFound];
+}
+
+export function useGetOrder(orderId) {
+  const location = useLocation();
+  const errorHandler = useErrorHandler();
+  const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    (async () => {
+      try {
+        const response = await getOrder(abortController, orderId);
+        setOrder(response);
+      } catch (error) {
+        errorHandler(error);
+      }
+    })();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [location]);
+
+  return order;
+}
+
+export function useEditOrder(orderId) {
+  const errorHandler = useErrorHandler();
+  const navigate = useNavigate();
+  const { handleMessage } = useContext(ErrorContext);
+  const { userId } = useContext(AuthContext);
+
+  const editOrder = async (data) => {
+    if (!userId) {
+      handleMessage("Please login first.", false);
+      return;
+    }
+
+    try {
+      await sendEditOrder(orderId, data);
+      navigate(`/details-order/${orderId}`);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
+  return editOrder;
 }

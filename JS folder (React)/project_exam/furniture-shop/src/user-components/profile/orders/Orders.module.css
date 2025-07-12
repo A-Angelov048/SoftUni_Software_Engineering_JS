@@ -10,39 +10,16 @@
   border-bottom: 1px solid #334155;
 }
 
-.order strong {
+strong {
   display: block;
   margin-bottom: 5px;
   color: #94a3b8;
   font-size: 14px;
 }
 
-.order span {
+span {
   font-size: 16px;
   font-weight: bold;
-}
-
-.order .status {
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.pre-order {
-  background-color: #1e3a8a;
-  color: #93c5fd;
-}
-
-.in-transit {
-  background-color: #713f12;
-  color: #fde047;
-}
-
-.confirmed {
-  background-color: #14532d;
-  color: #86efac;
 }
 
 .link {

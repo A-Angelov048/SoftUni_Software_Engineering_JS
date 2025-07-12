@@ -1,0 +1,22 @@
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.pre-order {
+  background-color: #1e3a8a;
+  color: #93c5fd;
+}
+
+.in-transit {
+  background-color: #713f12;
+  color: #fde047;
+}
+
+.confirmed {
+  background-color: #14532d;
+  color: #86efac;
+}

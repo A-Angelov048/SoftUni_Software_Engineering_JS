@@ -16,7 +16,9 @@ export default function CurrentOrder({ order }) {
       </div>
       <div>
         <strong>Price:</strong>
-        <span>{`$${order.furniturePrice}`}</span>
+        <span>{`$${(order.furniturePrice * 1.2 + order.shippingPrice).toFixed(
+          2
+        )}`}</span>
       </div>
       <div>
         <strong>Status:</strong>

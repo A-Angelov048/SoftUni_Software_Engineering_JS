@@ -1,5 +1,10 @@
 const router = require("express").Router();
-const { createOrder, getAllOrders } = require("../services/ordersService");
+const {
+  createOrder,
+  getAllOrders,
+  getOrder,
+  editOrder,
+} = require("../services/ordersService");
 
 router.get("/", async (req, res) => {
   const { date, deliveryStatus, page, limit } = req.query;
@@ -68,6 +73,20 @@ router.get("/:id", async (req, res) => {
   const orderId = req.params.id;
 
   try {
+    const result = await getOrder(orderId);
+    res.json(result);
+  } catch (err) {
+    console.log(err.errors);
+  }
+});
+
+router.put("/edit/:id", async (req, res) => {
+  const orderId = req.params.id;
+  const body = req.body;
+
+  try {
+    await editOrder(orderId, body);
+    res.json({ ok: true, message: "Order successful edited" });
   } catch (err) {
     console.log(err.errors);
   }

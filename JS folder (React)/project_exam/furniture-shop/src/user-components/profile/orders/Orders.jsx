@@ -1,12 +1,12 @@
-import { useHandlePage } from "../../../hooks/useHandlePage";
+import styles from "./Orders.module.css";
 import Pagination from "../../../shared-components/pagination/Pagination";
 import Spinner from "../../../shared-components/spinner/Spinner";
-import { convertDocLengthToArr } from "../../../utils/convertDocLengthToArr";
 import CurrentOrder from "./currentOrder/CurrentOrder";
-import styles from "./Orders.module.css";
+import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
+import { convertDocLengthToArr } from "../../../utils/convertDocLengthToArr";
+import { useHandlePage } from "../../../hooks/useHandlePage";
 import { useAllOrders } from "../../../hooks/useOrderResponse";
 import { useState } from "react";
-import ErrorMessage from "../../../shared-components/error-message/ErrorMessage";
 
 export default function Orders() {
   const [filters, setFilters] = useState({

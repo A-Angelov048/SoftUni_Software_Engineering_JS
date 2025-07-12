@@ -1,9 +1,11 @@
 import "./CompleteOrder.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CheckoutItems from "../checkoutItems/CheckoutItems";
 import SubmitButton from "../../../shared-components/submit-button/SubmitButton";
 import { orderSend } from "../../../api-service/ordersService";
+import { BasketContext } from "../../../context/BasketContext";
+import { mergeArrays } from "../../../utils/mergeArrays";
 
 export default function CompleteOrder({
   deliveryInfo,
@@ -11,7 +13,10 @@ export default function CompleteOrder({
   changeInfoDeliver,
 }) {
   const { state } = useLocation();
+  const { basketItems } = useContext(BasketContext);
   const [toggleArrow, setToggleArrow] = useState(false);
+
+  const finalBasketItems = mergeArrays(state.furniture, basketItems);
 
   const placeOrder = async () => {
     try {
@@ -19,7 +24,9 @@ export default function CompleteOrder({
         deliveryInfo: deliveryInfo,
         status: "pre-order",
         ...paymentInfo,
-        ...state,
+        furniture: finalBasketItems,
+        furniturePrice: state.furniturePrice,
+        shippingPrice: state.shippingPrice,
       });
       console.log(result);
 
@@ -72,7 +79,7 @@ export default function CompleteOrder({
                 </div>
               </header>
 
-              {state.furniture.map((current, index) => (
+              {finalBasketItems.map((current, index) => (
                 <CheckoutItems
                   currentItem={current}
                   index={index}

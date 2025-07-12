@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
 import styles from "./DetailsOrder.module.css";
+import { Link, useParams } from "react-router-dom";
+import { useEditOrder, useGetOrder } from "../../../../hooks/useOrderResponse";
+import { convertDate2 } from "../../../../utils/convertDate";
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext";
+import { ErrorContext } from "../../../../context/ErrorContext";
+import StatusOrder from "../statusOrder/StatusOrder";
+import ErrorMessage from "../../../../shared-components/error-message/ErrorMessage";
+
 export default function DetailsOrder() {
+  const { role } = useContext(AuthContext);
+  const { message } = useContext(ErrorContext);
+  const { orderId } = useParams();
+  const order = useGetOrder(orderId);
+  const editOrder = useEditOrder(orderId);
+
   return (
     <section className="layout-padding">
       <div className="container">
@@ -12,50 +26,77 @@ export default function DetailsOrder() {
           <p>Check the status of recent orders and download invoices.</p>
         </div>
 
+        {message.text !== "" && <ErrorMessage newMessage={message} />}
+
         <div className="layout-padding2">
           <div className={styles.summary}>
             <div>
               <span>Date placed</span>
-              <span>January 22, 2021</span>
+              <span>{convertDate2(order.createdAt)}</span>
             </div>
             <div>
               <span>Order number</span>
-              <span>WU88191111</span>
+              <span>{order.orderIdClient}</span>
             </div>
             <div>
               <span>Total amount</span>
-              <span>$238.00</span>
+              <span>{`$${(
+                order.furniturePrice * 1.2 +
+                order.shippingPrice
+              ).toFixed(2)}`}</span>
             </div>
-            <button className={styles.invoice}>View Invoice</button>
+            {role === "Admin" && order.status === "pre-order" && (
+              <button
+                onClick={() => editOrder({ status: "in-transit" })}
+                className={styles.btn}
+              >
+                Send order
+              </button>
+            )}
+            {role === "User" && order.status === "in-transit" && (
+              <button
+                onClick={() =>
+                  editOrder({ status: "confirmed", delivered: Date.now() })
+                }
+                className={styles.btn}
+              >
+                Confirm order
+              </button>
+            )}
+            {role === "User" && order.status === "confirmed" && (
+              <button className={styles.btn}>View Invoice</button>
+            )}
           </div>
 
           <table>
             <thead className={styles.hide}>
               <tr>
-                <th>Product</th>
+                <th className={styles.left}>Product</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Status</th>
                 <th>Info</th>
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3].map((current) => (
-                <tr key={current}>
-                  <td>
+              {order.furniture?.map((current) => (
+                <tr key={current._id}>
+                  <td className={styles.left}>
                     <div className={styles["product-info"]}>
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/027/572/532/original/lamp-lamp-table-lamp-transparent-background-ai-generative-free-png.png"
-                        alt="Product"
-                      />
-                      Machined Pen and Pencil Set
+                      <img src={current.imageUrl[0]} alt="Product" />
+                      {current.name}
                     </div>
                   </td>
-                  <td>$70.00</td>
+                  <td>{`$${current.price}`}</td>
+                  <td>{current.quantity}</td>
                   <td className={styles["delivery-date"]}>
-                    Delivered Jan 25, 2021
+                    <StatusOrder status={order.status.toLowerCase()} />
                   </td>
                   <td>
-                    <Link className={styles["view-link"]}>
+                    <Link
+                      to={`/details-furniture/${current._id}`}
+                      className={styles["view-link"]}
+                    >
                       View <span className={styles.hide}>Product</span>
                     </Link>
                   </td>
@@ -63,6 +104,12 @@ export default function DetailsOrder() {
               ))}
             </tbody>
           </table>
+          <div className={styles.delivered}>
+            <span>Total amount includes furniture, shipping and vat.</span>
+            {order.delivered && (
+              <span>{`Delivered ${convertDate2(order.delivered)}`}</span>
+            )}
+          </div>
         </div>
       </div>
     </section>

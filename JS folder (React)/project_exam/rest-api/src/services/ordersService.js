@@ -43,3 +43,8 @@ exports.createOrder = async (body, userId) => {
     throw error;
   }
 };
+
+exports.getOrder = (orderId) => Order.findById(orderId);
+
+exports.editOrder = (furnitureId, body) =>
+  Order.findByIdAndUpdate(furnitureId, body, { runValidators: true });

@@ -18,7 +18,7 @@ function basketReducer(state, action) {
     case "INCREMENT_QUANTITY":
       return state.map((item) =>
         item.id === action.payload
-          ? item.quantity + 1 >= 10
+          ? item.quantity + 1 > 10
             ? item
             : { ...item, quantity: item.quantity + 1 }
           : item
@@ -27,7 +27,7 @@ function basketReducer(state, action) {
     case "DECREMENT_QUANTITY":
       return state.map((item) =>
         item.id === action.payload
-          ? item.quantity - 1 <= 1
+          ? item.quantity - 1 < 1
             ? item
             : { ...item, quantity: item.quantity - 1 }
           : item

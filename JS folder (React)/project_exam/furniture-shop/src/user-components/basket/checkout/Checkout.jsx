@@ -60,7 +60,7 @@ export default function Checkout() {
                   <p>{deliveryInfo.phone}</p>
                 </div>
               ) : (
-                <DeliveryForm deliveryInfo={deliveryInfo} />
+                loading && <DeliveryForm deliveryInfo={deliveryInfo} />
               )}
             </div>
 

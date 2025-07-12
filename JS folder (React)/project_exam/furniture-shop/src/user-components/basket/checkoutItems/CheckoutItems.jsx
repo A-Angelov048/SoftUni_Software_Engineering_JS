@@ -1,10 +1,6 @@
 import "./CheckoutItems.css";
-import { Fragment, useContext } from "react";
-import { BasketContext } from "../../../context/BasketContext";
 
 export default function CheckoutItems({ currentItem, index }) {
-  const { basketItems } = useContext(BasketContext);
-
   return (
     <div className="basket-products">
       <img
@@ -14,25 +10,9 @@ export default function CheckoutItems({ currentItem, index }) {
       />
       <div className="info-product">
         <p className="name">{currentItem.name}</p>
-        <p>
-          {basketItems.map(
-            (x) =>
-              x.id === currentItem._id && (
-                <Fragment key={x.id}>{`Quantity: ${x.quantity}`}</Fragment>
-              )
-          )}
-        </p>
+        <p>{`Quantity: ${currentItem.quantity}`}</p>
       </div>
-      <span>
-        {basketItems.map(
-          (x) =>
-            x.id === currentItem._id && (
-              <Fragment key={x.id}>{`$${(x.quantity * x.price).toFixed(
-                2
-              )}`}</Fragment>
-            )
-        )}
-      </span>
+      <span>{`$${(currentItem.quantity * currentItem.price).toFixed(2)}`}</span>
     </div>
   );
 }
