@@ -15,7 +15,11 @@ export default function Checkout() {
   const [paymentInfo, setPaymentInfo] = useState({ payment: "" });
 
   useEffect(() => {
-    if (message.text !== "" && message.status) {
+    if (
+      message.text !== "" &&
+      message.status &&
+      deliveryInfo.hasOwnProperty("_id")
+    ) {
       setChangeInfoDeliver((oldState) => !oldState);
     }
   }, [message]);
