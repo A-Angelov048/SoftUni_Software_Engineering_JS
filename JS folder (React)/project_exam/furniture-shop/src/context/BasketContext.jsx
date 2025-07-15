@@ -34,11 +34,16 @@ export function BasketProvider(props) {
     }
   };
 
+  const clearBasketState = () => {
+    dispatch({ type: "CLEAR", payload: [] });
+  };
+
   const data = {
     basketItems: basket,
     removeBasketState,
     quantityHandler,
     addToBasket,
+    clearBasketState,
   };
 
   return (

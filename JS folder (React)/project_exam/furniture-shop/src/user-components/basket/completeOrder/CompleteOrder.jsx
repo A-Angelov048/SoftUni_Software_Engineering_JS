@@ -1,10 +1,11 @@
 import "./CompleteOrder.css";
 import { useContext, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CheckoutItems from "../checkoutItems/CheckoutItems";
 import SubmitButton from "../../../shared-components/submit-button/SubmitButton";
 import { orderSend } from "../../../api-service/ordersService";
 import { BasketContext } from "../../../context/BasketContext";
+import { useErrorHandler } from "../../../hooks/useErrorHandler";
 import { mergeArrays } from "../../../utils/mergeArrays";
 
 export default function CompleteOrder({
@@ -12,8 +13,10 @@ export default function CompleteOrder({
   paymentInfo,
   changeInfoDeliver,
 }) {
+  const errorHandler = useErrorHandler();
+  const navigate = useNavigate();
   const { state } = useLocation();
-  const { basketItems } = useContext(BasketContext);
+  const { basketItems, clearBasketState } = useContext(BasketContext);
   const [toggleArrow, setToggleArrow] = useState(false);
 
   const finalBasketItems = mergeArrays(state.furniture, basketItems);
@@ -28,11 +31,16 @@ export default function CompleteOrder({
         furniturePrice: state.furniturePrice,
         shippingPrice: state.shippingPrice,
       });
-      console.log(result);
-
-      // navigate to modal or something? await for the result from the server?
+      clearBasketState();
+      navigate("/placed-order", {
+        state: {
+          deliveryInfo: { ...paymentInfo, ...deliveryInfo },
+          orderId: result.orderId,
+        },
+        replace: true,
+      });
     } catch (error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   };
 

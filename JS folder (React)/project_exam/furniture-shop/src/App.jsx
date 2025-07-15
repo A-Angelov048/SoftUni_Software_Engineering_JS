@@ -24,6 +24,9 @@ import AdminGuard from "./shared-components/guards/AdminGuard";
 import RestrictAdminGuard from "./shared-components/guards/RestrictAdminGuard";
 import Checkout from "./user-components/basket/checkout/Checkout";
 import DetailsOrder from "./user-components/profile/orders/detailsOrder/DetailsOrder";
+import PlacedOrder from "./user-components/basket/placedOrder/PlacedOrder";
+import Test from "./shared-components/guards/OrderGuard";
+import OrderGuard from "./shared-components/guards/OrderGuard";
 
 function App() {
   return (
@@ -71,6 +74,9 @@ function App() {
                 <Route path="/basket" element={<Basket />} />
                 <Route element={<GuestGuard />}>
                   <Route path="/checkout" element={<Checkout />} />
+                </Route>
+                <Route element={<OrderGuard />}>
+                  <Route path="/placed-order" element={<PlacedOrder />} />
                 </Route>
               </Route>
 
