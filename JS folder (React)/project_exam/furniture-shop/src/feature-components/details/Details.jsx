@@ -314,6 +314,9 @@ export default function Details() {
                 </div>
               </div>
             </div>
+            <div className="info-price">
+              <span>The price do NOT includes VAT tax.</span>
+            </div>
           </div>
         </div>
       </section>
