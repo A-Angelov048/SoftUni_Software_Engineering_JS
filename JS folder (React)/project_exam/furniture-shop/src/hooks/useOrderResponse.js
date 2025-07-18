@@ -3,11 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   getAllOrders,
   getOrder,
+  orderSend,
   sendEditOrder,
 } from "../api-service/ordersService";
 import { useErrorHandler } from "./useErrorHandler";
 import { ErrorContext } from "../context/ErrorContext";
 import { AuthContext } from "../context/AuthContext";
+import { BasketContext } from "../context/BasketContext";
 
 export function useAllOrders(statePage, filters) {
   const errorHandler = useErrorHandler();
@@ -98,4 +100,29 @@ export function useEditOrder(orderId) {
   };
 
   return editOrder;
+}
+
+export function usePlaceOrder(order) {
+  const navigate = useNavigate();
+  const { clearBasketState } = useContext(BasketContext);
+  const errorHandler = useErrorHandler();
+
+  const placeOrder = async () => {
+    try {
+      const result = await orderSend(order);
+      clearBasketState();
+      navigate("/placed-order", {
+        state: {
+          deliveryInfo: order.deliveryInfo,
+          paymentInfo: order.payment,
+          orderId: result.orderId,
+        },
+        replace: true,
+      });
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
+  return placeOrder;
 }

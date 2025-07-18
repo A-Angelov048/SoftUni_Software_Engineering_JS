@@ -7,42 +7,29 @@ import { orderSend } from "../../../api-service/ordersService";
 import { BasketContext } from "../../../context/BasketContext";
 import { useErrorHandler } from "../../../hooks/useErrorHandler";
 import { mergeArrays } from "../../../utils/mergeArrays";
+import { usePlaceOrder } from "../../../hooks/useOrderResponse";
 
 export default function CompleteOrder({
   deliveryInfo,
   paymentInfo,
   changeInfoDeliver,
 }) {
-  const errorHandler = useErrorHandler();
-  const navigate = useNavigate();
   const { state } = useLocation();
-  const { basketItems, clearBasketState } = useContext(BasketContext);
-  const [toggleArrow, setToggleArrow] = useState(false);
+  const { basketItems } = useContext(BasketContext);
 
   const finalBasketItems = mergeArrays(state.furniture, basketItems);
 
-  const placeOrder = async () => {
-    try {
-      const result = await orderSend({
-        deliveryInfo: deliveryInfo,
-        status: "pre-order",
-        ...paymentInfo,
-        furniture: finalBasketItems,
-        furniturePrice: state.furniturePrice,
-        shippingPrice: state.shippingPrice,
-      });
-      clearBasketState();
-      navigate("/placed-order", {
-        state: {
-          deliveryInfo: { ...paymentInfo, ...deliveryInfo },
-          orderId: result.orderId,
-        },
-        replace: true,
-      });
-    } catch (error) {
-      errorHandler(error);
-    }
+  const order = {
+    deliveryInfo: deliveryInfo,
+    status: "pre-order",
+    ...paymentInfo,
+    furniture: finalBasketItems,
+    furniturePrice: state.furniturePrice,
+    shippingPrice: state.shippingPrice,
   };
+
+  const [toggleArrow, setToggleArrow] = useState(false);
+  const placeOrder = usePlaceOrder(order);
 
   return (
     <div className="order">

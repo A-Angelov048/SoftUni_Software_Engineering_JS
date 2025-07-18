@@ -105,7 +105,10 @@ export default function DetailsOrder() {
             </tbody>
           </table>
           <div className={styles.delivered}>
-            <span>Total amount includes furniture, shipping and vat.</span>
+            <div className={styles.info}>
+              <span>Total amount includes furniture, shipping and vat.</span>
+              <span>Order payment - with {order.payment}</span>
+            </div>
             {order.delivered && (
               <span>{`Delivered ${convertDate2(order.delivered)}`}</span>
             )}

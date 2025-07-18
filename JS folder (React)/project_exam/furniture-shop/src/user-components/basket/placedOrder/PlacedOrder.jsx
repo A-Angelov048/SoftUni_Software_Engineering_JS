@@ -50,7 +50,7 @@ export default function PlacedOrder() {
             </div>
             <div className={styles.detailRow}>
               <span className={styles.label}>Payment Method</span>
-              <span className={styles.value}>{state.deliveryInfo.payment}</span>
+              <span className={styles.value}>{state.paymentInfo}</span>
             </div>
           </section>
 
