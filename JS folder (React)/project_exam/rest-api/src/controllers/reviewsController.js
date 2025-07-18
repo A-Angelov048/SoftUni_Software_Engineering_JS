@@ -12,9 +12,9 @@ router.post("/save-review/:id", async (req, res) => {
       furnitureId
     );
 
-    res.json(result);
+    res.status(201).json(result);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 

@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
       sameSite: "none",
       secure: true,
     });
-    res.json(user);
+    res.status(201).json(user);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
@@ -94,7 +94,7 @@ router.get("/profile/:id", async (req, res) => {
 
     res.json(sendUser);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -106,7 +106,7 @@ router.post("/delivery-info", async (req, res) => {
     await createDeliveryInfo(body, userId);
     res.json({ ok: true });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -125,7 +125,7 @@ router.get("/delivery-info", async (req, res) => {
       data: result,
     });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 

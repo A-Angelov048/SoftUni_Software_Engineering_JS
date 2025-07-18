@@ -25,7 +25,6 @@ import RestrictAdminGuard from "./shared-components/guards/RestrictAdminGuard";
 import Checkout from "./user-components/basket/checkout/Checkout";
 import DetailsOrder from "./user-components/profile/orders/detailsOrder/DetailsOrder";
 import PlacedOrder from "./user-components/basket/placedOrder/PlacedOrder";
-import Test from "./shared-components/guards/OrderGuard";
 import OrderGuard from "./shared-components/guards/OrderGuard";
 
 function App() {

@@ -49,11 +49,7 @@ router.get("/", async (req, res) => {
       data: order,
     });
   } catch (err) {
-    if (err.message === "Orders not found.") {
-      res.status(200).json({ message: err.message });
-    } else {
-      res.status(404).json({ message: err.message });
-    }
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -65,7 +61,7 @@ router.post("/", async (req, res) => {
     const result = await createOrder(body, userId);
     res.status(201).json({ orderId: result.orderIdClient, ok: true });
   } catch (err) {
-    console.log(err.message);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -76,7 +72,7 @@ router.get("/:id", async (req, res) => {
     const result = await getOrder(orderId);
     res.json(result);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -88,7 +84,7 @@ router.put("/edit/:id", async (req, res) => {
     await editOrder(orderId, body);
     res.json({ ok: true, message: "Order successful edited" });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 

@@ -16,7 +16,7 @@ router.get("/latest", async (req, res) => {
     const data = await getLatest();
     res.json(data);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -42,9 +42,9 @@ router.post("/", async (req, res) => {
 
   try {
     await createFurniture({ ...body, owner: userId }, userId);
-    res.json({ ok: true });
+    res.status(201).json({ ok: true });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -55,7 +55,7 @@ router.get("/:id", async (req, res) => {
     const furniture = await getOne(furnitureId);
     res.json(furniture);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -67,7 +67,7 @@ router.put("/edit/:id", async (req, res) => {
     await editFurniture(furnitureId, body);
     res.json({ ok: true });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -79,7 +79,7 @@ router.delete("/delete/:id", async (req, res) => {
     await deleteFurniture(furnitureId, userId);
     res.json({ ok: true });
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -102,7 +102,7 @@ router.get("/wishlist/:id", async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -113,7 +113,7 @@ router.post("/search", async (req, res) => {
     const data = await searchFurniture(body);
     res.json(data);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
@@ -125,7 +125,7 @@ router.post("/basket", async (req, res) => {
 
     res.json(data);
   } catch (err) {
-    console.log(err.errors);
+    res.status(404).json({ message: err.message });
   }
 });
 
