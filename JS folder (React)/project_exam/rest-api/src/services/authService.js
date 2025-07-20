@@ -89,7 +89,7 @@ exports.editProfile = async (userId, body) => {
 };
 
 exports.getCurrentUser = (userId) =>
-  User.findById(userId).populate({
+  User.findById(userId).select("-password -deliveryInfo -orders").populate({
     path: "wishlist",
     select: "name price imageUrl",
   });

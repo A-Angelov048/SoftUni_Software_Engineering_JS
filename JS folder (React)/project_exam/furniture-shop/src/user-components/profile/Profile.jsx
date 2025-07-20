@@ -1,18 +1,39 @@
 import "./Profile.css";
 
 import { convertDate } from "../../utils/convertDate";
-import { useParams } from "react-router-dom";
 import { useGetProfile } from "../../hooks/useUserResponse";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
 import Settings from "./settings/Settings";
 import Orders from "./orders/Orders";
+import { useSearchParams } from "react-router-dom";
 
 export default function Profile() {
+  const [searchParams] = useSearchParams();
+  const flag = useRef(true);
   const { role } = useContext(AuthContext);
-  const { profileId } = useParams();
-  const [user, stateItems, handleClick] = useGetProfile(profileId);
+  const [user, stateItems, handleClick] = useGetProfile();
+
+  useEffect(() => {
+    if (flag && stateItems.currentClick === "") {
+      flag.current = false;
+      if (!!history.state.currentClick) {
+        handleClick(history.state.items, history.state.currentClick);
+      }
+    }
+
+    if (
+      stateItems.currentClick !== "" &&
+      stateItems.currentClick !== "orders"
+    ) {
+      window.history.replaceState(
+        stateItems,
+        "",
+        `/profile/${stateItems.currentClick}`
+      );
+    }
+  }, [stateItems.currentClick]);
 
   return (
     <section className="profile-section layout-padding">
@@ -53,7 +74,7 @@ export default function Profile() {
             <div className="nav-profile">
               <ul>
                 <li
-                  onClick={() => handleClick(user.orders, "orders")}
+                  onClick={() => handleClick([], "orders")}
                   className={
                     stateItems.currentClick === "orders"
                       ? "link active"
@@ -100,8 +121,13 @@ export default function Profile() {
                 </div>
               )}
 
-            {stateItems.currentClick === "orders" &&
-              stateItems.items.length > 0 && <Orders />}
+            {(stateItems.currentClick === "orders" || flag.current) && (
+              <Orders
+                page={Number(searchParams.get("page")) || 1}
+                deliveryStatus={searchParams.get("deliveryStatus")}
+                date={searchParams.get("date")}
+              />
+            )}
 
             {stateItems.currentClick === "settings" && <Settings />}
           </div>

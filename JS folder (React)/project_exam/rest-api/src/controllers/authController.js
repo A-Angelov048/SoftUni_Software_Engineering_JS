@@ -70,29 +70,12 @@ router.post("/edit-profile", async (req, res) => {
   }
 });
 
-router.get("/profile/:id", async (req, res) => {
-  const userId = req.params.id;
-  const flag = req.params.id === req.user?._id;
+router.get("/profile", async (req, res) => {
+  const userId = req.user?._id;
 
   try {
     const user = await getCurrentUser(userId);
-
-    const sendUser = {
-      _id: user._id,
-      username: user.username,
-      location: user.location,
-      createdAt: user.createdAt,
-      lastLogin: user.lastLogin,
-      imageProfile: user.imageProfile,
-      orders: user.orders,
-      role: user.role,
-    };
-
-    if (flag) {
-      sendUser.wishlist = user.wishlist;
-    }
-
-    res.json(sendUser);
+    res.json(user);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

@@ -50,7 +50,9 @@ function App() {
               </Route>
 
               <Route element={<GuestGuard />}>
-                <Route path="/profile/:profileId" element={<Profile />} />
+                <Route path="/profile/orders" element={<Profile />} />
+                <Route path="/profile/wishlist" element={<Profile />} />
+                <Route path="/profile/settings" element={<Profile />} />
                 <Route
                   path="/details-order/:orderId"
                   element={<DetailsOrder />}

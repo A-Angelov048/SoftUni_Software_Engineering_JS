@@ -61,7 +61,7 @@ export default function Header() {
               </div>
 
               <div>
-                <Link className="user" to={`/profile/${userId}`}>
+                <Link className="user" to={"/profile/orders"}>
                   <i className="bx bxs-user"></i>
                 </Link>
               </div>

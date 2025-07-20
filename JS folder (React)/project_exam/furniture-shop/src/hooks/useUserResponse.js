@@ -84,7 +84,7 @@ export function useLogoutUser() {
   return logoutUser;
 }
 
-export function useGetProfile(profileId) {
+export function useGetProfile() {
   const userContext = useContext(AuthContext);
   const errorHandler = useErrorHandler();
   const [user, setUser] = useState({});
@@ -98,7 +98,7 @@ export function useGetProfile(profileId) {
 
     (async () => {
       try {
-        const response = await getProfile(profileId, abortController);
+        const response = await getProfile(abortController);
         setUser(response);
       } catch (error) {
         errorHandler(error);
