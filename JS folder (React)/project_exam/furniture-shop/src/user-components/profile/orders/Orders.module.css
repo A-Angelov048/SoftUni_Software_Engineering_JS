@@ -59,6 +59,14 @@ select {
   border-radius: 6px;
 }
 
+.zeroOrders {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #22d378;
+  margin-top: 40px;
+}
+
 @media (max-width: 767px) {
   .order {
     grid-template-columns: repeat(2, 1fr);

@@ -7,7 +7,7 @@ import { useHandlePage } from "../../hooks/useHandlePage";
 import Pagination from "../../shared-components/pagination/Pagination";
 
 export default function Shop() {
-  const [statePage, handlePageChange] = useHandlePage();
+  const [statePage, handlePageChange] = useHandlePage(1);
   const [furniture, lengthDocuments] = useAllFurniture(statePage);
   const lengthPages = convertDocLengthToArr(lengthDocuments, 8);
 

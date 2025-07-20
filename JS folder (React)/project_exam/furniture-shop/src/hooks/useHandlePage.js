@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export function useHandlePage() {
-  const [statePage, setPage] = useState(1);
+export function useHandlePage(page) {
+  const [statePage, setPage] = useState(page);
 
   const handlePageChange = (pageAction) => {
     switch (pageAction) {

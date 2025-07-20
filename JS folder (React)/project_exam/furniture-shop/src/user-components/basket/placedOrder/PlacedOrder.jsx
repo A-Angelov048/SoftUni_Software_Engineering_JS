@@ -1,12 +1,9 @@
 import styles from "./PlacedOrder.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../../context/AuthContext";
 import { convertDate2 } from "../../../utils/convertDate";
 
 export default function PlacedOrder() {
   const { state } = useLocation();
-  const { userId } = useContext(AuthContext);
 
   return (
     <section className="layout-padding">
@@ -56,7 +53,7 @@ export default function PlacedOrder() {
 
           <div className={styles.links}>
             <Link
-              to={`/profile/${userId}`}
+              to={"/profile/orders"}
               className={`${styles.link} ${styles.linkPrimary}`}
             >
               Track your order
