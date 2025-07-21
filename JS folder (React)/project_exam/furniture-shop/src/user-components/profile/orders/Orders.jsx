@@ -6,8 +6,10 @@ import { convertDocLengthToArr } from "../../../utils/convertDocLengthToArr";
 import { useHandlePage } from "../../../hooks/useHandlePage";
 import { useAllOrders } from "../../../hooks/useOrderResponse";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Orders({ page, deliveryStatus, date }) {
+  const location = useLocation();
   const [filters, setFilters] = useState({
     deliveryStatus: deliveryStatus || "",
     date: date || "",
@@ -37,7 +39,7 @@ export default function Orders({ page, deliveryStatus, date }) {
       "",
       `/profile/orders/?page=${statePage}${params ? "&" + params : ""}`
     );
-  }, [orders]);
+  }, [orders, location]);
 
   return (
     <div className="layout-padding2">
