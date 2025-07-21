@@ -5,87 +5,100 @@ const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 
 exports.createUser = async (body) => {
-  const [username, email] = await Promise.all([
-    User.findOne({ username: body.username }),
-    User.findOne({ email: body.email }),
-  ]);
+  try {
+    const [username, email] = await Promise.all([
+      User.findOne({ username: body.username }),
+      User.findOne({ email: body.email }),
+    ]);
 
-  if (!!username) {
-    throw new Error("Username already exists!");
+    if (!!username) {
+      throw new Error("Username already exists!");
+    }
+
+    if (!!email) {
+      throw new Error("Email already exists!");
+    }
+
+    const createdUser = await User.create(body);
+    const userToReturn = await User.findById(createdUser._id).select(
+      "_id username imageProfile location role"
+    );
+
+    const token = await generateToken(userToReturn);
+
+    return [token, userToReturn];
+  } catch (error) {
+    throw error;
   }
-
-  if (!!email) {
-    throw new Error("Email already exists!");
-  }
-
-  const createdUser = await User.create(body);
-
-  const token = generateToken(createdUser);
-
-  return token;
 };
 
 exports.getUser = async (body) => {
-  const user = await User.findOne({ email: body.email });
+  try {
+    const user = await User.findOne({ email: body.email });
 
-  if (!user) {
-    throw new Error("Email or Password invalid.");
+    if (!user) {
+      throw new Error("Email or Password invalid.");
+    }
+
+    const validatePassword = await bcrypt.compare(body.password, user.password);
+
+    if (!validatePassword) {
+      throw new Error("Email or Password invalid.");
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
+      { lastLogin: Date.now() },
+      { returnDocument: "after" }
+    ).select("_id username imageProfile location role");
+
+    const token = await generateToken(updatedUser);
+
+    return [token, updatedUser];
+  } catch (error) {
+    throw error;
   }
-
-  const validatePassword = await bcrypt.compare(body.password, user.password);
-
-  if (!validatePassword) {
-    throw new Error("Email or Password invalid.");
-  }
-
-  const updatedUser = await User.findByIdAndUpdate(
-    user._id,
-    { lastLogin: Date.now() },
-    { returnDocument: "after" }
-  );
-
-  const token = generateToken(updatedUser);
-
-  return token;
-};
-
-exports.sendUser = async (token) => {
-  const user = await jwt.verify(token, process.env.SECRET);
-  return user;
 };
 
 exports.editProfile = async (userId, body) => {
   let newBody = {};
 
-  const [username, user] = await Promise.all([
-    User.findOne({ username: body.username }),
-    User.findById(userId),
-  ]);
+  try {
+    const [username, user] = await Promise.all([
+      User.findOne({ username: body.username }),
+      User.findById(userId),
+    ]);
 
-  if (!!username && username._id.valueOf() !== userId) {
-    throw new Error("Username already exists!");
-  }
-
-  if (body.password !== undefined) {
-    const validatePassword = await bcrypt.compare(body.password, user.password);
-
-    if (!validatePassword) {
-      throw new Error("Wrong password! Please try again.");
+    if (!!username && username._id.valueOf() !== userId) {
+      throw new Error("Username already exists!");
     }
 
-    const hashNewPassword = await bcrypt.hash(body.newPassword, 12);
-    newBody.password = hashNewPassword;
-  } else {
-    newBody = body;
+    if (body.password !== undefined) {
+      const validatePassword = await bcrypt.compare(
+        body.password,
+        user.password
+      );
+
+      if (!validatePassword) {
+        throw new Error("Wrong password! Please try again.");
+      }
+
+      const hashNewPassword = await bcrypt.hash(body.newPassword, 12);
+      newBody.password = hashNewPassword;
+    } else {
+      newBody = body;
+    }
+
+    const result = await User.findByIdAndUpdate(userId, newBody, {
+      returnDocument: "after",
+    }).select("_id username imageProfile location role");
+
+    const token = await generateToken(result);
+
+    return [token, result];
+  } catch (error) {
+    throw error;
   }
-
-  const result = await User.findByIdAndUpdate(userId, newBody, {
-    returnDocument: "after",
-  });
-
-  const token = generateToken(result);
-
-  return token;
 };
 
 exports.getCurrentUser = (userId) =>
@@ -95,27 +108,32 @@ exports.getCurrentUser = (userId) =>
   });
 
 exports.createDeliveryInfo = async (body, userId) => {
-  const result = await DeliveryInfo.findOne({ owner: userId });
   const newDeliveryInfo = [];
 
-  if (!result) {
-    const createDeliveryInfo = await DeliveryInfo.create({
-      ...body,
-      owner: userId,
-    });
-    await User.findByIdAndUpdate(userId, {
-      $push: { deliveryInfo: createDeliveryInfo._id },
-    });
+  try {
+    const result = await DeliveryInfo.findOne({ owner: userId });
 
-    newDeliveryInfo.push(createDeliveryInfo);
-  } else {
-    const updateDeliveryInfo = await DeliveryInfo.findOneAndUpdate(
-      result._id,
-      body,
-      { returnDocument: "after" }
-    );
+    if (!result) {
+      const createDeliveryInfo = await DeliveryInfo.create({
+        ...body,
+        owner: userId,
+      });
+      await User.findByIdAndUpdate(userId, {
+        $push: { deliveryInfo: createDeliveryInfo._id },
+      });
 
-    newDeliveryInfo.push(updateDeliveryInfo);
+      newDeliveryInfo.push(createDeliveryInfo);
+    } else {
+      const updateDeliveryInfo = await DeliveryInfo.findOneAndUpdate(
+        result._id,
+        body,
+        { returnDocument: "after" }
+      );
+
+      newDeliveryInfo.push(updateDeliveryInfo);
+    }
+  } catch (error) {
+    throw error;
   }
 
   return newDeliveryInfo;

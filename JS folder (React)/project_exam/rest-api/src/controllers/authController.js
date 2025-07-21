@@ -2,7 +2,6 @@ const router = require("express").Router();
 const {
   createUser,
   getUser,
-  sendUser,
   editProfile,
   getCurrentUser,
   createDeliveryInfo,
@@ -13,15 +12,14 @@ router.post("/register", async (req, res) => {
   const body = req.body;
 
   try {
-    const token = await createUser(body);
-    const user = await sendUser(token);
+    const [token, userToReturn] = await createUser(body);
 
     res.cookie("auth", token, {
       httpOnly: true,
       sameSite: "none",
       secure: true,
     });
-    res.status(201).json(user);
+    res.status(201).json(userToReturn);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
@@ -31,15 +29,14 @@ router.post("/login", async (req, res) => {
   const body = req.body;
 
   try {
-    const token = await getUser(body);
-    const user = await sendUser(token);
+    const [token, updatedUser] = await getUser(body);
 
     res.cookie("auth", token, {
       httpOnly: true,
       sameSite: "none",
       secure: true,
     });
-    res.json(user);
+    res.json(updatedUser);
   } catch (err) {
     res.status(401).json({ message: err.message });
   }
@@ -56,15 +53,14 @@ router.post("/edit-profile", async (req, res) => {
   const body = req.body;
 
   try {
-    const token = await editProfile(userId, body);
-    const editedProfile = await sendUser(token);
+    const [token, result] = await editProfile(userId, body);
 
     res.cookie("auth", token, {
       httpOnly: true,
       sameSite: "none",
       secure: true,
     });
-    res.json(editedProfile);
+    res.json(result);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
