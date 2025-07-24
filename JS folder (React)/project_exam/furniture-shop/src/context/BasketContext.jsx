@@ -23,15 +23,7 @@ export function BasketProvider(props) {
   };
 
   const quantityHandler = (id, operation) => {
-    switch (operation) {
-      case "increment":
-        dispatch({ type: "INCREMENT_QUANTITY", payload: id });
-        break;
-
-      case "decrement":
-        dispatch({ type: "DECREMENT_QUANTITY", payload: id });
-        break;
-    }
+    dispatch({ type: operation, payload: id });
   };
 
   const clearBasketState = () => {

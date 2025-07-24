@@ -50,7 +50,7 @@ export default function BasketItems({ currentItem, index }) {
         <div className="quantity-btn">
           <button
             onClick={() => {
-              quantityHandler(currentItem._id, "decrement");
+              quantityHandler(currentItem._id, "DECREMENT_QUANTITY");
             }}
             name="minus"
             type="button"
@@ -69,7 +69,7 @@ export default function BasketItems({ currentItem, index }) {
 
           <button
             onClick={() => {
-              quantityHandler(currentItem._id, "increment");
+              quantityHandler(currentItem._id, "INCREMENT_QUANTITY");
             }}
             name="plus"
             type="button"

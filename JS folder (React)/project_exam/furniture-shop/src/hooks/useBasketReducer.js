@@ -13,7 +13,7 @@ function basketReducer(state, action) {
         );
       }
 
-      return [...state, { ...action.payload }];
+      return [...state, action.payload];
 
     case "INCREMENT_QUANTITY":
       return state.map((item) =>
