@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("auth", token, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: true,
     });
     res.json(updatedUser);
@@ -42,10 +42,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
-  //ToDo make validation of the token
-  res.clearCookie("auth", { httpOnly: true, sameSite: "none", secure: true });
-  res.json({ ok: true });
+router.post("/logout", (req, res) => {
+  res.clearCookie("auth", { httpOnly: true, sameSite: "None", secure: true });
+  res.status(200).json({ message: "Logged out" });
 });
 
 router.post("/edit-profile", async (req, res) => {
@@ -57,7 +56,7 @@ router.post("/edit-profile", async (req, res) => {
 
     res.cookie("auth", token, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: true,
     });
     res.json(result);

@@ -4,7 +4,7 @@ export const register = (data) => post("/users/register", data);
 
 export const login = (data) => post("/users/login", data);
 
-export const logout = () => get("/users/logout");
+export const logout = () => post("/users/logout");
 
 export const getProfile = (abortController) =>
   get("/users/profile", abortController);
