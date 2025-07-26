@@ -12,25 +12,18 @@ export default function ErrorDialog() {
     navigate("/login");
   }
 
+  setTimeout(() => {
+    onClose();
+  }, 3000);
+
   return (
     <div className="overlay">
       <div className="content">
         <header className="header-content">
-          <h2>Error dialog</h2>
+          <h2>Information dialog</h2>
         </header>
 
         <p>Session expired. Please log in again.</p>
-
-        <div className="button-box">
-          <button
-            onClick={onClose}
-            name="ok"
-            type="button"
-            className="btn-hover"
-          >
-            Ok
-          </button>
-        </div>
       </div>
     </div>
   );

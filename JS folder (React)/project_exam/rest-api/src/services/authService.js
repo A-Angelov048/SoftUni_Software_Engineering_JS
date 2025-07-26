@@ -21,7 +21,7 @@ exports.createUser = async (body) => {
 
     const createdUser = await User.create(body);
     const userToReturn = await User.findById(createdUser._id).select(
-      "_id username imageProfile location role"
+      "_id username imageProfile location role createdAt lastLogin"
     );
 
     const token = await generateToken(userToReturn);
@@ -50,7 +50,7 @@ exports.getUser = async (body) => {
       user._id,
       { lastLogin: Date.now() },
       { returnDocument: "after" }
-    ).select("_id username imageProfile location role");
+    ).select("_id username imageProfile location role createdAt lastLogin");
 
     const token = await generateToken(updatedUser);
 
@@ -91,7 +91,7 @@ exports.editProfile = async (userId, body) => {
 
     const result = await User.findByIdAndUpdate(userId, newBody, {
       returnDocument: "after",
-    }).select("_id username imageProfile location role");
+    }).select("_id username imageProfile location role createdAt lastLogin");
 
     const token = await generateToken(result);
 

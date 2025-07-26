@@ -21,6 +21,8 @@ export function ContextProvider(props) {
     username: authState.username,
     location: authState.location,
     role: authState.role,
+    createdAt: authState.createdAt,
+    lastLogin: authState.lastLogin,
     error: authError,
     changeAuthState,
     updateAuthError,

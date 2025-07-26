@@ -13,7 +13,7 @@ exports.auth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.clearCookie("auth", { httpOnly: true, sameSite: "none", secure: true });
+    res.clearCookie("auth", { httpOnly: true, sameSite: "None", secure: true });
     res.status(403).json({ message: error.message });
   }
 };

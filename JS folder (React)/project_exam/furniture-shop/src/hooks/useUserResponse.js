@@ -85,9 +85,8 @@ export function useLogoutUser() {
 }
 
 export function useGetProfile() {
-  const userContext = useContext(AuthContext);
   const errorHandler = useErrorHandler();
-  const [user, setUser] = useState({});
+  const { changeAuthState } = useContext(AuthContext);
   const [stateItems, setStateItems] = useState({
     items: [],
     currentClick: "",
@@ -99,7 +98,7 @@ export function useGetProfile() {
     (async () => {
       try {
         const response = await getProfile(abortController);
-        setUser(response);
+        changeAuthState(response);
       } catch (error) {
         errorHandler(error);
       }
@@ -108,13 +107,13 @@ export function useGetProfile() {
     return () => {
       abortController.abort();
     };
-  }, [userContext]);
+  }, []);
 
   const handleClick = (items, currentClick) => {
     setStateItems({ items, currentClick });
   };
 
-  return [user, stateItems, handleClick];
+  return [stateItems, handleClick];
 }
 
 export function useGetDeliveryInfo() {

@@ -12,8 +12,8 @@ import { useSearchParams } from "react-router-dom";
 export default function Profile() {
   const [searchParams] = useSearchParams();
   const flag = useRef(true);
-  const { role } = useContext(AuthContext);
-  const [user, stateItems, handleClick] = useGetProfile();
+  const user = useContext(AuthContext);
+  const [stateItems, handleClick] = useGetProfile();
 
   useEffect(() => {
     if (flag && stateItems.currentClick === "") {
@@ -39,7 +39,7 @@ export default function Profile() {
     <section className="profile-section layout-padding">
       <div className="container">
         <div className="heading-container">
-          <h2>{role} Profile</h2>
+          <h2>{user.role} Profile</h2>
         </div>
 
         <div className="layout-padding2">
@@ -81,7 +81,7 @@ export default function Profile() {
                       : "link"
                   }
                 >
-                  {role !== "Admin" ? "My orders" : "Orders"}
+                  {user.role !== "Admin" ? "My orders" : "Orders"}
                 </li>
 
                 <li
