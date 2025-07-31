@@ -1,10 +1,13 @@
-.header-section a {
+.header-section a,
+button {
+  background-color: transparent;
   position: relative;
   font-size: 18px;
   font-weight: 500;
 }
 
-.header-section a::before {
+.header-section a::before,
+button::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -14,7 +17,8 @@
   transition: 0.3s;
 }
 
-.header-section a:hover::before {
+.header-section a:hover::before,
+button:hover::before {
   width: 100%;
 }
 

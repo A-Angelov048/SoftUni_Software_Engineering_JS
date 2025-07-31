@@ -1,66 +1,61 @@
 import "./Search.css";
 
-import BrandContainer from "../../shared-components/brand-container/BrandContainer";
-import { useForm } from "../../hooks/useForms";
 import { useSearchFurniture } from "../../hooks/useFurnitureResponse";
+import { useForm } from "../../hooks/useForms";
+import SearchItem from "./searchItem/SearchItem";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const initialValues = {
-  name: "",
+  furnitureName: "",
 };
 
-export default function Search() {
-  const [furniture, flagState, search] = useSearchFurniture();
+export default function Search({ isOpen, onClose }) {
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
+  const { values, changeHandler } = useForm(initialValues, () => {});
+  const [furniture, flag] = useSearchFurniture(values);
 
-  const { values, changeHandler, submitCurForm } = useForm(
-    initialValues,
-    search
-  );
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <section className="search-section layout-padding">
-      <div className="container">
-        <div className="heading-container">
-          <h2>Search</h2>
-        </div>
+    <div className="overlay-search" onClick={onClose}>
+      <div className="wrapper-search" onClick={(e) => e.stopPropagation()}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate("/shop", { state: { search: values.furnitureName } });
+          }}
+        >
+          <div className="input-box">
+            <input
+              ref={inputRef}
+              type="text"
+              name="furnitureName"
+              className="search-input"
+              placeholder="Search by name"
+              value={values.furnitureName}
+              onChange={changeHandler}
+            />
 
-        <div className="search-form layout-padding2">
-          <div className="wrapper-search">
-            <form onSubmit={submitCurForm}>
-              <div className="input-box">
-                <input
-                  type="text"
-                  name="name"
-                  className="search-input"
-                  placeholder="Search by name"
-                  value={values.name}
-                  onChange={changeHandler}
-                />
-
-                <i className="bx bxs-search-alt-2"></i>
+            <i className="bx bxs-search-alt-2"></i>
+          </div>
+        </form>
+        <hr />
+        {furniture.length > 0
+          ? furniture.map((cur) => <SearchItem key={cur._id} item={cur} />)
+          : flag && (
+              <div className="no-match">
+                <h2>Whoops sorry no match was found!</h2>
               </div>
-              <button type="submit" className="search-button">
-                Search
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {flagState ? (
-          <div className="no-match">
-            <h2 className=".h2">Whoops sorry no match was found!</h2>
-          </div>
-        ) : (
-          <div className="brand-container layout-padding2">
-            {furniture.map((current, index) => (
-              <BrandContainer
-                furniture={current}
-                curIndex={index}
-                key={current._id}
-              />
-            ))}
-          </div>
-        )}
+            )}
       </div>
-    </section>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ const Reviews = require("../models/Reviews");
 
 exports.getLatest = () => Furniture.find().sort({ createdAt: -1 }).limit(4);
 
-exports.getAllData = async (page = 1, limit = 8) => {
+exports.getAllData = async (page = 1, limit = 8, filter) => {
   const skip = (page - 1) * limit;
   const regex = /^\d+$/;
 
@@ -14,8 +14,8 @@ exports.getAllData = async (page = 1, limit = 8) => {
 
   try {
     const [furnitureCount, furniture] = await Promise.all([
-      Furniture.countDocuments(),
-      Furniture.find().skip(skip).limit(Number(limit)),
+      Furniture.find(filter).countDocuments(),
+      Furniture.find(filter).skip(skip).limit(Number(limit)),
     ]);
 
     if (skip >= furnitureCount) {
@@ -109,14 +109,14 @@ exports.deleteFurniture = async (furnitureId, userId) => {
   }
 };
 
-exports.searchFurniture = (data) => {
+exports.searchFurniture = (product) => {
   const body = {};
 
-  if (data.name) {
-    body.name = new RegExp(data.name, "i");
+  if (product) {
+    body.name = new RegExp(product, "i");
   }
 
-  return Furniture.find(body);
+  return Furniture.find(body).sort({ createdAt: -1 }).limit(5);
 };
 
 exports.getBasketItems = (data) =>

@@ -1,20 +1,38 @@
-.search-form .wrapper-search {
-  max-width: 420px;
-  background-color: rgba(34, 211, 120, 0.5);
-  border: 3px solid rgba(51, 51, 51, 0.4);
-  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
-  color: #333;
-  border-radius: 10px;
-  padding: 30px 40px;
-  margin: 0px auto;
+body:has(.overlay-search) {
+  overflow: hidden;
 }
 
-.search-form .wrapper-search .input-box {
+.overlay-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: baseline;
+  z-index: 2;
+}
+
+.wrapper-search {
+  flex: 1;
+  max-width: 500px;
+  background-color: #22d378;
+  border: 3px solid #33333366;
+  box-shadow: 0 0 10px #33333366;
+  color: #333;
+  border-radius: 10px;
+  padding: 20px 40px;
+  margin: 0 auto;
+  margin-top: 85px;
+}
+
+.wrapper-search .input-box {
   position: relative;
   margin: 30px 0;
 }
 
-.search-form .wrapper-search .input-box i {
+.wrapper-search .input-box i {
   position: absolute;
   right: 20px;
   top: 50%;
@@ -22,11 +40,11 @@
   font-size: 20px;
 }
 
-.search-form .search-input {
+.wrapper-search .input-box .search-input {
   width: 100%;
   background: transparent;
   outline: none;
-  border: 2px solid rgba(51, 51, 51, 0.4);
+  border: 2px solid #33333366;
   border-radius: 40px;
   font-size: 16px;
   color: #333;
@@ -34,38 +52,32 @@
   text-overflow: ellipsis;
 }
 
-.search-form .search-input::placeholder {
+.wrapper-search .input-box .search-input::placeholder {
   color: #333;
 }
 
-.search-form .wrapper-search .search-button {
-  width: 100%;
-  padding: 15px 0px;
-  background: #333;
-  color: #fff;
-  border-radius: 40px;
-  box-shadow: 0 0 10px rgb(51, 51, 51, 0.4);
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.3s;
+.wrapper-search hr {
+  border: 1px solid #33333366;
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
-.search-form .wrapper-search .search-button:hover {
-  background: #fff;
-  color: #333;
-}
-
-.search-section .no-match {
+.wrapper-search .no-match {
   text-align: center;
-  margin: 0px 250px;
-  padding: 15px 0px;
-  color: #333;
-  background-color: rgba(34, 211, 120, 0.5);
-  border: 1px solid white;
+  margin-bottom: 10px;
+  padding: 10px 10px;
+  background-color: #e4e5e9;
+  border: 1px solid #33333366;
   border-radius: 10px;
 }
 
-.search-section .no-match h2 {
+.wrapper-search .no-match h2 {
+  font-size: 1.6rem;
   margin-bottom: 0rem;
+}
+
+@media (max-width: 576px) {
+  .wrapper-search {
+    margin: 85px 10px;
+  }
 }

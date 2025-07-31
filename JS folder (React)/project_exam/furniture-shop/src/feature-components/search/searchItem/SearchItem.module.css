@@ -1,0 +1,29 @@
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 5px;
+  background-color: #e4e5e9;
+  border-radius: 10px;
+  border: 1px solid #33333366;
+}
+
+.search-box:not(:nth-of-type(1)) {
+  margin-top: 10px;
+}
+
+.search-box:last-of-type {
+  margin-bottom: 10px;
+}
+
+.img-box-search img {
+  display: block;
+  width: 70px;
+  aspect-ratio: 1;
+}
+
+.info-search {
+  display: flex;
+  gap: 20px;
+  font-weight: 600;
+}

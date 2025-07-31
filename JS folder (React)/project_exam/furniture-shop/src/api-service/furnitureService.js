@@ -5,10 +5,14 @@ export const createFurnitureRequester = (data) => post("/furniture", data);
 export const getLatestFurniture = (abortController) =>
   get("/furniture/latest", abortController);
 
-export const getAllFurniture = (abortController, statePage, limit) =>
-  get(`/furniture/?page=${statePage}&limit=${limit}`, abortController);
+export const getAllFurniture = (abortController, statePage, limit, params) =>
+  get(
+    `/furniture/?page=${statePage}&limit=${limit}${params ? "&" + params : ""}`,
+    abortController
+  );
 
-export const getSearchFurniture = (data) => post("/furniture/search", data);
+export const getSearchFurniture = (param, abortController) =>
+  get(`/furniture/search${param ? "/?product=" + param : ""}`, abortController);
 
 export const getDetailsFurniture = (furnitureId, abortController) =>
   get(`/furniture/${furnitureId}`, abortController);

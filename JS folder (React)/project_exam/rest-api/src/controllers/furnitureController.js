@@ -21,10 +21,15 @@ router.get("/latest", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const { page, limit } = req.query;
+  const { page, limit, search } = req.query;
+  const filter = {};
+
+  if (search) {
+    filter.name = { $regex: search, $options: "i" };
+  }
 
   try {
-    const [length, furniture] = await getAllData(page, limit);
+    const [length, furniture] = await getAllData(page, limit, filter);
 
     res.status(200).json({
       status: 200,
@@ -36,13 +41,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  const body = req.body;
-  const userId = req.user?._id;
+router.get("/search", async (req, res) => {
+  const { product } = req.query;
 
   try {
-    await createFurniture({ ...body, owner: userId }, userId);
-    res.status(201).json({ ok: true });
+    const data = await searchFurniture(product);
+    res.status(200).json(data);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -54,30 +58,6 @@ router.get("/:id", async (req, res) => {
   try {
     const furniture = await getOne(furnitureId);
     res.json(furniture);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-});
-
-router.put("/edit/:id", async (req, res) => {
-  const body = req.body;
-  const furnitureId = req.params.id;
-
-  try {
-    await editFurniture(furnitureId, body);
-    res.json({ ok: true });
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-});
-
-router.delete("/delete/:id", async (req, res) => {
-  const furnitureId = req.params.id;
-  const userId = req.user?._id;
-
-  try {
-    await deleteFurniture(furnitureId, userId);
-    res.json({ ok: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -106,12 +86,13 @@ router.get("/wishlist/:id", async (req, res) => {
   }
 });
 
-router.post("/search", async (req, res) => {
+router.post("/", async (req, res) => {
   const body = req.body;
+  const userId = req.user?._id;
 
   try {
-    const data = await searchFurniture(body);
-    res.json(data);
+    await createFurniture({ ...body, owner: userId }, userId);
+    res.status(201).json({ ok: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -124,6 +105,30 @@ router.post("/basket", async (req, res) => {
     const data = await getBasketItems(body);
 
     res.json(data);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
+router.put("/edit/:id", async (req, res) => {
+  const body = req.body;
+  const furnitureId = req.params.id;
+
+  try {
+    await editFurniture(furnitureId, body);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  const furnitureId = req.params.id;
+  const userId = req.user?._id;
+
+  try {
+    await deleteFurniture(furnitureId, userId);
+    res.json({ ok: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

@@ -40,17 +40,25 @@ export function useLatestFurniture() {
   return furniture;
 }
 
-export function useAllFurniture(statePage) {
+export function useAllFurniture(statePage, filters) {
   const errorHandler = useErrorHandler();
   const [furniture, setFurniture] = useState([]);
   const lengthDocuments = useRef(1);
 
   useEffect(() => {
     const abortController = new AbortController();
+    const params = new URLSearchParams(
+      Object.entries(filters).filter(([_, value]) => value)
+    ).toString();
 
     (async () => {
       try {
-        const response = await getAllFurniture(abortController, statePage, 8);
+        const response = await getAllFurniture(
+          abortController,
+          statePage,
+          8,
+          params
+        );
 
         setFurniture(response.data);
         lengthDocuments.current = response.length;
@@ -62,7 +70,7 @@ export function useAllFurniture(statePage) {
     return () => {
       abortController.abort();
     };
-  }, [statePage]);
+  }, [statePage, filters.search]);
 
   return [furniture, lengthDocuments.current];
 }
@@ -139,32 +147,37 @@ export function useGetBasketItems(basket) {
   return basketItems;
 }
 
-export function useSearchFurniture() {
+export function useSearchFurniture(search) {
   const errorHandler = useErrorHandler();
   const [furniture, setFurniture] = useState([]);
-  const [flagState, setFlagState] = useState(false);
+  const [flag, setFlag] = useState(false);
 
-  const search = async (values) => {
-    if (!values.name) return setFlagState(true);
+  useEffect(() => {
+    const abortController = new AbortController();
 
-    const trimValues = trimValue(values);
-
-    try {
-      const response = await getSearchFurniture(trimValues);
-
-      if (response.length === 0) {
-        setFlagState(true);
-      } else {
-        setFlagState(false);
-      }
-
-      setFurniture(response);
-    } catch (error) {
-      errorHandler(error);
+    if (search.furnitureName === "") {
+      return setFurniture([]);
     }
-  };
 
-  return [furniture, flagState, search];
+    (async () => {
+      try {
+        const response = await getSearchFurniture(
+          search.furnitureName,
+          abortController
+        );
+        setFlag(true);
+        setFurniture(response);
+      } catch (error) {
+        errorHandler(error);
+      }
+    })();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [search]);
+
+  return [furniture, flag];
 }
 
 export function useEditFurniture(furnitureId) {

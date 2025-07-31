@@ -13,7 +13,10 @@ export default function Shop() {
   const [statePage, handlePageChange] = useHandlePage(
     Number(searchParams.get("page")) || 1
   );
-  const [furniture, lengthDocuments] = useAllFurniture(statePage);
+  const [furniture, lengthDocuments] = useAllFurniture(
+    statePage,
+    !location.state ? { search: "" } : location.state
+  );
   const lengthPages = convertDocLengthToArr(lengthDocuments, 8);
 
   useEffect(() => {
