@@ -10,6 +10,7 @@ import BrandContainer from "../../shared-components/brand-container/BrandContain
 export default function Shop() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
+
   const [statePage, handlePageChange] = useHandlePage(
     Number(searchParams.get("page")) || 1
   );
@@ -21,7 +22,11 @@ export default function Shop() {
 
   useEffect(() => {
     window.history.replaceState(null, "", `/shop/?page=${statePage}`);
-  }, [statePage, location]);
+  }, [statePage]);
+
+  useEffect(() => {
+    handlePageChange(1);
+  }, [location]);
 
   return (
     <section className="brand-section layout-padding">
