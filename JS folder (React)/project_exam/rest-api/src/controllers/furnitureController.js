@@ -9,6 +9,7 @@ const {
   searchFurniture,
   wishlistFurniture,
   getBasketItems,
+  getUserWishlist,
 } = require("../services/furnitureService");
 
 router.get("/latest", async (req, res) => {
@@ -47,6 +48,21 @@ router.get("/search", async (req, res) => {
   try {
     const data = await searchFurniture(product);
     res.status(200).json(data);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
+router.get("/user-wishlist", async (req, res) => {
+  const userId = req.user?._id;
+
+  if (!userId) {
+    res.status(403).json({ message: "Not authenticated please login again" });
+  }
+
+  try {
+    const data = await getUserWishlist(userId);
+    res.json(data);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

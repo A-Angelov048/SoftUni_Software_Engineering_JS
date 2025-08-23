@@ -7,6 +7,7 @@ import {
   getDetailsFurniture,
   getLatestFurniture,
   getSearchFurniture,
+  userWishlist,
   wishlist,
 } from "../api-service/furnitureService";
 import { AuthContext } from "../context/AuthContext";
@@ -216,4 +217,27 @@ export function useCreateFurniture() {
   };
 
   return createFurniture;
+}
+
+export function useGetWishlist() {
+  const { role } = useContext(AuthContext);
+  const errorHandler = useErrorHandler();
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    if (role === "Admin") return;
+
+    (async () => {
+      try {
+        const response = await userWishlist(abortController);
+        setList(response.wishlist);
+      } catch (error) {
+        errorHandler(error);
+      }
+    })();
+  }, []);
+
+  return list;
 }

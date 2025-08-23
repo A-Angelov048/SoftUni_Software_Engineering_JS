@@ -124,3 +124,8 @@ exports.getBasketItems = (data) =>
     { _id: { $in: data } },
     "_id name imageUrl price listUserLikes"
   );
+
+exports.getUserWishlist = (userId) =>
+  User.findById(userId)
+    .select("wishlist")
+    .populate({ path: "wishlist", select: "name price imageUrl" });

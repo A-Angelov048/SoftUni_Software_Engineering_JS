@@ -23,7 +23,6 @@ export function ContextProvider(props) {
     role: authState.role || "",
     createdAt: authState.createdAt || "",
     lastLogin: authState.lastLogin || "",
-    wishlist: authState.wishlist || [],
     error: authError,
     changeAuthState,
     updateAuthError,

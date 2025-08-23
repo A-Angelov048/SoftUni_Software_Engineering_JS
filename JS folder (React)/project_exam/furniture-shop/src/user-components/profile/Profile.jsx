@@ -7,11 +7,15 @@ import BrandContainer from "../../shared-components/brand-container/BrandContain
 import Settings from "./settings/Settings";
 import Orders from "./orders/Orders";
 import { useSearchParams } from "react-router-dom";
+import { useGetWishlist } from "../../hooks/useFurnitureResponse";
 
 export default function Profile() {
   const [searchParams] = useSearchParams();
   const flag = useRef(true);
+
   const user = useContext(AuthContext);
+  const wishlist = useGetWishlist();
+
   const [stateItems, handleClick] = useState({
     items: [],
     currentClick: "",
@@ -91,21 +95,20 @@ export default function Profile() {
                   {user.role !== "Admin" ? "My orders" : "Orders"}
                 </li>
 
-                <li
-                  onClick={() =>
-                    handleClick({
-                      items: user.wishlist,
-                      currentClick: "wishlist",
-                    })
-                  }
-                  className={
-                    stateItems.currentClick === "wishlist"
-                      ? "link active"
-                      : "link"
-                  }
-                >
-                  Wishlist
-                </li>
+                {user.role !== "Admin" && (
+                  <li
+                    onClick={() =>
+                      handleClick({ items: wishlist, currentClick: "wishlist" })
+                    }
+                    className={
+                      stateItems.currentClick === "wishlist"
+                        ? "link active"
+                        : "link"
+                    }
+                  >
+                    Wishlist
+                  </li>
+                )}
 
                 <li
                   onClick={() =>

@@ -27,3 +27,6 @@ export const editFurnitureRequester = (furnitureId, data) =>
   put(`/furniture/edit/${furnitureId}`, data);
 
 export const getBasketItems = (data) => post("/furniture/basket", data);
+
+export const userWishlist = (abortController) =>
+  get("/furniture/user-wishlist", abortController);
