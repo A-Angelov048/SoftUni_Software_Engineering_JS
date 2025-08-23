@@ -21,7 +21,7 @@ exports.createUser = async (body) => {
 
     const createdUser = await User.create(body);
     const userToReturn = await User.findById(createdUser._id).select(
-      "_id username imageProfile location role createdAt lastLogin"
+      "_id username imageProfile location role createdAt lastLogin wishlist"
     );
 
     const token = await generateToken(userToReturn);
@@ -50,7 +50,12 @@ exports.getUser = async (body) => {
       user._id,
       { lastLogin: Date.now() },
       { returnDocument: "after" }
-    ).select("_id username imageProfile location role createdAt lastLogin");
+    )
+      .select("-password -deliveryInfo -orders")
+      .populate({
+        path: "wishlist",
+        select: "name price imageUrl",
+      });
 
     const token = await generateToken(updatedUser);
 
@@ -91,7 +96,12 @@ exports.editProfile = async (userId, body) => {
 
     const result = await User.findByIdAndUpdate(userId, newBody, {
       returnDocument: "after",
-    }).select("_id username imageProfile location role createdAt lastLogin");
+    })
+      .select("-password -deliveryInfo -orders")
+      .populate({
+        path: "wishlist",
+        select: "name price imageUrl",
+      });
 
     const token = await generateToken(result);
 
@@ -147,7 +157,6 @@ async function generateToken(user) {
     imageProfile: user.imageProfile,
     username: user.username,
     location: user.location,
-    role: user.role,
   };
 
   return jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });

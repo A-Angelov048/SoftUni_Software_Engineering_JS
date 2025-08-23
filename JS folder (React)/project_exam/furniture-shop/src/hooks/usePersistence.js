@@ -2,14 +2,27 @@ import { useState } from "react";
 
 export default function usePersistence(initialValue, nameStorage) {
   const [value, setValue] = useState(() => {
-    const StorageData = sessionStorage.getItem(nameStorage);
+    const storageData = sessionStorage.getItem(nameStorage);
 
-    return StorageData ? JSON.parse(StorageData) : initialValue;
+    return storageData ? JSON.parse(storageData) : initialValue;
   });
 
   const updateState = (value) => {
-    sessionStorage.setItem(nameStorage, JSON.stringify(value));
-    setValue(value);
+    switch (nameStorage) {
+      case "auth":
+        if (value.hasOwnProperty("_id")) {
+          sessionStorage.setItem(nameStorage, JSON.stringify(value._id));
+        } else {
+          sessionStorage.removeItem("auth");
+        }
+        setValue(value);
+        break;
+
+      default:
+        sessionStorage.setItem(nameStorage, JSON.stringify(value));
+        setValue(value);
+        break;
+    }
   };
 
   return [value, updateState];

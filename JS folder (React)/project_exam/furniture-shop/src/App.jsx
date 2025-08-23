@@ -26,6 +26,7 @@ import Checkout from "./user-components/basket/checkout/Checkout";
 import DetailsOrder from "./user-components/profile/orders/detailsOrder/DetailsOrder";
 import PlacedOrder from "./user-components/basket/placedOrder/PlacedOrder";
 import OrderGuard from "./shared-components/guards/OrderGuard";
+import AuthInitializer from "./user-components/authInitializer/AuthInitializer";
 
 function App() {
   return (
@@ -35,54 +36,56 @@ function App() {
           <Introduction />
 
           <ScrollToTop>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/search" element={<Search />} />
+            <AuthInitializer>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/search" element={<Search />} />
 
-              <Route element={<AuthGuard />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Route>
+                <Route element={<AuthGuard />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
-              <Route element={<AdminGuard />}>
-                <Route path="/create-offer/admin" element={<CreateOffer />} />
-              </Route>
+                <Route element={<AdminGuard />}>
+                  <Route path="/create-offer/admin" element={<CreateOffer />} />
+                </Route>
 
-              <Route element={<GuestGuard />}>
-                <Route path="/profile/orders" element={<Profile />} />
-                <Route path="/profile/wishlist" element={<Profile />} />
-                <Route path="/profile/settings" element={<Profile />} />
-                <Route
-                  path="/details-order/:orderId"
-                  element={<DetailsOrder />}
-                />
-              </Route>
-
-              <Route
-                path="/details-furniture/:furnitureId"
-                element={<Details />}
-              />
-
-              <Route element={<AdminGuard />}>
-                <Route
-                  path="/edit-furniture/:furnitureId/admin"
-                  element={<Edit />}
-                />
-              </Route>
-
-              <Route element={<RestrictAdminGuard />}>
-                <Route path="/basket" element={<Basket />} />
                 <Route element={<GuestGuard />}>
-                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/profile/orders" element={<Profile />} />
+                  <Route path="/profile/wishlist" element={<Profile />} />
+                  <Route path="/profile/settings" element={<Profile />} />
+                  <Route
+                    path="/details-order/:orderId"
+                    element={<DetailsOrder />}
+                  />
                 </Route>
-                <Route element={<OrderGuard />}>
-                  <Route path="/placed-order" element={<PlacedOrder />} />
-                </Route>
-              </Route>
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+                <Route
+                  path="/details-furniture/:furnitureId"
+                  element={<Details />}
+                />
+
+                <Route element={<AdminGuard />}>
+                  <Route
+                    path="/edit-furniture/:furnitureId/admin"
+                    element={<Edit />}
+                  />
+                </Route>
+
+                <Route element={<RestrictAdminGuard />}>
+                  <Route path="/basket" element={<Basket />} />
+                  <Route element={<GuestGuard />}>
+                    <Route path="/checkout" element={<Checkout />} />
+                  </Route>
+                  <Route element={<OrderGuard />}>
+                    <Route path="/placed-order" element={<PlacedOrder />} />
+                  </Route>
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AuthInitializer>
           </ScrollToTop>
 
           <Footer />

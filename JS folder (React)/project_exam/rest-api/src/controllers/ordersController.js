@@ -12,8 +12,8 @@ router.get("/", async (req, res) => {
   const regex = /^(confirmed|pre-order|in-transit)$/;
   const filter = {};
 
-  if (user.role !== "Admin") {
-    filter["deliveryInfo.owner"] = user._id;
+  if (user?.role !== "Admin") {
+    filter["deliveryInfo.owner"] = user?._id;
   }
 
   if (regex.test(deliveryStatus)) {

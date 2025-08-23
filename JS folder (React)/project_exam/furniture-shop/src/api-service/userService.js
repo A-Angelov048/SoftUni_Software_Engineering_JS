@@ -14,3 +14,6 @@ export const editProfile = (data) => post("/users/edit-profile", data);
 export const createDeliveryInfo = (data) => post("/users/delivery-info", data);
 
 export const getDeliveryInfo = (data) => get("/users/delivery-info", data);
+
+export const refetchUser = (abortController) =>
+  get("/users/me", abortController);

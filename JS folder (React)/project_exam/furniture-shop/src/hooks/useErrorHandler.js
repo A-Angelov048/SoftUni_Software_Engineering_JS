@@ -23,6 +23,7 @@ export function useErrorHandler() {
 
         case "AuthError":
           updateAuthError(true);
+          console.error(typeError.message);
           break;
 
         case "ValidationError":

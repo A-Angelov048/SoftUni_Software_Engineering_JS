@@ -16,14 +16,14 @@ export function ContextProvider(props) {
   };
 
   const data = {
-    userId: authState._id,
-    imageProfile: authState.imageProfile,
-    username: authState.username,
-    location: authState.location,
-    role: authState.role,
-    createdAt: authState.createdAt,
-    lastLogin: authState.lastLogin,
-    wishlist: authState.wishlist,
+    userId: authState._id || "",
+    imageProfile: authState.imageProfile || "",
+    username: authState.username || "",
+    location: authState.location || "",
+    role: authState.role || "",
+    createdAt: authState.createdAt || "",
+    lastLogin: authState.lastLogin || "",
+    wishlist: authState.wishlist || [],
     error: authError,
     changeAuthState,
     updateAuthError,
