@@ -157,6 +157,7 @@ async function generateToken(user) {
     imageProfile: user.imageProfile,
     username: user.username,
     location: user.location,
+    role: user.role,
   };
 
   return jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });

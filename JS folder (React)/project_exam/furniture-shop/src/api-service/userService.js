@@ -6,9 +6,6 @@ export const login = (data) => post("/users/login", data);
 
 export const logout = () => post("/users/logout");
 
-export const getProfile = (abortController) =>
-  get("/users/profile", abortController);
-
 export const editProfile = (data) => post("/users/edit-profile", data);
 
 export const createDeliveryInfo = (data) => post("/users/delivery-info", data);

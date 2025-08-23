@@ -23,17 +23,6 @@ router.get("/me", async (req, res) => {
   }
 });
 
-router.get("/profile", async (req, res) => {
-  const userId = req.user?._id;
-
-  try {
-    const user = await getCurrentUser(userId);
-    res.json(user);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-});
-
 router.get("/delivery-info", async (req, res) => {
   const userId = req.user?._id;
 

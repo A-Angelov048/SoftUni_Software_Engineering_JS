@@ -1,8 +1,7 @@
 import "./Profile.css";
 
 import { convertDate } from "../../utils/convertDate";
-import { useGetProfile } from "../../hooks/useUserResponse";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import BrandContainer from "../../shared-components/brand-container/BrandContainer";
 import Settings from "./settings/Settings";
@@ -13,13 +12,19 @@ export default function Profile() {
   const [searchParams] = useSearchParams();
   const flag = useRef(true);
   const user = useContext(AuthContext);
-  const [stateItems, handleClick] = useGetProfile();
+  const [stateItems, handleClick] = useState({
+    items: [],
+    currentClick: "",
+  });
 
   useEffect(() => {
     if (flag && stateItems.currentClick === "") {
       flag.current = false;
       if (!!history.state.currentClick) {
-        handleClick(history.state.items, history.state.currentClick);
+        handleClick({
+          items: history.state.items,
+          currentClick: history.state.currentClick,
+        });
       }
     }
 
@@ -74,7 +79,9 @@ export default function Profile() {
             <div className="nav-profile">
               <ul>
                 <li
-                  onClick={() => handleClick([], "orders")}
+                  onClick={() =>
+                    handleClick({ items: [], currentClick: "orders" })
+                  }
                   className={
                     stateItems.currentClick === "orders"
                       ? "link active"
@@ -85,7 +92,12 @@ export default function Profile() {
                 </li>
 
                 <li
-                  onClick={() => handleClick(user.wishlist, "wishlist")}
+                  onClick={() =>
+                    handleClick({
+                      items: user.wishlist,
+                      currentClick: "wishlist",
+                    })
+                  }
                   className={
                     stateItems.currentClick === "wishlist"
                       ? "link active"
@@ -96,7 +108,9 @@ export default function Profile() {
                 </li>
 
                 <li
-                  onClick={() => handleClick([], "settings")}
+                  onClick={() =>
+                    handleClick({ items: [], currentClick: "settings" })
+                  }
                   className={
                     stateItems.currentClick === "settings"
                       ? "link active"

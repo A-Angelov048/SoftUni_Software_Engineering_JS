@@ -3,7 +3,6 @@ import {
   createDeliveryInfo,
   editProfile,
   getDeliveryInfo,
-  getProfile,
   login,
   logout,
   register,
@@ -82,38 +81,6 @@ export function useLogoutUser() {
   };
 
   return logoutUser;
-}
-
-export function useGetProfile() {
-  const errorHandler = useErrorHandler();
-  const { changeAuthState } = useContext(AuthContext);
-  const [stateItems, setStateItems] = useState({
-    items: [],
-    currentClick: "",
-  });
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    (async () => {
-      try {
-        const response = await getProfile(abortController);
-        changeAuthState(response);
-      } catch (error) {
-        errorHandler(error);
-      }
-    })();
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
-  const handleClick = (items, currentClick) => {
-    setStateItems({ items, currentClick });
-  };
-
-  return [stateItems, handleClick];
 }
 
 export function useGetDeliveryInfo() {
