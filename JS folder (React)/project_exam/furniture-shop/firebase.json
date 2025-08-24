@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "deploy-furniture-shop-123",
     "public": "dist",
     "ignore": [
       "firebase.json",
