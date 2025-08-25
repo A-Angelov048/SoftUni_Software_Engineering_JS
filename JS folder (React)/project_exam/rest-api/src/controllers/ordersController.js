@@ -70,7 +70,7 @@ router.get("/:id", async (req, res) => {
 
   try {
     const result = await getOrder(orderId);
-    res.json(result);
+    res.status(200).json(result);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -82,7 +82,7 @@ router.put("/edit/:id", async (req, res) => {
 
   try {
     await editOrder(orderId, body);
-    res.json({ ok: true, message: "Order successful edited" });
+    res.status(200).json({ ok: true, message: "Order successful edited" });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

@@ -5,8 +5,10 @@ const baseUrl = import.meta.env.VITE_API_URL;
 async function request(method, url, data, abortController) {
   const options = {
     method,
-    headers: {},
     credentials: "include",
+    headers: {
+      "Cache-Control": "no-cache",
+    },
   };
 
   if (abortController) {

@@ -15,7 +15,7 @@ const {
 router.get("/latest", async (req, res) => {
   try {
     const data = await getLatest();
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -62,7 +62,7 @@ router.get("/user-wishlist", async (req, res) => {
 
   try {
     const data = await getUserWishlist(userId);
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
 
   try {
     const furniture = await getOne(furnitureId);
-    res.json(furniture);
+    res.status(200).json(furniture);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -120,7 +120,7 @@ router.post("/basket", async (req, res) => {
   try {
     const data = await getBasketItems(body);
 
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -132,7 +132,7 @@ router.put("/edit/:id", async (req, res) => {
 
   try {
     await editFurniture(furnitureId, body);
-    res.json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -144,7 +144,7 @@ router.delete("/delete/:id", async (req, res) => {
 
   try {
     await deleteFurniture(furnitureId, userId);
-    res.json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

@@ -17,7 +17,7 @@ router.get("/me", async (req, res) => {
     }
 
     const user = await getCurrentUser(userId);
-    res.json(user);
+    res.status(200).json(user);
   } catch (err) {
     res.status(403).json({ message: err.message });
   }
@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
       sameSite: "None",
       secure: true,
     });
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
   } catch (err) {
     res.status(401).json({ message: err.message });
   }
