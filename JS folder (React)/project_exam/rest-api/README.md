@@ -7,5 +7,3 @@ The current application is built on Express. It's a server that listens for clie
 1. `create environment for developer and production` - DATABASE_URL & .etc
 2. `npm install` - installing node_modules
 3. `npm run start` - starts localhost
-4. `configured Firebase settings.` - (it's not required.)
-5. `npm run deploy` - firebase functions (it's not required.)

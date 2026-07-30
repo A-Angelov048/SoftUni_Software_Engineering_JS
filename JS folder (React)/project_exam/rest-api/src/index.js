@@ -1,4 +1,3 @@
-const functions = require("firebase-functions");
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -8,40 +7,26 @@ const expressConfig = require("./config/expressConfig");
 const router = require("./router");
 const localServerStart = require("./localApi");
 
-functions.setGlobalOptions({
-  region: "europe-west2",
-});
-
-switch (process.env.GCLOUD_PROJECT) {
-  case "deploy-furniture-shop-123":
-    dotenv.config({
-      path: path.resolve(__dirname, "../environments/.env.furniture-shop"),
-    });
-    break;
-
-  default:
-    dotenv.config({
-      path: path.resolve(__dirname, "../environments/.env.development"),
-    });
-    break;
-}
-
 const app = express();
-const connection = process.env.DATABASE_URL;
-const originUrl = process.env.ORIGIN_URL;
+const DB_URL = process.env.DATABASE_URL;
+const CLIENT_URL = process.env.CLIENT_URL;
+const PORT = process.env.PORT || 3000;
 
-expressConfig(app, originUrl);
+expressConfig(app, CLIENT_URL);
 app.use(router);
 
 mongoose
-  .connect(connection)
+  .connect(DB_URL)
   .then(() => {
     console.log("DB Connected.");
-
-    if (process.env.NODE_ENV === "development") {
-      return localServerStart(app);
-    }
   })
-  .catch((err) => console.error(err.message));
+  .catch((err) => {
+    console.error("DB connection error:", err.message);
+    process.exit(1);
+  });
 
-exports.api = functions.https.onRequest(app);
+app.listen(PORT, () =>
+  console.log(
+    `Express server running on port: ${PORT}. You can make requests to http://localhost:${PORT}`,
+  ),
+);
