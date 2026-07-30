@@ -1,11 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
-const dotenv = require("dotenv");
-
 const expressConfig = require("./config/expressConfig");
 const router = require("./router");
-const localServerStart = require("./localApi");
 
 const app = express();
 const DB_URL = process.env.DATABASE_URL;
