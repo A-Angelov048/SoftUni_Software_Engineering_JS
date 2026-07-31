@@ -73,9 +73,7 @@ User authentication is managed via a third-party cookie (auth) containing a JWT 
 1. `create an environment` - VITE_API_URL
 2. `npm install` - installing node_modules
 3. `npm run start` - starts localhost
-4. `configured Firebase settings.` - (it's not required.)
-5. `npm run build` - production build of your app (it's not required.)
-6. `npm run deploy` - firebase host (it's not required.)
+4. `npm run build` - production build of your app (it's not required.)
 
 ## Upcoming features to the app:
 
