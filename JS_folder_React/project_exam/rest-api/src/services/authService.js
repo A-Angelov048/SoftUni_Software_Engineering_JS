@@ -21,7 +21,7 @@ exports.createUser = async (body) => {
 
     const createdUser = await User.create(body);
     const userToReturn = await User.findById(createdUser._id).select(
-      "_id username imageProfile location role createdAt lastLogin wishlist"
+      "_id username imageProfile location role createdAt lastLogin wishlist",
     );
 
     const token = await generateToken(userToReturn);
@@ -49,7 +49,7 @@ exports.getUser = async (body) => {
     const updatedUser = await User.findByIdAndUpdate(
       user._id,
       { lastLogin: Date.now() },
-      { returnDocument: "after" }
+      { returnDocument: "after" },
     )
       .select("-password -deliveryInfo -orders")
       .populate({
@@ -81,7 +81,7 @@ exports.editProfile = async (userId, body) => {
     if (body.password !== undefined) {
       const validatePassword = await bcrypt.compare(
         body.password,
-        user.password
+        user.password,
       );
 
       if (!validatePassword) {
@@ -137,7 +137,7 @@ exports.createDeliveryInfo = async (body, userId) => {
       const updateDeliveryInfo = await DeliveryInfo.findOneAndUpdate(
         result._id,
         body,
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
 
       newDeliveryInfo.push(updateDeliveryInfo);
